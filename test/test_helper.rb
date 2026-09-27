@@ -19,6 +19,10 @@ module ActiveSupport
       World.current = previous
     end
 
+    def log_walks(user, *kms)
+      kms.each_with_index { |km, days_ago| user.walks.create!(km: km, walked_on: Date.current - days_ago) }
+    end
+
     private
       # Private so Minitest doesn't auto-discover this as a test case
       # (it grabs public instance methods matching /^test_/).
