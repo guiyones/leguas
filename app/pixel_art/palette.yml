@@ -1,0 +1,21 @@
+K: "#0B0D1F"   # contorno
+N: "#1B1F3B"   # noite
+P: "#2A2F5A"   # painel
+G: "#F4C542"   # dourado
+g: "#B8902A"   # dourado escuro
+W: "#F2EEDC"   # creme
+V: "#5BC27A"   # verde
+v: "#3A8A55"   # verde escuro
+O: "#FF9F6B"   # laranja
+o: "#C96A3E"   # laranja escuro
+L: "#B98CFF"   # lendária
+l: "#7A55C2"   # lendária escura
+B: "#4A90D9"   # água
+b: "#2B5C99"   # água escura
+S: "#8A8FA8"   # pedra
+s: "#5A5F78"   # pedra escura
+M: "#8B5A2B"   # madeira / couro
+m: "#5E3A1A"   # madeira escura
+F: "#E8B89A"   # pele clara
+f: "#9A6444"   # pele escura
+R: "#C0504D"   # vermelho
