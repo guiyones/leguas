@@ -1,0 +1,21 @@
+key: beta
+name: Região Beta
+inspired_by: Trilha de teste B
+trophy_name: Beta
+phases:
+  - key: b1
+    name: Fase B1
+    inspired_by: Ponto 30 → Ponto 60
+    km: 30
+    symbol: teste
+  - key: b2
+    name: Fase B2
+    inspired_by: Ponto 60 → Ponto 100
+    km: 40
+    rarity: legendary
+    symbol: teste
+    landmarks:
+      - key: b2_mark
+        name: Marco B2
+        at_km: 10
+        story: História do marco B2.

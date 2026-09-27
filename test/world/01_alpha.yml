@@ -1,0 +1,26 @@
+key: alpha
+name: Região Alfa
+inspired_by: Trilha de teste A
+trophy_name: Alfa
+phases:
+  - key: a1
+    name: Fase A1
+    inspired_by: Ponto 0 → Ponto 10
+    km: 10
+    symbol: teste
+    landmarks:
+      - key: a1_mark
+        name: Marco A1
+        at_km: 4
+        story: História do marco A1.
+  - key: a2
+    name: Fase A2
+    inspired_by: Ponto 10 → Ponto 30
+    km: 20
+    rarity: rare
+    symbol: teste
+    landmarks:
+      - key: a2_mark
+        name: Marco A2
+        at_km: 5
+        story: História do marco A2.

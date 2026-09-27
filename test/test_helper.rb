@@ -11,6 +11,20 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def with_world(world)
+      previous = World.current
+      World.current = world
+      yield
+    ensure
+      World.current = previous
+    end
+
+    private
+      # Private so Minitest doesn't auto-discover this as a test case
+      # (it grabs public instance methods matching /^test_/).
+      def test_world
+        World.load(Rails.root.join("test/world"))
+      end
   end
 end
 
