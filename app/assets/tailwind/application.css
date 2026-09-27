@@ -2,3 +2,19 @@
 @source "../../views";
 @source "../../helpers";
 @source "../../frontend/controllers";
+
+@theme {
+  --color-night: #1B1F3B;
+  --color-panel: #2A2F5A;
+  --color-ink: #0B0D1F;
+  --color-gold: #F4C542;
+  --color-xp: #5BC27A;
+  --color-boss: #FF9F6B;
+  --color-cream: #F2EEDC;
+  --color-legend: #B98CFF;
+  --color-silhouette: #3A3F6A;
+  --font-display: "Press Start 2P", monospace;
+  --font-body: "Pixelify Sans", system-ui, sans-serif;
+}
+
+@import "./components.css";
