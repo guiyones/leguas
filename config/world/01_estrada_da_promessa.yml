@@ -1,0 +1,119 @@
+key: estrada_da_promessa
+name: Estrada da Promessa
+inspired_by: Caminho da Fé (ramal principal)
+trophy_name: Promessa
+phases:
+  - key: vale_das_aguas
+    name: Vale das Águas
+    inspired_by: Águas da Prata → Andradas
+    km: 34
+    symbol: gota d'água
+    landmarks:
+      - key: pico_do_primeiro_folego
+        name: Pico do Primeiro Fôlego
+        at_km: 20
+        story: >
+          A primeira subida de verdade chega perto dos 1.375 metros. Quem passa por aqui
+          descobre cedo que a estrada não vai ser plana.
+      - key: vinhedos_do_vale
+        name: Vinhedos do Vale
+        at_km: 30
+        story: >
+          A cidade que inspira o fim desta fase é conhecida como a Capital Mineira do Vinho.
+          Os parreirais começam a aparecer pouco antes da chegada.
+
+  - key: colinas_douradas
+    name: Colinas Douradas
+    inspired_by: Andradas → Inconfidentes
+    km: 53
+    symbol: colinas
+    landmarks:
+      - key: serra_dos_limoeiros
+        name: Serra dos Limoeiros
+        at_km: 15
+        story: >
+          Um alto de serra a 1.221 metros. Olhando pra trás, dá pra ver o vale inteiro
+          que você já atravessou.
+      - key: vila_crisalida
+        name: Vila Crisálida
+        at_km: 36
+        story: >
+          Um distrito pequeno no meio do caminho, inspirado em Crisólia. Bom lugar pra
+          encher a garrafa d'água.
+      - key: porteira_do_ouro_miudo
+        name: Porteira do Ouro Miúdo
+        at_km: 43
+        story: >
+          Inspirada em Ouro Fino, a cidade da "estrada de Ouro Fino" que aparece na
+          música Menino da Porteira.
+
+  - key: planicie_dos_viajantes
+    name: Planície dos Viajantes
+    inspired_by: Inconfidentes → Estiva
+    km: 59
+    symbol: pegadas
+    landmarks:
+      - key: vila_dos_pijamas
+        name: Vila dos Pijamas
+        at_km: 20
+        story: >
+          Inspirada em Borda da Mata, que se apresenta como a capital nacional do pijama.
+          Tem loja de pijama pra todo lado.
+      - key: pico_do_toco
+        name: Pico do Toco
+        at_km: 38
+        story: >
+          Logo depois do vilarejo que inspira este marco vem um pico de 1.324 metros.
+          Respira fundo, viajante.
+
+  - key: estrada_luminosa
+    name: Estrada Luminosa
+    inspired_by: Estiva → Luminosa
+    km: 66
+    symbol: estrela
+    landmarks:
+      - key: vila_consolo
+        name: Vila Consolo
+        at_km: 20
+        story: >
+          Um vilarejo a pouco mais de mil metros de altitude, inspirado em Consolação.
+          O nome já diz: aqui a subida dá uma trégua.
+      - key: vila_paraiso
+        name: Vila Paraíso
+        at_km: 42
+        story: >
+          Inspirada em Paraisópolis. É dela que sai o ramal mais curto do caminho real,
+          com 134 km até o santuário.
+
+  - key: gigante_de_pedra
+    name: O Gigante de Pedra
+    inspired_by: Luminosa → Campos do Jordão (Serra da Mantiqueira)
+    km: 38
+    rarity: rare
+    symbol: montanha com pico nevado
+    landmarks:
+      - key: teto_do_caminho
+        name: Teto do Caminho
+        at_km: 17
+        story: >
+          1.820 metros. O ponto mais alto de todo o caminho que inspira esta região.
+          Daqui pra frente, o gigante começa a ceder.
+
+  - key: santuario_da_luz
+    name: Santuário da Luz
+    inspired_by: Campos do Jordão → Aparecida
+    km: 72
+    symbol: santuário com cruz
+    landmarks:
+      - key: mirante_da_descida
+        name: Mirante da Descida
+        at_km: 30
+        story: >
+          Começa a longa descida da serra rumo ao vale do rio Paraíba. Os joelhos vão
+          lembrar deste trecho.
+      - key: vila_potira
+        name: Vila Potira
+        at_km: 47
+        story: >
+          Já no vale, perto do fim. As torres do santuário estão a menos de um dia de
+          caminhada.
