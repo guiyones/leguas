@@ -1,0 +1,13 @@
+<% @page_title = "Entrar" %>
+<% @hide_nav = true %>
+
+<section class="panel flex flex-col gap-4 text-center mt-16">
+  <h1 class="text-gold">LÉGUAS</h1>
+  <p>Digite seu email. Vamos mandar um código pra você entrar.</p>
+
+  <%= form_with url: auth_tokens_path, class: "flex flex-col gap-4" do |form| %>
+    <%= form.label :email_address, "Email", class: "text-left text-[0.6rem]" %>
+    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", class: "field" %>
+    <%= form.submit "Receber código", class: "btn-game" %>
+  <% end %>
+</section>
