@@ -3694,9 +3694,10 @@ Em `app/models/user.rb`, troque `include Traveler` por:
 Em `app/models/walk.rb`, abaixo de `after_save :ensure_mission`:
 
 ```ruby
-  after_update_commit :forget_unreached_celebrations
-  after_destroy_commit :forget_unreached_celebrations
+  after_commit :forget_unreached_celebrations, on: %i[ update destroy ]
 ```
+
+(Um único `after_commit ... on:`. Registrar `after_update_commit` e `after_destroy_commit` com o mesmo método faz só o último valer.)
 
 e, nos privados (depois de `ensure_mission`):
 
