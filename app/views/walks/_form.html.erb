@@ -1,0 +1,33 @@
+<%= form_with model: walk, class: "flex flex-col gap-4" do |form| %>
+  <div class="flex flex-col gap-2">
+    <%= form.label :km, "Quantos km?", class: "text-[0.6rem]" %>
+    <%= form.text_field :km, value: walk.km&.to_s("F"), required: true, inputmode: "decimal",
+          autocomplete: "off", autofocus: walk.new_record?, class: "field text-center text-3xl" %>
+    <% if walk.new_record? %>
+      <div class="grid grid-cols-3 gap-2">
+        <% [ 2, 3, 5 ].each do |km| %>
+          <button type="button" class="btn-game btn-game--secondary"
+                  onclick="this.form.elements['walk[km]'].value = '<%= km %>'"><%= km %> km</button>
+        <% end %>
+      </div>
+    <% end %>
+    <% walk.errors.full_messages_for(:km).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :walked_on, "Quando?", class: "text-[0.6rem]" %>
+    <%= form.date_field :walked_on, min: Date.current - Walk::RETROACTIVE_DAYS, max: Date.current, required: true, class: "field" %>
+    <% walk.errors.full_messages_for(:walked_on).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :note, "Observação (opcional)", class: "text-[0.6rem]" %>
+    <%= form.text_field :note, maxlength: 140, class: "field" %>
+  </div>
+
+  <%= form.submit walk.new_record? ? "Registrar caminhada" : "Salvar", class: "btn-game" %>
+<% end %>
