@@ -1,0 +1,13 @@
+viajante:
+  email_address: viajante@leguas.test
+  name: Tião
+  avatar: tropeiro
+  daily_goal_km: 3
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+novato:
+  email_address: novato@leguas.test
+  daily_goal_km: 3
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
