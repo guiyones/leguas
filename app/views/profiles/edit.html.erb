@@ -1,0 +1,12 @@
+<% @page_title = "Perfil" %>
+
+<section class="panel flex flex-col gap-6">
+  <h1 class="text-gold">Perfil</h1>
+
+  <%= form_with model: @user, url: profile_path, method: :patch, class: "flex flex-col gap-6" do |form| %>
+    <%= render "travelers/fields", form: form, user: @user %>
+    <%= form.submit "Salvar", class: "btn-game" %>
+  <% end %>
+
+  <%= button_to "Sair", session_path, method: :delete, class: "btn-game btn-game--secondary w-full" %>
+</section>

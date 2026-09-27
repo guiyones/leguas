@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   require_unauthenticated_access only: :new
+  allow_unnamed_traveler only: :destroy
 
   def new
   end

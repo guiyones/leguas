@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resource :validations, only: %i[ new create ]
   end
 
+  resource :traveler, only: %i[ new create ]
+  resource :profile, only: %i[ edit update ]
+
   resources :walks
 
   get "up" => "rails/health#show", as: :rails_health_check

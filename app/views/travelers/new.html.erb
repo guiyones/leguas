@@ -1,0 +1,16 @@
+<% @page_title = "Boas-vindas" %>
+<% @hide_nav = true %>
+
+<section class="panel flex flex-col gap-6 mt-8" data-controller="steps">
+  <h1 class="text-gold text-center">Qual o seu nome, viajante?</h1>
+
+  <%= form_with model: @user, url: traveler_path, method: :post, class: "flex flex-col gap-6" do |form| %>
+    <%= render "travelers/fields", form: form, user: @user %>
+
+    <div class="flex gap-3 justify-between">
+      <button type="button" class="btn-game btn-game--secondary" data-steps-target="back" data-action="steps#back">Voltar</button>
+      <button type="button" class="btn-game" data-steps-target="next" data-action="steps#next">Próximo</button>
+      <%= form.submit "Começar jornada", class: "btn-game", data: { steps_target: "submit" } %>
+    </div>
+  <% end %>
+</section>

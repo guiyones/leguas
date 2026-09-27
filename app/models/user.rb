@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Traveler
+
   has_many :auth_tokens, dependent: :destroy
   has_many :sessions, dependent: :destroy
 
