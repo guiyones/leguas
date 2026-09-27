@@ -13,7 +13,7 @@ class WorldContentTest < ActiveSupport::TestCase
 
   test "toda fase tem insígnia válida no tamanho da raridade" do
     @world.phases.each do |phase|
-      PixelArt.find(:insignias, phase.key).validate(size: phase.insignia_size)
+      assert_nothing_raised { PixelArt.find(:insignias, phase.key).validate(size: phase.insignia_size) }
     end
   end
 
@@ -25,6 +25,8 @@ class WorldContentTest < ActiveSupport::TestCase
   end
 
   test "todo avatar é 16x16" do
-    User::Traveler::AVATARS.each { PixelArt.find(:avatars, it).validate(size: 16) }
+    User::Traveler::AVATARS.each do |avatar|
+      assert_nothing_raised { PixelArt.find(:avatars, avatar).validate(size: 16) }
+    end
   end
 end
