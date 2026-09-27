@@ -1,1 +1,42 @@
-<h1>Olá, viajante!</h1>
+<% @page_title = "Início" %>
+
+<section class="panel flex items-center gap-4" data-testid="hud">
+  <%= link_to edit_profile_path, aria: { label: "Perfil" } do %>
+    <%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 64, label: Current.user.name %>
+  <% end %>
+  <div class="flex-1 flex flex-col gap-2">
+    <p class="font-display text-xs"><%= Current.user.name %></p>
+    <p class="text-sm"><span class="text-gold">Nível <%= @level.number %></span> · <%= @level.title.name %></p>
+    <%= segmented_progress @level.progress, color: :xp %>
+    <p class="text-xs"><%= @level.xp %> XP · faltam <%= @level.xp_to_next %> pro próximo nível</p>
+  </div>
+</section>
+
+<section class="panel flex flex-col gap-3" data-testid="phase">
+  <% phase = @journey.current_phase %>
+  <p class="text-xs"><%= phase.region.name %> · Fase <%= phase.number %> de <%= phase.region.phases.size %></p>
+  <h2 class="<%= phase.boss? ? "text-boss" : "text-gold" %>"><%= "Chefão: " if phase.boss? %><%= phase.name %></h2>
+  <%= segmented_progress @journey.phase_progress %>
+  <p class="font-display text-[0.6rem]"><%= number_with_precision @journey.km_in_phase, precision: 1, strip_insignificant_zeros: true %> / <%= phase.km.to_i %> km</p>
+
+  <% if milestone = @journey.next_milestone %>
+    <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %> km</p>
+  <% else %>
+    <p class="text-gold">Você completou o mundo, viajante!</p>
+  <% end %>
+
+  <p class="text-sm">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas</p>
+</section>
+
+<section class="panel flex flex-col gap-3" data-testid="mission">
+  <h2>Missão do dia</h2>
+  <% if @walked_today >= @mission_goal %>
+    <p class="text-xp">Missão cumprida! +<%= Mission::XP %> XP</p>
+  <% else %>
+    <p>Caminhar <%= number_with_precision @mission_goal, precision: 1, strip_insignificant_zeros: true %> km</p>
+  <% end %>
+  <%= segmented_progress @walked_today / @mission_goal, segments: 6, color: :xp %>
+  <p class="font-display text-[0.6rem]"><%= number_with_precision @walked_today, precision: 1, strip_insignificant_zeros: true %> / <%= number_with_precision @mission_goal, precision: 1, strip_insignificant_zeros: true %> km</p>
+</section>
+
+<%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-sm py-6" %>
