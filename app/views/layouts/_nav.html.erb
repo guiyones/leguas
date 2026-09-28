@@ -1,7 +1,8 @@
 <nav class="fixed inset-x-0 bottom-0 border-t-4 border-ink bg-panel" aria-label="Navegação principal">
-  <ul class="mx-auto max-w-md grid grid-cols-3 items-end text-center font-display text-[0.7rem]">
+  <ul class="mx-auto max-w-md grid grid-cols-[80px_60px_140px_110px] items-end text-center font-display text-[0.7rem]">
     <li><%= link_to "Início", root_path, class: "block py-4" %></li>
-    <li><%= link_to "Registrar", new_walk_path, class: "btn-game -translate-y-3 w-full" %></li>
+    <li><%= link_to "Mapa", map_path(anchor: "atual"), class: "block py-4" %></li>
+    <li><%= link_to "Registrar", new_walk_path, class: "btn-game -translate-y-3 w-full px-1" %></li>
     <li><%= link_to "Histórico", walks_path, class: "block py-4" %></li>
   </ul>
 </nav>
