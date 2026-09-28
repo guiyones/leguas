@@ -30,6 +30,7 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     post walks_url, params: { walk: { km: "20", walked_on: Date.current.iso8601 } }
 
     assert_redirected_to celebration_url
+    assert_match(/\A\+\d+ XP/, flash[:notice])
   end
 
   test "caminhada inválida volta com erro" do

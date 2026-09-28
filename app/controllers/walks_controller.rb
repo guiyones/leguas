@@ -51,7 +51,7 @@ class WalksController < ApplicationController
 
     def redirect_to_celebration_or(path, notice:)
       if Current.user.next_celebration_key
-        redirect_to celebration_path
+        redirect_to celebration_path, notice: notice
       else
         redirect_to path, notice: notice
       end
