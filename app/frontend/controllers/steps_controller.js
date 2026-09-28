@@ -11,6 +11,13 @@ export default class extends Controller {
     if (this.currentStepIsValid()) this.show(this.index + 1)
   }
 
+  interceptEnter(event) {
+    if (this.index < this.stepTargets.length - 1) {
+      event.preventDefault()
+      this.next()
+    }
+  }
+
   back() {
     this.show(this.index - 1)
   }

@@ -4,7 +4,8 @@
 <section class="panel flex flex-col gap-6 mt-8" data-controller="steps">
   <h1 class="text-gold text-center">Qual o seu nome, viajante?</h1>
 
-  <%= form_with model: @user, url: traveler_path, method: :post, class: "flex flex-col gap-6" do |form| %>
+  <%= form_with model: @user, url: traveler_path, method: :post, class: "flex flex-col gap-6",
+        data: { action: "keydown.enter->steps#interceptEnter" } do |form| %>
     <%= render "travelers/fields", form: form, user: @user %>
 
     <div class="flex gap-3 justify-between">
