@@ -32,7 +32,7 @@
 - O viajante tem **uma única posição** no mundo. Não existem "desafios" nem "participações", só a caminhada contínua.
 - Cada fase tem uma meta em km. Ao batê-la, a fase fica vencida, a insígnia é liberada e o viajante segue pra próxima. **O excedente passa pra fase seguinte**, inclusive de uma região pra outra.
 - Ao vencer a última fase de uma região, o troféu fica completo e a próxima região é liberada automaticamente.
-- Ao fim da Região 3, o jogo está completo. Caminhadas posteriores continuam somando km e XP, mas a posição fica na bandeira final.
+- Ao fim da Região 3 o viajante chega ao "fim do mundo conhecido" (a interface avisa que novas regiões estão a caminho). Caminhadas posteriores continuam somando km e XP, mas a posição fica na bandeira final até as regiões em standby voltarem.
 - Raridade das insígnias: **comum**, **rara** (chefões) e **lendária** (O Trovão das Águas, a última fase do jogo). Chefões raros no MVP: 1 por região (As Areias Sem Fim, O Guardião do Céu, O Gigante de Pedra). A insígnia lendária (O Trovão das Águas) fica com a região em standby O Caminho do Sol.
 - **Troféu:** uma placa por região com **um encaixe por fase** (4, 6 e 6 no MVP). Os encaixes de chefão são maiores.
 
