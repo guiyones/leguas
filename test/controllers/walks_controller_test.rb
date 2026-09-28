@@ -39,6 +39,17 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_select ".field-error"
   end
 
+  test "editar caminhada de 10 dias atrás não bloqueia o campo de data" do
+    walk = users(:viajante).walks.create!(km: 3, walked_on: Date.current)
+
+    travel 10.days do
+      get edit_walk_url(walk)
+
+      assert_response :success
+      assert_select "input[name='walk[walked_on]'][min=?]", walk.walked_on.iso8601
+    end
+  end
+
   test "histórico lista, edita e exclui" do
     walk = users(:viajante).walks.create!(km: 3, walked_on: Date.current, note: "Parque")
 

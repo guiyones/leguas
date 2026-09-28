@@ -18,7 +18,7 @@
 
   <div class="flex flex-col gap-2">
     <%= form.label :walked_on, "Quando?", class: "text-[0.6rem]" %>
-    <%= form.date_field :walked_on, min: Date.current - Walk::RETROACTIVE_DAYS, max: Date.current, required: true, class: "field" %>
+    <%= form.date_field :walked_on, min: walk.walked_on_min, max: Date.current, required: true, class: "field" %>
     <% walk.errors.full_messages_for(:walked_on).each do |message| %>
       <p class="field-error"><%= message %></p>
     <% end %>

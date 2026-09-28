@@ -69,6 +69,20 @@ class WalkTest < ActiveSupport::TestCase
     end
   end
 
+  test "data mínima do formulário: nova caminhada usa a janela de 7 dias" do
+    walk = @user.walks.new(walked_on: Date.current)
+
+    assert_equal Date.current - Walk::RETROACTIVE_DAYS, walk.walked_on_min
+  end
+
+  test "data mínima do formulário: caminhada antiga permite manter a própria data" do
+    walk = @user.walks.create!(km: 3, walked_on: Date.current)
+
+    travel 10.days do
+      assert_equal walk.walked_on, walk.walked_on_min
+    end
+  end
+
   test "salvar cria a missão do dia com a meta atual" do
     assert_difference -> { @user.missions.count }, 1 do
       @user.walks.create!(km: 1, walked_on: Date.current)

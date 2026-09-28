@@ -17,6 +17,14 @@ class Walk < ApplicationRecord
     super(value.is_a?(String) ? value.tr(",", ".") : value)
   end
 
+  def walked_on_min
+    if new_record?
+      Date.current - RETROACTIVE_DAYS
+    else
+      [ walked_on_was || walked_on, Date.current - RETROACTIVE_DAYS ].min
+    end
+  end
+
   private
     def walked_on_within_window
       if walked_on && walked_on_changed? && !walked_on.between?(Date.current - RETROACTIVE_DAYS, Date.current)
