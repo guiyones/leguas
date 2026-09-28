@@ -50,12 +50,24 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     get celebration_url
     assert_select "h1", text: /NÍVEL COMPLETO/
     assert_select "*", text: /100 km/
-    assert_select "*", text: /Estrada da Promessa/   # a Task 2 troca pra Trilha do Primeiro Raio
+    assert_select "*", text: /Trilha do Primeiro Raio/
     post celebration_url, params: { key: "region:costa_do_missionario" }
 
     get celebration_url
     assert_select "h1", text: /Novo título/
     assert_select "*", text: /Andarilho/
+  end
+
+  test "última região fala do mundo conhecido" do
+    log_walks users(:viajante), 100, 100, 100, 100, 100, 99   # 599 km: fim do mundo do MVP
+    user = users(:viajante)
+    user.pending_celebration_keys.excluding("region:estrada_da_promessa").each { user.celebrate(it) }
+
+    get celebration_url
+
+    assert_select "h1", text: /NÍVEL COMPLETO/
+    assert_select "*", text: /fim do mundo conhecido/
+    assert_select "*", text: /completou o mundo inteiro/, count: 0
   end
 
   test "clique duplo ou chave estranha não quebra" do

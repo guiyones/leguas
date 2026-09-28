@@ -56,4 +56,24 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href=?]", new_walk_path, text: "Registrar caminhada"
   end
+
+  test "excedente da Região 1 cai na Região 2" do
+    log_walks users(:viajante), 100, 10
+
+    get root_url
+
+    assert_select "[data-testid=phase]" do
+      assert_select "*", text: /Trilha do Primeiro Raio/
+      assert_select "*", text: /Vale das Quedas/
+      assert_select "*", text: %r{10 / 44 km}
+    end
+  end
+
+  test "fim do mundo conhecido no início" do
+    log_walks users(:viajante), 100, 100, 100, 100, 100, 99
+
+    get root_url
+
+    assert_select "[data-testid=phase]", text: /fim do mundo conhecido/
+  end
 end

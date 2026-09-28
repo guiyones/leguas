@@ -22,7 +22,7 @@
   <% if milestone = @journey.next_milestone %>
     <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %> km</p>
   <% else %>
-    <p class="text-gold">Você completou o mundo, viajante!</p>
+    <p class="text-gold">Você chegou ao fim do mundo conhecido, viajante! Novas regiões estão a caminho.</p>
   <% end %>
 
   <p class="text-sm">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas</p>

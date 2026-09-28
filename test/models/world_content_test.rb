@@ -4,12 +4,13 @@ class WorldContentTest < ActiveSupport::TestCase
   setup { @world = World.load(World::ROOT) }
 
   test "regiões e número de fases" do
-    assert_equal [ [ "costa_do_missionario", 4 ], [ "estrada_da_promessa", 6 ] ], @world.regions.map { [ it.key, it.phases.size ] }
+    assert_equal [ [ "costa_do_missionario", 4 ], [ "trilha_do_primeiro_raio", 6 ], [ "estrada_da_promessa", 6 ] ],
+      @world.regions.map { [ it.key, it.phases.size ] }
   end
 
-  test "km de cada região" do
-    assert_equal 100, @world.region("costa_do_missionario").km
-    assert_equal 322, @world.region("estrada_da_promessa").km
+  test "km de cada região e do mundo" do
+    assert_equal [ 100, 177, 322 ], @world.regions.map { it.km.to_i }
+    assert_equal 599, @world.total_km
   end
 
   test "toda fase tem insígnia válida no tamanho da raridade" do

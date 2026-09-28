@@ -1,0 +1,87 @@
+key: trilha_do_primeiro_raio
+name: Trilha do Primeiro Raio
+inspired_by: Caminho da Luz
+trophy_name: Primeiro Raio
+phases:
+  - key: vale_das_quedas
+    name: Vale das Quedas
+    inspired_by: Tombos → Pedra Dourada
+    km: 44
+    symbol: cachoeira
+    landmarks:
+      - key: vila_do_carimbo
+        name: Vila do Carimbo
+        at_km: 25
+        story: >
+          Um distrito rural onde os peregrinos do caminho real costumam carimbar a
+          credencial. Aqui você ganha o seu carimbo também.
+      - key: gruta_sagrada
+        name: Gruta Sagrada
+        at_km: 35
+        story: >
+          Uma gruta que os caminhantes tratam como lugar de oração. Fala baixo lá dentro.
+
+  - key: vale_do_silencio
+    name: Vale do Silêncio
+    inspired_by: Pedra Dourada → Faria Lemos
+    km: 25
+    symbol: lua sobre a mata
+    landmarks:
+      - key: mata_calada
+        name: Mata Calada
+        at_km: 12
+        story: >
+          Um trecho de mata tão quieto que dá pra ouvir os próprios passos. Os peregrinos
+          dizem que é o lugar mais silencioso do caminho.
+
+  - key: estacao_esquecida
+    name: Estação Esquecida
+    inspired_by: Faria Lemos → Carangola
+    km: 23
+    symbol: trilho de trem
+    landmarks:
+      - key: trilhos_antigos
+        name: Trilhos Antigos
+        at_km: 11
+        story: >
+          Restos de uma linha de trem centenária que ligava as cidades da região. Hoje o
+          mato cobre quase tudo.
+
+  - key: colinas_do_cafe
+    name: Colinas do Café
+    inspired_by: Carangola → Espera Feliz
+    km: 33
+    symbol: grão de café
+    landmarks:
+      - key: alto_do_jacu
+        name: Alto do Jacu
+        at_km: 20
+        story: >
+          Um alto de pouco mais de mil metros no meio das fazendas de café. O ar já
+          começa a esfriar.
+
+  - key: portal_da_serra
+    name: Portal da Serra
+    inspired_by: Espera Feliz → Alto Caparaó
+    km: 34
+    symbol: portal de pedra
+    landmarks:
+      - key: vila_do_portal
+        name: Vila do Portal
+        at_km: 20
+        story: >
+          A última vila antes da serra grande. Daqui pra frente, o caminho é todo subida.
+
+  - key: guardiao_do_ceu
+    name: O Guardião do Céu
+    inspired_by: Alto Caparaó → cume do Pico da Bandeira
+    km: 18
+    rarity: rare
+    symbol: pico com o sol nascendo
+    landmarks:
+      - key: acampamento_das_nuvens
+        name: Acampamento das Nuvens
+        at_km: 9
+        story: >
+          Um descampado no meio da subida onde muita gente acampa pra chegar ao cume antes
+          do sol nascer. É esse primeiro raio que dá nome à trilha.
