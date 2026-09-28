@@ -1,6 +1,8 @@
 module Authentication
   extend ActiveSupport::Concern
 
+  RATE_LIMITED = -> { redirect_to new_session_path, alert: "Muitas tentativas. Respira e tenta de novo daqui a um minuto." }
+
   included do
     before_action :require_authentication
     helper_method :authenticated?
@@ -17,8 +19,11 @@ module Authentication
     end
 
     def rate_limit_sign_in(by:)
-      rate_limit to: 10, within: 1.minute, only: :create, by: by,
-        with: -> { redirect_to new_session_path, alert: "Muitas tentativas. Respira e tenta de novo daqui a um minuto." }
+      rate_limit to: 10, within: 1.minute, only: :create, by: by, with: RATE_LIMITED
+    end
+
+    def rate_limit_sign_in_by_ip(to:, within:)
+      rate_limit to: to, within: within, only: :create, by: -> { request.remote_ip }, with: RATE_LIMITED, name: "ip"
     end
   end
 
