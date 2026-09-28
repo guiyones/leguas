@@ -4,7 +4,7 @@
 
 ## Entendimento
 
-**O que é.** Um jogo de caminhada em pixel art. O viajante registra os km que andou e avança por um mundo de 3 regiões, cada uma inspirada numa trilha real do Brasil e dividida em fases (6, 10 e 14). Marcos dão carimbos, fases dão insígnias e regiões dão troféus.
+**O que é.** Um jogo de caminhada em pixel art. O viajante registra os km que andou e avança por um mundo de regiões inspiradas em trilhas reais do Brasil, divididas em fases. O MVP tem 3 regiões (4, 6 e 6 fases), e outras 2 já desenhadas ficam em standby. Marcos dão carimbos, fases dão insígnias e regiões dão troféus.
 
 **Pra quem.** No começo, só o autor, pelo celular. Amigos podem entrar depois, então o app já nasce com contas de usuário.
 
@@ -25,15 +25,16 @@
 
 ### Mundo, regiões e fases
 
-- Um mundo e 3 regiões em ordem fixa: **Estrada da Promessa → Estrada do Ouro Perdido → O Caminho do Sol**.
-- Número de fases: **6, 10 e 14**. A média de km por fase cresce entre as regiões (~54 → ~68 → ~88 km), o que dá em média uma insígnia a cada 11–18 dias pra quem anda 5 km/dia. Os cortes caem em cidades reais do trajeto e as fases são contíguas.
+- Um mundo e 3 regiões em ordem fixa no MVP: **Costa do Missionário → Trilha do Primeiro Raio → Estrada da Promessa** (100 → 177 → 322 km, ~600 km no total).
+- Número de fases: **4, 6 e 6**. As regiões crescem aos poucos: a primeira insígnia sai com 25 km (~5 dias a 5 km/dia) e cada região é maior que a anterior. Os cortes caem em cidades reais do trajeto e as fases são contíguas.
+- **Em standby** (desenhadas, fora do MVP): Estrada do Ouro Perdido (10 fases, 675 km) e O Caminho do Sol (14 fases, 1.233 km). Voltam depois como Regiões 4 e 5, sem mudar a curva de XP.
 - Marcos idealmente a cada ~20–25 km, pra ter algo novo a cada 4–5 dias.
 - O viajante tem **uma única posição** no mundo. Não existem "desafios" nem "participações", só a caminhada contínua.
 - Cada fase tem uma meta em km. Ao batê-la, a fase fica vencida, a insígnia é liberada e o viajante segue pra próxima. **O excedente passa pra fase seguinte**, inclusive de uma região pra outra.
 - Ao vencer a última fase de uma região, o troféu fica completo e a próxima região é liberada automaticamente.
 - Ao fim da Região 3, o jogo está completo. Caminhadas posteriores continuam somando km e XP, mas a posição fica na bandeira final.
-- Raridade das insígnias: **comum**, **rara** (chefões) e **lendária** (O Trovão das Águas, a última fase do jogo). Chefões raros: 1 na Região 1, 2 na Região 2 e 2 na Região 3, além do lendário final.
-- **Troféu:** uma placa por região com **um encaixe por fase** (6, 10 e 14). Os encaixes de chefão são maiores.
+- Raridade das insígnias: **comum**, **rara** (chefões) e **lendária** (O Trovão das Águas, a última fase do jogo). Chefões raros no MVP: 1 por região (As Areias Sem Fim, O Guardião do Céu, O Gigante de Pedra). A insígnia lendária (O Trovão das Águas) fica com a região em standby O Caminho do Sol.
+- **Troféu:** uma placa por região com **um encaixe por fase** (4, 6 e 6 no MVP). Os encaixes de chefão são maiores.
 
 ### Marcos, carimbos e diário
 
@@ -54,6 +55,7 @@
 
 - Nível *n* exige `40 × (n−1)²` de XP acumulado (nível 1 = 0 XP).
 - Títulos por nível: 1–4 Caminhante · 5–9 Andarilho · 10–14 Aventureiro · 15–19 Peregrino · 20–24 Desbravador · 25+ Lenda das Léguas.
+- A curva foi calibrada pro mundo completo (~2.230 km). No mundo do MVP (~600 km) o viajante chega a Peregrino (~nível 16); Desbravador e Lenda das Léguas esperam as regiões em standby. Decisão: não comprimir a curva.
 - Cada troca de título tem uma celebração. Subir de nível sem trocar de título só mostra um aviso.
 
 ### Missão do dia
@@ -109,9 +111,10 @@ Fica de fora do beep: multitenant, a separação `Identity`/`User`, `Deactivatab
 
 ```
 config/world/
-  01_estrada_da_promessa.yml
-  02_ouro_perdido.yml
-  03_caminho_do_sol.yml
+  01_costa_do_missionario.yml
+  02_trilha_do_primeiro_raio.yml
+  03_estrada_da_promessa.yml
+  # standby (sem YAML até voltarem): ouro_perdido, caminho_do_sol
 app/pixel_art/
   insignias/<phase_key>.txt
   stamps/<landmark_key>.txt
@@ -234,7 +237,7 @@ Os tokens ficam em `@theme` no Tailwind, e os componentes (`.btn-game`, `.panel`
 
 - `test/fixtures/world/`: um mundo pequeno com números redondos (2 regiões, 2–3 fases, alguns marcos) usado pelos testes de lógica via `World.load`
 - **Models:** `World` (carregamento, km acumulados, milestones), `PixelArt` (tamanhos e paleta), `User::Journey` (posição, fronteira exata, excedente atravessando região, jogo completo), `User::Level` (curva e títulos), `Walk` (validações, limite diário, janela de 7 dias), `Mission` (meta congelada, cumprida), `User::Celebrations` (pendentes em ordem, esquecer não alcançadas)
-- **Conteúdo real:** chaves únicas, `at_km` < `km` da fase, número de fases por região (6/10/14), grades existentes e válidas
+- **Conteúdo real:** chaves únicas, `at_km` < `km` da fase, número de fases por região (4/6/6), grades existentes e válidas
 - **Integração:** login por código, redirecionamento pro onboarding, CRUD de caminhadas, sequência de celebrações, região bloqueada
 - **System test:** registrar uma caminhada que vence uma fase → ver a insígnia → voltar pro início
 
@@ -242,9 +245,37 @@ Os tokens ficam em `@theme` no Tailwind, e os componentes (`.btn-game`, `.panel`
 
 Os km vêm da pesquisa em `docs/research/2026-09-25-distancias.md`, que traz as fontes, a lista cidade a cidade e os marcos candidatos. Status: **OF** = planilha ou perfil oficial, **EST** = estimativa por rota rodoviária. Os nomes das fases são fictícios; a coluna "trecho real" só existe pra referência e não aparece no app como marca.
 
-Total do mundo: **2.230 km** (~372 léguas).
+Mundo do MVP: **599 km** (~100 léguas). Com as regiões em standby, o mundo completo tem 2.507 km.
 
-### Região 1: Estrada da Promessa (322 km, OF)
+Pesquisa das Regiões 1 e 2: `docs/research/2026-09-28-distancias-regioes-curtas.md`.
+
+### Região 1: Costa do Missionário (100 km, OF)
+
+*Inspirada nos Passos de Anchieta (ES), 4 etapas oficiais da ABAPA.* Placa do troféu: "Missionário".
+
+| # | Fase | Trecho real | km | Raridade | Insígnia |
+|---|---|---|---|---|---|
+| 1 | Mirante do Convento | Vitória → Barra do Jucu | 25 | comum | convento no alto do morro |
+| 2 | As Areias Sem Fim | Barra do Jucu → Setiba | 28 | rara | pegada na areia sob o sol |
+| 3 | Praia das Areias que Curam | Setiba → Meaípe | 24 | comum | concha brilhando |
+| 4 | Chegada do Missionário | Meaípe → Anchieta | 23 | comum | cajado com cruz |
+
+A fase 2 é o chefão por ser a etapa mais longa, de areia fofa, isolada e quase sem sombra.
+
+### Região 2: Trilha do Primeiro Raio (177 km, SEC)
+
+*Inspirada no Caminho da Luz (MG), tabela detalhada de etapas.* O site oficial arredonda para "~200 km"; o jogo usa a soma das etapas (177,3 km, arredondada por fase). Placa do troféu: "Primeiro Raio" (o nascer do sol no Pico da Bandeira).
+
+| # | Fase | Trecho real | km | Raridade | Insígnia |
+|---|---|---|---|---|---|
+| 1 | Vale das Quedas | Tombos → Pedra Dourada | 44 | comum | cachoeira |
+| 2 | Vale do Silêncio | Pedra Dourada → Faria Lemos | 25 | comum | lua sobre a mata |
+| 3 | Estação Esquecida | Faria Lemos → Carangola | 23 | comum | trilho de trem |
+| 4 | Colinas do Café | Carangola → Espera Feliz | 33 | comum | grão de café |
+| 5 | Portal da Serra | Espera Feliz → Alto Caparaó | 34 | comum | portal de pedra |
+| 6 | O Guardião do Céu | Alto Caparaó → cume do Pico da Bandeira (2.892 m) | 18 | rara | pico com o sol nascendo |
+
+### Região 3: Estrada da Promessa (322 km, OF)
 
 *Inspirada no Caminho da Fé, perfil oficial da Associação.* O traçado atual desce por Gomeral e Potim (~317 km) em vez de Pindamonhangaba. Por isso a fase 6 fica com 72 km provisórios até confirmar o trecho.
 
@@ -259,7 +290,7 @@ Total do mundo: **2.230 km** (~372 léguas).
 
 A fase 5 é curta porque é chefão: 38 km de subida forte. É a única fase abaixo da faixa de 50–80 km, e o motivo é o terreno.
 
-### Região 2: Estrada do Ouro Perdido (675 km, OF)
+### Standby: Estrada do Ouro Perdido (675 km, OF)
 
 *Inspirada na Estrada Real, Caminho Velho.* A soma oficial dos 27 trechos planilhados pelo Instituto Estrada Real é 675 km. O número de divulgação é 710, mas o jogo usa a soma dos trechos.
 
@@ -278,7 +309,7 @@ A fase 5 é curta porque é chefão: 38 km de subida forte. É a única fase aba
 
 O último marco da fase 10 é **Porto das Pedras** (Paraty), que herda a âncora como carimbo.
 
-### Região 3: O Caminho do Sol (1.233 km, EST)
+### Standby: O Caminho do Sol (1.233 km, EST)
 
 *Inspirada nos Caminhos do Peabiru.* Não existe tabela oficial por trecho, porque o Peabiru é uma rede de ramais. O traçado linear passa por municípios da rota oficial e mede cada par por estrada (OSRM). Os totais oficiais são 800 km (Paranaguá → Peabiru) + 450 km (Peabiru → Foz), e o traçado dá 775 + 458.
 
@@ -299,22 +330,22 @@ O último marco da fase 10 é **Porto das Pedras** (Paraty), que herda a âncora
 | 13 | Floresta das Onças | Céu Azul → São Miguel do Iguaçu | 80 | comum | pegada de onça |
 | 14 | O Trovão das Águas | São Miguel do Iguaçu → Cataratas | 70 | lendária | cachoeira com raio |
 
-Cinco fases passam de 100 km, o que dá uns 20 dias cada a 5 km/dia. Como a Região 3 é a jornada épica e cada uma dessas fases tem 2 ou 3 marcos no meio, o ritmo é aceitável.
+Cinco fases passam de 100 km, o que dá uns 20 dias cada a 5 km/dia. Como é a jornada épica e cada uma dessas fases tem 2 ou 3 marcos no meio, o ritmo é aceitável.
 
 ### Marcos
 
-Os candidatos de cada fase, com o km dentro da fase e a curiosidade, estão no documento de pesquisa. O conteúdo final (nome fictício, texto do cartão e carimbo) é escrito na entrega 2 (Região 1) e na entrega 8 (Regiões 2 e 3). As curiosidades sem fonte oficial devem ser conferidas antes de entrar.
+Os candidatos de cada fase, com o km dentro da fase e a curiosidade, estão no documento de pesquisa. O conteúdo final (nome fictício, texto do cartão e carimbo) foi escrito no Plano 1 (Estrada da Promessa) e é escrito na entrega 8 (Costa do Missionário e Trilha do Primeiro Raio); o das regiões em standby, quando voltarem. As curiosidades sem fonte oficial devem ser conferidas antes de entrar.
 
 ## Ordem de entregas
 
 1. Esqueleto Rails + login por código + boas-vindas (nome, avatar, meta)
-2. Carregador do mundo + `PixelArt` + conteúdo da Região 1 (km, marcos, insígnias, carimbos)
+2. Carregador do mundo + `PixelArt` + conteúdo da Estrada da Promessa (km, marcos, insígnias, carimbos) — feita no Plano 1, quando ela ainda era a Região 1
 3. Caminhadas + `User::Journey` + início com HUD
 4. XP, níveis, títulos e missão do dia
 5. Celebrações (a partir daqui o app já é usável com a Região 1)
 6. Mapa do mundo + mapa esquemático da região
 7. Diário e troféus com certificado
-8. Conteúdo das Regiões 2 e 3
+8. Conteúdo das Regiões 1 e 2 (Costa do Missionário, Trilha do Primeiro Raio); a Estrada da Promessa passa a ser a Região 3
 9. PWA + deploy (Kamal, Resend)
 
 **Pré-requisito do deploy:** conta no Resend com domínio verificado.
