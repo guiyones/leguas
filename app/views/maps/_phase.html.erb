@@ -5,10 +5,10 @@
   <summary>
     <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.boss? ? 60 : 48,
           label: "Insígnia #{phase.name}", silhouette: status == :upcoming %>
-    <div class="flex-1 flex flex-col gap-1">
-      <p class="caption">Fase <%= phase.number %><%= " · Chefão" if phase.boss? %></p>
-      <p class="font-display text-[0.75rem] <%= phase.boss? ? "text-boss" : "text-gold" %>"><%= phase.name %></p>
-    </div>
+    <span class="flex-1 flex flex-col gap-1">
+      <span class="block caption">Fase <%= phase.number %><%= " · Chefão" if phase.boss? %></span>
+      <span class="block font-display text-[0.75rem] <%= phase.boss? ? "text-boss" : "text-gold" %>"><%= phase.name %></span>
+    </span>
     <% if status == :current %>
       <%= pixel_art_tag PixelArt.find(:avatars, journey.user.avatar), size: 40, label: journey.user.name %>
     <% end %>
@@ -31,8 +31,11 @@
               <%= pixel_art_tag PixelArt.find(:stamps, landmark.key), size: 32, label: "Carimbo #{landmark.name}" %>
               <span><%= landmark.name %></span>
             <% else %>
-              <span class="block bg-silhouette" style="width: 32px; height: 32px"></span>
-              <span class="caption">??? · km <%= number_with_precision landmark.at_km, precision: 1, strip_insignificant_zeros: true %></span>
+              <span class="silhouette silhouette--32"></span>
+              <span class="caption">
+                <span class="sr-only">Marco ainda não alcançado,</span>
+                <span aria-hidden="true">???</span> · km <%= number_with_precision landmark.at_km, precision: 1, strip_insignificant_zeros: true %>
+              </span>
             <% end %>
           </li>
         <% end %>

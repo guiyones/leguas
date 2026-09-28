@@ -37,6 +37,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-region=trilha_do_primeiro_raio]" do
       assert_select "*", text: /Trilha do Primeiro Raio/
       assert_select "*", text: /\?\?\?/
+      assert_select "*", text: /Fase bloqueada/
     end
     assert_no_match(/Vale das Quedas|Vila do Carimbo|Gigante de Pedra/, response.body)
   end

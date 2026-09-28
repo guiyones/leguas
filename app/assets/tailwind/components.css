@@ -148,4 +148,25 @@
   }
 
   .trail-node > summary::-webkit-details-marker { display: none; }
+
+  .trail-node > summary::after {
+    content: "▸";
+    margin-left: auto;
+    padding-left: 0.5rem;
+    color: var(--color-gold);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .trail-node[open] > summary::after { content: "▾"; }
+
+  .silhouette {
+    display: block;
+    background: var(--color-silhouette);
+    flex-shrink: 0;
+  }
+
+  .silhouette--32 { width: 32px; height: 32px; }
+  .silhouette--40 { width: 40px; height: 40px; }
 }
