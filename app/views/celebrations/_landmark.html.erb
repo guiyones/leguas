@@ -1,0 +1,6 @@
+<% landmark = achievement.subject %>
+<h1 class="text-gold">Carimbo conquistado!</h1>
+<%= pixel_art_tag PixelArt.find(:stamps, landmark.key), size: 120, label: "Carimbo #{landmark.name}" %>
+<h2><%= landmark.name %></h2>
+<p><%= landmark.story %></p>
+<p class="font-display text-[0.6rem] text-xp">+<%= landmark.xp %> XP</p>

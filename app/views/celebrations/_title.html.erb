@@ -1,0 +1,5 @@
+<% title = achievement.subject %>
+<h1 class="text-gold">Novo título!</h1>
+<%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 96, label: Current.user.name %>
+<h2><%= Current.user.name %>, agora você é <%= title.name %></h2>
+<p>Nível <%= title.from_level %> alcançado.</p>

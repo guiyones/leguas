@@ -1,0 +1,8 @@
+<% @page_title = "Conquista" %>
+<% @hide_nav = true %>
+
+<section class="panel flex flex-col items-center gap-5 text-center mt-8">
+  <%= render @achievement.kind, achievement: @achievement %>
+
+  <%= button_to "Continuar", celebration_path, params: { key: @achievement.key }, class: "btn-game w-full" %>
+</section>
