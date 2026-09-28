@@ -14,7 +14,7 @@ module User::Celebrations
   end
 
   def celebrate(key)
-    celebrations.find_or_create_by!(key: key)
+    celebrations.create_or_find_by!(key: key)
   end
 
   def forget_unreached_celebrations

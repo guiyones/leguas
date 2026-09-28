@@ -43,7 +43,7 @@ class Walk < ApplicationRecord
     end
 
     def ensure_mission
-      user.missions.find_or_create_by!(date: walked_on) { it.goal_km = user.daily_goal_km }
+      user.missions.create_or_find_by!(date: walked_on) { it.goal_km = user.daily_goal_km }
     end
 
     def forget_unreached_celebrations
