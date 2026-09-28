@@ -187,15 +187,14 @@ Regras de fronteira: um km total exatamente igual ao `at_km` conta como alcança
 
 ## Telas e rotas
 
-A navegação inferior tem Início · Mapa · **Registrar** · Diário · Troféus.
+A navegação inferior tem Início · Mapa · **Registrar** · Diário · Troféus. (Até o diário e os troféus existirem: Início · Mapa · **Registrar** · Histórico.)
 
 | Tela | Rota | Conteúdo |
 |---|---|---|
 | Login | `resource :session`, `resources :auth_tokens`, `namespace :auth_tokens { resource :validations }` | Email e depois o código de 6 dígitos |
 | Boas-vindas | `resource :traveler, only: %i[ new create ]` | Formulário em 3 passos (Stimulus): nome ("Qual o seu nome, viajante?"), avatar (4 opções), meta diária. Um before_action manda pra cá enquanto `name` estiver vazio |
 | Início | `root "home#show"` | HUD (avatar, nome, nível, título, barra de XP), card da fase atual (barra segmentada, km feitos/meta, próximo marco), missão do dia, botão "Registrar caminhada" |
-| Mapa do mundo | `resource :world, only: :show` | 3 regiões como nós: concluída, atual (com o bonequinho) ou bloqueada, com a distância e a prévia do troféu |
-| Região | `resources :regions, only: :show, param: :key` | Mapa esquemático em SVG: fases (nós grandes), marcos (pontos), trecho percorrido contínuo e o que falta tracejado, bonequinho proporcional, bandeira no fim. Tocar num nó abre os detalhes. Região bloqueada: 404 |
+| Mapa | `resource :map, only: :show` | Uma tela só, com trilha vertical: as regiões empilhadas em ordem, cada uma com número, nome, km e situação (concluída, atual ou bloqueada). As fases são nós ligados por uma linha (contínua no que já foi percorrido, tracejada no que falta): fase vencida mostra a insígnia colorida, a fase atual mostra o avatar, a barra e os km, e as futuras mostram a silhueta. Chefões são nós maiores e laranja. Regiões bloqueadas mostram só o nome e as fases como "???". Tocar numa fase (`<details>`) abre km, trecho real e marcos (alcançados com o carimbo; os outros como "???" com o km). A página abre rolada até a fase atual |
 | Registrar | `resources :walks` (`new`, `create`) | Km com atalhos 2/3/5, data e observação |
 | Histórico | `resources :walks` (`index`, `edit`, `update`, `destroy`) | Lista com editar e excluir |
 | Celebração | `resource :celebration, only: %i[ show create ]` | `show`: próxima pendente (ou redireciona pro início). `create`: marca como vista e redireciona pra `show` |
@@ -224,7 +223,7 @@ Segue `docs/PROJETO.md`, seção "Estilo visual":
 
 Os tokens ficam em `@theme` no Tailwind, e os componentes (`.btn-game`, `.panel`, `.progress-segmented`) em CSS próprio.
 
-**Mapa:** no MVP ele é esquemático, gerado por código: um caminho sinuoso em SVG a partir da lista de fases e marcos, sem ilustração. Depois, cada região ganha um fundo ilustrado sem mexer na lógica.
+**Mapa:** no MVP é uma trilha vertical gerada por código (HTML + CSS, sem ilustração), pensada pra rolagem no celular. Decisão de 2026-09-28: uma tela só em vez de mapa do mundo + mapa da região. Depois, cada região pode ganhar um fundo ilustrado sem mexer na lógica.
 
 ## Tratamento de erros
 
@@ -343,7 +342,7 @@ Os candidatos de cada fase, com o km dentro da fase e a curiosidade, estão no d
 3. Caminhadas + `User::Journey` + início com HUD
 4. XP, níveis, títulos e missão do dia
 5. Celebrações (a partir daqui o app já é usável com a Região 1)
-6. Mapa do mundo + mapa esquemático da região
+6. Mapa (tela única com a trilha vertical de regiões e fases)
 7. Diário e troféus com certificado
 8. Conteúdo das Regiões 1 e 2 (Costa do Missionário, Trilha do Primeiro Raio); a Estrada da Promessa passa a ser a Região 3
 9. PWA + deploy (Kamal, Resend)
