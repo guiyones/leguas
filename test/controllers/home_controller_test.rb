@@ -34,6 +34,15 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=mission]", text: %r{1,5 / 3 km}
   end
 
+  test "missão do dia usa a meta congelada, não a meta atual do viajante" do
+    users(:viajante).walks.create!(km: 1, walked_on: Date.current)
+    users(:viajante).update!(daily_goal_km: 8)
+
+    get root_url
+
+    assert_select "[data-testid=mission]", text: %r{1 / 3 km}
+  end
+
   test "missão cumprida" do
     users(:viajante).walks.create!(km: 3, walked_on: Date.current)
 
