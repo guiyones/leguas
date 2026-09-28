@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Traveler
+  include Celebrations, Traveler
 
   has_many :auth_tokens, dependent: :destroy
   has_many :sessions, dependent: :destroy

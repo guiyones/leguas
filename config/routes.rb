@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resource :profile, only: %i[ edit update ]
 
   resources :walks
+  resource :celebration, only: %i[ show create ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

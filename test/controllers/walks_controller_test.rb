@@ -26,6 +26,12 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "+70 XP · Nível 2!", flash[:notice]
   end
 
+  test "vencer um marco leva pra celebração" do
+    post walks_url, params: { walk: { km: "20", walked_on: Date.current.iso8601 } }
+
+    assert_redirected_to celebration_url
+  end
+
   test "caminhada inválida volta com erro" do
     post walks_url, params: { walk: { km: "0", walked_on: Date.current.iso8601 } }
 

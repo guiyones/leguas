@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_27_233327) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_28_000610) do
   create_table "auth_tokens", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "code", null: false
@@ -20,6 +20,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_27_233327) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "code"], name: "index_auth_tokens_on_user_id_and_code"
     t.index ["user_id"], name: "index_auth_tokens_on_user_id"
+  end
+
+  create_table "celebrations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "key"], name: "index_celebrations_on_user_id_and_key", unique: true
+    t.index ["user_id"], name: "index_celebrations_on_user_id"
   end
 
   create_table "missions", force: :cascade do |t|
@@ -67,6 +76,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_27_233327) do
   end
 
   add_foreign_key "auth_tokens", "users"
+  add_foreign_key "celebrations", "users"
   add_foreign_key "missions", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "walks", "users"

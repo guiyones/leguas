@@ -9,6 +9,7 @@ class Walk < ApplicationRecord
   validate :walked_on_within_window, :daily_limit_respected
 
   after_save :ensure_mission
+  after_commit :forget_unreached_celebrations, on: %i[ update destroy ]
 
   scope :newest_first, -> { order(walked_on: :desc, created_at: :desc) }
 
@@ -35,5 +36,9 @@ class Walk < ApplicationRecord
 
     def ensure_mission
       user.missions.find_or_create_by!(date: walked_on) { it.goal_km = user.daily_goal_km }
+    end
+
+    def forget_unreached_celebrations
+      user.forget_unreached_celebrations
     end
 end

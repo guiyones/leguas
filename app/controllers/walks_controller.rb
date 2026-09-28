@@ -25,7 +25,11 @@ class WalksController < ApplicationController
 
   def update
     if @walk.update(walk_params)
-      redirect_to walks_path, notice: "Caminhada atualizada."
+      if Current.user.next_celebration_key
+        redirect_to celebration_path
+      else
+        redirect_to walks_path, notice: "Caminhada atualizada."
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +50,11 @@ class WalksController < ApplicationController
     end
 
     def redirect_after_progress(xp_before)
-      redirect_to root_path, notice: progress_notice(xp_before, Current.user.journey.xp)
+      if Current.user.next_celebration_key
+        redirect_to celebration_path
+      else
+        redirect_to root_path, notice: progress_notice(xp_before, Current.user.journey.xp)
+      end
     end
 
     def progress_notice(xp_before, xp_after)
