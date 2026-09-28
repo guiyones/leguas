@@ -4,7 +4,7 @@
   <h1 class="text-gold">Perfil</h1>
 
   <%= form_with model: @user, url: profile_path, method: :patch, class: "flex flex-col gap-6" do |form| %>
-    <%= render "travelers/fields", form: form, user: @user %>
+    <%= render "travelers/fields", form: form, user: @user, autofocus: false %>
     <%= form.submit "Salvar", class: "btn-game" %>
   <% end %>
 

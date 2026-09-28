@@ -1,6 +1,6 @@
 <fieldset data-steps-target="step" class="flex flex-col gap-4">
   <%= form.label :name, "Seu nome de viajante", class: "text-[0.6rem]" %>
-  <%= form.text_field :name, required: true, maxlength: 20, autofocus: true, class: "field" %>
+  <%= form.text_field :name, required: true, maxlength: 20, autofocus: local_assigns.fetch(:autofocus, true), class: "field" %>
   <% user.errors.full_messages_for(:name).each do |message| %>
     <p class="field-error"><%= message %></p>
   <% end %>

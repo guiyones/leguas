@@ -16,6 +16,7 @@ class TravelersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", text: /Qual o seu nome, viajante\?/
+    assert_select "input[name='user[name]'][autofocus]"
     assert_select "input[type=radio][name='user[avatar]']", 4
   end
 

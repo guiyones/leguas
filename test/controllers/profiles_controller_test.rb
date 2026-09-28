@@ -6,6 +6,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   test "edita meta e avatar" do
     get edit_profile_url
     assert_response :success
+    assert_select "input[name='user[name]']:not([autofocus])"
 
     patch profile_url, params: { user: { name: "Tião", avatar: "romeira", daily_goal_km: "8" } }
 
