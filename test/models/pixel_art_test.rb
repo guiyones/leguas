@@ -32,6 +32,13 @@ class PixelArtTest < ActiveSupport::TestCase
     assert_match "Z", error.message
   end
 
+  test "memoiza a paleta por root, sem reler o YAML a cada find" do
+    first = PixelArt.palette(root: ROOT)
+    second = PixelArt.palette(root: ROOT)
+
+    assert_same first, second
+  end
+
   test "arquivo inexistente é inválido" do
     assert_raises(PixelArt::Invalid) { PixelArt.find(:insignias, "nao_existe", root: ROOT) }
   end

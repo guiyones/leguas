@@ -7,7 +7,8 @@ class PixelArt
   attr_reader :path, :rows
 
   def self.palette(root: ROOT)
-    YAML.load_file(root.join("palette.yml"))
+    @palettes ||= {}
+    @palettes[root] ||= YAML.load_file(root.join("palette.yml"))
   end
 
   def self.find(kind, key, root: ROOT)
