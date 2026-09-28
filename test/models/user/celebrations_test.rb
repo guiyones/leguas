@@ -24,7 +24,7 @@ class User::CelebrationsTest < ActiveSupport::TestCase
     end
   end
 
-  test "excluir caminhada esquece conquistas que deixaram de valer" do
+  test "editar caminhada esquece conquistas que deixaram de valer" do
     with_world test_world do
       log_walks @user, 12
       @user.pending_celebration_keys.each { @user.celebrate(it) }
