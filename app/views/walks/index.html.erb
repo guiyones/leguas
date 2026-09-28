@@ -8,13 +8,13 @@
       <% @walks.each do |walk| %>
         <li class="flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
           <div>
-            <p class="font-display text-xs text-gold"><%= walk.km.to_s("F") %> km</p>
-            <p class="text-sm"><%= l walk.walked_on, format: :long %><%= " · #{walk.note}" if walk.note.present? %></p>
+            <%= stat walk.km, unit: "km" %>
+            <p class="caption"><%= l walk.walked_on, format: :long %><%= " · #{walk.note}" if walk.note.present? %></p>
           </div>
           <div class="flex gap-2">
-            <%= link_to "Editar", edit_walk_path(walk), class: "btn-game btn-game--secondary text-[0.5rem] min-h-0 py-2 px-3" %>
+            <%= link_to "Editar", edit_walk_path(walk), class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3" %>
             <%= button_to "Excluir", walk_path(walk), method: :delete,
-                  class: "btn-game btn-game--secondary text-[0.5rem] min-h-0 py-2 px-3",
+                  class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3",
                   form: { data: { turbo_confirm: "Excluir essa caminhada? Seu progresso vai ser recalculado." } } %>
           </div>
         </li>

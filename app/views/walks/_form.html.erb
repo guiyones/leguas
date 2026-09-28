@@ -1,6 +1,6 @@
 <%= form_with model: walk, class: "flex flex-col gap-4" do |form| %>
   <div class="flex flex-col gap-2">
-    <%= form.label :km, "Quantos km?", class: "text-[0.6rem]" %>
+    <%= form.label :km, "Quantos km?" %>
     <%= form.text_field :km, value: walk.km&.to_s("F"), required: true, inputmode: "decimal",
           autocomplete: "off", autofocus: walk.new_record?, class: "field text-center text-3xl" %>
     <% if walk.new_record? %>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="flex flex-col gap-2">
-    <%= form.label :walked_on, "Quando?", class: "text-[0.6rem]" %>
+    <%= form.label :walked_on, "Quando?" %>
     <%= form.date_field :walked_on, min: walk.walked_on_min, max: Date.current, required: true, class: "field" %>
     <% walk.errors.full_messages_for(:walked_on).each do |message| %>
       <p class="field-error"><%= message %></p>
@@ -25,7 +25,7 @@
   </div>
 
   <div class="flex flex-col gap-2">
-    <%= form.label :note, "Observação (opcional)", class: "text-[0.6rem]" %>
+    <%= form.label :note, "Observação (opcional)" %>
     <%= form.text_field :note, maxlength: 140, class: "field" %>
   </div>
 

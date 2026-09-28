@@ -10,11 +10,11 @@
   <% end %>
 
   <%= form_with url: auth_tokens_validations_path, class: "flex flex-col gap-4" do |form| %>
-    <%= form.label :code, "Código de 6 dígitos", class: "text-left text-[0.6rem]" %>
+    <%= form.label :code, "Código de 6 dígitos", class: "text-left" %>
     <%= form.text_field :code, required: true, autofocus: true, inputmode: "numeric",
           autocomplete: "one-time-code", maxlength: 6, class: "field text-center tracking-[0.5em]" %>
     <%= form.submit "Entrar", class: "btn-game" %>
   <% end %>
 
-  <p class="text-sm">Não chegou? <%= link_to "Pedir outro código", new_session_path, class: "underline" %></p>
+  <p class="caption">Não chegou? <%= link_to "Pedir outro código", new_session_path, class: "underline" %></p>
 </section>

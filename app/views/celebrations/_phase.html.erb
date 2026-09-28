@@ -2,5 +2,5 @@
 <h1 class="<%= phase.boss? ? "text-boss" : "text-gold" %>"><%= phase.boss? ? "Chefão derrotado!" : "Conquista desbloqueada!" %></h1>
 <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.insignia_size * 8, label: "Insígnia #{phase.name}" %>
 <h2>Fase <%= phase.number %> vencida: <%= phase.name %></h2>
-<p class="text-sm">Inspirada no trecho <%= phase.inspired_by %>.</p>
-<p class="font-display text-[0.6rem] text-xp">+<%= phase.xp %> XP</p>
+<p class="caption">Inspirada no trecho <%= phase.inspired_by %>.</p>
+<%= stat phase.xp, unit: "XP", prefix: "+", color: :xp %>

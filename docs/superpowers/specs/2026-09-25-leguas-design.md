@@ -219,7 +219,7 @@ As datas do certificado vêm da primeira caminhada da região e da caminhada que
 Segue `docs/PROJETO.md`, seção "Estilo visual":
 
 - **Paleta:** fundo #1B1F3B, painéis #2A2F5A, contornos #0B0D1F, dourado #F4C542, verde #5BC27A, laranja #FF9F6B, texto #F2EEDC. Cor da lendária: #B98CFF (a confirmar na arte).
-- **Fontes:** Press Start 2P em títulos, rótulos e botões; Pixelify Sans no texto corrido.
+- **Fontes:** Press Start 2P em títulos, rótulos e botões; Jersey 10 no texto corrido (trocada da Pixelify Sans, cujos dígitos 2 e 5 se confundiam com 8 e S).
 - **Formas:** cantos retos, bordas grossas, botões com degrau de sombra e barras segmentadas.
 
 Os tokens ficam em `@theme` no Tailwind, e os componentes (`.btn-game`, `.panel`, `.progress-segmented`) em CSS próprio.

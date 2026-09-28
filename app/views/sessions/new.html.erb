@@ -6,7 +6,7 @@
   <p>Digite seu email. Vamos mandar um código pra você entrar.</p>
 
   <%= form_with url: auth_tokens_path, class: "flex flex-col gap-4" do |form| %>
-    <%= form.label :email_address, "Email", class: "text-left text-[0.6rem]" %>
+    <%= form.label :email_address, "Email", class: "text-left" %>
     <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", class: "field" %>
     <%= form.submit "Receber código", class: "btn-game" %>
   <% end %>

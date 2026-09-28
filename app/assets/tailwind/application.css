@@ -14,7 +14,7 @@
   --color-legend: #B98CFF;
   --color-silhouette: #3A3F6A;
   --font-display: "Press Start 2P", monospace;
-  --font-body: "Pixelify Sans", system-ui, sans-serif;
+  --font-body: "Jersey 10", system-ui, sans-serif;
 }
 
 @import "./components.css";

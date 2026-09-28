@@ -6,7 +6,7 @@
     <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.insignia_size * 3, label: phase.name %>
   <% end %>
 </div>
-<dl class="grid grid-cols-3 gap-2 w-full font-display text-[0.55rem]">
+<dl class="grid grid-cols-3 gap-2 w-full font-display text-[0.7rem]">
   <div class="panel"><dt>Distância</dt><dd class="text-gold"><%= region.km.to_i %> km</dd></div>
   <div class="panel"><dt>Fases</dt><dd class="text-gold"><%= region.phases.size %></dd></div>
   <div class="panel"><dt>XP</dt><dd class="text-gold"><%= region.xp %></dd></div>
