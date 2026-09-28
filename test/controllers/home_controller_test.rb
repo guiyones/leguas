@@ -19,10 +19,10 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "[data-testid=phase]" do
-      assert_select "*", text: /Vale das Águas/
-      assert_select "*", text: %r{5 / 34 km}
-      assert_select "*", text: /Pico do Primeiro Fôlego/
-      assert_select "*", text: /faltam 15 km/
+      assert_select "*", text: /Mirante do Convento/
+      assert_select "*", text: %r{5 / 25 km}
+      assert_select "*", text: /Orla da Costa Velha/
+      assert_select "*", text: /faltam 5 km/
     end
   end
 

@@ -9,7 +9,7 @@ class Walk < ApplicationRecord
   validate :walked_on_within_window, :daily_limit_respected
 
   after_save :ensure_mission
-  after_commit :forget_unreached_celebrations, on: %i[ update destroy ]
+  after_commit :forget_unreached_celebrations
 
   scope :newest_first, -> { order(walked_on: :desc, created_at: :desc) }
 

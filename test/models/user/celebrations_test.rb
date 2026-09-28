@@ -46,4 +46,17 @@ class User::CelebrationsTest < ActiveSupport::TestCase
       assert_equal %w[ landmark:a1_mark phase:a1 ], @user.pending_celebration_keys
     end
   end
+
+  test "registrar caminhada esquece celebração gravada que o mundo não alcança mais" do
+    with_world test_world do
+      log_walks @user, 12
+      @user.pending_celebration_keys.each { |key| @user.celebrate(key) }
+      @user.celebrations.create!(key: "phase:b1")   # gravada antes de uma reorganização do mundo
+
+      @user.walks.create!(km: 1, walked_on: Date.current - 1)
+
+      assert_not_includes @user.celebrations.pluck(:key), "phase:b1"
+      assert_includes @user.celebrations.pluck(:key), "phase:a1"
+    end
+  end
 end

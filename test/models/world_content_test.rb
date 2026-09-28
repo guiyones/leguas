@@ -4,10 +4,11 @@ class WorldContentTest < ActiveSupport::TestCase
   setup { @world = World.load(World::ROOT) }
 
   test "regiões e número de fases" do
-    assert_equal [ [ "estrada_da_promessa", 6 ] ], @world.regions.map { [ it.key, it.phases.size ] }
+    assert_equal [ [ "costa_do_missionario", 4 ], [ "estrada_da_promessa", 6 ] ], @world.regions.map { [ it.key, it.phases.size ] }
   end
 
-  test "Região 1 soma 322 km" do
+  test "km de cada região" do
+    assert_equal 100, @world.region("costa_do_missionario").km
     assert_equal 322, @world.region("estrada_da_promessa").km
   end
 

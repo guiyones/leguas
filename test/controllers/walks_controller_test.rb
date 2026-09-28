@@ -21,13 +21,13 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "subir de nível aparece no aviso" do
-    post walks_url, params: { walk: { km: "5", walked_on: Date.current.iso8601 } }   # 50 + missão 20 = 70 xp → nível 2
+    post walks_url, params: { walk: { km: "3", walked_on: Date.current.iso8601 } }   # 30 + missão 20 = 50 xp → nível 2
 
-    assert_equal "+70 XP · Nível 2!", flash[:notice]
+    assert_equal "+50 XP · Nível 2!", flash[:notice]
   end
 
   test "vencer um marco leva pra celebração" do
-    post walks_url, params: { walk: { km: "20", walked_on: Date.current.iso8601 } }
+    post walks_url, params: { walk: { km: "4", walked_on: Date.current.iso8601 } }
 
     assert_redirected_to celebration_url
     assert_match(/\A\+\d+ XP/, flash[:notice])
@@ -52,14 +52,14 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "histórico lista, edita e exclui" do
-    walk = users(:viajante).walks.create!(km: 3, walked_on: Date.current, note: "Parque")
+    walk = users(:viajante).walks.create!(km: 1, walked_on: Date.current, note: "Parque")
 
     get walks_url
     assert_select "li", text: /Parque/
 
-    patch walk_url(walk), params: { walk: { km: "4" } }
+    patch walk_url(walk), params: { walk: { km: "2" } }
     assert_redirected_to walks_url
-    assert_equal 4, walk.reload.km
+    assert_equal 2, walk.reload.km
 
     delete walk_url(walk)
     assert_redirected_to walks_url

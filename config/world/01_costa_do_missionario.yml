@@ -1,0 +1,81 @@
+key: costa_do_missionario
+name: Costa do Missionário
+inspired_by: Passos de Anchieta
+trophy_name: Missionário
+phases:
+  - key: mirante_do_convento
+    name: Mirante do Convento
+    inspired_by: Vitória → Barra do Jucu
+    km: 25
+    symbol: convento no alto do morro
+    landmarks:
+      - key: convento_do_penhasco
+        name: Convento do Penhasco
+        at_km: 4
+        story: >
+          Lá no alto de um morro de pedra fica um convento do século XVI. Ele é o destino
+          da maior romaria do estado que inspira esta região.
+      - key: orla_da_costa_velha
+        name: Orla da Costa Velha
+        at_km: 10
+        story: >
+          Uma orla comprida de cidade grande, cheia de gente correndo cedo. A areia ainda
+          é fácil de pisar. Aproveita, viajante.
+
+  - key: areias_sem_fim
+    name: As Areias Sem Fim
+    inspired_by: Barra do Jucu → Setiba
+    km: 28
+    rarity: rare
+    symbol: pegada na areia sob o sol
+    landmarks:
+      - key: vila_do_camarao
+        name: Vila do Camarão
+        at_km: 15
+        story: >
+          Uma vila de pescadores famosa pelos restaurantes de camarão. Boa hora de parar,
+          porque o trecho que vem é longo e quase sem sombra.
+      - key: lagoas_da_restinga
+        name: Lagoas da Restinga
+        at_km: 22
+        story: >
+          Uma restinga protegida, com lagoas escuras de água doce entre a areia e o mato
+          baixo. Falta pouco pra vencer as areias.
+
+  - key: areias_que_curam
+    name: Praia das Areias que Curam
+    inspired_by: Setiba → Meaípe
+    km: 24
+    symbol: concha brilhando
+    landmarks:
+      - key: praia_do_morro_dourado
+        name: Praia do Morro Dourado
+        at_km: 8
+        story: >
+          As areias escuras desta praia já foram procuradas por quem acreditava que elas
+          curavam. A ciência nunca confirmou, mas os banhistas continuam vindo.
+      - key: tres_enseadas
+        name: Três Enseadas
+        at_km: 18
+        story: >
+          Três praias pequenas, uma colada na outra, com piscinas naturais quando a maré
+          baixa.
+
+  - key: chegada_do_missionario
+    name: Chegada do Missionário
+    inspired_by: Meaípe → Anchieta
+    km: 23
+    symbol: cajado com cruz
+    landmarks:
+      - key: vila_dos_pescadores
+        name: Vila dos Pescadores
+        at_km: 8
+        story: >
+          Barcos coloridos na areia e rede secando no sol. O missionário que inspira esta
+          região passou por muitas vilas assim.
+      - key: praia_dos_navegantes
+        name: Praia dos Navegantes
+        at_km: 15
+        story: >
+          Pedras, mar aberto e vento. Daqui já dá pra imaginar o santuário no fim da
+          estrada.

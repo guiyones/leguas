@@ -10,46 +10,48 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "sequência: carimbo, carimbo, insígnia, e depois início" do
-    post walks_url, params: { walk: { km: "34", walked_on: Date.current.iso8601 } }
+    post walks_url, params: { walk: { km: "25", walked_on: Date.current.iso8601 } }
 
     get celebration_url
     assert_select "h1", text: /Carimbo conquistado/
-    assert_select "*", text: /Pico do Primeiro Fôlego/
-    post celebration_url, params: { key: "landmark:pico_do_primeiro_folego" }
+    assert_select "*", text: /Convento do Penhasco/
+    post celebration_url, params: { key: "landmark:convento_do_penhasco" }
     assert_redirected_to celebration_url
 
     get celebration_url
-    assert_select "*", text: /Vinhedos do Vale/
-    post celebration_url, params: { key: "landmark:vinhedos_do_vale" }
+    assert_select "*", text: /Orla da Costa Velha/
+    post celebration_url, params: { key: "landmark:orla_da_costa_velha" }
 
     get celebration_url
     assert_select "h1", text: /Conquista desbloqueada/
-    assert_select "*", text: /Vale das Águas/
-    assert_select "svg[aria-label=?]", "Insígnia Vale das Águas"
-    post celebration_url, params: { key: "phase:vale_das_aguas" }
+    assert_select "*", text: /Mirante do Convento/
+    assert_select "svg[aria-label=?]", "Insígnia Mirante do Convento"
+    post celebration_url, params: { key: "phase:mirante_do_convento" }
 
     get celebration_url
     assert_redirected_to root_url
   end
 
   test "chefão tem título próprio" do
-    log_walks users(:viajante), 100, 100, 50, 30   # 280 km: passa do Gigante de Pedra (km 250)
-    users(:viajante).pending_celebration_keys.excluding("phase:gigante_de_pedra").each { users(:viajante).celebrate(it) }
+    log_walks users(:viajante), 60   # passa do fim de As Areias Sem Fim (km 53)
+    users(:viajante).pending_celebration_keys.excluding("phase:areias_sem_fim").each { users(:viajante).celebrate(it) }
 
     get celebration_url
 
     assert_select "h1", text: /Chefão derrotado/
+    assert_select "*", text: /As Areias Sem Fim/
   end
 
-  test "região completa e título" do
-    log_walks users(:viajante), 100, 100, 100, 22   # 322 km: fim da Região 1
+  test "região completa mostra a próxima e depois o título" do
+    log_walks users(:viajante), 100   # 100 km: fim da Costa do Missionário
     user = users(:viajante)
-    user.pending_celebration_keys.excluding("region:estrada_da_promessa", "title:andarilho").each { user.celebrate(it) }
+    user.pending_celebration_keys.excluding("region:costa_do_missionario", "title:andarilho").each { user.celebrate(it) }
 
     get celebration_url
     assert_select "h1", text: /NÍVEL COMPLETO/
-    assert_select "*", text: /322 km/
-    post celebration_url, params: { key: "region:estrada_da_promessa" }
+    assert_select "*", text: /100 km/
+    assert_select "*", text: /Estrada da Promessa/   # a Task 2 troca pra Trilha do Primeiro Raio
+    post celebration_url, params: { key: "region:costa_do_missionario" }
 
     get celebration_url
     assert_select "h1", text: /Novo título/
@@ -57,14 +59,14 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "clique duplo ou chave estranha não quebra" do
-    post walks_url, params: { walk: { km: "20", walked_on: Date.current.iso8601 } }
+    post walks_url, params: { walk: { km: "4", walked_on: Date.current.iso8601 } }
 
-    post celebration_url, params: { key: "landmark:pico_do_primeiro_folego" }
-    post celebration_url, params: { key: "landmark:pico_do_primeiro_folego" }
+    post celebration_url, params: { key: "landmark:convento_do_penhasco" }
+    post celebration_url, params: { key: "landmark:convento_do_penhasco" }
     post celebration_url, params: { key: "phase:santuario_da_luz" }
     post celebration_url, params: { key: "qualquer coisa" }
 
     assert_redirected_to celebration_url
-    assert_equal [ "landmark:pico_do_primeiro_folego" ], users(:viajante).celebrations.pluck(:key)
+    assert_equal [ "landmark:convento_do_penhasco" ], users(:viajante).celebrations.pluck(:key)
   end
 end
