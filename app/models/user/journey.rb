@@ -45,6 +45,30 @@ class User::Journey
     world.phases.select { it.end_km <= total_km }
   end
 
+  def region_status(region)
+    if region.end_km <= total_km
+      :completed
+    elsif region == current_region
+      :current
+    else
+      :locked
+    end
+  end
+
+  def phase_status(phase)
+    if phase.end_km <= total_km
+      :completed
+    elsif phase == current_phase
+      :current
+    else
+      :upcoming
+    end
+  end
+
+  def landmark_reached?(landmark)
+    landmark.world_km <= total_km
+  end
+
   def xp
     @xp ||= (total_km * XP_PER_KM).floor + reached_milestones.sum(&:xp) + Mission::XP * user.missions.accomplished.count
   end

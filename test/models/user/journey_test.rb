@@ -88,4 +88,44 @@ class User::JourneyTest < ActiveSupport::TestCase
 
     assert_equal "a1", @user.journey(world: @world).current_phase.key
   end
+
+  test "status no meio da primeira região" do
+    log_walks @user, 12
+    journey = @user.journey(world: @world)
+
+    assert_equal :current, journey.region_status(@world.region("alpha"))
+    assert_equal :locked, journey.region_status(@world.region("beta"))
+    assert_equal :completed, journey.phase_status(@world.phase("a1"))
+    assert_equal :current, journey.phase_status(@world.phase("a2"))
+    assert_equal :upcoming, journey.phase_status(@world.phase("b1"))
+    assert journey.landmark_reached?(@world.landmark("a1_mark"))
+    assert_not journey.landmark_reached?(@world.landmark("a2_mark"))
+  end
+
+  test "status na fronteira exata entre regiões" do
+    log_walks @user, 30
+    journey = @user.journey(world: @world)
+
+    assert_equal :completed, journey.region_status(@world.region("alpha"))
+    assert_equal :current, journey.region_status(@world.region("beta"))
+    assert_equal :completed, journey.phase_status(@world.phase("a2"))
+    assert_equal :current, journey.phase_status(@world.phase("b1"))
+  end
+
+  test "mundo completo: tudo concluído, nenhuma fase atual" do
+    log_walks @user, 60, 50
+    journey = @user.journey(world: @world)
+
+    assert_equal [ :completed, :completed ], @world.regions.map { journey.region_status(it) }
+    assert_equal [ :completed ], @world.phases.map { journey.phase_status(it) }.uniq
+    assert journey.landmark_reached?(@world.landmark("b2_mark"))
+  end
+
+  test "sem caminhadas: primeira fase atual" do
+    journey = @user.journey(world: @world)
+
+    assert_equal :current, journey.phase_status(@world.phase("a1"))
+    assert_equal :upcoming, journey.phase_status(@world.phase("a2"))
+    assert_equal :locked, journey.region_status(@world.region("beta"))
+  end
 end
