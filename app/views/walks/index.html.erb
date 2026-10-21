@@ -3,19 +3,25 @@
 <section class="panel flex flex-col gap-4">
   <h1 class="text-gold">Histórico</h1>
 
-  <% if @walks.any? %>
+  <% if @entries.any? %>
     <ul class="flex flex-col gap-3">
-      <% @walks.each do |walk| %>
+      <% @entries.each do |entry| %>
+        <% stair = entry.is_a?(StairSession) %>
         <li class="flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
           <div>
-            <%= stat walk.km, unit: "km" %>
-            <p class="caption"><%= l walk.walked_on, format: :long %><%= " · #{walk.note}" if walk.note.present? %></p>
+            <% if stair %>
+              <%= stat entry.climb_m.round, unit: "m de escada" %>
+              <p class="caption"><%= l entry.climbed_on, format: :long %> · <%= entry.climbs %> subidas<%= " · mochila #{entry.load_kg.to_s("F")} kg" if entry.load_kg %><%= " · #{entry.note}" if entry.note.present? %></p>
+            <% else %>
+              <%= stat entry.km, unit: "km" %>
+              <p class="caption"><%= l entry.walked_on, format: :long %><%= " · mochila #{entry.load_kg.to_s("F")} kg" if entry.load_kg %><%= " · #{entry.note}" if entry.note.present? %></p>
+            <% end %>
           </div>
           <div class="flex gap-2">
-            <%= link_to "Editar", edit_walk_path(walk), class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3" %>
-            <%= button_to "Excluir", walk_path(walk), method: :delete,
+            <%= link_to "Editar", (stair ? edit_stair_session_path(entry) : edit_walk_path(entry)), class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3" %>
+            <%= button_to "Excluir", (stair ? stair_session_path(entry) : walk_path(entry)), method: :delete,
                   class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3",
-                  form: { data: { turbo_confirm: "Excluir essa caminhada? Seu progresso vai ser recalculado." } } %>
+                  form: { data: { turbo_confirm: stair ? "Excluir essa subida de escada? Seu progresso vai ser recalculado." : "Excluir essa caminhada? Seu progresso vai ser recalculado." } } %>
           </div>
         </li>
       <% end %>

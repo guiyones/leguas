@@ -57,6 +57,12 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_walk_path, text: "Registrar caminhada"
   end
 
+  test "botão de registrar escada" do
+    get root_url
+
+    assert_select "a.btn-game--secondary[href=?]", new_stair_session_path, text: "Registrar escada"
+  end
+
   test "com o km completo a fase espera o chefe" do
     walk_steady users(:viajante), 100
 

@@ -25,6 +25,14 @@
   </div>
 
   <div class="flex flex-col gap-2">
+    <%= form.label :load_kg, "Mochila (kg, opcional)" %>
+    <%= form.text_field :load_kg, value: walk.load_kg&.to_s("F"), inputmode: "decimal", autocomplete: "off", class: "field" %>
+    <% walk.errors.full_messages_for(:load_kg).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
     <%= form.label :note, "Observação (opcional)" %>
     <%= form.text_field :note, maxlength: 140, class: "field" %>
   </div>

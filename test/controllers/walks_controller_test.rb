@@ -66,6 +66,30 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_not Walk.exists?(walk.id)
   end
 
+  test "caminhada com mochila" do
+    post walks_url, params: { walk: { km: "2", walked_on: Date.current.iso8601, load_kg: "5" } }
+
+    assert_equal 5, users(:viajante).walks.last.load_kg
+  end
+
+  test "novo tem link pra escada" do
+    get new_walk_url
+
+    assert_select "a[href=?]", new_stair_session_path, text: /Registrar escada/
+  end
+
+  test "histórico mistura caminhadas e escada" do
+    walk = users(:viajante).walks.create!(km: 1, walked_on: Date.current - 1, note: "Parque")
+    stair = users(:viajante).stair_sessions.create!(climbs: 3, climbed_on: Date.current, note: "Prédio")
+
+    get walks_url
+
+    assert_select "section li", 2
+    assert_select "section li:first-child", text: /Prédio/
+    assert_select "section li:first-child a[href=?]", edit_stair_session_path(stair), text: "Editar"
+    assert_select "section li:last-child a[href=?]", edit_walk_path(walk), text: "Editar"
+  end
+
   test "não mexe na caminhada de outro viajante" do
     other = users(:novato).walks.create!(km: 1, walked_on: Date.current)
 

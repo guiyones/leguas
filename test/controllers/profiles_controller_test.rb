@@ -15,6 +15,12 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 8, users(:viajante).daily_goal_km
   end
 
+  test "salva os degraus da escada" do
+    patch profile_url, params: { user: { name: "Tião", avatar: "romeira", daily_goal_km: "3", stair_steps: "62" } }
+
+    assert_equal 62, users(:viajante).reload.stair_steps
+  end
+
   test "não aceita meta fora das opções" do
     patch profile_url, params: { user: { name: "Tião", avatar: "romeira", daily_goal_km: "50" } }
 

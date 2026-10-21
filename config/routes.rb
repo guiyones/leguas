@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resource :profile, only: %i[ edit update ]
 
   resources :walks
+  resources :stair_sessions, except: %i[ index show ]
   resource :celebration, only: %i[ show create ]
   resource :map, only: :show
 

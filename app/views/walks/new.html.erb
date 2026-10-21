@@ -3,4 +3,5 @@
 <section class="panel flex flex-col gap-4">
   <h1 class="text-gold">Registrar caminhada</h1>
   <%= render "form", walk: @walk %>
+  <%= link_to "Foi de escada? Registrar escada", new_stair_session_path, class: "caption underline" %>
 </section>

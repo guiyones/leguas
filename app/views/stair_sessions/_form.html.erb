@@ -1,0 +1,58 @@
+<%= form_with model: stair_session, class: "flex flex-col gap-4",
+      data: { controller: "climb-preview", climb_preview_steps_value: Current.user.stair_steps.to_i,
+              climb_preview_rise_value: StairSession::STEP_RISE_M.to_f } do |form| %>
+  <% if Current.user.stair_steps_in_database.nil? %>
+    <div class="flex flex-col gap-2">
+      <%= label_tag "user_stair_steps", "Quantos degraus tem uma subida?" %>
+      <%= number_field_tag "user[stair_steps]", Current.user.stair_steps, id: "user_stair_steps", min: 1, max: 1000,
+            required: true, inputmode: "numeric", class: "field",
+            data: { climb_preview_target: "steps", action: "input->climb-preview#update" } %>
+      <p class="caption">Conte da calçada ao topo, sem os patamares. Fica salvo no seu perfil.</p>
+      <% Current.user.errors.full_messages_for(:stair_steps).each do |message| %>
+        <p class="field-error"><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :climbs, "Quantas subidas?" %>
+    <%= form.number_field :climbs, min: 1, max: StairSession::DAILY_LIMIT, required: true, inputmode: "numeric",
+          autofocus: stair_session.new_record?, class: "field text-center text-3xl",
+          data: { climb_preview_target: "climbs", action: "input->climb-preview#update" } %>
+    <% if stair_session.new_record? %>
+      <div class="grid grid-cols-3 gap-2">
+        <% [ 10, 20, 30 ].each do |climbs| %>
+          <button type="button" class="btn-game btn-game--secondary"
+                  data-action="climb-preview#fill" data-climb-preview-climbs-param="<%= climbs %>"><%= climbs %></button>
+        <% end %>
+      </div>
+    <% end %>
+    <p class="caption" data-climb-preview-target="output" aria-live="polite"></p>
+    <% (stair_session.errors.full_messages_for(:climbs) + stair_session.errors.full_messages_for(:base)).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :climbed_on, "Quando?" %>
+    <%= form.date_field :climbed_on, min: stair_session.climbed_on_min, max: Date.current, required: true, class: "field" %>
+    <% stair_session.errors.full_messages_for(:climbed_on).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :load_kg, "Mochila (kg, opcional)" %>
+    <%= form.text_field :load_kg, value: stair_session.load_kg&.to_s("F"), inputmode: "decimal", autocomplete: "off", class: "field" %>
+    <% stair_session.errors.full_messages_for(:load_kg).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :note, "Observação (opcional)" %>
+    <%= form.text_field :note, maxlength: 140, class: "field" %>
+  </div>
+
+  <%= form.submit stair_session.new_record? ? "Registrar escada" : "Salvar", class: "btn-game" %>
+<% end %>
