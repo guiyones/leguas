@@ -360,4 +360,84 @@
   }
 
   .art-locked { filter: grayscale(1) brightness(0.45); opacity: 0.7; }
+
+  .phase-map {
+    position: relative;
+    margin: -1rem -1rem 0;
+  }
+
+  .phase-map__hud {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.3rem 0.75rem 0.3rem 0.3rem;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--color-deep) 70%, transparent);
+  }
+
+  .phase-map__hud .progress { height: 6px; }
+
+  .phase-scene {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .phase-scene__label {
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: 700;
+    fill: var(--color-text);
+    stroke: rgb(0 0 0 / 0.55);
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+    paint-order: stroke;
+    text-shadow: 0 0 4px #000, 0 1px 2px #000;
+  }
+
+  .phase-scene__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 8.5px;
+    letter-spacing: 0.04em;
+    fill: var(--color-gold);
+  }
+
+  .phase-scene__unknown { fill: var(--color-muted); }
+
+  .phase-scene__boss-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 8.5px;
+    fill: #FFB27A;
+  }
+
+  .phase-scene__walked { filter: drop-shadow(0 0 3px var(--color-ember)); }
+
+  .phase-scene__boss-glow {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: glow-pulse 2.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .phase-scene__boss-glow { animation: none; }
+  }
+
+  .phase-card {
+    position: relative;
+    margin-top: -36%;
+    box-shadow:
+      0 0 22px color-mix(in srgb, var(--color-ember) 35%, transparent),
+      inset 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+
+  .phase-card__name {
+    font-size: 1.4rem;
+    text-shadow: 0 0 12px color-mix(in srgb, var(--color-ember) 60%, transparent);
+  }
 }

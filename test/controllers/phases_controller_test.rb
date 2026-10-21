@@ -205,4 +205,48 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a", text: "Registrar", count: 0
     end
   end
+
+  test "cena da fase com viajante na posição" do
+    log_walks users(:viajante), 45
+
+    get phase_url
+
+    assert_select "[data-testid=scene] [data-traveler][data-fraction=?]", "0.5"
+  end
+
+  test "zero km: viajante no começo" do
+    get phase_url
+
+    assert_select "[data-testid=scene] [data-traveler][data-fraction=?]", "0.0"
+  end
+
+  test "marcos alcançados com nome, futuros sem nome" do
+    log_walks users(:viajante), 10
+
+    get phase_url
+
+    assert_select "[data-testid=scene]" do
+      assert_select "[data-landmark=ponta_das_areias][data-reached=true]", text: /Ponta das Areias/
+      assert_select "[data-reached=false]", 3
+      assert_select "[data-landmark=estreito_do_navegante]", text: /\?\?\?/
+      assert_select "*", text: /Estreito do Navegante/, count: 0
+    end
+    assert_no_match(/Forte do Estreito|Ilha dos Pinguins/, response.body)
+  end
+
+  test "chefe pulsa quando espera" do
+    walk_steady users(:viajante), 100
+
+    get phase_url
+
+    assert_select "[data-testid=scene] [data-scene-boss=waiting]", text: /Chefe/
+  end
+
+  test "chefe escondido na cena sem o nome" do
+    get phase_url
+
+    assert_select "[data-testid=scene] [data-scene-boss=hidden]" do
+      assert_select "*", text: /O Primeiro Horizonte/, count: 0
+    end
+  end
 end
