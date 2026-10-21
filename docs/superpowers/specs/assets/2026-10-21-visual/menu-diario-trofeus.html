@@ -1,0 +1,107 @@
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --deep:#0d1726; --panel:#16263b; --text:#e8eef2; --muted:#9fb8c9; --gold:#f2c46d; --ember:#e98a3c; --glow:#ffe6b0 }
+  .phones { display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin-top:14px }
+  .phone { width:280px; height:590px; border-radius:30px; overflow:hidden; position:relative; box-shadow:0 12px 40px rgba(0,0,0,.35); border:6px solid #111; font-family:Nunito,sans-serif; color:var(--text); background:var(--deep) }
+  .phone > svg.bg { position:absolute; inset:0; width:100%; height:100% }
+  .scr { position:absolute; inset:0; padding:14px 14px 70px; display:flex; flex-direction:column; gap:10px; overflow:hidden }
+  .eyebrow { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted) }
+  h4 { font-family:Cinzel,serif; font-weight:800; font-size:19px; letter-spacing:1px; margin:0; color:var(--gold); text-shadow:0 0 12px rgba(233,138,60,.5) }
+  .card { background:linear-gradient(rgba(22,38,59,.9),rgba(13,23,38,.9)); border:1px solid rgba(242,196,109,.5); border-radius:16px; padding:10px 12px; box-shadow:0 0 18px rgba(233,138,60,.2) }
+  .btn { border-radius:12px; text-align:center; font-weight:800; padding:11px 0; font-size:14px }
+  .btn.main { background:linear-gradient(var(--gold),var(--ember)); color:#3a1a08; box-shadow:0 4px 0 #8a4418, 0 0 18px rgba(233,138,60,.55) }
+  .btn.sec { background:rgba(22,38,59,.75); border:1px solid rgba(242,196,109,.45); color:var(--text); backdrop-filter:blur(4px) }
+  .nav { position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-around; padding:12px 6px 14px; background:#08101b; border-top:1px solid rgba(242,196,109,.35); font-size:11px; font-weight:700; color:var(--muted) } .nav b { color:var(--gold); text-shadow:0 0 8px var(--ember) }
+  .cap { text-align:center; margin-top:8px; font-size:13px; max-width:280px }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+  .stamp { text-align:center; font-size:10px; line-height:1.2 } .stamp svg { display:block; margin:0 auto 3px }
+  .stamp.off { opacity:.45 }
+  .stats { display:flex; justify-content:space-between; text-align:center } .stats b { display:block; font-family:Cinzel,serif; font-size:17px; color:var(--gold) } .stats span { font-size:10px; color:var(--muted) }
+</style>
+
+<h2>Menu, Diário e Troféus — paleta Crepúsculo austral</h2>
+<p class="subtitle">Também mostra como ficariam <b>carimbos</b> e <b>insígnias</b> desenhados em código: carimbos como selos de passaporte de trilha, insígnias como medalhões com aro dourado.</p>
+
+<div class="phones">
+
+  <!-- MENU -->
+  <div><div class="phone">
+    <svg class="bg" viewBox="0 0 280 590" preserveAspectRatio="none">
+      <defs><linearGradient id="m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1726"/><stop offset=".3" stop-color="#29435e"/><stop offset=".46" stop-color="#e2a05a"/><stop offset=".52" stop-color="#22374d"/><stop offset="1" stop-color="#0a1320"/></linearGradient>
+        <radialGradient id="mg" r=".5"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".9"/><stop offset="1" stop-color="#e98a3c" stop-opacity="0"/></radialGradient></defs>
+      <rect width="280" height="590" fill="url(#m)"/>
+      <circle cx="140" cy="300" r="80" fill="url(#mg)" opacity=".5"/>
+      <path d="M0 320 L60 290 L95 300 L118 230 L126 212 L133 240 L142 196 L151 235 L159 210 L168 255 L200 285 L280 300 L280 590 L0 590Z" fill="#1c2e44"/>
+      <path d="M126 212 L133 240 L129 242Z M142 196 L151 235 L146 230Z M159 210 L168 255 L163 250Z" fill="#cfe3ee" opacity=".75"/>
+      <path d="M0 360 Q90 330 170 355 T280 345 L280 590 L0 590Z" fill="#132235"/>
+      <path d="M0 420 Q120 395 280 415 L280 590 L0 590Z" fill="#0e1a2a"/>
+      <circle cx="12" cy="40" r="1" fill="#fff"/><circle cx="200" cy="30" r="1.2" fill="#fff"/><circle cx="250" cy="80" r="1" fill="#fff"/><circle cx="70" cy="70" r="1" fill="#fff"/>
+    </svg>
+    <div class="scr" style="padding-bottom:20px">
+      <div style="text-align:center;margin-top:60px"><div style="font-family:Cinzel,serif;font-weight:800;font-size:40px;letter-spacing:5px;color:#fff3dc;text-shadow:0 0 18px rgba(233,138,60,.7),0 2px 0 #3a1a08">LÉGUAS</div><div class="eyebrow" style="letter-spacing:3px;margin-top:4px">a trilha do vento austral</div></div>
+      <div style="flex:1"></div>
+      <div class="card" style="display:flex;gap:10px;align-items:center;padding:8px 12px">
+        <svg width="40" height="40" viewBox="0 0 220 220"><circle cx="110" cy="110" r="104" fill="#f2c46d"/><circle cx="110" cy="110" r="98" fill="#22374d"/><path d="M30 230 C35 180 70 165 110 165 C150 165 185 180 190 230Z" fill="#8f9c78"/><path d="M68 90 C68 58 86 46 110 46 C134 46 152 58 152 90 L152 112 C152 140 134 158 110 158 C86 158 68 140 68 112Z" fill="#e8b892"/><path d="M64 92 C60 58 80 36 110 36 C142 36 160 56 156 92 C150 80 146 70 140 66 C126 72 96 70 82 64 C74 70 70 80 64 92Z" fill="#2e211b"/><circle cx="91" cy="104" r="14" fill="none" stroke="#4d4660" stroke-width="7"/><circle cx="129" cy="104" r="14" fill="none" stroke="#4d4660" stroke-width="7"/><path d="M88 134 C96 124 106 126 110 130 C114 126 124 124 132 134 C124 132 116 133 110 136 C104 133 96 132 88 134Z" fill="#6b4a33"/></svg>
+        <div style="flex:1;font-size:12px"><b>Nv 6 · Andarilho</b><br><span style="color:var(--muted)">Fase 1 · Primeiros Passos · 35/90 km</span></div>
+      </div>
+      <div class="btn main" style="font-size:16px;padding:13px 0">Continuar jornada</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="btn sec">Diário</div><div class="btn sec">Troféus</div><div class="btn sec">Histórico</div><div class="btn sec">Perfil</div></div>
+    </div>
+  </div><div class="cap"><b>Menu</b><br><small>abre o app; "Continuar" vai pra tela da fase</small></div></div>
+
+  <!-- DIÁRIO -->
+  <div><div class="phone">
+    <div class="scr">
+      <div style="text-align:center"><div class="eyebrow">Diário de viagem</div><h4>Carimbos</h4></div>
+      <div class="card stats"><div><b>142</b><span>km</span></div><div><b>23</b><span>léguas</span></div><div><b>1.240</b><span>m subidos</span></div><div><b>18</b><span>missões</span></div></div>
+      <div class="grid">
+        <!-- selo 1 -->
+        <div class="stamp"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="#16263b" stroke="#f2c46d" stroke-width="2.5" stroke-dasharray="4 3"/><circle cx="35" cy="35" r="25" fill="#29435e"/><path d="M14 44 L24 32 L30 37 L38 24 L46 34 L56 44Z" fill="#1c2e44"/><path d="M14 44 h42 v6 a20 20 0 0 1 -42 0Z" fill="#5f9bb8"/><circle cx="46" cy="22" r="4" fill="#ffe0a0"/></svg>Porto do Fim</div>
+        <div class="stamp"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="#16263b" stroke="#f2c46d" stroke-width="2.5" stroke-dasharray="4 3"/><circle cx="35" cy="35" r="25" fill="#22374d"/><path d="M20 46 q4 -14 15 -14 q11 0 15 14Z" fill="#8a6a4a"/><circle cx="35" cy="26" r="6" fill="#8a6a4a"/><path d="M35 20 q-8 -2 -10 3" stroke="#8a6a4a" stroke-width="3" fill="none"/></svg>Caverna do Gigante</div>
+        <div class="stamp"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="#16263b" stroke="#f2c46d" stroke-width="2.5" stroke-dasharray="4 3"/><circle cx="35" cy="35" r="25" fill="#29435e"/><path d="M22 38 q6 -6 12 0 q-2 8 -12 6Z" fill="#fff"/><path d="M34 38 q2 -12 -2 -16 q-3 -2 -4 1" stroke="#111" stroke-width="3" fill="none"/><path d="M28 23 l-4 1" stroke="#e05a3a" stroke-width="2"/><path d="M14 46 h42" stroke="#5f9bb8" stroke-width="3"/></svg>Cisne de Pescoço Negro</div>
+        <div class="stamp off"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="none" stroke="#4a6078" stroke-width="2" stroke-dasharray="4 3"/><text x="35" y="41" text-anchor="middle" fill="#4a6078" font-family="Cinzel" font-size="16">?</text></svg>km 55</div>
+        <div class="stamp off"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="none" stroke="#4a6078" stroke-width="2" stroke-dasharray="4 3"/><text x="35" y="41" text-anchor="middle" fill="#4a6078" font-family="Cinzel" font-size="16">?</text></svg>km 75</div>
+        <div class="stamp off"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="none" stroke="#4a6078" stroke-width="2" stroke-dasharray="4 3"/><text x="35" y="41" text-anchor="middle" fill="#4a6078" font-family="Cinzel" font-size="16">?</text></svg>fase 2</div>
+      </div>
+      <div class="card" style="font-size:12px"><b style="font-family:Cinzel;color:var(--gold)">Cisne de Pescoço Negro</b><br>Tocar num carimbo abre a história do lugar.</div>
+    </div>
+    <div class="nav"><span>Fase</span><span>Mapa</span><b>Diário</b><span>Menu</span></div>
+  </div><div class="cap"><b>Diário</b><br><small>selos dos marcos; os ainda não alcançados ficam como "?"</small></div></div>
+
+  <!-- TROFÉUS -->
+  <div><div class="phone">
+    <div class="scr">
+      <div style="text-align:center"><div class="eyebrow">Troféus</div><h4>Vento Austral</h4></div>
+      <div style="display:flex;justify-content:center">
+        <svg width="240" height="250" viewBox="0 0 240 250">
+          <defs><radialGradient id="tg" r=".5"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".6"/><stop offset="1" stop-color="#e98a3c" stop-opacity="0"/></radialGradient>
+            <linearGradient id="gr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a6f86"/><stop offset=".5" stop-color="#8ea6bb"/><stop offset="1" stop-color="#4a5d72"/></linearGradient>
+            <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe0a0"/><stop offset="1" stop-color="#c98a3a"/></linearGradient></defs>
+          <circle cx="120" cy="110" r="110" fill="url(#tg)"/>
+          <!-- três torres -->
+          <path d="M70 140 L76 60 L82 48 L90 62 L94 140Z" fill="url(#gr)"/>
+          <path d="M104 140 L108 40 L118 22 L128 40 L132 140Z" fill="url(#gr)"/>
+          <path d="M144 140 L148 66 L156 52 L164 66 L170 140Z" fill="url(#gr)"/>
+          <path d="M82 48 L90 62 L85 64Z M118 22 L128 40 L121 38Z M156 52 L164 66 L159 64Z" fill="#e8f2f8"/>
+          <!-- base de rocha -->
+          <path d="M40 140 h160 l14 30 H26Z" fill="#3a4a5c" stroke="#f2c46d" stroke-width="2"/>
+          <rect x="30" y="170" width="180" height="62" rx="8" fill="#22374d" stroke="#f2c46d" stroke-width="2"/>
+          <!-- 6 encaixes: 2 cheios -->
+          <g>
+            <circle cx="62" cy="190" r="15" fill="url(#gold)"/><circle cx="62" cy="190" r="11" fill="#29435e"/><path d="M55 195 l4 -9 h6 l2 6 h3 v3Z" fill="#8a5a3a"/>
+            <circle cx="120" cy="190" r="15" fill="url(#gold)"/><circle cx="120" cy="190" r="11" fill="#29435e"/><rect x="114" y="183" width="12" height="14" rx="3" fill="#b0552c"/>
+            <circle cx="178" cy="190" r="15" fill="none" stroke="#f2c46d" stroke-width="2" stroke-dasharray="3 3"/>
+            <circle cx="62" cy="219" r="11" fill="#16263b" stroke="#4a6078"/><circle cx="120" cy="219" r="11" fill="#16263b" stroke="#4a6078"/><circle cx="178" cy="219" r="11" fill="#16263b" stroke="#b98cff"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card" style="font-size:12px;display:flex;gap:10px;align-items:center">
+        <svg width="54" height="54" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="url(#gold)"/><circle cx="30" cy="30" r="23" fill="#22374d"/><circle cx="30" cy="30" r="23" fill="none" stroke="#c98a3a" stroke-width="1.5"/><path d="M18 40 q12 4 24 0" stroke="#b3542e" stroke-width="5" fill="none"/><path d="M22 36 l3 -14 h7 l1 9 h6 q3 0 3 3 v2Z" fill="#7a5034"/><ellipse cx="44" cy="44" rx="3" ry="2" fill="#5a3a24"/></svg>
+        <div><b style="font-family:Cinzel;color:var(--gold)">Pegada do Viajante</b><br><span style="color:var(--muted)">Fase 1 vencida · 12/10</span></div>
+      </div>
+      <div class="btn sec" style="font-size:12px">Certificado (ao completar a trilha)</div>
+    </div>
+    <div class="nav"><span>Fase</span><span>Mapa</span><span>Diário</span><b>Menu</b></div>
+  </div><div class="cap"><b>Troféus</b><br><small>as Três Torres com 6 encaixes; insígnias entram como medalhões</small></div></div>
+
+</div>

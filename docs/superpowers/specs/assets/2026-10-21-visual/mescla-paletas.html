@@ -1,0 +1,125 @@
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  .set { margin-top:22px }
+  .phones { display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin-top:10px }
+  .phone { width:280px; height:590px; border-radius:30px; overflow:hidden; position:relative; box-shadow:0 12px 40px rgba(0,0,0,.35); border:6px solid #111; font-family:Nunito,sans-serif; color:var(--text); background:var(--deep) }
+  .phone > svg { position:absolute; inset:0; width:100%; height:100% }
+  .top { position:absolute; left:10px; right:10px; top:10px; display:flex; align-items:center; gap:8px; background:color-mix(in srgb,var(--deep) 70%,transparent); backdrop-filter:blur(6px); border:1px solid color-mix(in srgb,var(--gold) 45%,transparent); border-radius:14px; padding:5px 10px 5px 5px; font-weight:800; font-size:12px }
+  .ava { width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 40% 35%,var(--glow),var(--ember)); border:2px solid var(--gold); box-shadow:0 0 10px var(--ember) }
+  .xp { flex:1; height:6px; border-radius:99px; background:rgba(255,255,255,.12) } .xp i { display:block; height:100%; width:62%; border-radius:99px; background:linear-gradient(90deg,var(--gold),var(--ember)); box-shadow:0 0 8px var(--ember) }
+  .label { position:absolute; transform:translate(-50%,0); text-align:center; font-size:11px; font-weight:700; white-space:nowrap; text-shadow:0 0 6px #000,0 1px 2px #000 }
+  .label b { font-family:Cinzel,serif; font-size:12px; letter-spacing:1px; color:var(--gold); display:block }
+  .sheet { position:absolute; left:10px; right:10px; bottom:56px; background:linear-gradient(color-mix(in srgb,var(--panel) 92%,transparent),color-mix(in srgb,var(--deep) 92%,transparent)); backdrop-filter:blur(8px); border:1px solid color-mix(in srgb,var(--gold) 55%,transparent); border-radius:16px; padding:12px 14px; box-shadow:0 0 22px color-mix(in srgb,var(--ember) 35%,transparent), inset 0 1px 0 rgba(255,255,255,.08) }
+  .eyebrow { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted) }
+  h4 { font-family:Cinzel,serif; font-weight:800; font-size:19px; letter-spacing:1px; margin:2px 0 6px; color:var(--gold); text-shadow:0 0 12px color-mix(in srgb,var(--ember) 60%,transparent) }
+  .bar { height:10px; border-radius:99px; background:rgba(0,0,0,.35); overflow:hidden } .bar i { display:block; height:100%; width:39%; border-radius:99px; background:linear-gradient(90deg,var(--gold),var(--ember)); box-shadow:0 0 10px var(--ember) }
+  .btn { margin-top:10px; border-radius:12px; text-align:center; font-weight:800; padding:10px 0; font-size:14px; letter-spacing:.5px; background:linear-gradient(var(--gold),var(--ember)); color:var(--btntext); box-shadow:0 4px 0 var(--btnshadow), 0 0 18px color-mix(in srgb,var(--ember) 55%,transparent) }
+  .nav { position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-around; padding:12px 6px 14px; background:color-mix(in srgb,var(--deep) 94%,#000); border-top:1px solid color-mix(in srgb,var(--gold) 35%,transparent); font-size:11px; font-weight:700; color:var(--muted) } .nav b { color:var(--gold); text-shadow:0 0 8px var(--ember) }
+  .cap { text-align:center; margin-top:8px; font-size:13px; max-width:280px }
+
+  /* Paleta 1 — Brasa (cores do B) */
+  .p1 { --deep:#140a1a; --panel:#24142c; --text:#f1dfbd; --muted:#c9a46a; --gold:#f3c16a; --ember:#e8762f; --glow:#ffe2a6; --btntext:#3a1608; --btnshadow:#7a3416 }
+  /* Paleta 2 — Crepúsculo austral (frio + luz quente) */
+  .p2 { --deep:#0d1726; --panel:#16263b; --text:#e8eef2; --muted:#9fb8c9; --gold:#f2c46d; --ember:#e98a3c; --glow:#ffe6b0; --btntext:#3a1a08; --btnshadow:#8a4418 }
+</style>
+
+<h2>Mescla: formas suaves do A + luz e cores do B</h2>
+<p class="subtitle">Tirei o rosa/lilás do A. Paisagem pintada (curvas, gradientes), botões arredondados, mas paleta escura com luz de brasa. Fiz <b>duas paletas</b> pra você comparar: <b>1 · Brasa</b> (as cores do B) e <b>2 · Crepúsculo austral</b> (azul-gelo da Patagônia com a mesma luz quente). Clique na que preferir.</p>
+
+<!-- ================= PALETA 1 ================= -->
+<div class="set" data-choice="brasa" onclick="toggleSelect(this)">
+<h3 style="text-align:center">1 · Brasa</h3>
+<div class="phones">
+  <div><div class="phone p1">
+    <svg viewBox="0 0 280 590" preserveAspectRatio="none">
+      <defs><linearGradient id="s1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a1a"/><stop offset=".22" stop-color="#2e1530"/><stop offset=".36" stop-color="#6e2b2a"/><stop offset=".44" stop-color="#d3672c"/><stop offset=".5" stop-color="#3a1b2a"/><stop offset="1" stop-color="#120916"/></linearGradient>
+        <radialGradient id="gl1" r=".5"><stop offset="0" stop-color="#ffd38a" stop-opacity=".95"/><stop offset="1" stop-color="#e8762f" stop-opacity="0"/></radialGradient></defs>
+      <rect width="280" height="590" fill="url(#s1)"/>
+      <circle cx="210" cy="250" r="70" fill="url(#gl1)" opacity=".55"/>
+      <path d="M0 270 L50 245 L85 250 L110 200 L118 182 L126 210 L136 168 L146 205 L154 180 L164 225 L200 245 L280 255 L280 590 L0 590Z" fill="#2a1428"/>
+      <path d="M0 315 Q90 285 170 310 T280 300 L280 590 L0 590Z" fill="#1d0e20"/>
+      <path d="M30 395 C90 375 115 345 160 348 S240 310 245 268" fill="none" stroke="#f3c16a" stroke-width="5" stroke-linecap="round"/>
+      <path d="M140 349 C150 348 155 348 160 348 S240 310 245 268" fill="none" stroke="#120916" stroke-width="5" stroke-dasharray="2 8" stroke-linecap="round"/>
+      <circle cx="30" cy="395" r="7" fill="#f3c16a"/><circle cx="88" cy="377" r="7" fill="#f3c16a"/><circle cx="200" cy="333" r="7" fill="#2a1428" stroke="#8a6236" stroke-width="2"/>
+      <circle cx="245" cy="268" r="24" fill="url(#gl1)" opacity=".45"/><circle cx="245" cy="268" r="11" fill="#2a1428" stroke="#e8762f" stroke-width="3"/>
+      <circle cx="140" cy="349" r="28" fill="url(#gl1)"/><circle cx="140" cy="342" r="10" fill="#ffe2a6" stroke="#f3c16a" stroke-width="3"/>
+    </svg>
+    <div class="top"><div class="ava"></div>Nv 6 · Andarilho<div class="xp"><i></i></div></div>
+    <div class="label" style="left:88px;top:390px">Mirante<br>km 30</div><div class="label" style="left:245px;top:220px"><b style="color:#ffab72">Chefe</b>km 90</div>
+    <div class="sheet"><div class="eyebrow">Fase 1 de 6 · Criar o hábito</div><h4>Primeiros Passos</h4><div class="bar"><i></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px"><b style="font-size:16px">35 / 90 km</b><span>Semana 2 de 4</span></div>
+      <div style="font-size:12px;margin-top:4px;color:var(--muted)">3 caminhadas de 40–50 min · longão de 10 km</div><div class="btn">+ Registrar caminhada</div></div>
+    <div class="nav"><b>Fase</b><span>Mapa</span><span>Diário</span><span>Menu</span></div>
+  </div><div class="cap">Tela da fase</div></div>
+
+  <div><div class="phone p1">
+    <svg viewBox="0 0 280 590" preserveAspectRatio="none">
+      <defs><linearGradient id="w1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a1a"/><stop offset=".12" stop-color="#3a1b30"/><stop offset=".22" stop-color="#b8552a"/><stop offset=".3" stop-color="#2a1428"/><stop offset="1" stop-color="#120916"/></linearGradient>
+        <radialGradient id="gw1" r=".5"><stop offset="0" stop-color="#ffd38a" stop-opacity=".95"/><stop offset="1" stop-color="#e8762f" stop-opacity="0"/></radialGradient></defs>
+      <rect width="280" height="590" fill="url(#w1)"/>
+      <path d="M40 160 L90 130 L110 80 L118 64 L124 92 L134 52 L144 88 L152 66 L162 110 L195 135 L280 150 L280 200 L0 200Z" fill="#2a1428"/>
+      <ellipse cx="190" cy="250" rx="70" ry="14" fill="#3a4a6a" opacity=".6"/>
+      <path d="M0 330 Q100 300 180 330 T280 320 L280 590 L0 590Z" fill="#1d0e20"/><path d="M0 450 Q120 420 280 445 L280 590 L0 590Z" fill="#160a1a"/>
+      <path d="M140 545 C60 510 70 465 135 445 S235 395 185 355" fill="none" stroke="#f3c16a" stroke-width="5" stroke-linecap="round"/>
+      <path d="M185 355 S60 325 90 275 S215 245 195 205 S135 160 140 128" fill="none" stroke="#3a2030" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/>
+      <circle cx="140" cy="545" r="11" fill="#f3c16a"/><circle cx="135" cy="445" r="11" fill="#f3c16a"/>
+      <circle cx="185" cy="355" r="32" fill="url(#gw1)"/><circle cx="185" cy="355" r="14" fill="#e8762f" stroke="#ffe2a6" stroke-width="3"/>
+      <circle cx="90" cy="275" r="10" fill="#2a1428" stroke="#8a6236" stroke-width="3"/><circle cx="195" cy="205" r="10" fill="#2a1428" stroke="#8a6236" stroke-width="3"/><circle cx="140" cy="128" r="12" fill="#2a1428" stroke="#b98cff" stroke-width="3"/>
+    </svg>
+    <div class="top"><div class="ava"></div>Nv 6<div class="xp"><i></i></div></div>
+    <div class="label" style="left:140px;top:492px"><b>Primeiros Passos</b>vencida</div><div class="label" style="left:95px;top:398px"><b>Carga Leve</b>vencida</div>
+    <div class="label" style="left:228px;top:372px"><b>A Subida</b>você está aqui</div><div class="label" style="left:90px;top:232px;opacity:.7"><b>Dois Dias</b></div>
+    <div class="label" style="left:225px;top:163px;opacity:.7"><b>O Pico</b></div><div class="label" style="left:140px;top:88px"><b style="color:#d9b8ff">Patagônia</b>lendária</div>
+    <div class="nav"><span>Fase</span><b>Mapa</b><span>Diário</span><span>Menu</span></div>
+  </div><div class="cap">Mapa do mundo</div></div>
+</div></div>
+
+<!-- ================= PALETA 2 ================= -->
+<div class="set" data-choice="crepusculo" onclick="toggleSelect(this)">
+<h3 style="text-align:center">2 · Crepúsculo austral</h3>
+<div class="phones">
+  <div><div class="phone p2">
+    <svg viewBox="0 0 280 590" preserveAspectRatio="none">
+      <defs><linearGradient id="s2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1726"/><stop offset=".22" stop-color="#1d3550"/><stop offset=".36" stop-color="#4f6f86"/><stop offset=".44" stop-color="#e2a05a"/><stop offset=".5" stop-color="#22374d"/><stop offset="1" stop-color="#0a1320"/></linearGradient>
+        <radialGradient id="gl2" r=".5"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".95"/><stop offset="1" stop-color="#e98a3c" stop-opacity="0"/></radialGradient></defs>
+      <rect width="280" height="590" fill="url(#s2)"/>
+      <circle cx="210" cy="250" r="70" fill="url(#gl2)" opacity=".5"/>
+      <path d="M0 270 L50 245 L85 250 L110 200 L118 182 L126 210 L136 168 L146 205 L154 180 L164 225 L200 245 L280 255 L280 590 L0 590Z" fill="#1c2e44"/>
+      <path d="M118 182 L126 210 L121 212Z M136 168 L146 205 L140 200Z" fill="#cfe3ee" opacity=".7"/>
+      <path d="M0 315 Q90 285 170 310 T280 300 L280 590 L0 590Z" fill="#132235"/>
+      <path d="M30 395 C90 375 115 345 160 348 S240 310 245 268" fill="none" stroke="#f2c46d" stroke-width="5" stroke-linecap="round"/>
+      <path d="M140 349 C150 348 155 348 160 348 S240 310 245 268" fill="none" stroke="#0a1320" stroke-width="5" stroke-dasharray="2 8" stroke-linecap="round"/>
+      <circle cx="30" cy="395" r="7" fill="#f2c46d"/><circle cx="88" cy="377" r="7" fill="#f2c46d"/><circle cx="200" cy="333" r="7" fill="#1c2e44" stroke="#6f8aa0" stroke-width="2"/>
+      <circle cx="245" cy="268" r="24" fill="url(#gl2)" opacity=".45"/><circle cx="245" cy="268" r="11" fill="#1c2e44" stroke="#e98a3c" stroke-width="3"/>
+      <circle cx="140" cy="349" r="28" fill="url(#gl2)"/><circle cx="140" cy="342" r="10" fill="#ffe6b0" stroke="#f2c46d" stroke-width="3"/>
+    </svg>
+    <div class="top"><div class="ava"></div>Nv 6 · Andarilho<div class="xp"><i></i></div></div>
+    <div class="label" style="left:88px;top:390px">Mirante<br>km 30</div><div class="label" style="left:245px;top:220px"><b style="color:#ffb27a">Chefe</b>km 90</div>
+    <div class="sheet"><div class="eyebrow">Fase 1 de 6 · Criar o hábito</div><h4>Primeiros Passos</h4><div class="bar"><i></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px"><b style="font-size:16px">35 / 90 km</b><span>Semana 2 de 4</span></div>
+      <div style="font-size:12px;margin-top:4px;color:var(--muted)">3 caminhadas de 40–50 min · longão de 10 km</div><div class="btn">+ Registrar caminhada</div></div>
+    <div class="nav"><b>Fase</b><span>Mapa</span><span>Diário</span><span>Menu</span></div>
+  </div><div class="cap">Tela da fase</div></div>
+
+  <div><div class="phone p2">
+    <svg viewBox="0 0 280 590" preserveAspectRatio="none">
+      <defs><linearGradient id="w2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1726"/><stop offset=".12" stop-color="#29435e"/><stop offset=".22" stop-color="#d9934f"/><stop offset=".3" stop-color="#1c2e44"/><stop offset="1" stop-color="#0a1320"/></linearGradient>
+        <radialGradient id="gw2" r=".5"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".95"/><stop offset="1" stop-color="#e98a3c" stop-opacity="0"/></radialGradient></defs>
+      <rect width="280" height="590" fill="url(#w2)"/>
+      <path d="M40 160 L90 130 L110 80 L118 64 L124 92 L134 52 L144 88 L152 66 L162 110 L195 135 L280 150 L280 200 L0 200Z" fill="#1c2e44"/>
+      <path d="M118 64 L124 92 L120 94Z M134 52 L144 88 L138 84Z M152 66 L162 110 L156 104Z" fill="#cfe3ee" opacity=".75"/>
+      <ellipse cx="190" cy="250" rx="70" ry="14" fill="#5f9bb8" opacity=".55"/>
+      <path d="M0 330 Q100 300 180 330 T280 320 L280 590 L0 590Z" fill="#132235"/><path d="M0 450 Q120 420 280 445 L280 590 L0 590Z" fill="#0e1a2a"/>
+      <path d="M140 545 C60 510 70 465 135 445 S235 395 185 355" fill="none" stroke="#f2c46d" stroke-width="5" stroke-linecap="round"/>
+      <path d="M185 355 S60 325 90 275 S215 245 195 205 S135 160 140 128" fill="none" stroke="#2a4058" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/>
+      <circle cx="140" cy="545" r="11" fill="#f2c46d"/><circle cx="135" cy="445" r="11" fill="#f2c46d"/>
+      <circle cx="185" cy="355" r="32" fill="url(#gw2)"/><circle cx="185" cy="355" r="14" fill="#e98a3c" stroke="#ffe6b0" stroke-width="3"/>
+      <circle cx="90" cy="275" r="10" fill="#1c2e44" stroke="#6f8aa0" stroke-width="3"/><circle cx="195" cy="205" r="10" fill="#1c2e44" stroke="#6f8aa0" stroke-width="3"/><circle cx="140" cy="128" r="12" fill="#1c2e44" stroke="#b98cff" stroke-width="3"/>
+    </svg>
+    <div class="top"><div class="ava"></div>Nv 6<div class="xp"><i></i></div></div>
+    <div class="label" style="left:140px;top:492px"><b>Primeiros Passos</b>vencida</div><div class="label" style="left:95px;top:398px"><b>Carga Leve</b>vencida</div>
+    <div class="label" style="left:228px;top:372px"><b>A Subida</b>você está aqui</div><div class="label" style="left:90px;top:232px;opacity:.7"><b>Dois Dias</b></div>
+    <div class="label" style="left:225px;top:163px;opacity:.7"><b>O Pico</b></div><div class="label" style="left:140px;top:88px"><b style="color:#d9b8ff">Patagônia</b>lendária</div>
+    <div class="nav"><span>Fase</span><b>Mapa</b><span>Diário</span><span>Menu</span></div>
+  </div><div class="cap">Mapa do mundo</div></div>
+</div></div>
