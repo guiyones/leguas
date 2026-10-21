@@ -184,7 +184,6 @@ class User::JourneyTest < ActiveSupport::TestCase
     assert_equal :boss, journey.phase_status(@world.phase("a2"))
     assert_equal :upcoming, journey.phase_status(@world.phase("b1"))
     assert_equal :hidden, journey.boss_status(@world.phase("b1"))
-    assert_equal [ "a1" ], journey.completed_phases.map(&:key)
     assert journey.landmark_reached?(@world.landmark("a2_mark"))
     assert_not journey.finished?
   end

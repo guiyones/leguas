@@ -16,7 +16,6 @@ class User::TrainingLog
   def stair_sessions_on(date) = @stair_sessions_by_date.fetch(date, [])
   def km_on(date) = walks_on(date).sum(BigDecimal(0), &:km)
 
-  def total_km = walks.sum(BigDecimal(0), &:km)
   def climbed_m = stair_sessions.sum(BigDecimal(0), &:climb_m)
 
   def entries_newest_first

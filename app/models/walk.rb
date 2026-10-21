@@ -14,8 +14,6 @@ class Walk < ApplicationRecord
   after_save :ensure_mission
   after_commit :forget_unreached_celebrations
 
-  scope :newest_first, -> { order(walked_on: :desc, created_at: :desc) }
-
   def km=(value)
     super(value.is_a?(String) ? value.tr(",", ".") : value)
   end

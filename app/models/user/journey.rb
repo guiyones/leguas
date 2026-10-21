@@ -72,10 +72,6 @@ class User::Journey
     @reached_milestones ||= world.milestones.select { reached?(it) }
   end
 
-  def completed_phases
-    world.phases.select { phase_completed?(it) }
-  end
-
   def region_status(region)
     if region.phases.all? { phase_completed?(it) }
       :completed
