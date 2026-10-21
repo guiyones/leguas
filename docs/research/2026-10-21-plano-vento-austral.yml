@@ -1,0 +1,176 @@
+# Léguas — Região de treino: A Trilha do Vento Austral
+# Inspiração real: preparação de 6 meses para o Circuito W (Torres del Paine)
+# Feito para ser treinado em cidade plana (Paranavaí): mochila com peso, escada e força.
+#
+# Plano original trazido pelo autor em 2026-10-21. O que vale pro jogo está em
+# docs/superpowers/specs/2026-10-21-trilha-do-vento-austral-design.md
+# (ex.: o treino de força saiu, os chefes não contam calendário).
+
+regiao:
+  slug: trilha-do-vento-austral
+  nome: "A Trilha do Vento Austral"
+  descricao: >
+    Seis fases de preparação para atravessar as terras do vento, onde três torres
+    de granito guardam o fim do mundo. Cada fase termina com um chefe que libera a próxima.
+  inspiracao: "Circuito W — Torres del Paine (~80 km)"
+  duracao_semanas: 24
+  meta_km_total: 810
+
+  semana_padrao:
+    caminhadas_curtas: "3 por semana (2 nas fases 4 e 5)"
+    longao: "1 por fim de semana — o treino principal"
+    forca: "2 sessões de 25–30 min: agachamento, afundo, step-up, panturrilha, ponte de glúteo, prancha"
+    semana_leve: "a 4ª semana de cada fase tem ~30% menos volume"
+
+  regras:
+    - "Se uma dor piorar de uma semana para a outra, repita a semana (refazer a fase não é perder)."
+    - "Treine cedo ou à noite no calor e leve água sempre."
+    - "Use nos longões a bota e a mochila da viagem."
+
+  trofeu:
+    nome: "Troféu do Vento Austral"
+    desenho: "Três torres de granito sobre uma base de rocha, com 6 encaixes para as insígnias das fases"
+    encaixes: 6
+
+fases:
+  - ordem: 1
+    slug: primeiros-passos
+    nome: "Primeiros Passos"
+    foco: "Criar o hábito"
+    duracao_semanas: 4
+    meta_km: 90
+    metas_semanais_km: [22, 24, 26, 18]
+    treino:
+      caminhadas_curtas: "3× 40–50 min"
+      longao: "8 → 12 km"
+      mochila_kg: 0
+      escada: "não"
+      observacao: "Desça prédios de elevador para poupar os joelhos."
+    chefe:
+      nome: "O Primeiro Horizonte"
+      descricao: "Caminhar 12 km sem parar, em ritmo confortável."
+      tipo: distancia
+      meta_km: 12
+    insignia:
+      nome: "Pegada do Viajante"
+      desenho: "Uma bota de trilha deixando uma pegada na terra vermelha"
+
+  - ordem: 2
+    slug: carga-leve
+    nome: "Carga Leve"
+    foco: "Acostumar com a mochila"
+    duracao_semanas: 4
+    meta_km: 115
+    metas_semanais_km: [28, 30, 33, 24]
+    treino:
+      caminhadas_curtas: "3× 50 min"
+      longao: "12 → 15 km"
+      mochila_kg: "4–5"
+      escada: "1× 15–20 min"
+      observacao: "Desça prédios de elevador."
+    chefe:
+      nome: "O Fardo do Caminhante"
+      descricao: "15 km com 5 kg nas costas, sem dor no ombro ou no pé."
+      tipo: distancia_com_carga
+      meta_km: 15
+      carga_kg: 5
+    insignia:
+      nome: "Mochila Firme"
+      desenho: "Uma mochila com as alças cruzadas sobre uma estrada"
+
+  - ordem: 3
+    slug: a-subida
+    nome: "A Subida"
+    foco: "Ganhar desnível"
+    duracao_semanas: 4
+    meta_km: 125
+    metas_semanais_km: [30, 33, 36, 26]
+    treino:
+      caminhadas_curtas: "3× 50–60 min"
+      longao: "15 → 18 km"
+      mochila_kg: "6–7"
+      escada: "1–2× 30 min"
+      observacao: "A partir daqui, desça a escada devagar — também é treino."
+    chefe:
+      nome: "A Torre de Degraus"
+      descricao: "Acumular 300 m de desnível na escada numa sessão (~10 subidas de prédio de 10 andares)."
+      tipo: desnivel
+      meta_desnivel_m: 300
+    desafio_bonus:
+      nome: "Pico Agudo ou Morro do Diabo"
+      descricao: "Subir uma montanha real num fim de semana."
+    insignia:
+      nome: "Degrau de Pedra"
+      desenho: "Uma escada esculpida na rocha subindo até um pico"
+
+  - ordem: 4
+    slug: dois-dias
+    nome: "Dois Dias"
+    foco: "Caminhar cansado"
+    duracao_semanas: 4
+    meta_km: 150
+    metas_semanais_km: [36, 40, 42, 32]
+    treino:
+      caminhadas_curtas: "2× 60 min"
+      longao: "sábado 15 km + domingo 10 km"
+      mochila_kg: 8
+      escada: "2× 30–40 min"
+    chefe:
+      nome: "Sol e Lua"
+      descricao: "Completar sábado e domingo e, na segunda, fazer a caminhada curta normalmente."
+      tipo: dias_seguidos
+      dias: 2
+      meta_km: 25
+      carga_kg: 8
+    insignia:
+      nome: "Sol e Lua"
+      desenho: "Um sol e uma lua lado a lado sobre uma trilha"
+
+  - ordem: 5
+    slug: o-pico
+    nome: "O Pico"
+    foco: "Volume máximo"
+    duracao_semanas: 4
+    meta_km: 180
+    metas_semanais_km: [44, 47, 50, 39]
+    treino:
+      caminhadas_curtas: "2× 60 min"
+      longao: "sábado 18 km + domingo 15 km"
+      mochila_kg: 10
+      escada: "2× 45 min"
+    chefe:
+      nome: "O Cume"
+      descricao: "600–800 m de desnível numa sessão de escada com 10 kg."
+      tipo: desnivel_com_carga
+      meta_desnivel_m: 700
+      carga_kg: 10
+    desafio_bonus:
+      nome: "Pico Paraná"
+      descricao: "Subir o pico mais alto do Sul num feriado, com pernoite."
+    insignia:
+      nome: "Bandeira no Cume"
+      desenho: "Um pico pontiagudo com uma pequena bandeira tremulando no topo"
+
+  - ordem: 6
+    slug: patagonia
+    nome: "Patagônia"
+    foco: "Simular a viagem e descansar"
+    duracao_semanas: 4
+    meta_km: 150
+    metas_semanais_km: [38, 55, 30, 27]
+    treino:
+      caminhadas_curtas: "2–3× 45 min"
+      longao: "semana 2: simulação de 3 dias; semanas 3–4: redução"
+      mochila_kg: "8–10"
+      escada: "1× 30 min"
+      observacao: "Semanas 3 e 4 com volume pela metade, para chegar descansado."
+    chefe:
+      nome: "O Vento Austral"
+      descricao: "3 dias seguidos de 15–20 km com mochila, simulando o Circuito W."
+      tipo: dias_seguidos
+      dias: 3
+      meta_km: 50
+      carga_kg: 9
+    insignia:
+      nome: "Três Torres"
+      desenho: "Três torres de granito com linhas de vento passando entre elas"
