@@ -1,0 +1,9 @@
+<section class="panel flex flex-col gap-3" data-testid="boss">
+  <p class="caption">Chefe da fase</p>
+  <h2 class="text-boss"><%= boss.name %></h2>
+  <p><%= boss.description %></p>
+  <p class="caption">Ele espera o tempo que for preciso.</p>
+  <% if banked_km > 0 %>
+    <p class="text-xp"><%= number_with_precision banked_km, precision: 1, strip_insignificant_zeros: true %> km guardados esperando o chefe</p>
+  <% end %>
+</section>

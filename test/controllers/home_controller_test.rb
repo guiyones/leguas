@@ -75,4 +75,79 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "[data-testid=phase]", text: /fim do mundo conhecido/
   end
+
+  test "sugestão da semana pelo km da fase" do
+    log_walks users(:viajante), 5, 20
+
+    get root_url
+
+    assert_select "[data-testid=week]", text: /Semana 2 de 4/
+    assert_select "[data-testid=week]", text: /Desça prédios de elevador/
+    assert_select "[data-testid=boss]", 0
+  end
+
+  test "semana leve" do
+    log_walks users(:viajante), 30, 30, 15
+
+    get root_url
+
+    assert_select "[data-testid=week]", text: /semana leve/i
+  end
+
+  test "foco da fase perto do nome" do
+    get root_url
+
+    assert_select "[data-testid=phase]", text: /Criar o hábito/
+    assert_no_match(/Chefão:/, response.body)
+  end
+
+  test "chefe esperando com km guardados, sem cobrança" do
+    walk_steady users(:viajante), 100
+
+    get root_url
+
+    assert_select "[data-testid=boss]", text: /O Primeiro Horizonte/
+    assert_select "[data-testid=boss]", text: /Caminhar 12 km sem parar/
+    assert_select "[data-testid=boss]", text: /Ele espera o tempo que for preciso/
+    assert_select "[data-testid=boss]", text: /10 km guardados/
+    assert_select "[data-testid=week]", 0
+    assert_select "[data-testid=phase]", text: /Próximo marco/, count: 0
+    assert_no_match(/atras|perdeu|falhou|prazo/i, response.body)
+  end
+
+  test "chefe esperando sem km guardados" do
+    walk_steady users(:viajante), 90
+
+    get root_url
+
+    assert_select "[data-testid=boss]", text: /O Primeiro Horizonte/
+    assert_select "[data-testid=boss]", text: /guardados/, count: 0
+  end
+
+  test "fim do mundo sem semana nem chefe" do
+    travel_whole_world users(:viajante)
+
+    get root_url
+
+    assert_select "[data-testid=week]", 0
+    assert_select "[data-testid=boss]", 0
+  end
+
+  test "desnível acumulado no total" do
+    walk_on users(:viajante), 1, 5
+    climb_on users(:viajante), 1, 100
+
+    get root_url
+
+    assert_select "[data-testid=phase]", text: /m subidos/
+  end
+
+  test "dica do plano" do
+    get root_url
+
+    tips = World.current.regions.first.tips
+    assert_select "[data-testid=tip]" do |nodes|
+      assert_includes tips, nodes.first.text.strip
+    end
+  end
 end

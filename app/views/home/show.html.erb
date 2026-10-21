@@ -16,17 +16,31 @@
 <section class="panel flex flex-col gap-3" data-testid="phase">
   <% phase = @journey.current_phase %>
   <p class="caption"><%= phase.region.name %> · Fase <%= phase.number %> de <%= phase.region.phases.size %></p>
-  <h2 class="<%= phase.boss? ? "text-boss" : "text-gold" %>"><%= "Chefão: " if phase.boss? %><%= phase.name %></h2>
+  <h2 class="text-gold"><%= phase.name %></h2>
+  <% if phase.focus %>
+    <p class="caption"><%= phase.focus %></p>
+  <% end %>
   <%= segmented_progress @journey.phase_progress %>
   <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
 
-  <% if milestone = @journey.next_milestone %>
-    <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %> km</p>
-  <% else %>
+  <% if @journey.finished? %>
     <p class="text-gold">Você chegou ao fim do mundo conhecido, viajante! Novas regiões estão a caminho.</p>
+  <% elsif (milestone = @journey.next_milestone) && milestone.at_km <= phase.end_km %>
+    <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %> km</p>
   <% end %>
 
-  <p class="caption">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas</p>
+  <p class="caption">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas<% if @journey.climbed_m > 0 %> · <%= number_with_delimiter @journey.climbed_m.round %> m subidos<% end %></p>
+</section>
+
+<% if @week %>
+  <%= render "home/week", week: @week, phase: phase %>
+<% elsif @journey.boss_status(phase) == :waiting %>
+  <%= render "home/boss", boss: phase.boss, banked_km: @journey.banked_km %>
+<% end %>
+
+<section class="panel">
+  <p class="caption">Dica do plano</p>
+  <p data-testid="tip"><%= tip_of_the_day phase.region %></p>
 </section>
 
 <section class="panel flex flex-col gap-3" data-testid="mission">

@@ -1,0 +1,10 @@
+<section class="panel flex flex-col gap-3" data-testid="week">
+  <h2>Semana <%= week.number %> de <%= phase.weeks.size %><%= " · semana leve" if week.light? %></h2>
+  <p>Caminhadas curtas: <%= week.short_walks %></p>
+  <p>Caminhada longa: <%= week.long_walk %></p>
+  <p>Carga: <%= week.load %></p>
+  <p>Escadas: <%= week.stairs %></p>
+  <% if phase.note %>
+    <p class="caption"><%= phase.note %></p>
+  <% end %>
+</section>
