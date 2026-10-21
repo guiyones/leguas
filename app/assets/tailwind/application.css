@@ -19,6 +19,12 @@
   --color-ember: #E98A3C;
   --color-glow: #FFE6B0;
   --color-legend: #B98CFF;
+  --color-cream: #FFF3DC;
+  --color-ember-light: #FFB27A;
+  --color-ember-dark: #8A4418;
+  --color-rust: #B4451E;
+  --color-ink-warm: #3A1A08;
+  --color-abyss: #070D17;
   --font-display: "Cinzel", Georgia, serif;
   --font-body: "Nunito", system-ui, sans-serif;
 }

@@ -70,12 +70,12 @@
     font-weight: 800;
     font-size: 1rem;
     letter-spacing: 0.02em;
-    color: #3A1A08;
+    color: var(--color-ink-warm);
     background: linear-gradient(var(--color-gold), var(--color-ember));
     border: 0;
     border-radius: 12px;
     box-shadow:
-      0 4px 0 #8A4418,
+      0 4px 0 var(--color-ember-dark),
       0 0 18px color-mix(in srgb, var(--color-ember) 55%, transparent);
     cursor: pointer;
     text-decoration: none;
@@ -85,7 +85,7 @@
   .btn-game:active {
     transform: translateY(3px);
     box-shadow:
-      0 1px 0 #8A4418,
+      0 1px 0 var(--color-ember-dark),
       0 0 12px color-mix(in srgb, var(--color-ember) 45%, transparent);
   }
 
@@ -185,24 +185,6 @@
     font-weight: 700;
   }
 
-  .glow {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .glow::before {
-    content: "";
-    position: absolute;
-    inset: -40%;
-    z-index: -1;
-    background: radial-gradient(closest-side,
-      color-mix(in srgb, var(--color-glow) 70%, transparent),
-      color-mix(in srgb, var(--color-ember) 25%, transparent) 55%,
-      transparent);
-    pointer-events: none;
-    animation: glow-pulse 3.2s ease-in-out infinite;
-  }
-
   @keyframes glow-pulse {
     50% { opacity: 0.6; transform: scale(0.92); }
   }
@@ -243,8 +225,8 @@
     font-weight: 800;
     font-size: 2.75rem;
     letter-spacing: 0.12em;
-    color: #FFF3DC;
-    text-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 70%, transparent), 0 2px 0 #3A1A08;
+    color: var(--color-cream);
+    text-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 70%, transparent), 0 2px 0 var(--color-ink-warm);
   }
 
   .trail {
@@ -312,7 +294,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .trail-node--waiting, .glow::before { animation: none; }
+    .trail-node--waiting { animation: none; }
   }
 
   .trail-node > summary {
@@ -419,10 +401,51 @@
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 8.5px;
-    fill: #FFB27A;
+    fill: var(--color-ember-light);
   }
 
-  .phase-scene__walked { filter: drop-shadow(0 0 3px var(--color-ember)); }
+  .phase-scene__stars { fill: var(--color-ice); }
+  .phase-scene__far { fill: var(--scene-far); opacity: 0.75; }
+  .phase-scene__rim { fill: none; stroke: var(--scene-horizon); stroke-width: 1.2; stroke-linejoin: round; opacity: 0.6; }
+  .phase-scene__snow { fill: var(--color-ice); }
+  .phase-scene__shine { stroke: var(--color-glow); stroke-width: 1; stroke-linecap: round; opacity: 0.4; }
+  .phase-scene__hill--1 { fill: var(--scene-granite); opacity: 0.9; }
+  .phase-scene__hill--2 { fill: var(--color-ridge-2); }
+
+  .phase-scene__walked {
+    fill: none;
+    stroke: var(--color-gold);
+    stroke-width: 4;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 3px var(--color-ember));
+  }
+
+  .phase-scene__ahead {
+    fill: none;
+    stroke: var(--color-ridge-3);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 2 7;
+    opacity: 0.85;
+  }
+
+  .phase-scene__mark {
+    fill: var(--color-ridge);
+    stroke: color-mix(in srgb, var(--color-muted) 70%, transparent);
+    stroke-width: 1.5;
+  }
+
+  .phase-scene__mark--reached { fill: var(--color-gold); stroke: var(--color-glow); }
+
+  .phase-scene__boss--waiting { fill: var(--color-ridge); stroke: var(--color-ember); stroke-width: 2.5; }
+  .phase-scene__boss--defeated { fill: var(--color-gold); stroke: var(--color-glow); stroke-width: 2; }
+
+  .phase-scene__boss--hidden {
+    fill: var(--color-ridge-3);
+    stroke: color-mix(in srgb, var(--color-muted) 70%, transparent);
+    stroke-width: 1.5;
+    stroke-dasharray: 2 2;
+  }
 
   .phase-scene__boss-glow {
     transform-box: fill-box;
@@ -445,6 +468,13 @@
   .phase-card__name {
     font-size: 1.4rem;
     text-shadow: 0 0 12px color-mix(in srgb, var(--color-ember) 60%, transparent);
+  }
+
+  .trophy__ring {
+    fill: none;
+    stroke: var(--color-gold);
+    stroke-width: 2;
+    stroke-dasharray: 4 3;
   }
 
   .world-map { margin: 0 -1rem; }
@@ -483,7 +513,16 @@
 
   .world-map__node { cursor: pointer; }
   .world-map__node:focus-visible { outline: none; }
-  .world-map__node:focus-visible .world-map__dot { stroke: var(--color-glow); stroke-width: 3; }
+
+  .world-map__focus-ring {
+    fill: none;
+    stroke: var(--color-glow);
+    stroke-width: 2;
+    stroke-dasharray: 4 3;
+    opacity: 0;
+  }
+
+  .world-map__node:focus-visible .world-map__focus-ring { opacity: 1; }
 
   .world-map__dot {
     fill: var(--color-ridge);
@@ -555,10 +594,10 @@
         color-mix(in srgb, var(--celebration-glow) 50%, transparent),
         color-mix(in srgb, var(--celebration-halo) 24%, transparent) 28%,
         transparent 52%),
-      linear-gradient(var(--color-ridge-3), var(--color-deep) 60%, #070D17);
+      linear-gradient(var(--color-ridge-3), var(--color-deep) 60%, var(--color-abyss));
   }
 
-  .celebration--boss { --celebration-glow: var(--color-ember); --celebration-halo: #B4451E; }
+  .celebration--boss { --celebration-glow: var(--color-ember); --celebration-halo: var(--color-rust); }
 
   .celebration__kicker {
     font-size: 1.15rem;
@@ -573,11 +612,11 @@
 
   .celebration__name {
     font-size: 1.75rem;
-    color: #FFF3DC;
+    color: var(--color-cream);
     text-shadow: 0 0 16px color-mix(in srgb, var(--celebration-halo) 70%, transparent), 0 2px 0 rgb(0 0 0 / 0.5);
   }
 
-  .celebration--boss .celebration__name { color: #FFB27A; }
+  .celebration--boss .celebration__name { color: var(--color-ember-light); }
 
   .celebration__action {
     width: 100%;

@@ -13,6 +13,12 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav[aria-label=?]", "Navegação principal", count: 0
   end
 
+  test "título da página" do
+    get root_url
+
+    assert_select "title", "Menu · Léguas"
+  end
+
   test "cartão com nível e fase atual" do
     get root_url
 
@@ -24,7 +30,7 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
   test "paisagem do pôr do sol nas Três Torres" do
     get root_url
 
-    assert_select "img[role=img][src*='art/scenes/menu']"
+    assert_select "img[alt=''][src*='art/scenes/menu']:not([role])"
   end
 
   test "carrega Cinzel e Nunito" do

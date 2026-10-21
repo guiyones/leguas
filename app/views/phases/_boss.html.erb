@@ -1,7 +1,8 @@
 <section class="panel flex flex-col gap-3 border-ember" data-testid="boss">
   <p class="eyebrow">Chefe da fase</p>
-  <h2 class="text-ember"><%= boss.name %></h2>
-  <p><%= boss.description %></p>
+  <%= art_tag :bosses, phase.key, label: phase.boss.name, size: 120, class: "self-center" %>
+  <h2 class="text-ember"><%= phase.boss.name %></h2>
+  <p><%= phase.boss.description %></p>
   <p class="caption">Ele espera o tempo que for preciso.</p>
   <% if banked_km > 0 %>
     <p class="text-gold font-bold"><%= number_with_precision banked_km, precision: 1, strip_insignificant_zeros: true %> km guardados esperando o chefe</p>

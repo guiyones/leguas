@@ -1,3 +1,5 @@
+<% @page_title = "Diário" %>
+
 <header class="text-center">
   <p class="eyebrow">Diário de viagem</p>
   <h1>Carimbos</h1>
@@ -17,7 +19,7 @@
         <li class="stamp-slot">
           <details>
             <summary class="flex flex-col items-center gap-1 cursor-pointer">
-              <%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 72 %>
+              <%= art_tag :stamps, landmark.key, label: "", size: 72 %>
               <span class="text-xs leading-tight text-center"><%= landmark.name %></span>
             </summary>
             <p class="caption mt-1">Fase <%= phase.number %> · <%= phase.name %></p>

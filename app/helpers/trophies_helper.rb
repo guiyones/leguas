@@ -3,6 +3,17 @@ module TrophiesHelper
   SLOT_CENTERS = [ [ 62, 190 ], [ 120, 190 ], [ 178, 190 ], [ 62, 226 ], [ 120, 226 ], [ 178, 226 ] ].freeze
   SLOT_RADIUS = 15
 
+  def trophy_label(journey, phases)
+    won = phases.select { journey.phase_completed?(it) }.map(&:insignia_name)
+    label = "Troféu das Três Torres, com #{pluralize won.size, "insígnia"} de #{phases.size}"
+
+    if won.any?
+      "#{label}: #{won.to_sentence}"
+    else
+      label
+    end
+  end
+
   def trophy_slot_state(journey, phase)
     case journey.phase_status(phase)
     when :completed then :filled

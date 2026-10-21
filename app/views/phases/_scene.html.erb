@@ -1,48 +1,46 @@
-<% colors = scene_palette(phase)
-   trail = Trail.new(Trail::PHASE)
-   progress = journey.phase_progress.to_f
-   traveler_x, traveler_y = trail.point_at([ progress, 0.94 ].min)
-   boss_x, boss_y = trail.point_at(1)
+<% progress = journey.phase_progress.to_f
+   traveler_x, traveler_y = scene_traveler_point(progress)
+   boss_x, boss_y = scene_boss_point
    boss_status = journey.boss_status(phase) %>
 
-<svg class="phase-scene" viewBox="0 0 280 420" role="img" data-testid="scene"
+<svg class="phase-scene" viewBox="0 0 280 420" role="img" data-testid="scene" style="<%= scene_palette_style(phase) %>"
   aria-label="Mapa da fase: <%= number_with_precision journey.km_in_phase, precision: 1, strip_insignificant_zeros: true %> de <%= phase.km %> km">
   <defs>
     <linearGradient id="phase-scene-sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0D1726"/>
-      <stop offset=".12" stop-color="<%= colors[:sky] %>"/>
-      <stop offset=".25" stop-color="<%= colors[:horizon] %>"/>
-      <stop offset=".34" stop-color="<%= colors[:sky] %>"/>
-      <stop offset="1" stop-color="#0D1726"/>
+      <stop offset="0" style="stop-color: var(--color-deep)"/>
+      <stop offset=".12" style="stop-color: var(--scene-sky)"/>
+      <stop offset=".25" style="stop-color: var(--scene-horizon)"/>
+      <stop offset=".34" style="stop-color: var(--scene-sky)"/>
+      <stop offset="1" style="stop-color: var(--color-deep)"/>
     </linearGradient>
     <radialGradient id="phase-scene-glow" r=".5">
-      <stop offset="0" stop-color="#FFE6B0" stop-opacity=".95"/>
-      <stop offset=".45" stop-color="#E98A3C" stop-opacity=".35"/>
-      <stop offset="1" stop-color="#E98A3C" stop-opacity="0"/>
+      <stop offset="0" style="stop-color: var(--color-glow); stop-opacity: .95"/>
+      <stop offset=".45" style="stop-color: var(--color-ember); stop-opacity: .35"/>
+      <stop offset="1" style="stop-color: var(--color-ember); stop-opacity: 0"/>
     </radialGradient>
     <radialGradient id="phase-scene-horizon-glow" r=".5">
-      <stop offset="0" stop-color="<%= colors[:horizon] %>" stop-opacity=".7"/>
-      <stop offset="1" stop-color="<%= colors[:horizon] %>" stop-opacity="0"/>
+      <stop offset="0" style="stop-color: var(--scene-horizon); stop-opacity: .7"/>
+      <stop offset="1" style="stop-color: var(--scene-horizon); stop-opacity: 0"/>
     </radialGradient>
     <linearGradient id="phase-scene-granite" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="<%= colors[:far] %>"/>
-      <stop offset=".5" stop-color="<%= colors[:granite] %>"/>
-      <stop offset="1" stop-color="#132235"/>
+      <stop offset="0" style="stop-color: var(--scene-far)"/>
+      <stop offset=".5" style="stop-color: var(--scene-granite)"/>
+      <stop offset="1" style="stop-color: var(--color-ridge-2)"/>
     </linearGradient>
     <linearGradient id="phase-scene-lake" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="<%= colors[:horizon] %>" stop-opacity=".6"/>
-      <stop offset=".5" stop-color="#5F9BB8" stop-opacity=".55"/>
-      <stop offset="1" stop-color="#132235" stop-opacity=".9"/>
+      <stop offset="0" style="stop-color: var(--scene-horizon); stop-opacity: .6"/>
+      <stop offset=".5" style="stop-color: var(--color-lake); stop-opacity: .55"/>
+      <stop offset="1" style="stop-color: var(--color-ridge-2); stop-opacity: .9"/>
     </linearGradient>
     <linearGradient id="phase-scene-ground" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="<%= colors[:ridge] %>"/>
-      <stop offset="1" stop-color="#0D1726"/>
+      <stop offset="0" style="stop-color: var(--scene-ridge)"/>
+      <stop offset="1" style="stop-color: var(--color-deep)"/>
     </linearGradient>
   </defs>
 
   <rect width="280" height="420" fill="url(#phase-scene-sky)"/>
 
-  <g fill="#FFFFFF">
+  <g class="phase-scene__stars">
     <circle cx="14" cy="30" r="1"/>
     <circle cx="46" cy="70" r=".8" opacity=".7"/>
     <circle cx="96" cy="22" r="1" opacity=".8"/>
@@ -54,11 +52,11 @@
 
   <circle cx="190" cy="105" r="120" fill="url(#phase-scene-horizon-glow)"/>
 
-  <path d="M0 132 L30 120 L58 126 L84 108 L104 118 L130 112 L150 100 L170 112 L280 104 L280 190 L0 190Z" fill="<%= colors[:far] %>" opacity=".75"/>
+  <path class="phase-scene__far" d="M0 132 L30 120 L58 126 L84 108 L104 118 L130 112 L150 100 L170 112 L280 104 L280 190 L0 190Z"/>
 
   <path d="M0 160 L40 150 L80 142 L112 132 L128 110 L136 84 L142 66 L148 58 L154 62 L158 80 L162 96 L168 76 L174 56 L180 46 L186 44 L192 52 L196 72 L200 92 L206 80 L210 64 L216 56 L222 60 L226 74 L240 74 L258 70 L280 78 L280 220 L0 220Z" fill="url(#phase-scene-granite)"/>
-  <path d="M112 132 L128 110 L136 84 L142 66 L148 58 L154 62 L158 80 L162 96 L168 76 L174 56 L180 46 L186 44 L192 52 L196 72 L200 92 L206 80 L210 64 L216 56 L222 60 L226 74" fill="none" stroke="<%= colors[:horizon] %>" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>
-  <g fill="#CFE3EE">
+  <path class="phase-scene__rim" d="M112 132 L128 110 L136 84 L142 66 L148 58 L154 62 L158 80 L162 96 L168 76 L174 56 L180 46 L186 44 L192 52 L196 72 L200 92 L206 80 L210 64 L216 56 L222 60 L226 74"/>
+  <g class="phase-scene__snow">
     <path d="M148 58 L154 62 L158 80 L154 76 L151 82 L147 72 L143 74 L142 66Z" opacity=".85"/>
     <path d="M180 46 L186 44 L192 52 L196 72 L191 66 L187 76 L183 62 L178 66 L174 56Z" opacity=".9"/>
     <path d="M216 56 L222 60 L226 74 L221 68 L218 74 L214 66 L210 64Z" opacity=".85"/>
@@ -66,27 +64,27 @@
   </g>
 
   <path d="M6 166 Q60 154 120 162 Q106 174 62 177 Q20 175 6 166Z" fill="url(#phase-scene-lake)"/>
-  <path d="M36 165 h52 M50 171 h28" stroke="#FFE6B0" stroke-width="1" stroke-linecap="round" opacity=".4"/>
+  <path class="phase-scene__shine" d="M36 165 h52 M50 171 h28"/>
 
-  <path d="M0 196 Q70 176 150 196 T280 150 L280 420 L0 420Z" fill="<%= colors[:granite] %>" opacity=".9"/>
-  <path d="M0 250 Q90 222 170 246 T280 228 L280 420 L0 420Z" fill="#132235"/>
+  <path class="phase-scene__hill phase-scene__hill--1" d="M0 196 Q70 176 150 196 T280 150 L280 420 L0 420Z"/>
+  <path class="phase-scene__hill phase-scene__hill--2" d="M0 250 Q90 222 170 246 T280 228 L280 420 L0 420Z"/>
   <path d="M0 300 Q140 276 280 296 L280 420 L0 420Z" fill="url(#phase-scene-ground)"/>
 
   <% if progress > 0 %>
-    <path d="<%= trail.path_d(from: 0, to: progress) %>" fill="none" stroke="#F2C46D" stroke-width="4" stroke-linecap="round" class="phase-scene__walked"/>
+    <path class="phase-scene__walked" d="<%= scene_trail.path_d(from: 0, to: progress) %>"/>
   <% end %>
   <% if progress < 1 %>
-    <path d="<%= trail.path_d(from: progress, to: 1) %>" fill="none" stroke="#0A1320" stroke-width="4" stroke-dasharray="2 7" stroke-linecap="round" opacity=".85"/>
+    <path class="phase-scene__ahead" d="<%= scene_trail.path_d(from: progress, to: 1) %>"/>
   <% end %>
 
   <% phase.landmarks.each do |landmark|
-       x, y = trail.point_at(landmark.at_km.to_f / phase.km)
+       x, y = scene_trail.point_at(landmark.at_km.to_f / phase.km)
        reached = journey.landmark_reached?(landmark) %>
     <g data-landmark="<%= landmark.key %>" data-reached="<%= reached %>">
       <% if reached %>
-        <circle cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5.5" fill="#F2C46D" stroke="#FFE6B0" stroke-width="1.5"/>
+        <circle class="phase-scene__mark phase-scene__mark--reached" cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5.5"/>
       <% else %>
-        <circle cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5" fill="#1C2E44" stroke="#6F8AA0" stroke-width="1.5"/>
+        <circle class="phase-scene__mark" cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5"/>
       <% end %>
       <text class="phase-scene__label" x="<%= x.round(1) %>" y="<%= (y + 17).round(1) %>" text-anchor="<%= scene_label_anchor(x) %>">
         <tspan class="<%= reached ? "phase-scene__name" : "phase-scene__unknown" %>"><%= reached ? landmark.name : "???" %></tspan>
@@ -96,15 +94,10 @@
   <% end %>
 
   <g data-scene-boss="<%= boss_status %>">
-    <% case boss_status %>
-    <% when :waiting %>
+    <% if boss_status == :waiting %>
       <circle class="phase-scene__boss-glow" cx="<%= boss_x.round(1) %>" cy="<%= boss_y.round(1) %>" r="30" fill="url(#phase-scene-glow)"/>
-      <circle cx="<%= boss_x.round(1) %>" cy="<%= boss_y.round(1) %>" r="8" fill="#1C2E44" stroke="#E98A3C" stroke-width="2.5"/>
-    <% when :defeated %>
-      <circle cx="<%= boss_x.round(1) %>" cy="<%= boss_y.round(1) %>" r="8" fill="#F2C46D" stroke="#FFE6B0" stroke-width="2"/>
-    <% else %>
-      <circle cx="<%= boss_x.round(1) %>" cy="<%= boss_y.round(1) %>" r="8" fill="#0E1A2A" stroke="#6F8AA0" stroke-width="1.5" stroke-dasharray="2 2"/>
     <% end %>
+    <circle class="phase-scene__boss phase-scene__boss--<%= boss_status %>" cx="<%= boss_x.round(1) %>" cy="<%= boss_y.round(1) %>" r="8"/>
     <text class="phase-scene__label" x="<%= (boss_x + 22).round(1) %>" y="<%= (boss_y + 26).round(1) %>" text-anchor="end">
       <tspan class="phase-scene__boss-name">Chefe</tspan>
       <tspan x="<%= (boss_x + 22).round(1) %>" dy="11">km <%= number_with_precision phase.km, precision: 1, strip_insignificant_zeros: true %></tspan>

@@ -9,6 +9,19 @@ class ArtHelperTest < ActionView::TestCase
     assert_match "art/avatar/portrait", img["src"]
   end
 
+  test "rótulo vazio é decorativo" do
+    img = Nokogiri::HTML(art_tag(:scenes, :menu, label: "")).at("img")
+
+    assert_equal "", img["alt"]
+    assert_nil img["role"]
+  end
+
+  test "arte não depende de fonte" do
+    Dir[ArtHelper::ROOT.join("**/*.svg")].each do |file|
+      assert_no_match(/<text/, File.read(file), "#{file} usa texto")
+    end
+  end
+
   test "tamanho vira largura e altura" do
     img = Nokogiri::HTML(art_tag(:avatar, :portrait, label: "Tião", size: 44)).at("img")
 

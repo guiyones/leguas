@@ -104,6 +104,7 @@
           <% end %>
           <circle cx="<%= x %>" cy="<%= y %>" r="11" class="world-map__dot"/>
         <% end %>
+        <circle cx="<%= x %>" cy="<%= y %>" r="<%= status == :upcoming ? 16 : 20 %>" class="world-map__focus-ring"/>
         <text class="world-map__label" x="<%= label_x %>" y="<%= y + (caption ? 0 : 4) %>" text-anchor="<%= anchor %>">
           <tspan class="world-map__name"><%= phase.name %></tspan>
           <% if caption %>

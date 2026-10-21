@@ -19,7 +19,9 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
 
     get journal_url
 
-    assert_select "img[alt=?][src*='art/stamps/ponta_das_areias']", "Carimbo Ponta das Areias"
+    assert_select "summary", text: /Ponta das Areias/ do
+      assert_select "img[alt=''][src*='art/stamps/ponta_das_areias']:not([role])"
+    end
     assert_select "details", text: /cidade de vento/
   end
 
@@ -36,6 +38,12 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /fase #{future.phase.number}\b/
     assert_no_match current_pending.name, response.body
     assert_no_match future.name, response.body
+  end
+
+  test "título da página" do
+    get journal_url
+
+    assert_select "title", "Diário · Léguas"
   end
 
   test "aba e menu levam ao diário" do

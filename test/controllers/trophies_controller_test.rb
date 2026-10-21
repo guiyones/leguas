@@ -14,6 +14,13 @@ class TrophiesControllerTest < ActionDispatch::IntegrationTest
     World.current.phases.drop(2).each do |phase|
       assert_select "[data-slot=#{phase.key}][data-state=empty]"
     end
+    assert_select "svg[aria-label*=?]", "Pegada do Viajante"
+  end
+
+  test "título da página" do
+    get trophies_url
+
+    assert_select "title", "Troféus · Léguas"
   end
 
   test "insígnia com data do chefe derrotado" do

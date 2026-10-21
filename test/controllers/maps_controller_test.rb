@@ -103,6 +103,14 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#fase-a_subida [data-phase=a_subida]"
   end
 
+  test "todo nó tem anel de foco" do
+    walk_steady users(:viajante), 40
+
+    get map_url
+
+    assert_select "[data-world-phase] .world-map__focus-ring", 6
+  end
+
   test "nó da fase atual diz você está aqui" do
     walk_steady users(:viajante), 40
 

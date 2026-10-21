@@ -3,6 +3,12 @@ require "test_helper"
 class PhasesControllerTest < ActionDispatch::IntegrationTest
   setup { sign_in :viajante }
 
+  test "título da página" do
+    get phase_url
+
+    assert_select "title", "Fase · Léguas"
+  end
+
   test "HUD com nome, nível, título e xp" do
     get phase_url
 
@@ -153,6 +159,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=boss]", text: /Caminhar 12 km sem parar/
     assert_select "[data-testid=boss]", text: /Ele espera o tempo que for preciso/
     assert_select "[data-testid=boss]", text: /10 km guardados/
+    assert_select "[data-testid=boss] img[alt=?][src*='art/bosses/primeiros_passos']", "O Primeiro Horizonte"
     assert_select "[data-testid=week]", 0
     assert_select "[data-testid=phase]", text: /Próximo marco/, count: 0
     assert_no_match(/atras|perdeu|falhou|prazo/i, response.body)
@@ -240,6 +247,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     get phase_url
 
     assert_select "[data-testid=scene] [data-scene-boss=waiting]", text: /Chefe/
+    assert_no_match(/#\h{6}/, css_select("[data-testid=scene]").to_s)
   end
 
   test "chefe escondido na cena sem o nome" do

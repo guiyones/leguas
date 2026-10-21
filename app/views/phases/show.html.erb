@@ -1,4 +1,4 @@
-<% @page_title = "Início" %>
+<% @page_title = "Fase" %>
 
 <% phase = @journey.current_phase %>
 
@@ -42,7 +42,7 @@
 <% if @week %>
   <%= render "phases/week", week: @week, phase: phase %>
 <% elsif @journey.boss_status(phase) == :waiting %>
-  <%= render "phases/boss", boss: phase.boss, banked_km: @journey.banked_km %>
+  <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
 <% end %>
 
 <% if tip = tip_of_the_day(phase.region) %>
