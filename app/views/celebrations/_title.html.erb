@@ -1,5 +1,5 @@
 <% title = achievement.subject %>
-<h1 class="text-gold">Novo título!</h1>
-<%= art_tag :avatar, :portrait, label: Current.user.name, size: 96 %>
-<h2><%= Current.user.name %>, agora você é <%= title.name %></h2>
+<h1 class="celebration__kicker text-gold">Novo título!</h1>
+<%= art_tag :avatar, :portrait, label: Current.user.name, size: 140, class: "celebration__art" %>
+<h2 class="celebration__name"><%= Current.user.name %>, agora você é <%= title.name %></h2>
 <p>Nível <%= title.from_level %> alcançado.</p>

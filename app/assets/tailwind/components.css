@@ -531,4 +531,56 @@
   .world-map__node--upcoming .world-map__label { opacity: 0.7; }
   .world-map__node--legend .world-map__name { fill: var(--color-legend); }
   .world-map__node--legend .world-map__label { opacity: 1; }
+
+  .celebration {
+    --celebration-glow: var(--color-glow);
+    --celebration-halo: var(--color-ember);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: calc(100dvh - 2.5rem);
+    padding: 1.5rem 0.25rem;
+    text-align: center;
+  }
+
+  .celebration::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 50% 36%,
+        color-mix(in srgb, var(--celebration-glow) 50%, transparent),
+        color-mix(in srgb, var(--celebration-halo) 24%, transparent) 28%,
+        transparent 52%),
+      linear-gradient(var(--color-ridge-3), var(--color-deep) 60%, #070D17);
+  }
+
+  .celebration--boss { --celebration-glow: var(--color-ember); --celebration-halo: #B4451E; }
+
+  .celebration__kicker {
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+  }
+
+  .celebration__art {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 22px color-mix(in srgb, var(--celebration-halo) 60%, transparent));
+  }
+
+  .celebration__name {
+    font-size: 1.75rem;
+    color: #FFF3DC;
+    text-shadow: 0 0 16px color-mix(in srgb, var(--celebration-halo) 70%, transparent), 0 2px 0 rgb(0 0 0 / 0.5);
+  }
+
+  .celebration--boss .celebration__name { color: #FFB27A; }
+
+  .celebration__action {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 }

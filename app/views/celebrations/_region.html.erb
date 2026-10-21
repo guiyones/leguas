@@ -1,7 +1,7 @@
 <% region = achievement.subject %>
-<h1 class="text-gold">NÍVEL COMPLETO!</h1>
-<h2><%= region.name %></h2>
-<div class="flex flex-wrap justify-center gap-2">
+<h1 class="celebration__kicker text-gold">NÍVEL COMPLETO!</h1>
+<h2 class="celebration__name"><%= region.name %></h2>
+<div class="celebration__art flex flex-wrap justify-center gap-2">
   <% region.phases.each do |phase| %>
     <%= art_tag :insignias, phase.key, label: phase.name, size: phase.legendary? ? 60 : 52 %>
   <% end %>

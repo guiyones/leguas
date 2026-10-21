@@ -1,9 +1,11 @@
 <% phase = achievement.subject %>
-<h1 class="<%= phase.boss? ? "text-ember" : "text-gold" %>"><%= phase.boss? ? "Chefe derrotado!" : "Conquista desbloqueada!" %></h1>
-<%= art_tag :insignias, phase.key, label: "Insígnia #{phase.name}", size: phase.legendary? ? 160 : 136 %>
-<h2>Fase <%= phase.number %> vencida: <%= phase.name %></h2>
+<h1 class="celebration__kicker <%= phase.boss? ? "text-ember" : "text-gold" %>"><%= phase.boss? ? "Chefe derrotado!" : "Conquista desbloqueada!" %></h1>
+<%= art_tag :insignias, phase.key, label: "Insígnia #{phase.name}", size: phase.legendary? ? 200 : 180, class: "celebration__art" %>
 <% if phase.boss? %>
-  <p>Insígnia: <strong><%= phase.insignia_name %></strong></p>
+  <h2 class="celebration__name"><%= phase.insignia_name %></h2>
+  <p>Fase <%= phase.number %> vencida: <strong><%= phase.name %></strong></p>
+<% else %>
+  <h2 class="celebration__name">Fase <%= phase.number %> vencida: <%= phase.name %></h2>
 <% end %>
 <p class="caption">Foco: <%= phase.focus %></p>
 <%= stat phase.xp, unit: "XP", prefix: "+" %>

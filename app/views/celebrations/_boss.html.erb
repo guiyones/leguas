@@ -1,5 +1,6 @@
 <% phase = achievement.subject %>
-<h1 class="text-ember">Um chefe apareceu!</h1>
-<h2><%= phase.boss.name %></h2>
+<h1 class="celebration__kicker text-ember">Um chefe apareceu!</h1>
+<%= art_tag :bosses, phase.key, label: phase.boss.name, size: 200, class: "celebration__art" %>
+<h2 class="celebration__name"><%= phase.boss.name %></h2>
 <p><%= phase.boss.description %></p>
 <p class="caption">Ele espera o tempo que for preciso.</p>

@@ -16,6 +16,8 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: /Carimbo conquistado/
     assert_select "*", text: /Ponta das Areias/
     assert_select "img[alt=?][src*='art/stamps/ponta_das_areias']", "Carimbo Ponta das Areias"
+    assert_select "img[alt^='Carimbo']"
+    assert_select "button", text: "Continuar"
     post celebration_url, params: { key: "landmark:ponta_das_areias" }
     assert_redirected_to celebration_url
 
@@ -58,6 +60,9 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /O Primeiro Horizonte/
     assert_select "*", text: /Caminhar 12 km sem parar/
     assert_select "*", text: /Ele espera o tempo que for preciso/
+    assert_select "img[alt=?][src*='art/bosses/primeiros_passos']", "O Primeiro Horizonte"
+    assert_select "button", text: "Aceitar o desafio"
+    assert_select "button", text: "Continuar", count: 0
     post celebration_url, params: { key: "boss:primeiros_passos" }
     get celebration_url
     assert_redirected_to phase_url

@@ -52,7 +52,7 @@ class JourneyFlowTest < ApplicationSystemTestCase
     click_on "Registrar caminhada"
 
     assert_text "Um chefe apareceu!"
-    click_on "Continuar"
+    click_on "Aceitar o desafio"
     assert_text "Chefe derrotado!"
     assert_text "Pegada do Viajante"
     click_on "Continuar"

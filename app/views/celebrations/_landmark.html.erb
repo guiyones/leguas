@@ -1,6 +1,6 @@
 <% landmark = achievement.subject %>
-<h1 class="text-gold">Carimbo conquistado!</h1>
-<%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 140 %>
-<h2><%= landmark.name %></h2>
+<h1 class="celebration__kicker text-gold">Carimbo conquistado!</h1>
+<%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 180, class: "celebration__art" %>
+<h2 class="celebration__name"><%= landmark.name %></h2>
 <p><%= landmark.story %></p>
 <%= stat landmark.xp, unit: "XP", prefix: "+" %>

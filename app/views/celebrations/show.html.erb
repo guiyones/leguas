@@ -1,8 +1,9 @@
 <% @page_title = "Conquista" %>
 <% @hide_nav = true %>
 
-<section class="panel flex flex-col items-center gap-5 text-center mt-8">
+<section class="celebration celebration--<%= @achievement.kind %>">
   <%= render @achievement.kind, achievement: @achievement %>
 
-  <%= button_to "Continuar", celebration_path, params: { key: @achievement.key }, class: "btn-game w-full", form_class: "w-full" %>
+  <%= button_to @achievement.kind == "boss" ? "Aceitar o desafio" : "Continuar", celebration_path,
+        params: { key: @achievement.key }, class: "btn-game w-full", form_class: "celebration__action" %>
 </section>
