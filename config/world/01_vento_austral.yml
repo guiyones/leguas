@@ -1,0 +1,390 @@
+key: vento_austral
+name: A Trilha do Vento Austral
+inspired_by: Circuito W, Torres del Paine
+trophy_name: Vento Austral
+tips:
+  - Treine cedo ou à noite no calor e leve água sempre.
+  - Nos longões, use a bota e a mochila da viagem.
+  - Se uma dor piorar, segura o ritmo. A fase espera você.
+phases:
+  - key: primeiros_passos
+    name: Primeiros Passos
+    focus: Criar o hábito
+    inspired_by: Semanas 1–4 do plano
+    km: 90
+    rarity: rare
+    symbol: bota de trilha deixando uma pegada na terra vermelha
+    insignia_name: Pegada do Viajante
+    note: Desça prédios de elevador para poupar os joelhos.
+    weeks:
+      - km: 22
+        short_walks: 3× 40–50 min
+        long_walk: 8 km
+        load: sem mochila
+        stairs: não
+      - km: 24
+        short_walks: 3× 40–50 min
+        long_walk: 10 km
+        load: sem mochila
+        stairs: não
+      - km: 26
+        short_walks: 3× 40–50 min
+        long_walk: 12 km
+        load: sem mochila
+        stairs: não
+      - km: 18
+        short_walks: 3× 40 min
+        long_walk: 8 km
+        load: sem mochila
+        stairs: não
+    boss:
+      name: O Primeiro Horizonte
+      description: Caminhar 12 km sem parar, em ritmo confortável.
+      kind: distance
+      km: 12
+    landmarks:
+      - key: ponta_das_areias
+        name: Ponta das Areias
+        at_km: 8
+        story: >
+          Uma cidade de vento na beira do estreito, com a estátua de um navegador no meio
+          da praça. Dizem que quem esfrega o pé de um dos indígenas na base dela um dia volta pra lá.
+      - key: estreito_do_navegante
+        name: Estreito do Navegante
+        at_km: 30
+        story: >
+          Um canal de água fria entre o continente e a Terra do Fogo, ligando o Atlântico ao
+          Pacífico. A primeira expedição europeia a atravessar foi a de Fernão de Magalhães, em 1520.
+      - key: forte_do_estreito
+        name: Forte do Estreito
+        at_km: 55
+        story: >
+          Um forte de madeira erguido em 1843 numa ponta do estreito, pra marcar quem cuidava
+          daquelas águas. O que se visita hoje é uma reconstrução.
+      - key: ilha_dos_pinguins
+        name: Ilha dos Pinguins
+        at_km: 75
+        story: >
+          Uma ilha no meio do estreito onde milhares de pinguins-de-magalhães fazem ninho em
+          tocas cavadas no chão. Eles chegam na primavera e vão embora no outono.
+
+  - key: carga_leve
+    name: Carga Leve
+    focus: Acostumar com a mochila
+    inspired_by: Semanas 5–8 do plano
+    km: 115
+    rarity: rare
+    symbol: mochila com as alças cruzadas sobre uma estrada
+    insignia_name: Mochila Firme
+    note: Desça prédios de elevador.
+    weeks:
+      - km: 28
+        short_walks: 3× 50 min
+        long_walk: 12 km
+        load: 4 kg
+        stairs: 1× 15 min
+      - km: 30
+        short_walks: 3× 50 min
+        long_walk: 14 km
+        load: 4–5 kg
+        stairs: 1× 15–20 min
+      - km: 33
+        short_walks: 3× 50 min
+        long_walk: 15 km
+        load: 5 kg
+        stairs: 1× 20 min
+      - km: 24
+        short_walks: 3× 50 min
+        long_walk: 12 km
+        load: 4–5 kg
+        stairs: 1× 15 min
+    boss:
+      name: O Fardo do Caminhante
+      description: 15 km com 5 kg nas costas, sem dor no ombro ou no pé.
+      kind: distance_with_load
+      km: 15
+      load_kg: 5
+    landmarks:
+      - key: estrada_da_estepe
+        name: Estrada da Estepe
+        at_km: 20
+        story: >
+          Entre a cidade do estreito e o porto do norte são quase 250 km de estepe, com mais
+          ovelha que gente. As fazendas de ovelhas fizeram a riqueza da região há mais de cem anos.
+      - key: porto_da_ultima_esperanca
+        name: Porto da Última Esperança
+        at_km: 50
+        story: >
+          Uma cidade pequena na beira de um fiorde chamado Última Esperança. O nome veio de um
+          navegante espanhol do século XVI que procurava o caminho até o estreito por ali.
+      - key: orla_dos_cisnes
+        name: Orla dos Cisnes
+        at_km: 80
+        story: >
+          Na orla do fiorde nadam cisnes de corpo branco e pescoço preto. Essa espécie só
+          existe no sul da América do Sul.
+      - key: morro_da_vigia
+        name: Morro da Vigia
+        at_km: 105
+        story: >
+          Um morro logo atrás do porto, com um mirante lá no alto. De cima dá pra ver a cidade
+          inteira e o fiorde entrando no continente.
+
+  - key: a_subida
+    name: A Subida
+    focus: Ganhar desnível
+    inspired_by: Semanas 9–12 do plano
+    km: 125
+    rarity: rare
+    symbol: escada esculpida na rocha subindo até um pico
+    insignia_name: Degrau de Pedra
+    note: A partir daqui, desça a escada devagar, que também é treino.
+    weeks:
+      - km: 30
+        short_walks: 3× 50 min
+        long_walk: 15 km
+        load: 6 kg
+        stairs: 1× 30 min
+      - km: 33
+        short_walks: 3× 50–60 min
+        long_walk: 17 km
+        load: 6–7 kg
+        stairs: 2× 30 min
+      - km: 36
+        short_walks: 3× 60 min
+        long_walk: 18 km
+        load: 7 kg
+        stairs: 2× 30 min
+      - km: 26
+        short_walks: 3× 50 min
+        long_walk: 15 km
+        load: 6 kg
+        stairs: 1× 30 min
+    boss:
+      name: A Torre de Degraus
+      description: Acumular 300 m de desnível na escada num dia (~10 subidas de prédio de 10 andares).
+      kind: climb
+      climb_m: 300
+    bonus:
+      name: Pico Agudo ou Morro do Diabo
+      description: Subir uma montanha real num fim de semana.
+    landmarks:
+      - key: frigorifico_velho
+        name: Frigorífico Velho
+        at_km: 25
+        story: >
+          Uma fábrica de tijolos à beira do fiorde onde se congelava a carne das ovelhas da
+          região. Hoje é monumento nacional e virou hotel.
+      - key: caverna_do_gigante
+        name: Caverna do Gigante
+        at_km: 55
+        story: >
+          Numa caverna enorme acharam, no fim do século XIX, pele e ossos de milodonte, uma
+          preguiça gigante extinta. Na entrada tem uma estátua dele em tamanho real.
+      - key: lagoa_do_sal_amargo
+        name: Lagoa do Sal Amargo
+        at_km: 85
+        story: >
+          Uma lagoa salgada perto da entrada do parque, onde muitos viajantes descem do ônibus.
+          Em volta pastam guanacos, parentes selvagens da lhama.
+      - key: pedras_vivas
+        name: Pedras Vivas
+        at_km: 110
+        story: >
+          Na margem de um lago azul crescem pedras claras feitas por micróbios, os trombólitos.
+          Formações assim existem na Terra há bilhões de anos.
+
+  - key: dois_dias
+    name: Dois Dias
+    focus: Caminhar cansado
+    inspired_by: Semanas 13–16 do plano
+    km: 150
+    rarity: rare
+    symbol: sol e lua lado a lado sobre uma trilha
+    insignia_name: Sol e Lua
+    weeks:
+      - km: 36
+        short_walks: 2× 60 min
+        long_walk: sábado 13 km + domingo 8 km
+        load: 8 kg
+        stairs: 2× 30 min
+      - km: 40
+        short_walks: 2× 60 min
+        long_walk: sábado 14 km + domingo 9 km
+        load: 8 kg
+        stairs: 2× 30–40 min
+      - km: 42
+        short_walks: 2× 60 min
+        long_walk: sábado 15 km + domingo 10 km
+        load: 8 kg
+        stairs: 2× 40 min
+      - km: 32
+        short_walks: 2× 60 min
+        long_walk: sábado 12 km + domingo 8 km
+        load: 8 kg
+        stairs: 2× 30 min
+    boss:
+      name: Sol e Lua
+      description: Dois dias seguidos com 8 kg nas costas, somando 25 km.
+      kind: consecutive_days
+      days: 2
+      km: 25
+      load_kg: 8
+    landmarks:
+      - key: mirante_do_azul
+        name: Mirante do Azul
+        at_km: 25
+        story: >
+          Daqui o maciço aparece inteiro pela primeira vez. O nome da serra vem de uma palavra
+          tehuelche que quer dizer azul.
+      - key: salto_furioso
+        name: Salto Furioso
+        at_km: 60
+        story: >
+          Uma cachoeira curta e barulhenta por onde a água de um lago despenca pro outro. O
+          vento ali costuma ser tão forte que dá pra se apoiar nele.
+      - key: lago_turquesa
+        name: Lago Turquesa
+        at_km: 95
+        story: >
+          Um lago de cor turquesa, quase de mentira. A cor vem de um pó de rocha bem fino que
+          os glaciares moem e os rios trazem.
+      - key: travessia_do_lago
+        name: Travessia do Lago
+        at_km: 130
+        story: >
+          Pra seguir viagem, um catamarã cruza o lago turquesa. Do outro lado fica o pé da
+          montanha mais alta do maciço.
+
+  - key: o_pico
+    name: O Pico
+    focus: Volume máximo
+    inspired_by: Semanas 17–20 do plano
+    km: 180
+    rarity: rare
+    symbol: pico pontiagudo com uma pequena bandeira tremulando no topo
+    insignia_name: Bandeira no Cume
+    weeks:
+      - km: 44
+        short_walks: 2× 60 min
+        long_walk: sábado 16 km + domingo 12 km
+        load: 10 kg
+        stairs: 2× 40 min
+      - km: 47
+        short_walks: 2× 60 min
+        long_walk: sábado 17 km + domingo 14 km
+        load: 10 kg
+        stairs: 2× 45 min
+      - km: 50
+        short_walks: 2× 60 min
+        long_walk: sábado 18 km + domingo 15 km
+        load: 10 kg
+        stairs: 2× 45 min
+      - km: 39
+        short_walks: 2× 60 min
+        long_walk: sábado 15 km + domingo 10 km
+        load: 10 kg
+        stairs: 2× 40 min
+    boss:
+      name: O Cume
+      description: 700 m de desnível na escada num dia, com 10 kg nas costas.
+      kind: climb_with_load
+      climb_m: 700
+      load_kg: 10
+    bonus:
+      name: Pico Paraná
+      description: Subir o pico mais alto do Sul num feriado, com pernoite.
+    landmarks:
+      - key: lago_dos_icebergs
+        name: Lago dos Icebergs
+        at_km: 30
+        story: >
+          Num lago cinzento boiam pedaços de gelo azul que se soltaram do glaciar. O gelo é tão
+          compacto que absorve o vermelho da luz, e o que sobra pro olho é azul.
+      - key: geleira_cinzenta
+        name: Geleira Cinzenta
+        at_km: 60
+        story: >
+          Uma parede de gelo que desce do Campo de Gelo Patagônico Sul até o lago. Esse campo é
+          uma das maiores massas de gelo do mundo fora da Antártida e da Groenlândia.
+      - key: vale_do_frances
+        name: Vale do Francês
+        at_km: 90
+        story: >
+          Um vale entre montanhas onde o gelo troveja. São pedaços do glaciar lá em cima que
+          desabam em avalanches, mesmo no verão.
+      - key: os_chifres
+        name: Os Chifres
+        at_km: 120
+        story: >
+          Picos de granito claro com o topo escuro, de uma rocha mais antiga que ficou por
+          cima. Vistos do lago, parecem chifres.
+      - key: lago_do_explorador
+        name: Lago do Explorador
+        at_km: 150
+        story: >
+          Um lago comprido de água verde-azulada aos pés dos chifres. Leva o nome de um geólogo
+          sueco que explorou a Patagônia no fim do século XIX.
+
+  - key: patagonia
+    name: Patagônia
+    focus: Simular a viagem e descansar
+    inspired_by: Semanas 21–24 do plano
+    km: 150
+    rarity: legendary
+    symbol: três torres de granito com linhas de vento passando entre elas
+    insignia_name: Três Torres
+    note: Semanas 3 e 4 com volume pela metade, para chegar descansado.
+    weeks:
+      - km: 38
+        short_walks: 2–3× 45 min
+        long_walk: sábado 15 km + domingo 10 km
+        load: 8–10 kg
+        stairs: 1× 30 min
+      - km: 55
+        short_walks: 2× 45 min
+        long_walk: 3 dias seguidos de 15–20 km
+        load: 9–10 kg
+        stairs: 1× 30 min
+      - km: 30
+        short_walks: 2–3× 45 min
+        long_walk: 12 km
+        load: 8 kg
+        stairs: 1× 30 min
+      - km: 27
+        short_walks: 2–3× 45 min
+        long_walk: 10 km
+        load: 8 kg
+        stairs: não
+    boss:
+      name: O Vento Austral
+      description: 3 dias seguidos de 15–20 km com mochila, simulando o Circuito W.
+      kind: consecutive_days
+      days: 3
+      km: 50
+      load_kg: 9
+    landmarks:
+      - key: passo_dos_ventos
+        name: Passo dos Ventos
+        at_km: 25
+        story: >
+          A trilha entra num vale estreito, subindo pela beira de um rio que desce das torres.
+          Num trecho chamado Passo dos Ventos, o vento sopra encanado entre as montanhas.
+      - key: refugio_do_vale
+        name: Refúgio do Vale
+        at_km: 60
+        story: >
+          Um refúgio de madeira no fundo do vale, à beira do rio. Muita gente dorme aqui pra
+          subir de madrugada e ver o sol nascer nas torres.
+      - key: morena_das_torres
+        name: Morena das Torres
+        at_km: 95
+        story: >
+          O último trecho é uma subida íngreme por uma morena, um monte de pedras soltas que o
+          glaciar empurrou e deixou pra trás.
+      - key: base_das_torres
+        name: Base das Três Torres
+        at_km: 130
+        story: >
+          Três torres de granito sobem acima de uma lagoa verde de degelo. O granito delas se
+          formou debaixo da terra há uns 12 milhões de anos.

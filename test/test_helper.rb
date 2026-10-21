@@ -45,6 +45,41 @@ module ActiveSupport
       nil
     end
 
+    # Percorre o mundo inteiro: caminhadas de até 10 km até cada chefe aparecer e,
+    # no dia seguinte, o feito que derruba o chefe. Termina hoje.
+    def travel_whole_world(user, world: World.current)
+      user.update!(stair_steps: 100)   # 17 m por subida
+      days = []
+      total = 0
+
+      world.phases.each do |phase|
+        while total < phase.end_km
+          km = [ phase.end_km - total, 10 ].min
+          days << [ :walk, km, nil ]
+          total += km
+        end
+
+        boss = phase.boss
+        case boss.kind
+        when "distance", "distance_with_load"
+          days << [ :walk, boss.km, boss.load_kg ]
+          total += boss.km
+        when "climb", "climb_with_load"
+          days << [ :climb, (boss.climb_m / 17).ceil, boss.load_kg ]
+        when "consecutive_days"
+          boss.days.times do
+            days << [ :walk, (boss.km / boss.days).ceil, boss.load_kg ]
+            total += (boss.km / boss.days).ceil
+          end
+        end
+      end
+
+      days.each_with_index do |(kind, amount, load_kg), index|
+        days_ago = days.size - 1 - index
+        kind == :walk ? walk_on(user, days_ago, amount, load_kg: load_kg) : climb_on(user, days_ago, amount, load_kg: load_kg)
+      end
+    end
+
     private
       # Private so Minitest doesn't auto-discover this as a test case
       # (it grabs public instance methods matching /^test_/).

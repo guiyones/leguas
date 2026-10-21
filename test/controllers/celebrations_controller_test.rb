@@ -9,76 +9,43 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test "sequência: carimbo, carimbo, insígnia, e depois início" do
-    post walks_url, params: { walk: { km: "25", walked_on: Date.current.iso8601 } }
+  test "sequência: carimbo e depois início" do
+    post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }
 
     get celebration_url
     assert_select "h1", text: /Carimbo conquistado/
-    assert_select "*", text: /Convento do Penhasco/
-    post celebration_url, params: { key: "landmark:convento_do_penhasco" }
+    assert_select "*", text: /Ponta das Areias/
+    assert_select "svg[aria-label=?]", "Carimbo Ponta das Areias"
+    post celebration_url, params: { key: "landmark:ponta_das_areias" }
     assert_redirected_to celebration_url
-
-    get celebration_url
-    assert_select "*", text: /Orla da Costa Velha/
-    post celebration_url, params: { key: "landmark:orla_da_costa_velha" }
-
-    get celebration_url
-    assert_select "h1", text: /Conquista desbloqueada/
-    assert_select "*", text: /Mirante do Convento/
-    assert_select "svg[aria-label=?]", "Insígnia Mirante do Convento"
-    post celebration_url, params: { key: "phase:mirante_do_convento" }
 
     get celebration_url
     assert_redirected_to root_url
   end
 
-  test "chefão tem título próprio" do
-    log_walks users(:viajante), 60   # passa do fim de As Areias Sem Fim (km 53)
-    users(:viajante).pending_celebration_keys.excluding("phase:areias_sem_fim").each { users(:viajante).celebrate(it) }
-
-    get celebration_url
-
-    assert_select "h1", text: /Chefão derrotado/
-    assert_select "*", text: /As Areias Sem Fim/
-  end
-
-  test "região completa mostra a próxima e depois o título" do
-    log_walks users(:viajante), 100   # 100 km: fim da Costa do Missionário
+  test "região completa é o fim do mundo conhecido" do
+    travel_whole_world users(:viajante)
     user = users(:viajante)
-    user.pending_celebration_keys.excluding("region:costa_do_missionario", "title:andarilho").each { user.celebrate(it) }
-
-    get celebration_url
-    assert_select "h1", text: /NÍVEL COMPLETO/
-    assert_select "*", text: /100 km/
-    assert_select "*", text: /Trilha do Primeiro Raio/
-    post celebration_url, params: { key: "region:costa_do_missionario" }
-
-    get celebration_url
-    assert_select "h1", text: /Novo título/
-    assert_select "*", text: /Andarilho/
-  end
-
-  test "última região fala do mundo conhecido" do
-    log_walks users(:viajante), 100, 100, 100, 100, 100, 99   # 599 km: fim do mundo do MVP
-    user = users(:viajante)
-    user.pending_celebration_keys.excluding("region:estrada_da_promessa").each { user.celebrate(it) }
+    user.pending_celebration_keys.excluding("region:vento_austral").each { user.celebrate(it) }
 
     get celebration_url
 
     assert_select "h1", text: /NÍVEL COMPLETO/
+    assert_select "*", text: /A Trilha do Vento Austral/
+    assert_select "*", text: /810 km/
+    assert_select "svg[aria-label=?]", "Patagônia"
     assert_select "*", text: /fim do mundo conhecido/
-    assert_select "*", text: /completou o mundo inteiro/, count: 0
   end
 
   test "clique duplo ou chave estranha não quebra" do
-    post walks_url, params: { walk: { km: "4", walked_on: Date.current.iso8601 } }
+    post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }
 
-    post celebration_url, params: { key: "landmark:convento_do_penhasco" }
-    post celebration_url, params: { key: "landmark:convento_do_penhasco" }
-    post celebration_url, params: { key: "phase:santuario_da_luz" }
+    post celebration_url, params: { key: "landmark:ponta_das_areias" }
+    post celebration_url, params: { key: "landmark:ponta_das_areias" }
+    post celebration_url, params: { key: "phase:patagonia" }
     post celebration_url, params: { key: "qualquer coisa" }
 
     assert_redirected_to celebration_url
-    assert_equal [ "landmark:convento_do_penhasco" ], users(:viajante).celebrations.pluck(:key)
+    assert_equal [ "landmark:ponta_das_areias" ], users(:viajante).celebrations.pluck(:key)
   end
 end

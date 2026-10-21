@@ -3,68 +3,46 @@ require "test_helper"
 class MapsControllerTest < ActionDispatch::IntegrationTest
   setup { sign_in :viajante }
 
-  test "mostra as regiões em ordem com a situação de cada uma" do
-    log_walks users(:viajante), 20, 10   # 30 km: fase 2 da Costa do Missionário
-
-    get map_url
-
-    assert_response :success
-    assert_select "[data-region]", 3
-    assert_select "[data-region=costa_do_missionario][data-status=current]"
-    assert_select "[data-region=trilha_do_primeiro_raio][data-status=locked]"
-    assert_select "[data-region=estrada_da_promessa][data-status=locked]"
-  end
-
-  test "fases concluída, atual e futura" do
+  test "mostra a região com a situação dela" do
     log_walks users(:viajante), 20, 10
 
     get map_url
 
-    assert_select "[data-phase=mirante_do_convento][data-status=completed]" do
-      assert_select "svg[aria-label=?]", "Insígnia Mirante do Convento"
-      assert_select "*", text: /Convento do Penhasco/   # marco alcançado aparece pelo nome
-    end
-    assert_select "#atual[data-phase=areias_sem_fim][data-status=current]" do
-      assert_select "*", text: %r{5 / 28 km}
-      assert_select "*", text: /km 15/                  # Vila do Camarão ainda não alcançada
-    end
-    assert_select "[data-phase=areias_que_curam][data-status=upcoming]"
+    assert_response :success
+    assert_select "[data-region]", 1
+    assert_select "[data-region=vento_austral][data-status=current]"
   end
 
-  test "região bloqueada não revela fases nem marcos" do
+  test "fases concluída, atual e futura" do
+    walk_steady users(:viajante), 90, until_days_ago: 2
+    walk_on users(:viajante), 1, 12   # derruba O Primeiro Horizonte
+
     get map_url
 
-    assert_select "[data-region=trilha_do_primeiro_raio]" do
-      assert_select "*", text: /Trilha do Primeiro Raio/
-      assert_select "*", text: /\?\?\?/
-      assert_select "*", text: /Fase bloqueada/
+    assert_select "[data-phase=primeiros_passos][data-status=completed]" do
+      assert_select "svg[aria-label=?]", "Insígnia Primeiros Passos"
+      assert_select "*", text: /Ponta das Areias/   # marco alcançado aparece pelo nome
     end
-    assert_no_match(/Vale das Quedas|Vila do Carimbo|Gigante de Pedra/, response.body)
+    assert_select "#atual[data-phase=carga_leve][data-status=current]" do
+      assert_select "*", text: %r{12 / 115 km}
+      assert_select "*", text: /km 20/                # Estrada da Estepe ainda não alcançada
+    end
+    assert_select "[data-phase=a_subida][data-status=upcoming]"
   end
 
   test "sem caminhadas a primeira fase é a atual" do
     get map_url
 
-    assert_select "#atual[data-phase=mirante_do_convento]", text: %r{0 / 25 km}
-    assert_select "*", text: /Vila do Camarão/, count: 0
-  end
-
-  test "fronteira de 100 km libera a Região 2" do
-    log_walks users(:viajante), 100
-
-    get map_url
-
-    assert_select "[data-region=costa_do_missionario][data-status=completed]"
-    assert_select "[data-region=trilha_do_primeiro_raio][data-status=current]"
-    assert_select "#atual[data-phase=vale_das_quedas]"
+    assert_select "#atual[data-phase=primeiros_passos]", text: %r{0 / 90 km}
+    assert_select "*", text: /Estrada da Estepe/, count: 0
   end
 
   test "mundo completo não tem fase atual" do
-    log_walks users(:viajante), 100, 100, 100, 100, 100, 99
+    travel_whole_world users(:viajante)
 
     get map_url
 
-    assert_select "[data-region][data-status=completed]", 3
+    assert_select "[data-region=vento_austral][data-status=completed]"
     assert_select "#atual", 0
   end
 

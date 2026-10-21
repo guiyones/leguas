@@ -19,10 +19,10 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "[data-testid=phase]" do
-      assert_select "*", text: /Mirante do Convento/
-      assert_select "*", text: %r{5 / 25 km}
-      assert_select "*", text: /Orla da Costa Velha/
-      assert_select "*", text: /faltam 5 km/
+      assert_select "*", text: /Primeiros Passos/
+      assert_select "*", text: %r{5 / 90 km}
+      assert_select "*", text: /Ponta das Areias/
+      assert_select "*", text: /faltam 3 km/
     end
   end
 
@@ -57,20 +57,19 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_walk_path, text: "Registrar caminhada"
   end
 
-  test "excedente da Região 1 cai na Região 2" do
-    log_walks users(:viajante), 100, 10
+  test "com o km completo a fase espera o chefe" do
+    walk_steady users(:viajante), 100
 
     get root_url
 
     assert_select "[data-testid=phase]" do
-      assert_select "*", text: /Trilha do Primeiro Raio/
-      assert_select "*", text: /Vale das Quedas/
-      assert_select "*", text: %r{10 / 44 km}
+      assert_select "*", text: /Primeiros Passos/
+      assert_select "*", text: %r{90 / 90 km}
     end
   end
 
   test "fim do mundo conhecido no início" do
-    log_walks users(:viajante), 100, 100, 100, 100, 100, 99
+    travel_whole_world users(:viajante)
 
     get root_url
 
