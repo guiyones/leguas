@@ -10,6 +10,7 @@ Achievement = Data.define(:key, :kind, :subject) do
   def self.subject_for(kind, subject_key, world)
     case kind
     when "landmark" then world.landmark(subject_key)
+    when "boss" then world.phase(subject_key)
     when "phase" then world.phase(subject_key)
     when "region" then world.region(subject_key)
     when "title" then User::Level.title(subject_key)

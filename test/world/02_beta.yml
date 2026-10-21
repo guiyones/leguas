@@ -7,13 +7,16 @@ phases:
     name: Fase B1
     inspired_by: Ponto 30 → Ponto 60
     km: 30
+    rarity: rare
     symbol: teste
+    boss: { name: Chefe B1, description: x, kind: climb, climb_m: 100 }
   - key: b2
     name: Fase B2
     inspired_by: Ponto 60 → Ponto 100
     km: 40
     rarity: legendary
     symbol: teste
+    boss: { name: Chefe B2, description: x, kind: consecutive_days, days: 2, km: 10, load_kg: 5 }
     landmarks:
       - key: b2_mark
         name: Marco B2

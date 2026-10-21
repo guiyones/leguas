@@ -2,6 +2,9 @@ key: alpha
 name: Região Alfa
 inspired_by: Trilha de teste A
 trophy_name: Alfa
+tips:
+  - Dica um.
+  - Dica dois.
 phases:
   - key: a1
     name: Fase A1
@@ -19,6 +22,16 @@ phases:
     km: 20
     rarity: rare
     symbol: teste
+    focus: Foco A2
+    note: Nota A2
+    insignia_name: Insígnia A2
+    bonus: { name: Bônus A2, description: x }
+    boss: { name: Chefe A2, description: x, kind: distance, km: 12 }
+    weeks:
+      - { km: 5, short_walks: Curtas 1, long_walk: Longa 1, load: Sem carga, stairs: Sem escada }
+      - { km: 5, short_walks: Curtas 2, long_walk: Longa 2, load: Sem carga, stairs: Sem escada }
+      - { km: 5, short_walks: Curtas 3, long_walk: Longa 3, load: Sem carga, stairs: Sem escada }
+      - { km: 5, short_walks: Curtas 4, long_walk: Longa 4, load: Sem carga, stairs: Sem escada }
     landmarks:
       - key: a2_mark
         name: Marco A2

@@ -1,13 +1,14 @@
 class World::Region
   XP = 500
 
-  attr_reader :key, :name, :inspired_by, :trophy_name, :number, :phases, :start_km
+  attr_reader :key, :name, :inspired_by, :trophy_name, :number, :phases, :start_km, :tips
 
   def initialize(data, world:, number:, start_km:)
     @world = world
     @key, @name, @inspired_by, @trophy_name = data.values_at("key", "name", "inspired_by", "trophy_name")
     @number = number
     @start_km = start_km
+    @tips = Array(data["tips"])
     @phases = build_phases(data.fetch("phases"))
   end
 

@@ -26,11 +26,12 @@ class WorldTest < ActiveSupport::TestCase
     assert @world.phase("b2").legendary?
   end
 
-  test "milestones em ordem de caminho: marco, fim de fase, fim de região" do
+  test "milestones em ordem de caminho: marco, chefe, fim de fase, fim de região" do
     expected = [
       [ "landmark:a1_mark", 4, 25 ], [ "phase:a1", 10, 100 ],
-      [ "landmark:a2_mark", 15, 25 ], [ "phase:a2", 30, 250 ], [ "region:alpha", 30, 500 ],
-      [ "phase:b1", 60, 100 ], [ "landmark:b2_mark", 70, 25 ], [ "phase:b2", 100, 250 ], [ "region:beta", 100, 500 ]
+      [ "landmark:a2_mark", 15, 25 ], [ "boss:a2", 30, 0 ], [ "phase:a2", 30, 250 ], [ "region:alpha", 30, 500 ],
+      [ "boss:b1", 60, 0 ], [ "phase:b1", 60, 250 ], [ "landmark:b2_mark", 70, 25 ],
+      [ "boss:b2", 100, 0 ], [ "phase:b2", 100, 250 ], [ "region:beta", 100, 500 ]
     ]
 
     assert_equal expected, @world.milestones.map { [ it.key, it.at_km, it.xp ] }
@@ -88,4 +89,68 @@ class WorldTest < ActiveSupport::TestCase
       assert_raises(World::Invalid) { World.load(dir) }
     end
   end
+
+  test "semanas acumulam km dentro da fase" do
+    weeks = @world.phase("a2").weeks
+
+    assert_equal [ 0, 5, 10, 15 ], weeks.map(&:start_km)
+    assert_equal [ 5, 10, 15, 20 ], weeks.map(&:end_km)
+    assert_equal [ 1, 2, 3, 4 ], weeks.map(&:number)
+    assert_equal [ false, false, false, true ], weeks.map(&:light?)
+    assert_equal "Curtas 1", weeks.first.short_walks
+    assert_empty @world.phase("a1").weeks
+  end
+
+  test "fase com chefe e dados extras" do
+    phase = @world.phase("a2")
+
+    assert phase.boss?
+    assert_equal "Chefe A2", phase.boss.name
+    assert_equal phase, phase.boss.phase
+    assert_not @world.phase("a1").boss?
+    assert_nil @world.phase("a1").boss
+    assert_equal [ "Foco A2", "Nota A2", "Insígnia A2" ], [ phase.focus, phase.note, phase.insignia_name ]
+    assert_equal "Bônus A2", phase.bonus["name"]
+    assert phase.rare?
+    assert_not @world.phase("a1").rare?
+  end
+
+  test "chefe com tipo desconhecido é inválido" do
+    assert_raises(World::Invalid) { load_phase("boss: { name: B, description: x, kind: voar }") }
+  end
+
+  test "chefe sem parâmetro obrigatório é inválido" do
+    assert_raises(World::Invalid) { load_phase("boss: { name: B, description: x, kind: distance_with_load, km: 10 }") }
+    assert_raises(World::Invalid) { load_phase("boss: { name: B, description: x, kind: climb }") }
+    assert_raises(World::Invalid) { load_phase("boss: { name: B, description: x, kind: consecutive_days, days: 1, km: 10, load_kg: 5 }") }
+  end
+
+  test "semanas que não somam o km da fase são inválidas" do
+    assert_raises(World::Invalid) { load_phase("weeks: [ { km: 4 }, { km: 3 } ]") }
+  end
+
+  test "dicas da região" do
+    assert_equal [ "Dica um.", "Dica dois." ], @world.region("alpha").tips
+    assert_equal [], @world.region("beta").tips
+  end
+
+  test "achievement boss aponta para a fase" do
+    assert_equal @world.phase("a2"), Achievement.find("boss:a2", world: @world).subject
+  end
+
+  private
+    def load_phase(extra)
+      Dir.mktmpdir do |dir|
+        File.write(File.join(dir, "01.yml"), <<~YAML)
+          key: x
+          name: X
+          inspired_by: x
+          trophy_name: X
+          phases:
+            - { key: x1, name: A, inspired_by: x, km: 8, symbol: x, #{extra} }
+        YAML
+
+        World.load(dir)
+      end
+    end
 end
