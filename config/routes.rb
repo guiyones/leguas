@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resource :map, only: :show
   resource :menu, only: :show
   resource :phase, only: :show
+  resource :trophies, only: :show
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

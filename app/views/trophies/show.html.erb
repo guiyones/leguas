@@ -1,0 +1,36 @@
+<header class="text-center">
+  <p class="eyebrow">Troféus</p>
+  <h1>Vento Austral</h1>
+</header>
+
+<div class="mt-3">
+  <%= render "trophy", journey: @journey, phases: @phases %>
+</div>
+
+<ul class="flex flex-col gap-2 mt-3" aria-label="Insígnias conquistadas">
+  <% @phases.select { @journey.phase_completed?(it) }.each do |phase| %>
+    <li class="panel flex items-center gap-3 py-2">
+      <%= art_tag :insignias, phase.key, label: "Insígnia #{phase.insignia_name}", size: 54, class: "shrink-0" %>
+      <div>
+        <p class="font-display text-gold"><%= phase.insignia_name %></p>
+        <p class="caption">Fase <%= phase.number %> vencida · <%= trophy_short_date @journey.boss_defeated_on(phase) %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<% if @journey.finished? %>
+  <section class="panel text-center mt-3" data-testid="certificate" aria-label="Certificado">
+    <p class="eyebrow">Certificado</p>
+    <p class="font-display text-gold text-xl mt-1"><%= Current.user.name %></p>
+    <p class="caption">completou</p>
+    <p class="font-display text-lg">A Trilha do Vento Austral</p>
+    <%= stat @journey.total_km, unit: "km" %>
+    <p class="caption mt-1">
+      De <%= trophy_short_date Current.user.training_log.dates.first %>
+      a <%= trophy_short_date @journey.boss_defeated_on(@phases.last) %>
+    </p>
+  </section>
+<% else %>
+  <button type="button" class="btn-game btn-game--secondary w-full mt-3" disabled>Certificado — ao completar a trilha</button>
+<% end %>

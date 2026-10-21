@@ -1,0 +1,13 @@
+<svg viewBox="0 0 240 250" class="w-full max-w-60 mx-auto" role="img" aria-label="Troféu das Três Torres, com <%= pluralize phases.count { journey.phase_completed?(it) }, "insígnia" %> de <%= phases.size %>">
+  <image href="<%= asset_path "art/trophies/vento_austral.svg" %>" x="0" y="0" width="240" height="250"/>
+  <% phases.zip(TrophiesHelper::SLOT_CENTERS).each do |phase, (x, y)| %>
+    <% state = trophy_slot_state(journey, phase) %>
+    <g data-slot="<%= phase.key %>" data-state="<%= state %>">
+      <% if state == :filled %>
+        <image href="<%= asset_path "art/insignias/#{phase.key}.svg" %>" x="<%= x - TrophiesHelper::SLOT_RADIUS %>" y="<%= y - TrophiesHelper::SLOT_RADIUS %>" width="<%= TrophiesHelper::SLOT_RADIUS * 2 %>" height="<%= TrophiesHelper::SLOT_RADIUS * 2 %>"/>
+      <% elsif state == :current %>
+        <circle class="trophy-current" cx="<%= x %>" cy="<%= y %>" r="<%= TrophiesHelper::SLOT_RADIUS + 2 %>" fill="none" stroke="#F2C46D" stroke-width="2" stroke-dasharray="4 3"/>
+      <% end %>
+    </g>
+  <% end %>
+</svg>
