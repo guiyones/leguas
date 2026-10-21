@@ -136,8 +136,16 @@
 
   .trail-node--completed::before { background: var(--color-gold); }
   .trail-node--current::before { background: var(--color-xp); }
-  .trail-node--boss { border-color: var(--color-boss); }
-  .trail-node--boss::before { width: 22px; height: 22px; left: calc(-1.25rem - 13px); }
+  .trail-node--waiting { border-color: var(--color-boss); animation: boss-pulse 1.6s steps(2, end) infinite; }
+  .trail-node--waiting::before { background: var(--color-boss); width: 22px; height: 22px; left: calc(-1.25rem - 13px); }
+
+  @keyframes boss-pulse {
+    50% { border-color: var(--color-ink); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trail-node--waiting { animation: none; }
+  }
 
   .trail-node > summary {
     display: flex;

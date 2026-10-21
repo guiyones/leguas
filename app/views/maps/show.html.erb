@@ -1,6 +1,6 @@
 <% @page_title = "Mapa" %>
 
-<h1 class="text-gold text-center">Mapa do mundo</h1>
+<h1 class="text-gold text-center">Mapa da trilha</h1>
 
 <% @journey.world.regions.each do |region| %>
   <%= render "maps/region", region: region, journey: @journey %>

@@ -1,27 +1,56 @@
 <% status = journey.phase_status(phase) %>
-<%= tag.details id: ("atual" if status == :current), open: status == :current,
-      class: [ "trail-node", "trail-node--#{status}", ("trail-node--boss" if phase.boss?) ],
+<% here = status.in?(%i[ current boss ]) %>
+<%= tag.details id: ("atual" if here), open: here,
+      class: [ "trail-node", "trail-node--#{status == :boss ? :waiting : status}" ],
       data: { phase: phase.key, status: status } do %>
   <summary>
-    <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.boss? ? 60 : 48,
+    <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.rare? ? 60 : 48,
           label: "Insígnia #{phase.name}", silhouette: status == :upcoming %>
     <span class="flex-1 flex flex-col gap-1">
-      <span class="block caption">Fase <%= phase.number %><%= " · Chefão" if phase.boss? %></span>
-      <span class="block font-display text-[0.75rem] <%= phase.boss? ? "text-boss" : "text-gold" %>"><%= phase.name %></span>
+      <span class="block caption">Fase <%= phase.number %></span>
+      <span class="block font-display text-[0.75rem] <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></span>
     </span>
-    <% if status == :current %>
+    <% if here %>
       <%= pixel_art_tag PixelArt.find(:avatars, journey.user.avatar), size: 40, label: journey.user.name %>
     <% end %>
   </summary>
 
   <div class="flex flex-col gap-2 mt-3">
-    <% if status == :current %>
+    <% if here %>
       <%= segmented_progress journey.phase_progress %>
       <%= stat journey.km_in_phase, total: phase.km, unit: "km" %>
     <% else %>
       <%= stat phase.km, unit: "km" %>
     <% end %>
-    <p class="caption">Trecho real: <%= phase.inspired_by %></p>
+    <% if phase.focus.present? %>
+      <p class="caption">Foco: <%= phase.focus %></p>
+    <% end %>
+
+    <% if phase.weeks.any? %>
+      <ol class="flex flex-col gap-1">
+        <% phase.weeks.each do |week| %>
+          <li class="caption" data-week="<%= week.number %>">
+            Semana <%= week.number %><%= " (leve)" if week.light? %> · <%= number_with_precision week.km, precision: 1, strip_insignificant_zeros: true %> km ·
+            <%= week.short_walks %>, longão de <%= week.long_walk %>, <%= week.load %>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+
+    <% if phase.boss? %>
+      <div data-boss="<%= journey.boss_status(phase) %>">
+        <% if status == :upcoming %>
+          <p class="caption">Chefe: ???</p>
+        <% else %>
+          <p class="caption">Chefe: <span class="text-boss"><%= phase.boss.name %></span></p>
+          <p class="caption"><%= phase.boss.description %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if phase.bonus %>
+      <p class="caption">Bônus: <%= phase.bonus["name"] %>. <%= phase.bonus["description"] %></p>
+    <% end %>
 
     <% if phase.landmarks.any? %>
       <ul class="flex flex-col gap-2">
