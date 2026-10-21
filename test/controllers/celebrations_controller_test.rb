@@ -15,7 +15,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     get celebration_url
     assert_select "h1", text: /Carimbo conquistado/
     assert_select "*", text: /Ponta das Areias/
-    assert_select "svg[aria-label=?]", "Carimbo Ponta das Areias"
+    assert_select "img[alt=?][src*='art/stamps/ponta_das_areias']", "Carimbo Ponta das Areias"
     post celebration_url, params: { key: "landmark:ponta_das_areias" }
     assert_redirected_to celebration_url
 
@@ -33,7 +33,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "h1", text: /Chefe derrotado!/
     assert_select "*", text: /Primeiros Passos/
-    assert_select "svg[aria-label=?]", "Insígnia Primeiros Passos"
+    assert_select "img[alt=?][src*='art/insignias/primeiros_passos']", "Insígnia Primeiros Passos"
   end
 
   test "título novo mostra o retrato" do
@@ -85,7 +85,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: /NÍVEL COMPLETO/
     assert_select "*", text: /A Trilha do Vento Austral/
     assert_select "*", text: /810 km/
-    assert_select "svg[aria-label=?]", "Patagônia"
+    assert_select "img[alt=?][src*='art/insignias/patagonia']", "Patagônia"
     assert_select "*", text: /fim do mundo conhecido/
     assert_select "*", text: /completou o mundo inteiro/, count: 0
   end

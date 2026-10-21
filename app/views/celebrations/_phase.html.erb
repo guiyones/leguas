@@ -1,6 +1,6 @@
 <% phase = achievement.subject %>
 <h1 class="<%= phase.boss? ? "text-ember" : "text-gold" %>"><%= phase.boss? ? "Chefe derrotado!" : "Conquista desbloqueada!" %></h1>
-<%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.insignia_size * 8, label: "Insígnia #{phase.name}" %>
+<%= art_tag :insignias, phase.key, label: "Insígnia #{phase.name}", size: phase.legendary? ? 160 : 136 %>
 <h2>Fase <%= phase.number %> vencida: <%= phase.name %></h2>
 <% if phase.boss? %>
   <p>Insígnia: <strong><%= phase.insignia_name %></strong></p>

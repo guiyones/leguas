@@ -20,13 +20,16 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     get map_url
 
     assert_select "[data-phase=primeiros_passos][data-status=completed]" do
-      assert_select "svg[aria-label=?]", "Insígnia Primeiros Passos"
+      assert_select "img[alt=?][src*='art/insignias/primeiros_passos']", "Insígnia Primeiros Passos"
+      assert_select "img[alt=?][src*='art/stamps/ponta_das_areias']", "Carimbo Ponta das Areias"
       assert_select "*", text: /Ponta das Areias/   # marco alcançado aparece pelo nome
     end
     assert_select "#atual[data-phase=carga_leve][data-status=current]" do
       assert_select "*", text: %r{12 / 115 km}
       assert_select "img[alt=?][src*='art/avatar/traveler']", "Tião"
       assert_select "*", text: /km 20/                # Estrada da Estepe ainda não alcançada
+      assert_select ".stamp-unknown", text: "?"
+      assert_select "img[src*='art/stamps/estrada_da_estepe']", count: 0
     end
     assert_select "[data-phase=a_subida][data-status=upcoming]"
   end

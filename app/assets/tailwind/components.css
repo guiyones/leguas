@@ -344,6 +344,20 @@
     flex-shrink: 0;
   }
 
-  .silhouette--32 { width: 32px; height: 32px; }
   .silhouette--40 { width: 40px; height: 40px; }
+
+  .stamp-unknown {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px dashed color-mix(in srgb, var(--color-muted) 45%, transparent);
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: color-mix(in srgb, var(--color-muted) 70%, transparent);
+  }
+
+  .art-locked { filter: grayscale(1) brightness(0.45); opacity: 0.7; }
 }

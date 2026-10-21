@@ -26,7 +26,6 @@ class World::Phase
   def rare? = rarity != "common"
   def legendary? = rarity == "legendary"
   def xp = rare? ? 250 : 100
-  def insignia_size = rare? ? 20 : 16
 
   def milestones
     landmarks.map(&:milestone) + boss_milestones + [ World::Milestone.new(key: "phase:#{key}", kind: :phase, at_km: end_km, xp: xp, subject: self) ]

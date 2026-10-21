@@ -20,9 +20,9 @@ class WorldTest < ActiveSupport::TestCase
     assert_equal 15, @world.landmark("a2_mark").world_km
   end
 
-  test "raridade define xp e tamanho da insígnia" do
-    assert_equal [ 100, 16 ], [ @world.phase("a1").xp, @world.phase("a1").insignia_size ]
-    assert_equal [ 250, 20 ], [ @world.phase("a2").xp, @world.phase("a2").insignia_size ]
+  test "raridade define xp" do
+    assert_equal 100, @world.phase("a1").xp
+    assert_equal 250, @world.phase("a2").xp
     assert @world.phase("b2").legendary?
   end
 

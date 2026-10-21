@@ -3,7 +3,7 @@
 <h2><%= region.name %></h2>
 <div class="flex flex-wrap justify-center gap-2">
   <% region.phases.each do |phase| %>
-    <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.insignia_size * 3, label: phase.name %>
+    <%= art_tag :insignias, phase.key, label: phase.name, size: phase.legendary? ? 60 : 52 %>
   <% end %>
 </div>
 <dl class="grid grid-cols-3 gap-2 w-full text-sm">
