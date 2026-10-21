@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "home#show"
+  root "menus#show"
 
   resource :session, only: %i[ new destroy ]
   resources :auth_tokens, only: :create
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :stair_sessions, except: %i[ index show ]
   resource :celebration, only: %i[ show create ]
   resource :map, only: :show
+  resource :menu, only: :show
+  resource :phase, only: :show
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

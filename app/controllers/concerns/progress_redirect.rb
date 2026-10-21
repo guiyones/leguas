@@ -3,7 +3,7 @@ module ProgressRedirect
 
   private
     def redirect_after_progress(xp_before)
-      redirect_to_celebration_or root_path, notice: progress_notice(xp_before, Current.user.journey.xp)
+      redirect_to_celebration_or phase_path, notice: progress_notice(xp_before, Current.user.journey.xp)
     end
 
     def redirect_to_celebration_or(path, notice:)

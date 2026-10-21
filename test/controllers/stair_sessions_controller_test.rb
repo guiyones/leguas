@@ -17,7 +17,7 @@ class StairSessionsControllerTest < ActionDispatch::IntegrationTest
       post stair_sessions_url, params: { stair_session: { climbs: "12", climbed_on: Date.current.iso8601 } }
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to phase_url
     assert_equal "+20 XP", flash[:notice]   # 12 * 50 * 0,17 = 102 m
   end
 
@@ -51,7 +51,7 @@ class StairSessionsControllerTest < ActionDispatch::IntegrationTest
       post stair_sessions_url, params: { user: "x", stair_session: { climbs: "5", climbed_on: Date.current.iso8601 } }
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to phase_url
   end
 
   test "editar e excluir" do

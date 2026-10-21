@@ -11,7 +11,7 @@ class WalkEditingTest < ApplicationSystemTestCase
     assert_text "CÓDIGO"
     fill_in "Código de 6 dígitos", with: user.auth_tokens.order(:created_at).last.code
     click_on "Entrar"
-    assert_selector "[data-testid='hud']"
+    assert_text "Continuar jornada"
 
     travel 10.days do
       visit edit_walk_url(walk)

@@ -6,7 +6,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
   test "sem pendência volta pro início" do
     get celebration_url
 
-    assert_redirected_to root_url
+    assert_redirected_to phase_url
   end
 
   test "sequência: carimbo e depois início" do
@@ -20,7 +20,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to celebration_url
 
     get celebration_url
-    assert_redirected_to root_url
+    assert_redirected_to phase_url
   end
 
   test "fase vencida mostra a insígnia" do
@@ -49,7 +49,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /Ele espera o tempo que for preciso/
     post celebration_url, params: { key: "boss:primeiros_passos" }
     get celebration_url
-    assert_redirected_to root_url
+    assert_redirected_to phase_url
   end
 
   test "chefe derrotado mostra a insígnia" do

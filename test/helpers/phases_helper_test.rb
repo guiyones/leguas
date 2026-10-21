@@ -1,6 +1,6 @@
 require "test_helper"
 
-class HomeHelperTest < ActionView::TestCase
+class PhasesHelperTest < ActionView::TestCase
   test "dica do dia gira pelas dicas da região" do
     region = test_world.region("alpha")
 

@@ -3,7 +3,7 @@ class CelebrationsController < ApplicationController
     if key = Current.user.next_celebration_key
       @achievement = Achievement.find(key)
     else
-      redirect_to root_path
+      redirect_to phase_path
     end
   end
 

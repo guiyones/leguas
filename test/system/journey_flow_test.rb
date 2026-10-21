@@ -19,6 +19,7 @@ class JourneyFlowTest < ApplicationSystemTestCase
     click_on "Começar jornada"
 
     assert_text "Boa jornada, Nina!"
+    click_on "Continuar jornada"
     assert_text "Primeiros Passos"
 
     click_on "Registrar caminhada", match: :first
@@ -45,6 +46,7 @@ class JourneyFlowTest < ApplicationSystemTestCase
     assert_text "CÓDIGO"
     fill_in "Código de 6 dígitos", with: user.auth_tokens.order(:created_at).last.code
     click_on "Entrar"
+    click_on "Continuar jornada"
     assert_selector "[data-testid='hud']"
 
     visit new_walk_url

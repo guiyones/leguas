@@ -16,7 +16,7 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
       post walks_url, params: { walk: { km: "2", walked_on: Date.current.iso8601 } }
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to phase_url
     assert_equal "+20 XP", flash[:notice]
   end
 

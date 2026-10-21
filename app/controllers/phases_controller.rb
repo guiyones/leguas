@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class PhasesController < ApplicationController
   def show
     @journey = Current.user.journey
     @level = @journey.level

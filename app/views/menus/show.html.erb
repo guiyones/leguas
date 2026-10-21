@@ -1,0 +1,17 @@
+<% phase = @journey.current_phase %>
+
+<h1 class="font-display text-center text-xl">Léguas</h1>
+
+<section class="panel flex flex-col gap-2" data-testid="menu-card">
+  <p class="font-display text-sm"><%= Current.user.name %></p>
+  <p class="caption"><span class="text-gold">Nível <%= @level.number %></span> · <%= @level.title.name %></p>
+  <p class="caption"><%= phase.region.name %> · Fase <%= phase.number %></p>
+  <h2 class="text-gold"><%= phase.name %></h2>
+  <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
+</section>
+
+<nav class="flex flex-col gap-3" aria-label="Menu do jogo">
+  <%= link_to "Continuar jornada", phase_path, class: "btn-game" %>
+  <%= link_to "Histórico", walks_path, class: "btn-game btn-game--secondary" %>
+  <%= link_to "Perfil", edit_profile_path, class: "btn-game btn-game--secondary" %>
+</nav>
