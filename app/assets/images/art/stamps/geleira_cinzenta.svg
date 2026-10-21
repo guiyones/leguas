@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-geleira-cinzenta-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#9FB8C9"/></linearGradient>
+    <radialGradient id="st-geleira-cinzenta-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-geleira-cinzenta-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-geleira-cinzenta-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <linearGradient id="st-geleira-cinzenta-ice" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8EEF2"/><stop offset="1" stop-color="#9FB8C9"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-geleira-cinzenta-clip)">
+    <rect width="100" height="100" fill="url(#st-geleira-cinzenta-sky)"/>
+    <path d="M0 26 L18 20 L30 32 V100 H0Z" fill="#1C2E44"/>
+    <path d="M100 22 L82 18 L70 30 V100 H100Z" fill="#132235"/>
+    <path d="M22 14 Q50 8 78 14 L84 66 H16Z" fill="url(#st-geleira-cinzenta-ice)"/>
+    <path d="M24 30 Q50 37 76 30 M22 44 Q50 51 78 44 M20 56 Q50 62 80 56" stroke="#5F9BB8" stroke-width="1.4" fill="none" opacity=".7"/>
+    <path d="M40 22 L38 34 M58 24 L60 36 M34 46 L33 56 M64 47 L66 57" stroke="#5F9BB8" stroke-width="1" opacity=".6"/>
+    <rect y="70" width="100" height="30" fill="url(#st-geleira-cinzenta-lake)"/>
+    <path d="M16 62 L22 70 L28 63 L34 72 L40 62 L46 71 L52 63 L58 72 L64 62 L70 70 L76 63 L84 62 V74 H16Z" fill="#5F9BB8"/>
+    <path d="M22 70 L28 63 L30 72Z M46 71 L52 63 L54 72Z M70 70 L76 63 L78 72Z" fill="#CFE3EE" opacity=".8"/>
+    <path d="M26 84 l3 -3 l4 1 l1 2Z M64 88 l3 -3 l4 1 l1 2Z" fill="#E8EEF2"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

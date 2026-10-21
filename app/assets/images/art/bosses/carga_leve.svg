@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="bo-carga-leve-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1726"/><stop offset=".4" stop-color="#29435E"/><stop offset=".68" stop-color="#E2A05A"/><stop offset="1" stop-color="#E98A3C"/></linearGradient>
+    <radialGradient id="bo-carga-leve-ember" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".95"/><stop offset=".45" stop-color="#E98A3C" stop-opacity=".45"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="bo-carga-leve-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="bo-carga-leve-clip"><rect x="6" y="6" width="148" height="148" rx="26"/></clipPath>
+    <linearGradient id="bo-carga-leve-pack" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C8642E"/><stop offset="1" stop-color="#8E4322"/></linearGradient>
+    <linearGradient id="bo-carga-leve-roll" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+  </defs>
+  <rect x="2" y="2" width="156" height="156" rx="30" fill="#E98A3C" opacity=".35"/>
+  <g clip-path="url(#bo-carga-leve-clip)">
+    <rect width="160" height="160" fill="url(#bo-carga-leve-sky)"/>
+    <circle cx="80" cy="80" r="74" fill="url(#bo-carga-leve-ember)"/>
+    <path d="M0 128 Q80 118 160 128 V160 H0Z" fill="#132235"/>
+    <ellipse cx="80" cy="134" rx="46" ry="7" fill="#0D1726" opacity=".55"/>
+    <path d="M26 140 q-8 -4 -14 0 M134 140 q8 -4 14 0 M30 132 q-6 -6 -14 -4 M130 132 q6 -6 14 -4" stroke="#E2A05A" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+    <path d="M66 32 Q80 20 94 32" stroke="#6E3418" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="42" y="38" width="76" height="96" rx="22" fill="url(#bo-carga-leve-pack)"/>
+    <rect x="46" y="30" width="68" height="26" rx="12" fill="#8E4322"/>
+    <rect x="38" y="16" width="84" height="20" rx="10" fill="url(#bo-carga-leve-roll)"/>
+    <path d="M58 16 v20 M102 16 v20" stroke="#6E3418" stroke-width="4"/>
+    <ellipse cx="122" cy="26" rx="4" ry="10" fill="#29435E"/>
+    <rect x="54" y="78" width="52" height="42" rx="12" fill="#8E4322"/>
+    <path d="M60 86 h40" stroke="#F2C46D" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+    <rect x="34" y="70" width="10" height="44" rx="5" fill="#8E4322"/>
+    <rect x="116" y="70" width="10" height="44" rx="5" fill="#8E4322"/>
+    <path d="M60 56 V78 M100 56 V78" stroke="#6E3418" stroke-width="5"/>
+    <rect x="56" y="62" width="8" height="7" rx="1.6" fill="#F2C46D"/><rect x="96" y="62" width="8" height="7" rx="1.6" fill="#F2C46D"/>
+    <path d="M50 44 Q58 40 66 44" stroke="#E2A05A" stroke-width="2" fill="none" opacity=".7"/>
+    <path d="M118 96 q12 2 12 14" stroke="#A8744A" stroke-width="2" fill="none"/>
+    <path d="M122 108 h16 l3 6 v12 h-22 v-12Z" fill="#A8744A"/>
+    <circle cx="130" cy="112" r="1.6" fill="#3B2A1E"/>
+    <text x="130" y="124" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="800" font-size="8.6" fill="#3B2A1E">5 kg</text>
+  </g>
+  <rect x="6" y="6" width="148" height="148" rx="26" fill="none" stroke="#E98A3C" stroke-width="2.4"/>
+  <rect x="10" y="10" width="140" height="140" rx="22" fill="none" stroke="#F2C46D" stroke-opacity=".35" stroke-width="1"/>
+</svg>

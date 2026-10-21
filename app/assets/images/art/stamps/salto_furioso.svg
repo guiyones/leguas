@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-salto-furioso-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#9FB8C9"/></linearGradient>
+    <radialGradient id="st-salto-furioso-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-salto-furioso-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-salto-furioso-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <linearGradient id="st-salto-furioso-fall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8EEF2"/><stop offset="1" stop-color="#5F9BB8"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-salto-furioso-clip)">
+    <rect width="100" height="100" fill="url(#st-salto-furioso-sky)"/>
+    <path d="M0 30 Q50 26 100 30 V40 H0Z" fill="#5F9BB8"/>
+    <path d="M0 32 H40 L44 58 L38 100 H0Z" fill="#1C2E44"/>
+    <path d="M100 32 H60 L56 58 L62 100 H100Z" fill="#132235"/>
+    <path d="M41 33 H59 L60 76 H40Z" fill="url(#st-salto-furioso-fall)"/>
+    <path d="M45 36 V72 M50 34 V74 M55 36 V72" stroke="#E8EEF2" stroke-width="1.2" opacity=".6"/>
+    <rect y="76" width="100" height="24" fill="url(#st-salto-furioso-lake)"/>
+    <circle cx="42" cy="76" r="5" fill="#E8EEF2" opacity=".7"/><circle cx="50" cy="78" r="6" fill="#E8EEF2" opacity=".8"/><circle cx="58" cy="76" r="5" fill="#E8EEF2" opacity=".7"/>
+    <circle cx="35" cy="73" r="2.4" fill="#E8EEF2" opacity=".5"/><circle cx="65" cy="72" r="2.4" fill="#E8EEF2" opacity=".5"/>
+    <path d="M12 20 q14 -5 28 0 q4 1.6 3 -2 M56 16 q14 -5 28 0 q4 1.6 3 -2" stroke="#E8EEF2" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".85"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

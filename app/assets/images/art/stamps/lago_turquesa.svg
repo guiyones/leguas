@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-lago-turquesa-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#9FB8C9"/></linearGradient>
+    <radialGradient id="st-lago-turquesa-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-lago-turquesa-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-lago-turquesa-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <linearGradient id="st-lago-turquesa-turq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFE3EE"/><stop offset="1" stop-color="#5F9BB8"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-lago-turquesa-clip)">
+    <rect width="100" height="100" fill="url(#st-lago-turquesa-sky)"/>
+    <circle cx="70" cy="30" r="22" fill="url(#st-lago-turquesa-glow)" opacity=".6"/>
+    <path d="M0 50 L16 36 L28 46 L42 24 L56 44 L66 34 L80 46 L100 40 V100 H0Z" fill="#1C2E44"/>
+    <path d="M37 32 L42 24 L47 32 L42 30Z M62 38 L66 34 L70 38Z" fill="#CFE3EE"/>
+    <rect y="54" width="100" height="46" fill="url(#st-lago-turquesa-turq)"/>
+    <path d="M0 54 L16 64 L28 58 L42 72 L56 60 L66 66 L80 58 L100 62 V54Z" fill="#1C2E44" opacity=".25"/>
+    <ellipse cx="50" cy="74" rx="26" ry="3" fill="#E8EEF2" opacity=".45"/>
+    <path d="M20 66 h8 M70 80 h10 M30 82 h6" stroke="#E8EEF2" stroke-width="1.1" stroke-linecap="round" opacity=".8"/>
+    <path d="M0 90 Q30 82 50 88 Q75 94 100 86 V100 H0Z" fill="#132235"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-ilha-dos-pinguins-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16263B"/><stop offset="0.42" stop-color="#29435E"/><stop offset="0.72" stop-color="#E2A05A"/></linearGradient>
+    <radialGradient id="st-ilha-dos-pinguins-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-ilha-dos-pinguins-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-ilha-dos-pinguins-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <g id="st-ilha-dos-pinguins-peng">
+      <path d="M-4 -2 Q-12 6 -9 14 Q-5 8 -3 3Z" fill="#0E1A2A"/>
+      <path d="M-8 22 Q-10 -2 0 -10 Q10 -2 8 22Z" fill="#132235"/>
+      <path d="M-4 20 Q-5 4 1 0 Q6 6 5 20Z" fill="#E8EEF2"/>
+      <path d="M-4 5 Q1 8 6 5" stroke="#132235" stroke-width="2" fill="none"/>
+      <circle cx="0" cy="-12" r="6" fill="#132235"/>
+      <path d="M-5 -10 Q0 -3 5 -10" stroke="#E8EEF2" stroke-width="1.6" fill="none"/>
+      <path d="M5 -13 l6 2 l-6 1.6Z" fill="#4D4660"/>
+      <circle cx="2" cy="-14" r="1" fill="#FFE6B0"/>
+      <ellipse cx="-3" cy="23" rx="3" ry="1.2" fill="#E98A3C"/>
+      <ellipse cx="4" cy="23" rx="3" ry="1.2" fill="#E98A3C"/>
+    </g>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-ilha-dos-pinguins-clip)">
+    <rect width="100" height="100" fill="url(#st-ilha-dos-pinguins-sky)"/>
+    <circle cx="52" cy="52" r="34" fill="url(#st-ilha-dos-pinguins-glow)"/>
+    <rect y="64" width="100" height="40" fill="url(#st-ilha-dos-pinguins-lake)"/>
+    <path d="M6 82 Q30 64 54 68 Q78 64 98 82 V100 H0Z" fill="#8A6A4A"/>
+    <path d="M6 82 Q30 66 54 70 Q78 66 98 82" stroke="#A8744A" stroke-width="1.5" fill="none"/>
+    <ellipse cx="74" cy="80" rx="5" ry="2" fill="#4A3021"/>
+    <ellipse cx="24" cy="84" rx="4" ry="1.6" fill="#4A3021"/>
+    <use href="#st-ilha-dos-pinguins-peng" transform="translate(66 64) scale(.72)"/>
+    <use href="#st-ilha-dos-pinguins-peng" transform="translate(42 56)"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

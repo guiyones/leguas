@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-forte-do-estreito-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#9FB8C9"/></linearGradient>
+    <radialGradient id="st-forte-do-estreito-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-forte-do-estreito-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-forte-do-estreito-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <linearGradient id="st-forte-do-estreito-wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B98252"/><stop offset="1" stop-color="#6B4A33"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-forte-do-estreito-clip)">
+    <rect width="100" height="100" fill="url(#st-forte-do-estreito-sky)"/>
+    <circle cx="44" cy="52" r="30" fill="url(#st-forte-do-estreito-glow)" opacity=".7"/>
+    <rect y="74" width="100" height="30" fill="url(#st-forte-do-estreito-lake)"/>
+    <path d="M0 70 Q30 63 60 66 Q80 68 100 64 V78 H0Z" fill="#1C2E44"/>
+    <path d="M18.0 68 V49 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M23.4 68 V51 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M28.8 68 V49 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M34.2 68 V51 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M39.6 68 V49 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M45.0 68 V51 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M50.4 68 V49 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M55.8 68 V51 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M61.2 68 V49 l2.7 -4 l2.7 4 V68Z" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M18 56 H66.6" stroke="#4A3021" stroke-width="1.2" opacity=".7"/>
+    <path d="M36 68 V60 a5 5 0 0 1 10 0 V68Z" fill="#2A1D18"/>
+    <rect x="64" y="36" width="16" height="32" fill="url(#st-forte-do-estreito-wood)"/>
+    <path d="M64 46 H80 M64 56 H80" stroke="#4A3021" stroke-width="1" opacity=".7"/>
+    <path d="M61 37 L72 28 L83 37Z" fill="#4A3021"/>
+    <rect x="70" y="41" width="4" height="5" rx="1" fill="#FFE6B0"/>
+    <path d="M72 28 V14" stroke="#4A3021" stroke-width="1.4"/>
+    <path d="M72 14 q5 1 9 0 q-2 3 0 6 q-4 1 -9 0Z" fill="#E98A3C"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

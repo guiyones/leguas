@@ -1,6 +1,8 @@
 require "test_helper"
 
 class WorldContentTest < ActiveSupport::TestCase
+  include ArtHelper
+
   setup { @world = World.load(World::ROOT) }
 
   test "região e fases" do
@@ -45,30 +47,39 @@ class WorldContentTest < ActiveSupport::TestCase
     assert_equal @world.total_km, journey.position_km
   end
 
-  test "troféu 32x32" do
-    assert_nothing_raised { PixelArt.find(:trophies, "vento_austral").validate(size: 32) }
+  test "troféu em svg" do
+    assert_svg :trophies, "vento_austral"
   end
 
   test "dicas da região" do
     assert_operator @world.regions.first.tips.size, :>=, 3
   end
 
-  test "toda fase tem insígnia válida no tamanho da raridade" do
+  test "toda fase tem insígnia e chefe em svg" do
     @world.phases.each do |phase|
-      assert_nothing_raised { PixelArt.find(:insignias, phase.key).validate(size: phase.insignia_size) }
+      assert_svg :insignias, phase.key
+      assert_svg :bosses, phase.key
     end
   end
 
-  test "todo marco tem carimbo 12x12 e história" do
+  test "todo marco tem carimbo em svg e história" do
     @world.landmarks.each do |landmark|
-      PixelArt.find(:stamps, landmark.key).validate(size: 12)
+      assert_svg :stamps, landmark.key
       assert landmark.story.present?, "#{landmark.key} sem história"
     end
   end
 
-  test "avatar tem retrato e viajante em svg" do
-    %w[ portrait traveler ].each do |key|
-      assert ArtHelper::ROOT.join("avatar/#{key}.svg").exist?, "falta o #{key} do avatar"
-    end
+  test "avatar em svg" do
+    %w[ portrait traveler ].each { assert_svg :avatar, it }
   end
+
+  private
+    def assert_svg(kind, key)
+      path = art_path_for(kind, key)
+      assert path.exist?, "falta art/#{kind}/#{key}.svg"
+
+      svg = path.read
+      assert svg.start_with?("<svg"), "art/#{kind}/#{key}.svg não começa com <svg"
+      assert_includes svg, "viewBox", "art/#{kind}/#{key}.svg sem viewBox"
+    end
 end

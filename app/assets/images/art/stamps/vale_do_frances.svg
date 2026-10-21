@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-vale-do-frances-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1A2A"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <radialGradient id="st-vale-do-frances-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-vale-do-frances-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-vale-do-frances-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-vale-do-frances-clip)">
+    <rect width="100" height="100" fill="url(#st-vale-do-frances-sky)"/>
+    <circle cx="24" cy="22" r=".8" fill="#E8EEF2" opacity=".8"/><circle cx="38" cy="16" r=".8" fill="#E8EEF2" opacity=".8"/><circle cx="70" cy="18" r=".8" fill="#E8EEF2" opacity=".8"/><circle cx="80" cy="30" r=".8" fill="#E8EEF2" opacity=".8"/><circle cx="58" cy="12" r=".8" fill="#E8EEF2" opacity=".8"/><circle cx="30" cy="34" r=".8" fill="#E8EEF2" opacity=".8"/>
+    <path d="M10 56 L28 34 L40 40 L54 18 L70 32 L90 56Z" fill="#29435E"/>
+    <path d="M24 39 L28 34 L40 40 L54 18 L64 27 L60 33 Q50 38 40 44 Q32 40 24 43Z" fill="#CFE3EE"/>
+    <circle cx="58" cy="36" r="4.6" fill="#E8EEF2"/><circle cx="55" cy="42" r="4" fill="#E8EEF2" opacity=".85"/><circle cx="59" cy="46" r="3.4" fill="#E8EEF2" opacity=".7"/><circle cx="54" cy="50" r="2.8" fill="#E8EEF2" opacity=".55"/>
+    <path d="M65 36 q4 3 0 7 M70 33 q6 5 0 12" stroke="#FFE6B0" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M0 46 L22 54 L42 92 L0 100Z" fill="#1C2E44"/>
+    <path d="M100 44 L78 52 L58 92 L100 100Z" fill="#132235"/>
+    <path d="M0 100 L10 86 L14 90 L20 80 L26 88 L32 82 L38 92 L46 84 L54 90 L62 82 L70 90 L76 84 L84 92 L92 82 L100 90 V100Z" fill="#0E1A2A"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

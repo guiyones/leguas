@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-estreito-do-navegante-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16263B"/><stop offset="0.42" stop-color="#29435E"/><stop offset="0.72" stop-color="#E2A05A"/></linearGradient>
+    <radialGradient id="st-estreito-do-navegante-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-estreito-do-navegante-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-estreito-do-navegante-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-estreito-do-navegante-clip)">
+    <rect width="100" height="100" fill="url(#st-estreito-do-navegante-sky)"/>
+    <circle cx="50" cy="60" r="30" fill="url(#st-estreito-do-navegante-glow)"/>
+    <circle cx="50" cy="60" r="7" fill="#FFE6B0"/>
+    <rect y="60" width="100" height="40" fill="url(#st-estreito-do-navegante-lake)"/>
+    <path d="M0 50 Q14 46 24 54 Q30 61 25 72 L0 76Z" fill="#1C2E44"/>
+    <path d="M100 46 Q84 49 78 58 Q74 66 82 73 L100 76Z" fill="#132235"/>
+    <path d="M30 66 h12 M58 64 h10 M36 84 h28" stroke="#CFE3EE" stroke-width="1" opacity=".45" stroke-linecap="round"/>
+    <path d="M47 70 V40 M57 70 V50" stroke="#4A3021" stroke-width="1.6"/>
+    <path d="M40 44 Q47 47 54 44 L54 58 Q47 61 40 58Z" fill="#E8EEF2"/>
+    <path d="M51 53 Q57 55 63 53 L63 64 Q57 66 51 64Z" fill="#CFE3EE"/>
+    <path d="M47 40 l7 2.4 l-7 2.4Z" fill="#E98A3C"/>
+    <path d="M34 70 H67 L63 77 Q50 80 38 77Z" fill="#6B4A33"/>
+    <path d="M35 71 H66" stroke="#A8744A" stroke-width="1.2"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

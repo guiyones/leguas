@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-caverna-do-gigante-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1A2A"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <radialGradient id="st-caverna-do-gigante-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-caverna-do-gigante-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-caverna-do-gigante-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <linearGradient id="st-caverna-do-gigante-fur" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B98252"/><stop offset="1" stop-color="#6B4A33"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-caverna-do-gigante-clip)">
+    <rect width="100" height="100" fill="url(#st-caverna-do-gigante-sky)"/>
+    <rect width="100" height="100" fill="#1C2E44"/>
+    <path d="M0 26 Q40 18 100 30 M0 16 Q50 8 100 18" stroke="#29435E" stroke-width="3" fill="none"/>
+    <path d="M18 92 Q20 40 52 34 Q84 38 86 92Z" fill="#0E1A2A"/>
+    <circle cx="52" cy="78" r="30" fill="url(#st-caverna-do-gigante-glow)" opacity=".8"/>
+    <rect y="86" width="100" height="16" fill="#132235"/>
+    <path d="M60 80 Q70 82 74 88" stroke="#7A5034" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M40 88 Q35 68 41 58 Q47 50 55 52 Q64 57 64 71 Q64 83 60 88Z" fill="url(#st-caverna-do-gigante-fur)"/>
+    <path d="M44 86 v-8 M58 86 v-8" stroke="#6B4A33" stroke-width="5" stroke-linecap="round"/>
+    <path d="M44 62 Q35 66 33 74" stroke="#8A5A3A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M31 75 l-2 3 M33 76 l-1 3.4 M35 76 l0 3.4" stroke="#CFE3EE" stroke-width=".9" stroke-linecap="round"/>
+    <ellipse cx="51" cy="48" rx="6.5" ry="5.4" fill="#8A5A3A"/>
+    <path d="M55 48 q6 0 6.5 4 q-3.5 2.2 -7 .4Z" fill="#6B4A33"/>
+    <circle cx="53.5" cy="46.5" r=".9" fill="#FFE6B0"/>
+    <path d="M47 60 Q51 66 50 74 M54 58 Q58 64 58 70" stroke="#6B4A33" stroke-width="1" fill="none" opacity=".7"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="in-a-subida-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE0A0"/><stop offset="1" stop-color="#C98A3A"/></linearGradient>
+    <radialGradient id="in-a-subida-field" cx=".5" cy=".38" r=".65"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#16263B"/></radialGradient>
+    <radialGradient id="in-a-subida-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".7"/><stop offset=".55" stop-color="#E98A3C" stop-opacity=".22"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <clipPath id="in-a-subida-clip"><circle cx="50" cy="50" r="40"/></clipPath>
+    <linearGradient id="in-a-subida-rock" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FB8C9"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="url(#in-a-subida-rim)"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#FFF3DC" stroke-opacity=".45" stroke-width=".8"/>
+  <circle cx="50" cy="50" r="41.5" fill="#C98A3A"/>
+  <g clip-path="url(#in-a-subida-clip)">
+    <rect width="100" height="100" fill="url(#in-a-subida-field)"/>
+    <circle cx="64" cy="30" r="30" fill="url(#in-a-subida-glow)"/>
+    <path d="M6 92 L64 18 L96 64 V100 H6Z" fill="url(#in-a-subida-rock)"/>
+    <path d="M64 18 L96 64 V100 H74 Q76 60 64 18Z" fill="#1C2E44" opacity=".55"/>
+    <path d="M56 28 L64 18 L73 31 L67 29 L63 34 L60 30Z" fill="#E8EEF2"/>
+    <path d="M20.0 84.0 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M20.0 84.0 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M25.4 76.8 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M25.4 76.8 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M30.8 69.6 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M30.8 69.6 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M36.2 62.4 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M36.2 62.4 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M41.6 55.2 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M41.6 55.2 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M47.0 48.0 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M47.0 48.0 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M52.4 40.8 h6.4 v-7.2 h-1Z" fill="#132235"/><path d="M52.4 40.8 h6.4" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M58 33 l3 -3" stroke="#FFE6B0" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

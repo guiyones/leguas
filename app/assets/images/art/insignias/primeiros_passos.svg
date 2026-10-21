@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="in-primeiros-passos-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE0A0"/><stop offset="1" stop-color="#C98A3A"/></linearGradient>
+    <radialGradient id="in-primeiros-passos-field" cx=".5" cy=".38" r=".65"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#16263B"/></radialGradient>
+    <radialGradient id="in-primeiros-passos-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".7"/><stop offset=".55" stop-color="#E98A3C" stop-opacity=".22"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <clipPath id="in-primeiros-passos-clip"><circle cx="50" cy="50" r="40"/></clipPath>
+    <linearGradient id="in-primeiros-passos-leather" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B98252"/><stop offset="1" stop-color="#7A5034"/></linearGradient>
+    <linearGradient id="in-primeiros-passos-earth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8642E"/><stop offset="1" stop-color="#8E4322"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="url(#in-primeiros-passos-rim)"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#FFF3DC" stroke-opacity=".45" stroke-width=".8"/>
+  <circle cx="50" cy="50" r="41.5" fill="#C98A3A"/>
+  <g clip-path="url(#in-primeiros-passos-clip)">
+    <rect width="100" height="100" fill="url(#in-primeiros-passos-field)"/>
+    <circle cx="46" cy="46" r="34" fill="url(#in-primeiros-passos-glow)"/>
+    <path d="M0 70 Q50 60 100 70 V100 H0Z" fill="url(#in-primeiros-passos-earth)"/>
+    <g transform="rotate(-18 74 78)" fill="#6E3418">
+    <path d="M70 72 Q70 66 75 66 Q80 66 80 72 Q80 78 75 79 Q70 78 70 72Z"/>
+    <ellipse cx="75" cy="84" rx="4" ry="3.4"/>
+    <path d="M72 70 h6 M71.5 73 h7 M72 76 h6 M73 83 h4 M73 85.5 h4" stroke="#C8642E" stroke-width="1.2"/>
+    </g>
+    <path d="M30 30 H48 V47 Q60 48 65 55 Q68 59 66 63 H29 Q27 46 30 30Z" fill="url(#in-primeiros-passos-leather)"/>
+    <path d="M52 50 Q62 52 66 63 H52Z" fill="#6B4A33"/>
+    <rect x="28.5" y="26" width="21" height="6" rx="2.4" fill="#6B4A33"/>
+    <path d="M38 36 h9 M38 41 h9 M39 46 h10" stroke="#F2C46D" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M26 62 H68 Q70 67 66 70 H29 Q25 67 26 62Z" fill="#3B2A1E"/>
+    <path d="M30 70 v-2 M36 70 v-2 M42 70 v-2 M48 70 v-2 M54 70 v-2 M60 70 v-2" stroke="#6B4A33" stroke-width="1.4"/>
+  </g>
+</svg>

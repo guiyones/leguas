@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-base-das-torres-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16263B"/><stop offset="0.42" stop-color="#29435E"/><stop offset="0.72" stop-color="#E2A05A"/></linearGradient>
+    <radialGradient id="st-base-das-torres-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-base-das-torres-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-base-das-torres-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+    <linearGradient id="st-base-das-torres-fire" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE6B0"/><stop offset=".5" stop-color="#E98A3C"/><stop offset="1" stop-color="#8A5A3A"/></linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-base-das-torres-clip)">
+    <rect width="100" height="100" fill="url(#st-base-das-torres-sky)"/>
+    <circle cx="50" cy="40" r="40" fill="url(#st-base-das-torres-glow)"/>
+    <path d="M22 68 L26 36 L30 28 L35 36 L38 68Z M40 68 L44 24 L50 14 L56 24 L60 68Z M62 68 L65 34 L70 26 L75 34 L78 68Z" fill="url(#st-base-das-torres-fire)"/>
+    <path d="M30 28 L35 36 L38 68 H33Z M50 14 L56 24 L60 68 H53Z M70 26 L75 34 L78 68 H73Z" fill="#7A3A22" opacity=".45"/>
+    <path d="M28 42 l3 -1 M46 34 l4 -1 M67 40 l3 -1" stroke="#E8EEF2" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M6 72 L22 62 L78 62 L94 72 V78 H6Z" fill="#1C2E44"/>
+    <ellipse cx="50" cy="84" rx="42" ry="10" fill="url(#st-base-das-torres-lake)"/>
+    <path d="M40 76 L44 90 L50 94 L56 90 L60 76Z" fill="#E98A3C" opacity=".3"/>
+    <path d="M0 92 Q50 86 100 92 V100 H0Z" fill="#132235"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

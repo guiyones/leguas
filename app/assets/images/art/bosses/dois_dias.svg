@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="bo-dois-dias-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1726"/><stop offset=".55" stop-color="#29435E"/><stop offset="1" stop-color="#5F9BB8"/></linearGradient>
+    <radialGradient id="bo-dois-dias-ember" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".95"/><stop offset=".45" stop-color="#E98A3C" stop-opacity=".45"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="bo-dois-dias-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="bo-dois-dias-clip"><rect x="6" y="6" width="148" height="148" rx="26"/></clipPath>
+    <linearGradient id="bo-dois-dias-day" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E2A05A" stop-opacity=".85"/><stop offset=".5" stop-color="#E2A05A" stop-opacity="0"/></linearGradient>
+    <radialGradient id="bo-dois-dias-sun" r=".5"><stop offset="0" stop-color="#FFF3DC"/><stop offset=".7" stop-color="#FFE6B0"/><stop offset="1" stop-color="#F2C46D"/></radialGradient>
+    <mask id="bo-dois-dias-moon"><circle cx="112" cy="54" r="18" fill="#fff"/><circle cx="120" cy="46" r="16" fill="#000"/></mask>
+  </defs>
+  <rect x="2" y="2" width="156" height="156" rx="30" fill="#E98A3C" opacity=".35"/>
+  <g clip-path="url(#bo-dois-dias-clip)">
+    <rect width="160" height="160" fill="url(#bo-dois-dias-sky)"/>
+    <rect width="160" height="160" fill="url(#bo-dois-dias-day)"/>
+    <circle cx="100" cy="24" r="1.1" fill="#E8EEF2"/><circle cx="140" cy="36" r="1.1" fill="#E8EEF2"/><circle cx="128" cy="84" r="1.1" fill="#E8EEF2"/><circle cx="146" cy="66" r="1.1" fill="#E8EEF2"/><circle cx="92" cy="80" r="1.1" fill="#E8EEF2"/><circle cx="120" cy="20" r="1.1" fill="#E8EEF2"/>
+    <circle cx="46" cy="56" r="42" fill="url(#bo-dois-dias-ember)"/>
+    <path d="M71.0 56.0 L79.0 56.0" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M67.7 68.5 L74.6 72.5" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M58.5 77.7 L62.5 84.6" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M46.0 81.0 L46.0 89.0" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M33.5 77.7 L29.5 84.6" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M24.3 68.5 L17.4 72.5" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M21.0 56.0 L13.0 56.0" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M24.3 43.5 L17.4 39.5" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M33.5 34.3 L29.5 27.4" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M46.0 31.0 L46.0 23.0" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M58.5 34.3 L62.5 27.4" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <path d="M67.7 43.5 L74.6 39.5" stroke="#F2C46D" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="46" cy="56" r="19" fill="url(#bo-dois-dias-sun)"/>
+    <circle cx="112" cy="54" r="28" fill="#CFE3EE" opacity=".12"/>
+    <circle cx="112" cy="54" r="18" fill="#E8EEF2" mask="url(#bo-dois-dias-moon)"/>
+    <path d="M0 112 L30 94 L52 104 L80 86 L108 102 L130 92 L160 106 V160 H0Z" fill="#1C2E44"/>
+    <path d="M74 92 L80 86 L86 92 L80 90Z" fill="#CFE3EE"/>
+    <path d="M0 128 Q60 116 160 126 V160 H0Z" fill="#132235"/>
+    <path d="M80 112 Q66 122 82 130 Q100 140 72 160" stroke="#F2C46D" stroke-width="4" fill="none" stroke-dasharray="7 5" stroke-linecap="round"/>
+  </g>
+  <rect x="6" y="6" width="148" height="148" rx="26" fill="none" stroke="#E98A3C" stroke-width="2.4"/>
+  <rect x="10" y="10" width="140" height="140" rx="22" fill="none" stroke="#F2C46D" stroke-opacity=".35" stroke-width="1"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="st-porto-da-ultima-esperanca-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16263B"/><stop offset="0.42" stop-color="#29435E"/><stop offset="0.72" stop-color="#E2A05A"/></linearGradient>
+    <radialGradient id="st-porto-da-ultima-esperanca-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".75"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".25"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="st-porto-da-ultima-esperanca-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="st-porto-da-ultima-esperanca-clip"><circle cx="50" cy="50" r="39"/></clipPath>
+
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="#16263B"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#F2C46D" stroke-width="3" stroke-dasharray="5.4 3.2"/>
+  <g clip-path="url(#st-porto-da-ultima-esperanca-clip)">
+    <rect width="100" height="100" fill="url(#st-porto-da-ultima-esperanca-sky)"/>
+    <circle cx="60" cy="52" r="30" fill="url(#st-porto-da-ultima-esperanca-glow)"/>
+    <path d="M0 58 L16 40 L28 50 L44 30 L58 46 L70 36 L100 56 V100 H0Z" fill="#1C2E44"/>
+    <path d="M40 35 L44 30 L48 35 L44 34Z M66 40 L70 36 L74 40 L70 39Z" fill="#CFE3EE"/>
+    <rect y="64" width="100" height="40" fill="url(#st-porto-da-ultima-esperanca-lake)"/>
+    <path d="M0 64 Q50 60 100 64 V67 H0Z" fill="#132235"/>
+    <rect x="18" y="55" width="8" height="9" fill="#B0552C"/><path d="M17 55 L22.0 50 L27 55Z" fill="#4A3021"/><rect x="20.5" y="58" width="3" height="3" fill="#FFE6B0"/><rect x="18" y="67" width="8" height="4" fill="#B0552C" opacity=".25"/>
+    <rect x="28" y="52" width="10" height="12" fill="#CFE3EE"/><path d="M27 52 L33.0 47 L39 52Z" fill="#4A3021"/><rect x="31.5" y="55" width="3" height="3" fill="#FFE6B0"/><rect x="28" y="67" width="10" height="6" fill="#CFE3EE" opacity=".25"/>
+    <rect x="40" y="56" width="8" height="8" fill="#E2A05A"/><path d="M39 56 L44.0 51 L49 56Z" fill="#4A3021"/><rect x="42.5" y="59" width="3" height="3" fill="#FFE6B0"/><rect x="40" y="67" width="8" height="4" fill="#E2A05A" opacity=".25"/>
+    <rect x="50" y="51" width="11" height="13" fill="#5F9BB8"/><path d="M49 51 L55.5 46 L62 51Z" fill="#4A3021"/><rect x="54.0" y="54" width="3" height="3" fill="#FFE6B0"/><rect x="50" y="67" width="11" height="6" fill="#5F9BB8" opacity=".25"/>
+    <rect x="63" y="54" width="9" height="10" fill="#B0552C"/><path d="M62 54 L67.5 49 L73 54Z" fill="#4A3021"/><rect x="66.0" y="57" width="3" height="3" fill="#FFE6B0"/><rect x="63" y="67" width="9" height="5" fill="#B0552C" opacity=".25"/>
+    <path d="M74 68 H90" stroke="#8A5A3A" stroke-width="1.6"/>
+    <path d="M76 68 V73 M82 68 V73 M88 68 V73" stroke="#6B4A33" stroke-width="1.2"/>
+  </g>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#F2C46D" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

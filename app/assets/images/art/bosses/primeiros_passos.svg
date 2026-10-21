@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="bo-primeiros-passos-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1726"/><stop offset=".4" stop-color="#29435E"/><stop offset=".68" stop-color="#E2A05A"/><stop offset="1" stop-color="#E98A3C"/></linearGradient>
+    <radialGradient id="bo-primeiros-passos-ember" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".95"/><stop offset=".45" stop-color="#E98A3C" stop-opacity=".45"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="bo-primeiros-passos-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="bo-primeiros-passos-clip"><rect x="6" y="6" width="148" height="148" rx="26"/></clipPath>
+    <radialGradient id="bo-primeiros-passos-sun" r=".5"><stop offset="0" stop-color="#FFF3DC"/><stop offset=".7" stop-color="#FFE6B0"/><stop offset="1" stop-color="#F2C46D"/></radialGradient>
+  </defs>
+  <rect x="2" y="2" width="156" height="156" rx="30" fill="#E98A3C" opacity=".35"/>
+  <g clip-path="url(#bo-primeiros-passos-clip)">
+    <rect width="160" height="160" fill="url(#bo-primeiros-passos-sky)"/>
+    <circle cx="80" cy="100" r="70" fill="url(#bo-primeiros-passos-ember)"/>
+    <path d="M49.6 90.1 L30.5 83.9" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M54.1 81.2 L37.9 69.4" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M61.2 74.1 L49.4 57.9" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M70.1 69.6 L63.9 50.5" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M80.0 68.0 L80.0 48.0" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M89.9 69.6 L96.1 50.5" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M98.8 74.1 L110.6 57.9" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M105.9 81.2 L122.1 69.4" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <path d="M110.4 90.1 L129.5 83.9" stroke="#FFE6B0" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <circle cx="80" cy="100" r="24" fill="url(#bo-primeiros-passos-sun)"/>
+    <path d="M0 100 L22 92 L44 98 L58 100 H102 L116 96 L138 90 L160 98 V160 H0Z" fill="#1C2E44"/>
+    <path d="M0 116 Q50 104 90 112 T160 108 V160 H0Z" fill="#132235"/>
+    <path d="M0 136 Q60 126 160 134 V160 H0Z" fill="#0E1A2A"/>
+    <path d="M80 102 Q72 110 84 116 Q100 124 76 136 Q56 146 70 160" stroke="#F2C46D" stroke-width="4" fill="none" stroke-dasharray="7 5" stroke-linecap="round"/>
+  </g>
+  <rect x="6" y="6" width="148" height="148" rx="26" fill="none" stroke="#E98A3C" stroke-width="2.4"/>
+  <rect x="10" y="10" width="140" height="140" rx="22" fill="none" stroke="#F2C46D" stroke-opacity=".35" stroke-width="1"/>
+</svg>

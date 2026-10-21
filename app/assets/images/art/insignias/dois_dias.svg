@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="in-dois-dias-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE0A0"/><stop offset="1" stop-color="#C98A3A"/></linearGradient>
+    <radialGradient id="in-dois-dias-field" cx=".5" cy=".38" r=".65"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#16263B"/></radialGradient>
+    <radialGradient id="in-dois-dias-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".7"/><stop offset=".55" stop-color="#E98A3C" stop-opacity=".22"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <clipPath id="in-dois-dias-clip"><circle cx="50" cy="50" r="40"/></clipPath>
+    <linearGradient id="in-dois-dias-split" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E2A05A" stop-opacity=".55"/><stop offset=".5" stop-color="#E2A05A" stop-opacity="0"/><stop offset=".5" stop-color="#0E1A2A" stop-opacity="0"/><stop offset="1" stop-color="#0E1A2A" stop-opacity=".6"/></linearGradient>
+    <radialGradient id="in-dois-dias-sun" r=".5"><stop offset="0" stop-color="#FFE6B0"/><stop offset="1" stop-color="#F2C46D"/></radialGradient>
+    <mask id="in-dois-dias-moon"><circle cx="68" cy="40" r="11" fill="#fff"/><circle cx="73" cy="35" r="9.6" fill="#000"/></mask>
+  </defs>
+  <circle cx="50" cy="50" r="49" fill="url(#in-dois-dias-rim)"/>
+  <circle cx="50" cy="50" r="45.5" fill="none" stroke="#FFF3DC" stroke-opacity=".45" stroke-width=".8"/>
+  <circle cx="50" cy="50" r="41.5" fill="#C98A3A"/>
+  <g clip-path="url(#in-dois-dias-clip)">
+    <rect width="100" height="100" fill="url(#in-dois-dias-field)"/>
+    <rect width="100" height="100" fill="url(#in-dois-dias-split)"/>
+    <circle cx="32" cy="40" r="22" fill="url(#in-dois-dias-glow)"/>
+    <path d="M32 22 v-5 M32 58 v5 M14 40 h-5 M50 40 h5 M19 27 l-3.6 -3.6 M45 27 l3.6 -3.6 M19 53 l-3.6 3.6 M45 53 l3.6 3.6" stroke="#F2C46D" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="32" cy="40" r="11" fill="url(#in-dois-dias-sun)"/>
+    <circle cx="68" cy="40" r="11" fill="#CFE3EE" mask="url(#in-dois-dias-moon)"/>
+    <circle cx="80" cy="26" r=".9" fill="#E8EEF2"/><circle cx="84" cy="44" r=".8" fill="#E8EEF2"/><circle cx="60" cy="22" r=".8" fill="#E8EEF2"/>
+    <path d="M0 70 Q30 62 50 66 T100 64 V100 H0Z" fill="#1C2E44"/>
+    <path d="M50 66 Q42 74 52 80 Q62 86 48 100" stroke="#F2C46D" stroke-width="3" fill="none" stroke-dasharray="4 3" stroke-linecap="round"/>
+  </g>
+</svg>

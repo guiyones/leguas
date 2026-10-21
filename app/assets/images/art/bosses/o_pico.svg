@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="bo-o-pico-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1726"/><stop offset=".4" stop-color="#29435E"/><stop offset=".68" stop-color="#E2A05A"/><stop offset="1" stop-color="#E98A3C"/></linearGradient>
+    <radialGradient id="bo-o-pico-ember" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".95"/><stop offset=".45" stop-color="#E98A3C" stop-opacity=".45"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="bo-o-pico-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F9BB8"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <clipPath id="bo-o-pico-clip"><rect x="6" y="6" width="148" height="148" rx="26"/></clipPath>
+    <linearGradient id="bo-o-pico-rock" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9FB8C9"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <linearGradient id="bo-o-pico-stone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FB8C9"/><stop offset="1" stop-color="#5F9BB8"/></linearGradient>
+  </defs>
+  <rect x="2" y="2" width="156" height="156" rx="30" fill="#E98A3C" opacity=".35"/>
+  <g clip-path="url(#bo-o-pico-clip)">
+    <rect width="160" height="160" fill="url(#bo-o-pico-sky)"/>
+    <circle cx="80" cy="40" r="60" fill="url(#bo-o-pico-ember)"/>
+    <path d="M10 140 L80 32 L150 140Z" fill="url(#bo-o-pico-rock)"/>
+    <path d="M80 32 L150 140 H96 Q100 90 80 32Z" fill="#1C2E44" opacity=".5"/>
+    <path d="M66 54 L80 32 L94 54 L88 51 L80 60 L73 51Z" fill="#E8EEF2"/>
+    <path d="M80 33 V12" stroke="#4A3021" stroke-width="2.4"/>
+    <path d="M80 12 Q90 10 100 14 Q94 19 100 25 Q90 22 80 24Z" fill="#E98A3C"/>
+    <path d="M0 132 Q50 120 90 130 T160 126 V160 H0Z" fill="#132235"/>
+    <path d="M30 148 Q28 128 46 124 Q66 120 74 132 Q80 146 66 150 Q44 154 30 148Z" fill="url(#bo-o-pico-stone)"/>
+    <path d="M36 130 Q48 124 60 126" stroke="#E8EEF2" stroke-width="2" fill="none" opacity=".6" stroke-linecap="round"/>
+    <text x="52" y="144" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="800" font-size="12" fill="#16263B">10 kg</text>
+  </g>
+  <rect x="6" y="6" width="148" height="148" rx="26" fill="none" stroke="#E98A3C" stroke-width="2.4"/>
+  <rect x="10" y="10" width="140" height="140" rx="22" fill="none" stroke="#F2C46D" stroke-opacity=".35" stroke-width="1"/>
+</svg>
