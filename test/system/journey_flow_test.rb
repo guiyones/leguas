@@ -17,7 +17,7 @@ class JourneyFlowTest < ApplicationSystemTestCase
     click_on "Começar jornada"
 
     assert_text "Boa jornada, Nina!"
-    click_on "Continuar jornada"
+    click_on "Começar jornada"
     assert_text "Primeiros Passos"
 
     click_on "Registrar caminhada", match: :first

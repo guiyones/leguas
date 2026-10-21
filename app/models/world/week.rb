@@ -11,4 +11,5 @@ class World::Week
 
   def end_km = start_km + km
   def light? = @light
+  def stairs? = stairs.present? && stairs != "não"
 end

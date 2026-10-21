@@ -64,4 +64,6 @@
 </section>
 
 <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
-<%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>
+<% if @stairs %>
+  <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>
+<% end %>

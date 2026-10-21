@@ -100,9 +100,19 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_walk_path, text: "Registrar caminhada"
   end
 
-  test "botão de registrar escada" do
+  test "sem escada na semana não mostra o registro de escada" do
     get phase_url
 
+    assert_select "a[href=?]", new_stair_session_path, count: 0
+  end
+
+  test "botão de registrar escada na semana com escada" do
+    walk_steady users(:viajante), 90, until_days_ago: 2
+    walk_on users(:viajante), 1, 12
+
+    get phase_url
+
+    assert_select "*", text: /Carga Leve/
     assert_select "a.btn-game--secondary[href=?]", new_stair_session_path, text: "Registrar escada"
   end
 

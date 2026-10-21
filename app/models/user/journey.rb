@@ -20,6 +20,7 @@ class User::Journey
   def banked_km = total_km - position_km
   def climbed_m = @log.climbed_m
   def leagues = (total_km / LEAGUE_KM).floor
+  def started? = @log.dates.any?
 
   def boss_appeared_on(phase) = @boss_appeared_on[phase.key]
   def boss_defeated_on(phase) = @boss_defeated_on[phase.key]

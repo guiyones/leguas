@@ -7,10 +7,18 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_response :success
-    assert_select "a[href=?]", phase_path, text: "Continuar jornada"
+    assert_select "a[href=?]", phase_path, text: "Começar jornada"
     assert_select "a[href=?]", walks_path, text: "Histórico"
     assert_select "a[href=?]", edit_profile_path, text: "Perfil"
     assert_select "nav[aria-label=?]", "Navegação principal", count: 0
+  end
+
+  test "com algo registrado a jornada continua" do
+    walk_on users(:viajante), 1, 3
+
+    get root_url
+
+    assert_select "a[href=?]", phase_path, text: "Continuar jornada"
   end
 
   test "título da página" do

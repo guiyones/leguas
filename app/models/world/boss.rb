@@ -24,6 +24,8 @@ class World::Boss
     end
   end
 
+  def climb? = kind.start_with?("climb")
+
   private
     def loaded?(record) = (record.load_kg || 0) >= load_kg
 
