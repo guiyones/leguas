@@ -26,6 +26,17 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "perto do fim da fase, avisa quando o chefe aparece" do
+    walk_steady users(:viajante), 80
+
+    get root_url
+
+    assert_select "[data-testid=phase]" do
+      assert_select "*", text: /O chefe da fase aparece em 10 km/
+      assert_select "*", text: /Próximo marco: Primeiros Passos/, count: 0
+    end
+  end
+
   test "missão do dia com a meta e o feito" do
     users(:viajante).walks.create!(km: 1.5, walked_on: Date.current)
 

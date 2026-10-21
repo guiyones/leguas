@@ -26,7 +26,12 @@
   <% if @journey.finished? %>
     <p class="text-gold">Você chegou ao fim do mundo conhecido, viajante! Novas regiões estão a caminho.</p>
   <% elsif (milestone = @journey.next_milestone) && milestone.at_km <= phase.end_km %>
-    <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %> km</p>
+    <% km_to_next = number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %>
+    <% if milestone.kind == :boss %>
+      <p>O chefe da fase aparece em <strong><%= km_to_next %> km</strong></p>
+    <% else %>
+      <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= km_to_next %> km</p>
+    <% end %>
   <% end %>
 
   <p class="caption">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas<% if @journey.climbed_m > 0 %> · <%= number_with_delimiter @journey.climbed_m.round %> m subidos<% end %></p>
