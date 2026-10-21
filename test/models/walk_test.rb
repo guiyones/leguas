@@ -90,4 +90,12 @@ class WalkTest < ActiveSupport::TestCase
 
     assert_equal 3, @user.missions.find_by(date: Date.current).goal_km
   end
+
+  test "mochila opcional, com vírgula, até 40 kg" do
+    walk = @user.walks.create!(km: 2, walked_on: Date.current, load_kg: "7,5")
+    assert_equal BigDecimal("7.5"), walk.reload.load_kg
+    assert @user.walks.new(km: 2, walked_on: Date.current, load_kg: nil).valid?
+    assert_not @user.walks.new(km: 2, walked_on: Date.current, load_kg: 0).valid?
+    assert_not @user.walks.new(km: 2, walked_on: Date.current, load_kg: 41).valid?
+  end
 end

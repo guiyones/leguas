@@ -3,6 +3,7 @@ viajante:
   name: Tião
   avatar: tropeiro
   daily_goal_km: 3
+  stair_steps: 50
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>
 

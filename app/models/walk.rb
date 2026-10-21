@@ -1,12 +1,15 @@
 class Walk < ApplicationRecord
+  include Backdatable
+
   DAILY_LIMIT_KM = 100
-  RETROACTIVE_DAYS = 7
 
   belongs_to :user
 
   validates :walked_on, presence: true
   validates :km, numericality: { greater_than: 0 }
-  validate :walked_on_within_window, :daily_limit_respected
+  backdatable :walked_on
+  validates :load_kg, numericality: { greater_than: 0, less_than_or_equal_to: 40 }, allow_nil: true
+  validate :daily_limit_respected
 
   after_save :ensure_mission
   after_commit :forget_unreached_celebrations
@@ -17,21 +20,11 @@ class Walk < ApplicationRecord
     super(value.is_a?(String) ? value.tr(",", ".") : value)
   end
 
-  def walked_on_min
-    if new_record?
-      Date.current - RETROACTIVE_DAYS
-    else
-      [ walked_on_was || walked_on, Date.current - RETROACTIVE_DAYS ].min
-    end
+  def load_kg=(value)
+    super(value.is_a?(String) ? value.tr(",", ".") : value)
   end
 
   private
-    def walked_on_within_window
-      if walked_on && walked_on_changed? && !walked_on.between?(Date.current - RETROACTIVE_DAYS, Date.current)
-        errors.add(:walked_on, "precisa ser de hoje ou dos últimos #{RETROACTIVE_DAYS} dias")
-      end
-    end
-
     def daily_limit_respected
       if km && walked_on && km + km_already_walked_that_day > DAILY_LIMIT_KM
         errors.add(:km, "passa de #{DAILY_LIMIT_KM} km no dia. Essa distância parece exagerada, viajante.")
