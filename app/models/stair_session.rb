@@ -30,7 +30,7 @@ class StairSession < ApplicationRecord
     end
 
     def user_has_stair_steps
-      errors.add(:base, "Informe os degraus do seu prédio no perfil antes de registrar a escada.") unless user&.stair_steps
+      errors.add(:base, "Informe os degraus da sua escada no perfil antes de registrar subidas.") unless user&.stair_steps
     end
 
     def daily_limit_respected

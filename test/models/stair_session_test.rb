@@ -16,7 +16,7 @@ class StairSessionTest < ActiveSupport::TestCase
   test "sem degraus no perfil não registra" do
     session = users(:novato).stair_sessions.new(climbs: 3, climbed_on: Date.current)
     assert_not session.valid?
-    assert_includes session.errors.full_messages.join, "degraus"
+    assert_equal [ "Informe os degraus da sua escada no perfil antes de registrar subidas." ], session.errors.full_messages
   end
 
   test "subidas inteiras e maiores que zero, até 500 por dia" do
