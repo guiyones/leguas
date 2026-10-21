@@ -31,9 +31,37 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
 
     get celebration_url
 
-    assert_select "h1", text: /Chefão derrotado!/
+    assert_select "h1", text: /Chefe derrotado!/
     assert_select "*", text: /Primeiros Passos/
     assert_select "svg[aria-label=?]", "Insígnia Primeiros Passos"
+  end
+
+  test "chefe apareceu antes da insígnia" do
+    user = users(:viajante)
+    walk_steady user, 90, until_days_ago: 1
+    user.pending_celebration_keys.excluding("boss:primeiros_passos").each { user.celebrate(it) }
+
+    get celebration_url
+
+    assert_select "h1", text: /Um chefe apareceu!/
+    assert_select "*", text: /O Primeiro Horizonte/
+    assert_select "*", text: /Caminhar 12 km sem parar/
+    assert_select "*", text: /Ele espera o tempo que for preciso/
+    post celebration_url, params: { key: "boss:primeiros_passos" }
+    get celebration_url
+    assert_redirected_to root_url
+  end
+
+  test "chefe derrotado mostra a insígnia" do
+    user = users(:viajante)
+    walk_steady user, 90, until_days_ago: 1
+    user.pending_celebration_keys.each { user.celebrate(it) }
+    walk_on user, 0, 12
+
+    get celebration_url
+
+    assert_select "h1", text: /Chefe derrotado!/
+    assert_select "*", text: /Pegada do Viajante/
   end
 
   test "região completa é o fim do mundo conhecido" do
