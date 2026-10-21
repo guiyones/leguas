@@ -41,7 +41,7 @@ Toda fase tem um chefe. **A fase só é vencida com as duas coisas: o km da fase
 3. O chefe cai com um feito realizado **no dia em que ele apareceu ou depois**. A caminhada que fecha o km da fase vale, se ela mesma cumprir o feito.
 4. Ao derrubar o chefe, a fase é vencida (insígnia + encaixe no troféu) e o viajante entra na fase seguinte.
 
-**Um chefe por dia.** *Minha decisão:* num mesmo dia cai no máximo um chefe. Se os km guardados fecharem a fase seguinte no dia em que um chefe caiu, o próximo chefe aparece no dia seguinte. Assim, uma caminhada de 15 km com 5 kg não derruba os chefes 1 e 2 de uma vez: cada chefe pede o seu próprio dia. No `consecutive_days`, a janela precisa começar no dia em que o chefe apareceu ou depois.
+**Um chefe por dia.** *Minha decisão:* num mesmo dia cai no máximo um chefe. Se os km guardados fecharem a fase seguinte no dia em que um chefe caiu, o próximo chefe aparece nesse mesmo dia, mas só pode ser derrotado a partir do dia seguinte. Assim, uma caminhada de 15 km com 5 kg não derruba os chefes 1 e 2 de uma vez: cada chefe pede o seu próprio dia. No `consecutive_days`, a janela precisa começar no dia em que o chefe apareceu ou depois, e nunca no dia em que o chefe anterior caiu.
 
 **Km guardados.** O km nunca para de somar. O que passar da meta enquanto o chefe espera fica **guardado** ("18 km guardados esperando o chefe"). Quando o chefe cai, esses km entram de uma vez na fase seguinte, até o limite dela, onde aparece o próximo chefe. O XP de km conta sempre sobre o total andado. Nada se perde.
 
