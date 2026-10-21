@@ -40,6 +40,7 @@ class Walk < ApplicationRecord
     end
 
     def forget_unreached_celebrations
+      user.forget_training_log
       user.forget_unreached_celebrations
     end
 end

@@ -6,6 +6,13 @@ class StairSessionTest < ActiveSupport::TestCase
     assert_equal BigDecimal("85"), session.climb_m           # 10 × 50 × 0,17
   end
 
+  test "sem degraus no perfil o desnível é zero" do
+    user = users(:viajante)
+    session = climb_on user, 1, 10
+    user.update!(stair_steps: nil)
+    assert_equal 0, session.climb_m
+  end
+
   test "sem degraus no perfil não registra" do
     session = users(:novato).stair_sessions.new(climbs: 3, climbed_on: Date.current)
     assert_not session.valid?

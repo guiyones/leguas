@@ -13,15 +13,22 @@ class StairSession < ApplicationRecord
   validates :load_kg, numericality: { greater_than: 0, less_than_or_equal_to: 40 }, allow_nil: true
   validate :user_has_stair_steps, :daily_limit_respected
 
+  after_commit :forget_unreached_celebrations
+
   def load_kg=(value)
     super(value.is_a?(String) ? value.tr(",", ".") : value)
   end
 
   def climb_m
-    climbs * user.stair_steps * STEP_RISE_M
+    climbs * user.stair_steps.to_i * STEP_RISE_M
   end
 
   private
+    def forget_unreached_celebrations
+      user.forget_training_log
+      user.forget_unreached_celebrations
+    end
+
     def user_has_stair_steps
       errors.add(:base, "Informe os degraus do seu prédio no perfil antes de registrar a escada.") unless user&.stair_steps
     end

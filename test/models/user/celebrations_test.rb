@@ -59,4 +59,48 @@ class User::CelebrationsTest < ActiveSupport::TestCase
       assert_includes @user.celebrations.pluck(:key), "phase:a1"
     end
   end
+
+  test "chefe que apareceu vem antes da insígnia" do
+    with_world test_world do
+      walk_steady @user, 30, until_days_ago: 2
+
+      assert_equal "boss:a2", @user.pending_celebration_keys.last
+      assert_not_includes @user.pending_celebration_keys, "phase:a2"
+
+      @user.pending_celebration_keys.each { @user.celebrate(it) }
+      walk_on @user, 1, 12
+
+      assert_equal %w[ phase:a2 region:alpha ], @user.pending_celebration_keys.first(2)
+    end
+  end
+
+  test "diminuir os degraus esquece o chefe de escada" do
+    with_world test_world do
+      walk_steady @user, 60, until_days_ago: 3   # a2 aparece em 30
+      walk_on @user, 2, 12                        # derruba a2; b1 aparece
+      climb_on @user, 1, 12                       # 12 × 50 × 0,17 = 102 m: derruba b1
+      @user.pending_celebration_keys.each { @user.celebrate(it) }
+      assert_includes @user.celebrations.pluck(:key), "phase:b1"
+
+      @user.update!(stair_steps: 40)              # 12 × 40 × 0,17 = 81,6 m
+
+      assert_not_includes @user.celebrations.pluck(:key), "phase:b1"
+      assert_includes @user.celebrations.pluck(:key), "boss:b1"
+      assert_includes @user.celebrations.pluck(:key), "phase:a2"
+    end
+  end
+
+  test "excluir a sessão de escada do feito esquece a insígnia" do
+    with_world test_world do
+      walk_steady @user, 60, until_days_ago: 3
+      walk_on @user, 2, 12
+      session = climb_on @user, 1, 12
+      @user.pending_celebration_keys.each { @user.celebrate(it) }
+
+      session.destroy
+
+      assert_not_includes @user.celebrations.pluck(:key), "phase:b1"
+      assert_includes @user.celebrations.pluck(:key), "boss:b1"
+    end
+  end
 end

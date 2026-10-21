@@ -17,4 +17,17 @@ class User < ApplicationRecord
   def journey(world: World.current)
     Journey.new(self, world: world)
   end
+
+  def training_log
+    @training_log ||= TrainingLog.new(self)
+  end
+
+  def forget_training_log
+    @training_log = nil
+  end
+
+  def reload(*)
+    forget_training_log
+    super
+  end
 end
