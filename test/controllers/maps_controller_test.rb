@@ -74,7 +74,20 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[data-boss]", text: /A Torre de Degraus/
       assert_select "*", text: /Pico Agudo/
       assert_select "[data-week]", 4
-      assert_select "[data-week='2']", text: /escada: 2× 30 min/
+      assert_select "[data-week='2']" do
+        assert_select "dt", text: "Escada"
+        assert_select "dd", text: "2× 30 min"
+      end
+    end
+  end
+
+  test "semana sem escada não lista escada" do
+    get map_url
+
+    assert_select "[data-phase=primeiros_passos] [data-week='1']" do
+      assert_select "dt", text: "Longão"
+      assert_select "dd", text: "8 km"
+      assert_select "dt", text: "Escada", count: 0
     end
   end
 
