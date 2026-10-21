@@ -127,7 +127,7 @@ phases:
         name: Morro da Vigia
         at_km: 105
         story: >
-          Um morro logo atrás do porto, com um mirante lá no alto. De cima dá pra ver a cidade
+          Um morro perto do porto, com um mirante lá no alto. De cima dá pra ver a cidade
           inteira e o fiorde entrando no continente.
 
   - key: a_subida
@@ -173,7 +173,7 @@ phases:
         name: Frigorífico Velho
         at_km: 25
         story: >
-          Uma fábrica de tijolos à beira do fiorde onde se congelava a carne das ovelhas da
+          Um frigorífico de tijolo à beira do fiorde onde se congelava a carne das ovelhas da
           região. Hoje é monumento nacional e virou hotel.
       - key: caverna_do_gigante
         name: Caverna do Gigante
@@ -235,8 +235,8 @@ phases:
         name: Mirante do Azul
         at_km: 25
         story: >
-          Daqui o maciço aparece inteiro pela primeira vez. O nome da serra vem de uma palavra
-          tehuelche que quer dizer azul.
+          Daqui o maciço aparece inteiro pela primeira vez. O parque que guarda essas montanhas
+          é Reserva da Biosfera da UNESCO desde 1978.
       - key: salto_furioso
         name: Salto Furioso
         at_km: 60
@@ -358,7 +358,7 @@ phases:
         stairs: não
     boss:
       name: O Vento Austral
-      description: 3 dias seguidos de 15–20 km com mochila, simulando o Circuito W.
+      description: 3 dias seguidos com 9 kg nas costas, somando 50 km, simulando o Circuito W.
       kind: consecutive_days
       days: 3
       km: 50

@@ -23,6 +23,19 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  test "fase vencida mostra a insígnia" do
+    walk_steady users(:viajante), 90, until_days_ago: 1
+    walk_on users(:viajante), 0, 12   # derruba O Primeiro Horizonte
+    user = users(:viajante)
+    user.pending_celebration_keys.excluding("phase:primeiros_passos").each { user.celebrate(it) }
+
+    get celebration_url
+
+    assert_select "h1", text: /Chefão derrotado!/
+    assert_select "*", text: /Primeiros Passos/
+    assert_select "svg[aria-label=?]", "Insígnia Primeiros Passos"
+  end
+
   test "região completa é o fim do mundo conhecido" do
     travel_whole_world users(:viajante)
     user = users(:viajante)
@@ -35,6 +48,7 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /810 km/
     assert_select "svg[aria-label=?]", "Patagônia"
     assert_select "*", text: /fim do mundo conhecido/
+    assert_select "*", text: /completou o mundo inteiro/, count: 0
   end
 
   test "clique duplo ou chave estranha não quebra" do
