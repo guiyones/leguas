@@ -37,6 +37,31 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "região sem dicas esconde o painel de dica" do
+    with_world test_world do
+      walk_steady users(:viajante), 30, until_days_ago: 6
+      walk_on users(:viajante), 5, 12               # derruba a2: Região Beta, sem dicas
+
+      get root_url
+    end
+
+    assert_select "[data-testid=phase]", text: /Fase B1/
+    assert_select "[data-testid=tip]", 0
+  end
+
+  test "fase lendária com o nome em cor de lenda" do
+    with_world test_world do
+      walk_steady users(:viajante), 30, until_days_ago: 20
+      walk_on users(:viajante), 19, 12
+      walk_steady users(:viajante), 18, until_days_ago: 16
+      climb_on users(:viajante), 15, 12             # derruba b1: chega em B2, lendária
+
+      get root_url
+    end
+
+    assert_select "[data-testid=phase] h2.text-legend", text: "Fase B2"
+  end
+
   test "missão do dia com a meta e o feito" do
     users(:viajante).walks.create!(km: 1.5, walked_on: Date.current)
 

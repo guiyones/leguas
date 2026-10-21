@@ -16,7 +16,7 @@
 <section class="panel flex flex-col gap-3" data-testid="phase">
   <% phase = @journey.current_phase %>
   <p class="caption"><%= phase.region.name %> · Fase <%= phase.number %> de <%= phase.region.phases.size %></p>
-  <h2 class="text-gold"><%= phase.name %></h2>
+  <h2 class="<%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></h2>
   <% if phase.focus %>
     <p class="caption"><%= phase.focus %></p>
   <% end %>
@@ -43,10 +43,12 @@
   <%= render "home/boss", boss: phase.boss, banked_km: @journey.banked_km %>
 <% end %>
 
-<section class="panel">
-  <p class="caption">Dica do plano</p>
-  <p data-testid="tip"><%= tip_of_the_day phase.region %></p>
-</section>
+<% if tip = tip_of_the_day(phase.region) %>
+  <section class="panel">
+    <p class="caption">Dica do plano</p>
+    <p data-testid="tip"><%= tip %></p>
+  </section>
+<% end %>
 
 <section class="panel flex flex-col gap-3" data-testid="mission">
   <h2>Missão do dia</h2>
