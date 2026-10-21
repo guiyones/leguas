@@ -99,6 +99,22 @@ class User::JourneyTest < ActiveSupport::TestCase
     assert_equal :defeated, @user.journey(world: @world).boss_status(@world.phase("b1"))
   end
 
+  test "mudar os degraus do perfil derruba ou devolve um chefe de escada" do
+    walk_steady @user, 30, until_days_ago: 6     # a2 aparece
+    walk_on @user, 5, 12                          # derruba a2 (42)
+    walk_steady @user, 18, until_days_ago: 3     # 60: b1 aparece
+    climb_on @user, 1, 12                         # 12 × 50 × 0,17 = 102 m
+    b1 = @world.phase("b1")
+
+    assert_equal :defeated, @user.journey(world: @world).boss_status(b1)
+
+    @user.update!(stair_steps: 40)                # 81,6 m
+    assert_equal :waiting, @user.journey(world: @world).boss_status(b1)
+
+    @user.update!(stair_steps: 50)
+    assert_equal :defeated, @user.journey(world: @world).boss_status(b1)
+  end
+
   test "semana atual pelo km dentro da fase" do
     walk_on @user, 1, 17                          # a2 com 7 km → semana 2 (5–10)
 

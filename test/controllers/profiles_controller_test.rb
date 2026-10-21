@@ -26,4 +26,30 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
   end
+
+  test "mais degraus que derrubam A Torre de Degraus levam à celebração" do
+    user = users(:viajante)
+    walk_steady user, 90, until_days_ago: 30      # O Primeiro Horizonte aparece
+    walk_on user, 29, 12                          # e cai (102)
+    walk_steady user, 88, until_days_ago: 20      # 190
+    walk_on user, 19, 15, load_kg: 5              # 205: O Fardo do Caminhante aparece e cai
+    walk_steady user, 125, until_days_ago: 3      # 330: A Torre de Degraus aparece
+    climb_on user, 2, 30                          # 30 × 50 × 0,17 = 255 m
+    user.journey.achievement_keys.each { user.celebrate(it) }
+
+    patch profile_url, params: { user: { name: "Tião", avatar: "tropeiro", daily_goal_km: "3", stair_steps: "60" } }
+
+    assert_redirected_to celebration_url
+    assert_includes user.reload.pending_celebration_keys, "phase:a_subida"
+  end
+
+  test "não apaga os degraus de quem já registrou escada" do
+    climb_on users(:viajante), 1, 5
+
+    patch profile_url, params: { user: { name: "Tião", avatar: "tropeiro", daily_goal_km: "3", stair_steps: "" } }
+
+    assert_response :unprocessable_entity
+    assert_select ".field-error", text: /Degraus/
+    assert_equal 50, users(:viajante).reload.stair_steps
+  end
 end

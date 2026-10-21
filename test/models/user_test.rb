@@ -21,4 +21,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.update(stair_steps: 1001)
     assert_not user.update(stair_steps: 2.5)
   end
+
+  test "degraus não somem depois de registrar escada" do
+    user = users(:viajante)
+    climb_on user, 1, 5
+
+    assert_not user.update(stair_steps: nil)
+    assert_equal [ "Degraus não podem sumir depois que você registrou escada. A altura das suas subidas vem deles." ],
+      user.errors.full_messages_for(:stair_steps)
+  end
 end

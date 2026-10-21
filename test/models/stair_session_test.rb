@@ -9,7 +9,7 @@ class StairSessionTest < ActiveSupport::TestCase
   test "sem degraus no perfil o desnível é zero" do
     user = users(:viajante)
     session = climb_on user, 1, 10
-    user.update!(stair_steps: nil)
+    user.stair_steps = nil
     assert_equal 0, session.climb_m
   end
 
