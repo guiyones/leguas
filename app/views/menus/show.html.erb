@@ -1,6 +1,6 @@
 <% phase = @journey.current_phase %>
 
-<div class="sky" aria-hidden="true"></div>
+<%= art_tag :scenes, :menu, label: "Pôr do sol nas Três Torres nevadas", class: "scene" %>
 
 <div class="flex flex-col gap-3 min-h-[calc(100dvh-2.5rem)]">
   <header class="text-center mt-14">
@@ -11,8 +11,7 @@
   <div class="flex-1"></div>
 
   <section class="panel flex items-center gap-3 py-2" data-testid="menu-card">
-    <%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 44, label: Current.user.name,
-          class: "rounded-full border-2 border-gold bg-ridge shrink-0" %>
+    <%= art_tag :avatar, :portrait, label: Current.user.name, size: 44, class: "shrink-0" %>
     <div class="flex-1 min-w-0">
       <p class="font-bold"><%= Current.user.name %> · Nv <%= @level.number %> · <%= @level.title.name %></p>
       <p class="caption">Fase <%= phase.number %> · <span class="font-display text-gold"><%= phase.name %></span></p>

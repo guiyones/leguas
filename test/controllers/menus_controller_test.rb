@@ -18,6 +18,13 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "*", text: /Primeiros Passos/
     assert_select "*", text: %r{/ 90 km}
+    assert_select "[data-testid=menu-card] img[alt=?][src*='art/avatar/portrait']", "Tião"
+  end
+
+  test "paisagem do pôr do sol nas Três Torres" do
+    get root_url
+
+    assert_select "img[role=img][src*='art/scenes/menu']"
   end
 
   test "carrega Cinzel e Nunito" do

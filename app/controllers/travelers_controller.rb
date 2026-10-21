@@ -4,7 +4,6 @@ class TravelersController < ApplicationController
 
   def new
     @user = Current.user
-    @user.avatar ||= User::Traveler::AVATARS.first
   end
 
   def create
@@ -26,6 +25,6 @@ class TravelersController < ApplicationController
     end
 
     def traveler_params
-      params.expect(user: [ :name, :avatar, :daily_goal_km ])
+      params.expect(user: [ :name, :daily_goal_km ])
     end
 end

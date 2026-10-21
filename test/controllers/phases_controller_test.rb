@@ -10,6 +10,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: /Tião/
       assert_select "*", text: /Nível 1/
       assert_select "*", text: /Caminhante/
+      assert_select "img[alt=?][src*='art/avatar/portrait']", "Tião"
     end
   end
 

@@ -17,13 +17,13 @@ class TravelersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", text: /Qual o seu nome, viajante\?/
     assert_select "input[name='user[name]'][autofocus]"
-    assert_select "input[type=radio][name='user[avatar]']", 4
+    assert_select "input[name='user[avatar]']", 0
   end
 
   test "salvar leva pro início" do
     sign_in :novato
 
-    post traveler_url, params: { user: { name: "Zé", avatar: "peregrino", daily_goal_km: "5" } }
+    post traveler_url, params: { user: { name: "Zé", daily_goal_km: "5" } }
 
     assert_redirected_to root_url
     assert_equal "Zé", users(:novato).reload.name
@@ -33,7 +33,7 @@ class TravelersControllerTest < ActionDispatch::IntegrationTest
   test "sem nome volta com erro" do
     sign_in :novato
 
-    post traveler_url, params: { user: { name: "", avatar: "peregrino", daily_goal_km: "5" } }
+    post traveler_url, params: { user: { name: "", daily_goal_km: "5" } }
 
     assert_response :unprocessable_entity
   end

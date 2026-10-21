@@ -1,7 +1,6 @@
 viajante:
   email_address: viajante@leguas.test
   name: Tião
-  avatar: tropeiro
   daily_goal_km: 3
   stair_steps: 50
   created_at: <%= Time.current %>

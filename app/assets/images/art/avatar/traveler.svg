@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 310">
+  <defs>
+    <radialGradient id="traveler-glow" r=".5"><stop offset="0" stop-color="#FFE0A0" stop-opacity=".9"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse cx="120" cy="200" rx="105" ry="105" fill="url(#traveler-glow)" opacity=".5"/>
+  <ellipse cx="120" cy="292" rx="56" ry="8" fill="#0D1726" opacity=".45"/>
+
+  <!-- mochila (atrás, aparece à esquerda do corpo) -->
+  <rect x="76" y="114" width="34" height="74" rx="12" fill="#B0552C"/>
+  <rect x="80" y="104" width="26" height="16" rx="6" fill="#8E4322"/>
+  <rect x="79" y="150" width="28" height="22" rx="6" fill="#8E4322"/>
+
+  <!-- braço direito, atrás, segurando a alça -->
+  <path d="M98 128 C90 146 90 162 96 176" stroke="#7F8B69" stroke-width="13" stroke-linecap="round" fill="none"/>
+  <circle cx="97" cy="180" r="6.5" fill="#D9A27C"/>
+
+  <!-- pernas no passo e botas -->
+  <path d="M108 198 L100 276" stroke="#3D4A5C" stroke-width="17" stroke-linecap="round"/>
+  <path d="M128 198 L142 274" stroke="#334051" stroke-width="17" stroke-linecap="round"/>
+  <path d="M86 274 h24 v12 h-28 q-2 -8 4 -12Z" fill="#4A3021"/>
+  <path d="M134 272 h22 q8 4 6 14 h-28Z" fill="#4A3021"/>
+
+  <!-- tronco e camiseta -->
+  <path d="M96 120 Q118 110 142 120 L146 200 Q118 210 92 200Z" fill="#8F9C78"/>
+  <path d="M110 118 Q119 127 128 118" fill="none" stroke="#7A8664" stroke-width="3"/>
+
+  <!-- alça curva por cima do ombro, com fivela, sumindo embaixo do braço -->
+  <path d="M99 117 C110 117 115 128 112 140 C110 148 104 154 98 156" stroke="#6E3418" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M100 116 C109 117 113 127 110 138" stroke="#C46A3C" stroke-width="1.5" fill="none" opacity=".7"/>
+  <rect x="105" y="138" width="9" height="6" rx="1.5" fill="#3B3B44"/>
+
+  <!-- bastão: da empunhadura, na altura da cintura, até o chão à frente -->
+  <path d="M170 160 L190 288" stroke="#C9B48A" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M166 152 L172 168" stroke="#3B3B44" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="190" cy="288" r="3" fill="#9FB8C9"/>
+
+  <!-- braço esquerdo: ombro, cotovelo e mão na empunhadura -->
+  <path d="M140 126 C152 136 158 148 162 156" stroke="#8F9C78" stroke-width="13" stroke-linecap="round" fill="none"/>
+  <path d="M160 152 L168 160" stroke="#E2B08A" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="169" cy="160" r="7" fill="#E2B08A"/>
+
+  <!-- cabeça -->
+  <rect x="112" y="104" width="14" height="12" fill="#D9A27C"/>
+  <ellipse cx="119" cy="82" rx="26" ry="30" fill="#E8B892"/>
+  <path d="M93 80 C91 56 105 48 119 48 C135 48 147 56 145 80 C141 70 137 64 133 62 C125 66 109 66 101 60 C97 66 95 72 93 80Z" fill="#2E211B"/>
+  <circle cx="110" cy="84" r="7.5" fill="none" stroke="#4D4660" stroke-width="2.5"/>
+  <circle cx="128" cy="84" r="7.5" fill="none" stroke="#4D4660" stroke-width="2.5"/>
+  <path d="M117.5 83 q1.5 -1.5 3 0" stroke="#4D4660" stroke-width="2.5" fill="none"/>
+  <circle cx="110" cy="85" r="1.8" fill="#2A1D18"/>
+  <circle cx="128" cy="85" r="1.8" fill="#2A1D18"/>
+  <path d="M109 98 C113 94 117 94 119 96 C121 94 125 94 129 98 C125 97 122 98 119 99 C116 98 113 97 109 98Z" fill="#6B4A33"/>
+  <path d="M115 104 q4 2 8 0 l-1 4 q-3 2 -6 0Z" fill="#6B4A33"/>
+</svg>

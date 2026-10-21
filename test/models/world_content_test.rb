@@ -66,9 +66,9 @@ class WorldContentTest < ActiveSupport::TestCase
     end
   end
 
-  test "todo avatar é 16x16" do
-    User::Traveler::AVATARS.each do |avatar|
-      assert_nothing_raised { PixelArt.find(:avatars, avatar).validate(size: 16) }
+  test "avatar tem retrato e viajante em svg" do
+    %w[ portrait traveler ].each do |key|
+      assert ArtHelper::ROOT.join("avatar/#{key}.svg").exist?, "falta o #{key} do avatar"
     end
   end
 end

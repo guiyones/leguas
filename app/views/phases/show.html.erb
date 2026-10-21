@@ -2,8 +2,7 @@
 
 <section class="panel flex items-center gap-4" data-testid="hud">
   <%= link_to edit_profile_path, aria: { label: "Perfil" } do %>
-    <%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 64, label: Current.user.name,
-          class: "rounded-full border-2 border-gold bg-ridge" %>
+    <%= art_tag :avatar, :portrait, label: Current.user.name, size: 64 %>
   <% end %>
   <div class="flex-1 flex flex-col gap-2">
     <p class="font-bold"><%= Current.user.name %></p>

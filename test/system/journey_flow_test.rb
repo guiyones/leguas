@@ -13,8 +13,6 @@ class JourneyFlowTest < ApplicationSystemTestCase
     assert_text "Qual o seu nome, viajante?"
     fill_in "Seu nome de viajante", with: "Nina"
     click_on "Próximo"
-    find("label", text: "Romeira").click
-    click_on "Próximo"
     find("label", text: "5 km").click
     click_on "Começar jornada"
 

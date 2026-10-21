@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844">
+  <defs>
+    <linearGradient id="menu-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0D1726"/>
+      <stop offset=".28" stop-color="#29435E"/>
+      <stop offset=".44" stop-color="#E2A05A"/>
+      <stop offset=".5" stop-color="#29435E"/>
+      <stop offset="1" stop-color="#0D1726"/>
+    </linearGradient>
+    <radialGradient id="menu-glow" r=".5">
+      <stop offset="0" stop-color="#FFE6B0" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#E98A3C" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#E98A3C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="menu-granite" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#29435E"/>
+      <stop offset=".5" stop-color="#1C2E44"/>
+      <stop offset="1" stop-color="#132235"/>
+    </linearGradient>
+    <linearGradient id="menu-lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E2A05A" stop-opacity=".7"/>
+      <stop offset=".5" stop-color="#5F9BB8" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#132235" stop-opacity=".9"/>
+    </linearGradient>
+    <linearGradient id="menu-mist" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E2A05A" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#E2A05A" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#E2A05A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="menu-ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1A2A"/>
+      <stop offset="1" stop-color="#0D1726"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="390" height="844" fill="url(#menu-sky)"/>
+
+  <!-- estrelas -->
+  <g fill="#FFFFFF">
+    <circle cx="18" cy="56" r="1.3"/>
+    <circle cx="62" cy="128" r="1"/>
+    <circle cx="98" cy="38" r="1.1" opacity=".7"/>
+    <circle cx="142" cy="96" r=".9" opacity=".6"/>
+    <circle cx="186" cy="24" r="1.2"/>
+    <circle cx="232" cy="70" r="1" opacity=".8"/>
+    <circle cx="279" cy="42" r="1.6"/>
+    <circle cx="318" cy="118" r="1"/>
+    <circle cx="356" cy="64" r="1.2" opacity=".8"/>
+    <circle cx="376" cy="170" r=".9" opacity=".5"/>
+    <circle cx="30" cy="196" r=".9" opacity=".5"/>
+    <circle cx="120" cy="170" r=".8" opacity=".4"/>
+    <circle cx="300" cy="200" r=".8" opacity=".4"/>
+  </g>
+  <circle cx="279" cy="42" r="5" fill="#FFE6B0" opacity=".15"/>
+
+  <!-- brilho quente do sol atrás das torres -->
+  <circle cx="200" cy="380" r="190" fill="url(#menu-glow)" opacity=".6"/>
+
+  <!-- serra distante -->
+  <path d="M0 400 L40 386 L78 394 L112 372 L140 384 L270 380 L300 366 L336 382 L390 374 L390 470 L0 470Z" fill="#29435E" opacity=".75"/>
+
+  <!-- maciço das Três Torres -->
+  <path d="M0 448 L52 428 L98 414 L130 404 L141 362 L145 314 L150 288 L156 276 L162 280 L166 300 L169 338 L172 356 L177 352 L180 304 L184 268 L190 246 L197 234 L204 244 L209 266 L213 302 L216 348 L220 358 L225 350 L227 306 L231 278 L237 264 L242 272 L245 298 L248 338 L262 386 L300 404 L346 416 L390 428 L390 520 L0 520Z" fill="url(#menu-granite)"/>
+  <!-- luz do poente contornando as torres -->
+  <path d="M130 404 L141 362 L145 314 L150 288 L156 276 L162 280 L166 300 L169 338 L172 356 L177 352 L180 304 L184 268 L190 246 L197 234 L204 244 L209 266 L213 302 L216 348 L220 358 L225 350 L227 306 L231 278 L237 264 L242 272 L245 298 L248 338 L262 386" fill="none" stroke="#E2A05A" stroke-width="1.6" stroke-linejoin="round" opacity=".6"/>
+  <!-- neve -->
+  <g fill="#CFE3EE">
+    <path d="M156 276 L162 280 L166 300 L162 298 L159 306 L155 292 L150 296 L150 288Z" opacity=".85"/>
+    <path d="M197 234 L204 244 L209 266 L203 260 L199 272 L194 256 L188 262 L184 268 L190 246Z" opacity=".9"/>
+    <path d="M237 264 L242 272 L245 298 L240 290 L236 298 L233 284 L231 278Z" opacity=".85"/>
+    <path d="M145 314 L149 330 L146 344 L143 336Z" opacity=".45"/>
+    <path d="M213 302 L216 328 L211 318Z" opacity=".45"/>
+    <path d="M172 356 L177 352 L176 362Z M216 348 L220 358 L225 350 L221 364Z" opacity=".55"/>
+    <path d="M98 414 L130 404 L124 412 L106 418Z" opacity=".35"/>
+    <path d="M262 386 L300 404 L280 404Z" opacity=".35"/>
+  </g>
+
+  <!-- névoa do vale -->
+  <rect y="420" width="390" height="60" fill="url(#menu-mist)"/>
+
+  <!-- laguna aos pés das torres -->
+  <path d="M84 470 Q200 452 316 468 Q300 486 200 490 Q104 488 84 470Z" fill="url(#menu-lake)"/>
+  <path d="M150 472 h96 M170 479 h56" stroke="#FFE6B0" stroke-width="1.2" stroke-linecap="round" opacity=".45"/>
+
+  <!-- cristas em camadas -->
+  <path d="M0 496 Q110 462 210 492 T390 484 L390 844 L0 844Z" fill="#132235"/>
+  <path d="M0 590 Q170 548 390 578 L390 844 L0 844Z" fill="url(#menu-ground)"/>
+  <path d="M0 690 Q220 660 390 690 L390 844 L0 844Z" fill="#0D1726" opacity=".8"/>
+</svg>

@@ -36,6 +36,17 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "svg[aria-label=?]", "Insígnia Primeiros Passos"
   end
 
+  test "título novo mostra o retrato" do
+    walk_steady users(:viajante), 90, until_days_ago: 1
+    user = users(:viajante)
+    user.pending_celebration_keys.excluding("title:andarilho").each { user.celebrate(it) }
+
+    get celebration_url
+
+    assert_select "h1", text: /Novo título!/
+    assert_select "img[alt=?][src*='art/avatar/portrait']", "Tião"
+  end
+
   test "chefe apareceu antes da insígnia" do
     user = users(:viajante)
     walk_steady user, 90, until_days_ago: 1

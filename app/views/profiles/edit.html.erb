@@ -1,7 +1,10 @@
 <% @page_title = "Perfil" %>
 
 <section class="panel flex flex-col gap-6">
-  <h1 class="text-gold">Perfil</h1>
+  <div class="flex items-center gap-4">
+    <%= art_tag :avatar, :portrait, label: @user.name_in_database, size: 64 %>
+    <h1 class="text-gold">Perfil</h1>
+  </div>
 
   <%= form_with model: @user, url: profile_path, method: :patch, class: "flex flex-col gap-6" do |form| %>
     <%= render "travelers/fields", form: form, user: @user, autofocus: false %>

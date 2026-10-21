@@ -13,6 +13,6 @@ class OnboardingTest < ApplicationSystemTestCase
     fill_in "Seu nome de viajante", with: "Nina"
     find_field("Seu nome de viajante").send_keys(:enter)
 
-    assert_text "Escolha seu viajante"
+    assert_text "Quanto você costuma andar por dia?"
   end
 end

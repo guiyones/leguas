@@ -25,6 +25,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "#atual[data-phase=carga_leve][data-status=current]" do
       assert_select "*", text: %r{12 / 115 km}
+      assert_select "img[alt=?][src*='art/avatar/traveler']", "Tião"
       assert_select "*", text: /km 20/                # Estrada da Estepe ainda não alcançada
     end
     assert_select "[data-phase=a_subida][data-status=upcoming]"

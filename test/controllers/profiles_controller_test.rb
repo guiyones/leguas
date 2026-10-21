@@ -3,26 +3,27 @@ require "test_helper"
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
   setup { sign_in :viajante }
 
-  test "edita meta e avatar" do
+  test "edita nome e meta" do
     get edit_profile_url
     assert_response :success
     assert_select "input[name='user[name]']:not([autofocus])"
+    assert_select "img[alt=?][src*='art/avatar/portrait']", "Tião"
+    assert_select "input[name='user[avatar]']", 0
 
-    patch profile_url, params: { user: { name: "Tião", avatar: "romeira", daily_goal_km: "8" } }
+    patch profile_url, params: { user: { name: "Tião", daily_goal_km: "8" } }
 
     assert_redirected_to root_url
-    assert_equal "romeira", users(:viajante).reload.avatar
-    assert_equal 8, users(:viajante).daily_goal_km
+    assert_equal 8, users(:viajante).reload.daily_goal_km
   end
 
   test "salva os degraus da escada" do
-    patch profile_url, params: { user: { name: "Tião", avatar: "romeira", daily_goal_km: "3", stair_steps: "62" } }
+    patch profile_url, params: { user: { name: "Tião", daily_goal_km: "3", stair_steps: "62" } }
 
     assert_equal 62, users(:viajante).reload.stair_steps
   end
 
   test "não aceita meta fora das opções" do
-    patch profile_url, params: { user: { name: "Tião", avatar: "romeira", daily_goal_km: "50" } }
+    patch profile_url, params: { user: { name: "Tião", daily_goal_km: "50" } }
 
     assert_response :unprocessable_entity
   end
@@ -37,7 +38,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     climb_on user, 2, 30                          # 30 × 50 × 0,17 = 255 m
     user.journey.achievement_keys.each { user.celebrate(it) }
 
-    patch profile_url, params: { user: { name: "Tião", avatar: "tropeiro", daily_goal_km: "3", stair_steps: "60" } }
+    patch profile_url, params: { user: { name: "Tião", daily_goal_km: "3", stair_steps: "60" } }
 
     assert_redirected_to celebration_url
     assert_includes user.reload.pending_celebration_keys, "phase:a_subida"
@@ -46,7 +47,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   test "não apaga os degraus de quem já registrou escada" do
     climb_on users(:viajante), 1, 5
 
-    patch profile_url, params: { user: { name: "Tião", avatar: "tropeiro", daily_goal_km: "3", stair_steps: "" } }
+    patch profile_url, params: { user: { name: "Tião", daily_goal_km: "3", stair_steps: "" } }
 
     assert_response :unprocessable_entity
     assert_select ".field-error", text: /Degraus/
