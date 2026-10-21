@@ -46,6 +46,14 @@ class StairSessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, users(:viajante).stair_sessions.count
   end
 
+  test "parâmetro user solto não quebra o registro" do
+    assert_difference -> { users(:viajante).stair_sessions.count }, 1 do
+      post stair_sessions_url, params: { user: "x", stair_session: { climbs: "5", climbed_on: Date.current.iso8601 } }
+    end
+
+    assert_redirected_to root_url
+  end
+
   test "editar e excluir" do
     session = users(:viajante).stair_sessions.create!(climbs: 3, climbed_on: Date.current)
 
@@ -74,6 +82,18 @@ class StairSessionsControllerTest < ActionDispatch::IntegrationTest
 
     patch stair_session_url(other), params: { stair_session: { climbs: "9" } }
 
+    assert_response :not_found
+  end
+
+  test "não abre nem exclui a escada de outro viajante" do
+    other = users(:novato).tap { it.update!(stair_steps: 10) }.stair_sessions.create!(climbs: 1, climbed_on: Date.current)
+
+    get edit_stair_session_url(other)
+    assert_response :not_found
+
+    assert_no_difference -> { StairSession.count } do
+      delete stair_session_url(other)
+    end
     assert_response :not_found
   end
 end

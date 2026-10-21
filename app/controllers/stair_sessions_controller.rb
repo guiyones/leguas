@@ -44,7 +44,12 @@ class StairSessionsController < ApplicationController
     end
 
     def save_steps
-      steps = params.dig(:user, :stair_steps)
+      steps = stair_steps_param
       Current.user.stair_steps || steps.blank? || Current.user.update(stair_steps: steps)
+    end
+
+    # The user param is optional and may come as anything, not only a hash.
+    def stair_steps_param
+      params[:user].try(:permit, :stair_steps)&.dig(:stair_steps)
     end
 end
