@@ -70,6 +70,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[data-boss]", text: /A Torre de Degraus/
       assert_select "*", text: /Pico Agudo/
       assert_select "[data-week]", 4
+      assert_select "[data-week='2']", text: /escada: 2× 30 min/
     end
   end
 

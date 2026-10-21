@@ -31,7 +31,7 @@
         <% phase.weeks.each do |week| %>
           <li class="caption" data-week="<%= week.number %>">
             Semana <%= week.number %><%= " (leve)" if week.light? %> · <%= number_with_precision week.km, precision: 1, strip_insignificant_zeros: true %> km ·
-            <%= week.short_walks %>, longão de <%= week.long_walk %>, <%= week.load %>
+            <%= week.short_walks %>, longão de <%= week.long_walk %>, <%= week.load %>, escada: <%= week.stairs %>
           </li>
         <% end %>
       </ol>
