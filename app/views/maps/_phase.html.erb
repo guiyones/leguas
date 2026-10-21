@@ -8,7 +8,7 @@
           label: "Insígnia #{phase.name}", silhouette: status == :upcoming %>
     <span class="flex-1 flex flex-col gap-1">
       <span class="block caption">Fase <%= phase.number %></span>
-      <span class="block font-display text-[0.75rem] <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></span>
+      <span class="block font-display <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></span>
     </span>
     <% if here %>
       <%= pixel_art_tag PixelArt.find(:avatars, journey.user.avatar), size: 40, label: journey.user.name %>
@@ -17,7 +17,7 @@
 
   <div class="flex flex-col gap-2 mt-3">
     <% if here %>
-      <%= segmented_progress journey.phase_progress %>
+      <%= progress_bar journey.phase_progress %>
       <%= stat journey.km_in_phase, total: phase.km, unit: "km" %>
     <% else %>
       <%= stat phase.km, unit: "km" %>
@@ -42,7 +42,7 @@
         <% if status == :upcoming %>
           <p class="caption">Chefe: ???</p>
         <% else %>
-          <p class="caption">Chefe: <span class="text-boss"><%= phase.boss.name %></span></p>
+          <p class="caption">Chefe: <span class="text-ember"><%= phase.boss.name %></span></p>
           <p class="caption"><%= phase.boss.description %></p>
         <% end %>
       </div>

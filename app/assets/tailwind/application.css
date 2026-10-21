@@ -4,17 +4,23 @@
 @source "../../frontend/controllers";
 
 @theme {
-  --color-night: #1B1F3B;
-  --color-panel: #2A2F5A;
-  --color-ink: #0B0D1F;
-  --color-gold: #F4C542;
-  --color-xp: #5BC27A;
-  --color-boss: #FF9F6B;
-  --color-cream: #F2EEDC;
+  --color-deep: #0D1726;
+  --color-panel: #16263B;
+  --color-ridge: #1C2E44;
+  --color-ridge-2: #132235;
+  --color-ridge-3: #0E1A2A;
+  --color-sky: #29435E;
+  --color-horizon: #E2A05A;
+  --color-ice: #CFE3EE;
+  --color-lake: #5F9BB8;
+  --color-text: #E8EEF2;
+  --color-muted: #9FB8C9;
+  --color-gold: #F2C46D;
+  --color-ember: #E98A3C;
+  --color-glow: #FFE6B0;
   --color-legend: #B98CFF;
-  --color-silhouette: #3A3F6A;
-  --font-display: "Press Start 2P", monospace;
-  --font-body: "Jersey 10", system-ui, sans-serif;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-body: "Nunito", system-ui, sans-serif;
 }
 
 @import "./components.css";

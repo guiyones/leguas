@@ -2,25 +2,26 @@
 
 <section class="panel flex items-center gap-4" data-testid="hud">
   <%= link_to edit_profile_path, aria: { label: "Perfil" } do %>
-    <%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 64, label: Current.user.name %>
+    <%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 64, label: Current.user.name,
+          class: "rounded-full border-2 border-gold bg-ridge" %>
   <% end %>
   <div class="flex-1 flex flex-col gap-2">
-    <p class="font-display text-sm"><%= Current.user.name %></p>
+    <p class="font-bold"><%= Current.user.name %></p>
     <p class="caption"><span class="text-gold">Nível <%= @level.number %></span> · <%= @level.title.name %></p>
-    <%= segmented_progress @level.progress, color: :xp %>
-    <%= stat @level.xp, unit: "XP", color: :xp %>
+    <%= progress_bar @level.progress %>
+    <%= stat @level.xp, unit: "XP" %>
     <p class="caption">faltam <%= @level.xp_to_next %> XP pro próximo nível</p>
   </div>
 </section>
 
 <section class="panel flex flex-col gap-3" data-testid="phase">
   <% phase = @journey.current_phase %>
-  <p class="caption"><%= phase.region.name %> · Fase <%= phase.number %> de <%= phase.region.phases.size %></p>
+  <p class="eyebrow"><%= phase.region.name %> · Fase <%= phase.number %> de <%= phase.region.phases.size %></p>
   <h2 class="<%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></h2>
   <% if phase.focus %>
     <p class="caption"><%= phase.focus %></p>
   <% end %>
-  <%= segmented_progress @journey.phase_progress %>
+  <%= progress_bar @journey.phase_progress %>
   <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
 
   <% if @journey.finished? %>
@@ -45,7 +46,7 @@
 
 <% if tip = tip_of_the_day(phase.region) %>
   <section class="panel">
-    <p class="caption">Dica do plano</p>
+    <p class="eyebrow">Dica do plano</p>
     <p data-testid="tip"><%= tip %></p>
   </section>
 <% end %>
@@ -53,13 +54,13 @@
 <section class="panel flex flex-col gap-3" data-testid="mission">
   <h2>Missão do dia</h2>
   <% if @walked_today >= @mission_goal %>
-    <p class="text-xp">Missão cumprida! +<%= Mission::XP %> XP</p>
+    <p class="text-lake font-bold">Missão cumprida! +<%= Mission::XP %> XP</p>
   <% else %>
     <p>Caminhar <%= number_with_precision @mission_goal, precision: 1, strip_insignificant_zeros: true %> km</p>
   <% end %>
-  <%= segmented_progress @walked_today / @mission_goal, segments: 6, color: :xp %>
-  <%= stat @walked_today, total: @mission_goal, unit: "km", color: :xp %>
+  <%= progress_bar @walked_today / @mission_goal, color: :lake %>
+  <%= stat @walked_today, total: @mission_goal, unit: "km", color: :lake %>
 </section>
 
-<%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-sm py-6" %>
+<%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
 <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>

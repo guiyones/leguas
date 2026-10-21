@@ -1,17 +1,30 @@
 <% phase = @journey.current_phase %>
 
-<h1 class="font-display text-center text-xl">Léguas</h1>
+<div class="sky" aria-hidden="true"></div>
 
-<section class="panel flex flex-col gap-2" data-testid="menu-card">
-  <p class="font-display text-sm"><%= Current.user.name %></p>
-  <p class="caption"><span class="text-gold">Nível <%= @level.number %></span> · <%= @level.title.name %></p>
-  <p class="caption"><%= phase.region.name %> · Fase <%= phase.number %></p>
-  <h2 class="text-gold"><%= phase.name %></h2>
-  <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
-</section>
+<div class="flex flex-col gap-3 min-h-[calc(100dvh-2.5rem)]">
+  <header class="text-center mt-14">
+    <h1 class="logo">LÉGUAS</h1>
+    <p class="eyebrow mt-1">a trilha do vento austral</p>
+  </header>
 
-<nav class="flex flex-col gap-3" aria-label="Menu do jogo">
-  <%= link_to "Continuar jornada", phase_path, class: "btn-game" %>
-  <%= link_to "Histórico", walks_path, class: "btn-game btn-game--secondary" %>
-  <%= link_to "Perfil", edit_profile_path, class: "btn-game btn-game--secondary" %>
-</nav>
+  <div class="flex-1"></div>
+
+  <section class="panel flex items-center gap-3 py-2" data-testid="menu-card">
+    <%= pixel_art_tag PixelArt.find(:avatars, Current.user.avatar), size: 44, label: Current.user.name,
+          class: "rounded-full border-2 border-gold bg-ridge shrink-0" %>
+    <div class="flex-1 min-w-0">
+      <p class="font-bold"><%= Current.user.name %> · Nv <%= @level.number %> · <%= @level.title.name %></p>
+      <p class="caption">Fase <%= phase.number %> · <span class="font-display text-gold"><%= phase.name %></span></p>
+      <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
+    </div>
+  </section>
+
+  <nav class="flex flex-col gap-3" aria-label="Menu do jogo">
+    <%= link_to "Continuar jornada", phase_path, class: "btn-game text-lg py-4" %>
+    <div class="grid grid-cols-2 gap-2">
+      <%= link_to "Histórico", walks_path, class: "btn-game btn-game--secondary" %>
+      <%= link_to "Perfil", edit_profile_path, class: "btn-game btn-game--secondary" %>
+    </div>
+  </nav>
+</div>

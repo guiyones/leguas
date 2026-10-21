@@ -19,4 +19,11 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /Primeiros Passos/
     assert_select "*", text: %r{/ 90 km}
   end
+
+  test "carrega Cinzel e Nunito" do
+    get root_url
+
+    assert_select 'link[href*="Cinzel"][href*="Nunito"]'
+    assert_select 'link[href*="Press+Start"]', count: 0
+  end
 end

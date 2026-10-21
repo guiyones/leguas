@@ -6,7 +6,7 @@
   <p>Mandamos um código pra <strong><%= session[:otp_email_address] %></strong>.</p>
 
   <% if Rails.env.development? && flash[:otp_code].present? %>
-    <p class="font-display text-xp" data-testid="dev-otp-code">DEV: <%= flash[:otp_code] %></p>
+    <p class="font-display text-lake" data-testid="dev-otp-code">DEV: <%= flash[:otp_code] %></p>
   <% end %>
 
   <%= form_with url: auth_tokens_validations_path, class: "flex flex-col gap-4" do |form| %>

@@ -1,7 +1,7 @@
 <% status = journey.region_status(region) %>
 <section class="panel flex flex-col gap-4" data-region="<%= region.key %>" data-status="<%= status %>">
   <header class="flex flex-col gap-1">
-    <p class="caption">Região <%= region.number %> · <%= region.km.to_i %> km ·
+    <p class="eyebrow">Região <%= region.number %> · <%= region.km.to_i %> km ·
       <%= { completed: "Concluída", current: "Em andamento", locked: "Bloqueada" }.fetch(status) %></p>
     <h2 class="<%= status == :locked ? "opacity-60" : "text-gold" %>"><%= region.name %></h2>
   </header>

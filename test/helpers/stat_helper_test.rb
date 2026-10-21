@@ -16,9 +16,9 @@ class StatHelperTest < ActionView::TestCase
   end
 
   test "sem total mostra só a unidade" do
-    html = Nokogiri::HTML(stat(25, unit: "XP", prefix: "+", color: :xp))
+    html = Nokogiri::HTML(stat(25, unit: "XP", prefix: "+", color: :lake))
 
     assert_equal "+25 XP", html.at(".stat").text.squish
-    assert_includes html.at(".stat__value")["class"], "text-xp"
+    assert_includes html.at(".stat__value")["class"], "text-lake"
   end
 end

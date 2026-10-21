@@ -15,6 +15,6 @@ class PixelArtHelperTest < ActionView::TestCase
   test "silhueta pinta tudo com a cor de silhueta" do
     svg = Nokogiri::HTML(pixel_art_tag(@art, size: 64, label: "?", silhouette: true))
 
-    assert_equal [ "var(--color-silhouette)" ], svg.css("rect").map { it["fill"] }.uniq
+    assert_equal [ "var(--color-ridge)" ], svg.css("rect").map { it["fill"] }.uniq
   end
 end

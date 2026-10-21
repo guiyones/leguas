@@ -7,7 +7,7 @@
     <ul class="flex flex-col gap-3">
       <% @entries.each do |entry| %>
         <% stair = entry.is_a?(StairSession) %>
-        <li class="flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
+        <li class="flex items-center justify-between gap-3 border-b border-gold/20 pb-3">
           <div>
             <% if stair %>
               <%= stat entry.climb_m.round, unit: "m de escada" %>
@@ -18,9 +18,9 @@
             <% end %>
           </div>
           <div class="flex gap-2">
-            <%= link_to "Editar", (stair ? edit_stair_session_path(entry) : edit_walk_path(entry)), class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3" %>
+            <%= link_to "Editar", (stair ? edit_stair_session_path(entry) : edit_walk_path(entry)), class: "btn-game btn-game--secondary text-sm min-h-0 py-2 px-3" %>
             <%= button_to "Excluir", (stair ? stair_session_path(entry) : walk_path(entry)), method: :delete,
-                  class: "btn-game btn-game--secondary text-[0.65rem] min-h-0 py-2 px-3",
+                  class: "btn-game btn-game--secondary text-sm min-h-0 py-2 px-3",
                   form: { data: { turbo_confirm: stair ? "Excluir essa subida de escada? Seu progresso vai ser recalculado." : "Excluir essa caminhada? Seu progresso vai ser recalculado." } } %>
           </div>
         </li>

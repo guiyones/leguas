@@ -7,25 +7,25 @@
 </fieldset>
 
 <fieldset data-steps-target="step" class="flex flex-col gap-4">
-  <legend class="font-display text-[0.75rem] mb-2">Escolha seu viajante</legend>
+  <legend class="mb-2">Escolha seu viajante</legend>
   <div class="grid grid-cols-2 gap-3">
     <% User::Traveler::AVATARS.each do |avatar| %>
       <label class="panel flex flex-col items-center gap-2 has-checked:border-gold cursor-pointer">
         <%= form.radio_button :avatar, avatar, class: "sr-only" %>
         <%= pixel_art_tag PixelArt.find(:avatars, avatar), size: 64, label: avatar.humanize %>
-        <span class="font-display text-[0.65rem]"><%= avatar.humanize %></span>
+        <span class="font-bold"><%= avatar.humanize %></span>
       </label>
     <% end %>
   </div>
 </fieldset>
 
 <fieldset data-steps-target="step" class="flex flex-col gap-4">
-  <legend class="font-display text-[0.75rem] mb-2">Quanto você costuma andar por dia?</legend>
+  <legend class="mb-2">Quanto você costuma andar por dia?</legend>
   <div class="grid grid-cols-4 gap-2">
     <% User::Traveler::DAILY_GOALS.each do |km| %>
       <label class="panel text-center has-checked:border-gold cursor-pointer">
         <%= form.radio_button :daily_goal_km, km, checked: user.daily_goal_km.to_i == km, class: "sr-only" %>
-        <span class="font-display text-xs"><%= km %> km</span>
+        <span class="font-bold"><%= km %> km</span>
       </label>
     <% end %>
   </div>

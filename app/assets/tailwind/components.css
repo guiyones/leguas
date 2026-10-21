@@ -1,29 +1,63 @@
 @layer base {
   body {
-    background: var(--color-night);
-    color: var(--color-cream);
+    background: var(--color-deep);
+    color: var(--color-text);
     font-family: var(--font-body);
-    font-size: 1.375rem;
-    line-height: 1.3;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
-  h1, h2, h3, button, label, .font-display {
+  h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    line-height: 1.6;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
   }
 
-  h1 { font-size: 1rem; }
-  h2 { font-size: 0.8rem; }
-  label { font-size: 0.75rem; }
+  h1 {
+    font-size: 1.5rem;
+    text-shadow: 0 0 12px color-mix(in srgb, var(--color-ember) 50%, transparent);
+  }
+
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.05rem; }
+
+  label, legend {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  strong, b { font-weight: 800; }
 }
 
 @layer components {
   .panel {
-    background: var(--color-panel);
-    border: 4px solid var(--color-ink);
-    box-shadow: inset 0 0 0 2px #3A4078;
+    background: linear-gradient(
+      color-mix(in srgb, var(--color-panel) 90%, transparent),
+      color-mix(in srgb, var(--color-deep) 90%, transparent));
+    backdrop-filter: blur(6px);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 50%, transparent);
+    border-radius: 16px;
+    box-shadow:
+      0 0 18px color-mix(in srgb, var(--color-ember) 20%, transparent),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
     padding: 1rem;
   }
+
+  label.panel:has(:checked) {
+    background: var(--color-ridge);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 50%, transparent);
+  }
+
+  label.panel:has(:focus-visible) {
+    outline: 2px solid var(--color-glow);
+    outline-offset: 2px;
+  }
+
+  .flash { text-align: center; font-weight: 700; }
+  .flash--notice { color: var(--color-gold); }
+  .flash--alert { color: var(--color-ember); }
 
   .btn-game {
     display: inline-flex;
@@ -32,75 +66,184 @@
     gap: 0.5rem;
     min-height: 3rem;
     padding: 0.75rem 1.25rem;
-    font-family: var(--font-display);
-    font-size: 0.75rem;
-    color: var(--color-ink);
-    background: var(--color-gold);
-    border: 4px solid var(--color-ink);
-    box-shadow: 0 6px 0 var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: #3A1A08;
+    background: linear-gradient(var(--color-gold), var(--color-ember));
+    border: 0;
+    border-radius: 12px;
+    box-shadow:
+      0 4px 0 #8A4418,
+      0 0 18px color-mix(in srgb, var(--color-ember) 55%, transparent);
     cursor: pointer;
     text-decoration: none;
+    transition: transform 80ms, box-shadow 80ms;
   }
 
   .btn-game:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px 0 var(--color-ink);
+    transform: translateY(3px);
+    box-shadow:
+      0 1px 0 #8A4418,
+      0 0 12px color-mix(in srgb, var(--color-ember) 45%, transparent);
+  }
+
+  .btn-game:focus-visible {
+    outline: 2px solid var(--color-glow);
+    outline-offset: 2px;
   }
 
   .btn-game--secondary {
-    background: var(--color-panel);
-    color: var(--color-cream);
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-panel) 75%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+    backdrop-filter: blur(4px);
+    box-shadow: none;
   }
 
-  .progress-segmented {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 3px;
-    padding: 3px;
-    background: var(--color-ink);
+  .btn-game--secondary:active {
+    box-shadow: none;
   }
 
-  .progress-segmented__segment {
-    height: 0.9rem;
-    background: var(--color-silhouette);
+  .progress {
+    height: 10px;
+    border-radius: 99px;
+    background: rgb(0 0 0 / 0.35);
+    overflow: hidden;
   }
 
-  .progress-segmented--gold .progress-segmented__segment--filled { background: var(--color-gold); }
-  .progress-segmented--xp .progress-segmented__segment--filled { background: var(--color-xp); }
+  .progress__fill {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+  }
+
+  .progress--gold .progress__fill {
+    background: linear-gradient(90deg, var(--color-gold), var(--color-ember));
+    box-shadow: 0 0 10px var(--color-ember);
+  }
+
+  .progress--lake .progress__fill {
+    background: linear-gradient(90deg, var(--color-ice), var(--color-lake));
+    box-shadow: 0 0 10px var(--color-lake);
+  }
 
   .field {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.75rem 0.875rem;
     font-family: var(--font-body);
-    font-size: 1.5rem;
-    color: var(--color-ink);
-    background: var(--color-cream);
-    border: 4px solid var(--color-ink);
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-ridge-3) 85%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+    border-radius: 12px;
+    color-scheme: dark;
+    transition: border-color 120ms, box-shadow 120ms;
+  }
+
+  .field:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--color-ember) 45%, transparent);
+    outline: none;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted);
   }
 
   .stat {
     display: flex;
     align-items: baseline;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .stat__value {
     font-family: var(--font-display);
-    font-size: 1rem;
+    font-weight: 800;
+    font-size: 1.25rem;
   }
 
   .stat__unit {
-    font-size: 1.375rem;
+    font-size: 0.95rem;
+    color: var(--color-muted);
   }
 
   .caption {
-    font-size: 1.25rem;
-    opacity: 0.9;
+    font-size: 0.875rem;
+    color: var(--color-muted);
   }
 
   .field-error {
-    color: var(--color-boss);
-    font-size: 1.25rem;
+    color: var(--color-ember);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .glow {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .glow::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    z-index: -1;
+    background: radial-gradient(closest-side,
+      color-mix(in srgb, var(--color-glow) 70%, transparent),
+      color-mix(in srgb, var(--color-ember) 25%, transparent) 55%,
+      transparent);
+    pointer-events: none;
+    animation: glow-pulse 3.2s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    50% { opacity: 0.6; transform: scale(0.92); }
+  }
+
+  .nav {
+    background: color-mix(in srgb, var(--color-deep) 94%, #000);
+    border-top: 1px solid color-mix(in srgb, var(--color-gold) 35%, transparent);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .nav-tab {
+    display: block;
+    padding: 0.9rem 0.25rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  .nav-tab--active {
+    color: var(--color-gold);
+    text-shadow: 0 0 8px var(--color-ember);
+  }
+
+  .sky {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 60% 18% at 50% 50%, color-mix(in srgb, var(--color-glow) 45%, transparent), transparent),
+      linear-gradient(var(--color-deep) 0%, var(--color-sky) 30%, var(--color-horizon) 46%,
+        var(--color-ridge) 52%, var(--color-ridge-2) 75%, var(--color-ridge-3) 100%);
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.75rem;
+    letter-spacing: 0.12em;
+    color: #FFF3DC;
+    text-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 70%, transparent), 0 2px 0 #3A1A08;
   }
 
   .trail {
@@ -108,7 +251,7 @@
     flex-direction: column;
     gap: 0.75rem;
     padding-left: 1.25rem;
-    border-left: 4px dashed var(--color-silhouette);
+    border-left: 2px dashed color-mix(in srgb, var(--color-muted) 40%, transparent);
   }
 
   .trail--done {
@@ -118,33 +261,57 @@
 
   .trail-node {
     position: relative;
-    background: var(--color-panel);
-    border: 4px solid var(--color-ink);
+    background: color-mix(in srgb, var(--color-ridge-2) 85%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 30%, transparent);
+    border-radius: 14px;
     padding: 0.75rem;
   }
 
   .trail-node::before {
     content: "";
     position: absolute;
-    left: calc(-1.25rem - 10px);
+    left: calc(-1.25rem - 9px);
     top: 1.25rem;
-    width: 16px;
-    height: 16px;
-    background: var(--color-silhouette);
-    border: 3px solid var(--color-ink);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-ridge);
+    border: 2px solid color-mix(in srgb, var(--color-muted) 50%, transparent);
   }
 
-  .trail-node--completed::before { background: var(--color-gold); }
-  .trail-node--current::before { background: var(--color-xp); }
-  .trail-node--waiting { border-color: var(--color-boss); animation: boss-pulse 1.6s steps(2, end) infinite; }
-  .trail-node--waiting::before { background: var(--color-boss); width: 22px; height: 22px; left: calc(-1.25rem - 13px); }
+  .trail-node--completed::before { background: var(--color-gold); border-color: var(--color-gold); }
+
+  .trail-node--current {
+    border-color: color-mix(in srgb, var(--color-gold) 70%, transparent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 30%, transparent);
+  }
+
+  .trail-node--current::before {
+    background: var(--color-glow);
+    border-color: var(--color-gold);
+    box-shadow: 0 0 10px var(--color-ember);
+  }
+
+  .trail-node--waiting {
+    border-color: var(--color-ember);
+    animation: boss-pulse 2.4s ease-in-out infinite;
+  }
+
+  .trail-node--waiting::before {
+    background: var(--color-ember);
+    border-color: var(--color-glow);
+    width: 18px;
+    height: 18px;
+    left: calc(-1.25rem - 11px);
+    box-shadow: 0 0 12px var(--color-ember);
+  }
 
   @keyframes boss-pulse {
-    50% { border-color: var(--color-ink); }
+    50% { box-shadow: 0 0 22px color-mix(in srgb, var(--color-ember) 55%, transparent); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .trail-node--waiting { animation: none; }
+    .trail-node--waiting, .glow::before { animation: none; }
   }
 
   .trail-node > summary {
@@ -162,8 +329,7 @@
     margin-left: auto;
     padding-left: 0.5rem;
     color: var(--color-gold);
-    font-family: var(--font-display);
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
   }
 
@@ -171,7 +337,9 @@
 
   .silhouette {
     display: block;
-    background: var(--color-silhouette);
+    background: var(--color-ridge);
+    border: 1px dashed color-mix(in srgb, var(--color-muted) 45%, transparent);
+    border-radius: 50%;
     flex-shrink: 0;
   }
 

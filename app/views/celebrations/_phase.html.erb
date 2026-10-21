@@ -1,9 +1,9 @@
 <% phase = achievement.subject %>
-<h1 class="<%= phase.boss? ? "text-boss" : "text-gold" %>"><%= phase.boss? ? "Chefe derrotado!" : "Conquista desbloqueada!" %></h1>
+<h1 class="<%= phase.boss? ? "text-ember" : "text-gold" %>"><%= phase.boss? ? "Chefe derrotado!" : "Conquista desbloqueada!" %></h1>
 <%= pixel_art_tag PixelArt.find(:insignias, phase.key), size: phase.insignia_size * 8, label: "Insígnia #{phase.name}" %>
 <h2>Fase <%= phase.number %> vencida: <%= phase.name %></h2>
 <% if phase.boss? %>
   <p>Insígnia: <strong><%= phase.insignia_name %></strong></p>
 <% end %>
 <p class="caption">Foco: <%= phase.focus %></p>
-<%= stat phase.xp, unit: "XP", prefix: "+", color: :xp %>
+<%= stat phase.xp, unit: "XP", prefix: "+" %>
