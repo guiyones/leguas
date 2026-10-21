@@ -150,6 +150,6 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
   test "aba Mapa na navegação" do
     get phase_url
 
-    assert_select "nav a[href=?]", map_path(anchor: "atual"), text: "Mapa"
+    assert_select "nav a[href=?]", map_path, text: "Mapa"
   end
 end

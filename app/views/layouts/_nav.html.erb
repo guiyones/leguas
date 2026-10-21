@@ -1,7 +1,7 @@
 <nav class="nav fixed inset-x-0 bottom-0" aria-label="Navegação principal">
   <ul class="mx-auto max-w-md grid grid-cols-4 text-center">
     <li><%= link_to "Fase", phase_path, class: [ "nav-tab", ("nav-tab--active" if current_page?(phase_path)) ] %></li>
-    <li><%= link_to "Mapa", map_path(anchor: "atual"), class: [ "nav-tab", ("nav-tab--active" if current_page?(map_path)) ] %></li>
+    <li><%= link_to "Mapa", map_path, class: [ "nav-tab", ("nav-tab--active" if current_page?(map_path)) ] %></li>
     <li><%= link_to "Diário", "#", class: "nav-tab", "aria-disabled": "true" %></li>
     <li><%= link_to "Menu", root_path, class: "nav-tab" %></li>
   </ul>

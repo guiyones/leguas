@@ -26,6 +26,14 @@ class MapsHelperTest < ActionView::TestCase
     assert_equal 1, world_walked_fraction(@region, user.journey)
   end
 
+  test "região que não é a atual nem completa fica sem trilha dourada" do
+    with_world(test_world) do
+      region = World.current.regions.last
+
+      assert_equal 0, world_walked_fraction(region, users(:viajante).journey)
+    end
+  end
+
   test "rótulo fica do lado livre do nó" do
     assert_equal [ 78, "start" ], world_label_position(60)
     assert_equal [ 162, "end" ], world_label_position(180)

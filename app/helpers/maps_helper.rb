@@ -13,8 +13,10 @@ module MapsHelper
   def world_walked_fraction(region, journey)
     if journey.region_status(region) == :completed
       1
+    elsif index = region.phases.index(journey.current_phase)
+      index / [ region.phases.size - 1, 1 ].max.to_f
     else
-      region.phases.index(journey.current_phase).to_i / [ region.phases.size - 1, 1 ].max.to_f
+      0
     end
   end
 
