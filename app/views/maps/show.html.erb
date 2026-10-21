@@ -2,6 +2,8 @@
 
 <h1 class="text-gold text-center">Mapa da trilha</h1>
 
+<%= render "maps/world", region: @journey.current_region, journey: @journey %>
+
 <% @journey.world.regions.each do |region| %>
   <%= render "maps/region", region: region, journey: @journey %>
 <% end %>

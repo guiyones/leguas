@@ -86,6 +86,67 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_not_includes response.body, "O Cume"
   end
 
+  test "mapa do mundo com seis nós" do
+    walk_steady users(:viajante), 90, until_days_ago: 2
+    walk_on users(:viajante), 1, 12
+
+    get map_url
+
+    assert_select "[data-testid=world]" do
+      assert_select "[data-world-phase]", 6
+      assert_select "[data-world-phase=primeiros_passos][data-status=completed][href='#fase-primeiros_passos']" do
+        assert_select "image[href*='art/insignias/primeiros_passos']"
+      end
+      assert_select "[data-world-phase=carga_leve][data-status=current]"
+      assert_select "[data-world-phase=a_subida][data-status=upcoming]", text: /A Subida/
+    end
+    assert_select "#fase-a_subida [data-phase=a_subida]"
+  end
+
+  test "nó da fase atual diz você está aqui" do
+    walk_steady users(:viajante), 40
+
+    get map_url
+
+    assert_select "[data-world-phase=primeiros_passos][data-status=current]", text: /você está aqui/
+    assert_select "[data-world-phase]", text: /você está aqui/, count: 1
+  end
+
+  test "chefe esperando faz o nó pulsar" do
+    walk_steady users(:viajante), 100
+
+    get map_url
+
+    assert_select "[data-world-phase=primeiros_passos][data-status=boss] .world-map__ember"
+  end
+
+  test "fase futura não mostra nome do chefe nem na ilustração" do
+    walk_steady users(:viajante), 90, until_days_ago: 2
+    walk_on users(:viajante), 1, 12
+
+    get map_url
+
+    assert_match "O Primeiro Horizonte", response.body
+    [ "A Torre de Degraus", "Sol e Lua", "O Cume", "O Vento Austral" ].each do |boss|
+      assert_no_match boss, response.body
+    end
+  end
+
+  test "patagônia lendária" do
+    get map_url
+
+    assert_select "[data-world-phase=patagonia].world-map__node--legend", text: /Patagônia/
+  end
+
+  test "mundo completo mostra todas as fases vencidas" do
+    travel_whole_world users(:viajante)
+
+    get map_url
+
+    assert_select "[data-world-phase][data-status=completed]", 6
+    assert_select "[data-world-phase]", text: /você está aqui/, count: 0
+  end
+
   test "aba Mapa na navegação" do
     get phase_url
 
