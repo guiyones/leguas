@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :walks
   resources :stair_sessions, except: %i[ index show ]
   resource :celebration, only: %i[ show create ]
+  resource :journal, only: :show
   resource :map, only: :show
   resource :menu, only: :show
   resource :phase, only: :show

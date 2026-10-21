@@ -359,6 +359,12 @@
     color: color-mix(in srgb, var(--color-muted) 70%, transparent);
   }
 
+  .stamp-unknown--large { width: 72px; height: 72px; font-size: 1.5rem; }
+
+  .stamp-slot:has(details[open]) { grid-column: 1 / -1; }
+  .stamp-slot > details > summary { list-style: none; }
+  .stamp-slot > details > summary::-webkit-details-marker { display: none; }
+
   .art-locked { filter: grayscale(1) brightness(0.45); opacity: 0.7; }
 
   .phase-map {

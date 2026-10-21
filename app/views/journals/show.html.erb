@@ -1,0 +1,38 @@
+<header class="text-center">
+  <p class="eyebrow">Diário de viagem</p>
+  <h1>Carimbos</h1>
+</header>
+
+<section class="panel grid grid-cols-2 gap-3 mt-3" aria-label="Números da jornada">
+  <div data-stat="km"><%= stat @journey.total_km, unit: "km" %></div>
+  <div data-stat="leagues"><%= stat @journey.leagues, unit: "léguas" %></div>
+  <div data-stat="climbed"><%= stat @journey.climbed_m, unit: "m subidos" %></div>
+  <div data-stat="missions"><%= stat @missions_done, unit: "missões" %></div>
+</section>
+
+<ul class="grid grid-cols-3 gap-3 mt-3">
+  <% @journey.world.phases.each do |phase| %>
+    <% phase.landmarks.each do |landmark| %>
+      <% if @journey.landmark_reached?(landmark) %>
+        <li class="stamp-slot">
+          <details>
+            <summary class="flex flex-col items-center gap-1 cursor-pointer">
+              <%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 72 %>
+              <span class="text-xs leading-tight text-center"><%= landmark.name %></span>
+            </summary>
+            <p class="caption mt-1">Fase <%= phase.number %> · <%= phase.name %></p>
+            <p class="caption mt-1"><%= landmark.story %></p>
+          </details>
+        </li>
+      <% else %>
+        <li class="stamp-slot flex flex-col items-center gap-1">
+          <span class="stamp-unknown stamp-unknown--large" aria-hidden="true">?</span>
+          <span class="caption text-xs text-center">
+            <span class="sr-only">Marco ainda não alcançado,</span>
+            <%= @journey.phase_status(phase) == :upcoming ? "fase #{phase.number}" : "km #{number_with_precision landmark.at_km, precision: 1, strip_insignificant_zeros: true}" %>
+          </span>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>

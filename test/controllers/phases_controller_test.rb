@@ -201,7 +201,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href=?]", phase_path
       assert_select "a[href=?]", map_path
       assert_select "a[href=?]", root_path
-      assert_select "a[href=?][aria-disabled=true]", "#", text: "Diário"
+      assert_select "a[href=?]", journal_path, text: "Diário"
       assert_select "a", text: "Registrar", count: 0
     end
   end
