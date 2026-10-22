@@ -2,6 +2,20 @@ class Walk < ApplicationRecord
   include Backdatable
 
   DAILY_LIMIT_KM = 100
+  MAX_DURATION_S = 24.hours.to_i
+  MAX_STEPS = 200_000
+  MAX_ELEVATION_M = 10_000
+
+  def self.format_duration(seconds)
+    hours, rest = seconds.divmod(3600)
+    minutes, secs = rest.divmod(60)
+
+    if hours > 0
+      format("%d:%02d:%02d", hours, minutes, secs)
+    else
+      format("%d:%02d", minutes, secs)
+    end
+  end
 
   belongs_to :user
 
@@ -9,7 +23,8 @@ class Walk < ApplicationRecord
   validates :km, numericality: { greater_than: 0 }
   backdatable :walked_on
   validates :load_kg, numericality: { greater_than: 0, less_than_or_equal_to: 40 }, allow_nil: true
-  validates :elevation_gain_m, numericality: { greater_than_or_equal_to: 0, only_integer: true }, allow_nil: true
+  validates :elevation_gain_m, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: MAX_ELEVATION_M }, allow_nil: true
+  validates :steps, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: MAX_STEPS }, allow_nil: true
   validate :daily_limit_respected
   validate :duration_readable
 
@@ -29,7 +44,7 @@ class Walk < ApplicationRecord
   end
 
   def duration
-    @duration_text || (duration_s && format_duration(duration_s))
+    @duration_text || (duration_s && self.class.format_duration(duration_s))
   end
 
   def duration=(text)
@@ -46,26 +61,16 @@ class Walk < ApplicationRecord
 
   private
     def parse_duration(text)
-      if text.blank?
-        nil
-      elsif text.match?(/\A\d+\z/)
-        text.to_i * 60
-      elsif (match = text.match(/\A(?:(\d+):)?(\d{1,2}):(\d{2})\z/)) && match[2].to_i < 60 && match[3].to_i < 60
-        match[1].to_i * 3600 + match[2].to_i * 60 + match[3].to_i
-      else
-        :invalid
-      end
-    end
+      seconds =
+        if text.blank?
+          return nil
+        elsif text.match?(/\A\d+\z/)
+          text.to_i * 60
+        elsif (match = text.match(/\A(?:(\d+):)?(\d{1,2}):(\d{2})\z/)) && match[2].to_i < 60 && match[3].to_i < 60
+          match[1].to_i * 3600 + match[2].to_i * 60 + match[3].to_i
+        end
 
-    def format_duration(seconds)
-      hours, rest = seconds.divmod(3600)
-      minutes, secs = rest.divmod(60)
-
-      if hours > 0
-        format("%d:%02d:%02d", hours, minutes, secs)
-      else
-        format("%d:%02d", minutes, secs)
-      end
+      seconds&.between?(1, MAX_DURATION_S) ? seconds : :invalid
     end
 
     def duration_readable

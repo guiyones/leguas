@@ -13,13 +13,6 @@ module WorkoutHelper
   end
 
   def duration_text(duration_s)
-    hours, rest = duration_s.divmod(3600)
-    minutes, seconds = rest.divmod(60)
-
-    if hours > 0
-      format("%d:%02d:%02d", hours, minutes, seconds)
-    else
-      format("%d:%02d", minutes, seconds)
-    end
+    Walk.format_duration(duration_s)
   end
 end

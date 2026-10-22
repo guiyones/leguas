@@ -129,4 +129,32 @@ class WalkTest < ActiveSupport::TestCase
     assert_not @user.walks.new(km: 1, walked_on: Date.current, elevation_gain_m: -1).valid?
     assert @user.walks.new(km: 1, walked_on: Date.current, elevation_gain_m: 32).valid?
   end
+
+  test "tempo zero ou acima de 24h é inválido" do
+    [ "0", "0:00", "0:00:00", "99999999", "24:00:01" ].each do |text|
+      walk = @user.walks.new(km: 1, walked_on: Date.current, duration: text)
+
+      assert_not walk.valid?, text
+      assert_nil walk.duration_s
+    end
+    assert @user.walks.new(km: 1, walked_on: Date.current, duration: "24:00:00").valid?
+  end
+
+  test "valores enormes dão erro de validação, não exceção" do
+    walk = @user.walks.new(km: 1, walked_on: Date.current, steps: "99999999999", elevation_gain_m: 99999999999)
+
+    assert_not walk.valid?
+    assert walk.errors[:steps].any?
+    assert walk.errors[:elevation_gain_m].any?
+  end
+
+  test "passos precisam ser positivos e até 200.000" do
+    assert_not @user.walks.new(km: 1, walked_on: Date.current, steps: 0).valid?
+    assert_not @user.walks.new(km: 1, walked_on: Date.current, steps: 200_001).valid?
+    assert @user.walks.new(km: 1, walked_on: Date.current, steps: "200.000").valid?
+  end
+
+  test "subida acima de 10.000 m é inválida" do
+    assert_not @user.walks.new(km: 1, walked_on: Date.current, elevation_gain_m: 10_001).valid?
+  end
 end
