@@ -85,6 +85,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     get map_url
 
     assert_select "[data-phase=primeiros_passos] [data-week='1']" do
+      assert_select "*", text: /Trecho 1/
       assert_select "dt", text: "Longão"
       assert_select "dd", text: "8 km"
       assert_select "dt", text: "Escada", count: 0

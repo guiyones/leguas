@@ -19,7 +19,7 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
     get journal_url
 
     assert_select "[data-testid=weeks]", 0
-    assert_select "*", text: /Semanas completas/, count: 0
+    assert_select "*", text: /Trechos completos/, count: 0
   end
 
   test "semana completa vira selo com o nome da fase" do
@@ -31,9 +31,9 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
     get journal_url
 
     assert_select "[data-testid=weeks]" do
-      assert_select "h2", text: "Semanas completas"
+      assert_select "h2", text: "Trechos completos"
       assert_select "li", 1
-      assert_select "li", text: /Semana 1/
+      assert_select "li", text: /Trecho 1/
       assert_select "li", text: /Primeiros Passos/
       assert_select "img[src*='art/seals/week']"
     end

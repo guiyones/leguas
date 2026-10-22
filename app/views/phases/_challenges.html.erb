@@ -1,6 +1,6 @@
 <section class="panel flex flex-col gap-3" data-testid="challenges">
-  <p class="eyebrow">Semana <%= week.number %> de <%= phase.weeks.size %><%= " · semana leve" if week.light? %></p>
-  <h2>Desafios da semana</h2>
+  <p class="eyebrow">Trecho <%= week.number %> de <%= phase.weeks.size %><%= " · trecho leve" if week.light? %></p>
+  <h2>Desafios do trecho</h2>
   <ul class="flex flex-col gap-2">
     <% week.challenges.each do |challenge| %>
       <% done = progress.done?(challenge) %>

@@ -1,9 +1,9 @@
 <% week = achievement.subject %>
-<h1 class="celebration__kicker text-gold">Semana completa!</h1>
+<h1 class="celebration__kicker text-gold">Trecho completo!</h1>
 <div class="relative">
-  <%= art_tag :seals, "week", label: "Selo da semana #{week.number}", size: 180, class: "celebration__art" %>
+  <%= art_tag :seals, "week", label: "Selo do trecho #{week.number}", size: 180, class: "celebration__art" %>
   <span class="absolute inset-x-0 top-[22%] text-center text-5xl text-glow" aria-hidden="true"><%= week.number %></span>
 </div>
-<h2 class="celebration__name">Semana <%= week.number %></h2>
+<h2 class="celebration__name">Trecho <%= week.number %></h2>
 <p>Fase <%= week.phase.number %>: <strong><%= week.phase.name %></strong></p>
 <%= stat User::WeekProgress::COMPLETE_XP, unit: "XP", prefix: "+" %>

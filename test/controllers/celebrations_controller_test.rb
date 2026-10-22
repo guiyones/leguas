@@ -103,9 +103,9 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
 
     get celebration_url
 
-    assert_select "h1", text: /Semana completa!/
+    assert_select "h1", text: /Trecho completo!/
     assert_select "*", text: /Primeiros Passos/
-    assert_select "*", text: /Semana 1/
+    assert_select "*", text: /Trecho 1/
     assert_select "img[src*='art/seals/week']"
     assert_select ".stat", text: /\+50\s+XP/
     assert_select "button", text: "Continuar"

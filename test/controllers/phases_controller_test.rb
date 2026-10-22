@@ -73,8 +73,8 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     get phase_url
 
     assert_select "[data-testid=challenges]" do
-      assert_select "h2", text: "Desafios da semana"
-      assert_select "*", text: /Semana 1 de 4/
+      assert_select "h2", text: "Desafios do trecho"
+      assert_select "*", text: /Trecho 1 de 4/
       assert_select "[data-done=false]", text: /3 caminhadas de 40 min.*0\/3/m
       assert_select "[data-done=false]", text: /Longão de 8 km/
       assert_select "*", text: Regexp.new(Regexp.escape(World.current.phases.first.note))
@@ -195,7 +195,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     get phase_url
 
-    assert_select "[data-testid=challenges]", text: /Semana 2 de 4/
+    assert_select "[data-testid=challenges]", text: /Trecho 2 de 4/
     assert_select "[data-testid=challenges]", text: /Desça prédios de elevador/
     assert_select "[data-testid=boss]", 0
   end
@@ -205,7 +205,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     get phase_url
 
-    assert_select "[data-testid=challenges]", text: /semana leve/i
+    assert_select "[data-testid=challenges]", text: /trecho leve/i
   end
 
   test "foco da fase perto do nome" do
