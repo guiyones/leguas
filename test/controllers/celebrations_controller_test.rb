@@ -95,6 +95,22 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /completou o mundo inteiro/, count: 0
   end
 
+  test "semana completa mostra o selo" do
+    user = users(:viajante)
+    3.downto(1) { walk_on user, it, 3, minutes: 40 }
+    walk_on user, 0, 8                            # longão da semana 1
+    user.pending_celebration_keys.excluding("week:primeiros_passos:1").each { user.celebrate(it) }
+
+    get celebration_url
+
+    assert_select "h1", text: /Semana completa!/
+    assert_select "*", text: /Primeiros Passos/
+    assert_select "*", text: /Semana 1/
+    assert_select "img[src*='art/seals/week']"
+    assert_select ".stat", text: /\+50\s+XP/
+    assert_select "button", text: "Continuar"
+  end
+
   test "clique duplo ou chave estranha não quebra" do
     post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }
 

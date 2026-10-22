@@ -103,4 +103,20 @@ class User::CelebrationsTest < ActiveSupport::TestCase
       assert_includes @user.celebrations.pluck(:key), "boss:b1"
     end
   end
+
+  test "apagar a caminhada que fechava a semana esquece a celebração" do
+    with_world test_world do
+      walk_on @user, 4, 10
+      walk_on @user, 3, 2, minutes: 40
+      closing = walk_on @user, 2, 2, minutes: 40
+      walk_on @user, 1, 3                         # km 14 de manhã: longão da semana 1
+      assert_includes @user.pending_celebration_keys, "week:a2:1"
+      @user.pending_celebration_keys.each { @user.celebrate(it) }
+
+      closing.destroy
+
+      assert_not_includes @user.journey.achievement_keys, "week:a2:1"
+      assert_not_includes @user.celebrations.pluck(:key), "week:a2:1"
+    end
+  end
 end

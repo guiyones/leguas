@@ -13,6 +13,7 @@ class User::Journey
     @log = user.training_log
     @boss_appeared_on = {}
     @boss_defeated_on = {}
+    @week_dates = Hash.new { |dates, week| dates[week] = [] }
 
     replay
   end
@@ -99,7 +100,21 @@ class User::Journey
 
   def xp
     @xp ||= (total_km * XP_PER_KM).floor + reached_milestones.sum(&:xp) +
-      Mission::XP * user.missions.accomplished.count + (climbed_m / CLIMB_M_PER_XP).floor
+      Mission::XP * user.missions.accomplished.count + (climbed_m / CLIMB_M_PER_XP).floor +
+      @week_dates.keys.sum { week_progress(it).xp }
+  end
+
+  def week_progress(week)
+    @week_progress ||= {}
+    @week_progress[week] ||= begin
+      dates = @week_dates.fetch(week, [])
+      User::WeekProgress.new(week, walks: dates.flat_map { @log.walks_on(it) },
+        stair_sessions: dates.flat_map { @log.stair_sessions_on(it) })
+    end
+  end
+
+  def completed_weeks
+    world.phases.flat_map(&:weeks).select { week_progress(it).complete? }
   end
 
   def level
@@ -107,7 +122,8 @@ class User::Journey
   end
 
   def achievement_keys
-    reached_milestones.map(&:key) + level.reached_titles.map { "title:#{it.key}" }
+    reached_milestones.map(&:key) + level.reached_titles.map { "title:#{it.key}" } +
+      completed_weeks.map { "week:#{it.phase.key}:#{it.number}" }
   end
 
   private
@@ -116,6 +132,10 @@ class User::Journey
       gate = boss_phases.first
 
       @log.dates.each do |date|
+        if week = week_at(gate)
+          @week_dates[week] << date
+        end
+
         @total_km += @log.km_on(date)
         gate = advance(gate, on: date) if gate
       end
@@ -136,6 +156,17 @@ class User::Journey
         end
       else
         gate
+      end
+    end
+
+    # The week of the position at the start of the day. While a boss waits, the day has no week.
+    def week_at(gate)
+      position = [ total_km, gate&.end_km || world.total_km ].min
+
+      unless gate && position >= gate.end_km
+        if phase = world.phases.find { position < it.end_km }
+          phase.weeks.find { position - phase.start_km < it.end_km }
+        end
       end
     end
 

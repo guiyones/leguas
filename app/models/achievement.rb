@@ -14,6 +14,7 @@ Achievement = Data.define(:key, :kind, :subject) do
     when "phase" then world.phase(subject_key)
     when "region" then world.region(subject_key)
     when "title" then User::Level.title(subject_key)
+    when "week" then world.week(*subject_key.to_s.split(":", 2).values_at(0, 1))
     end
   end
 end

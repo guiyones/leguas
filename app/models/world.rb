@@ -30,6 +30,7 @@ class World
   def region(key) = regions.find { it.key == key }
   def phase(key) = phases.find { it.key == key }
   def landmark(key) = landmarks.find { it.key == key }
+  def week(phase_key, number) = phase(phase_key)&.weeks&.find { it.number.to_s == number.to_s }
 
   private
     def build_regions(regions_data)

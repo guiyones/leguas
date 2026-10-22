@@ -9,10 +9,14 @@ class AchievementTest < ActiveSupport::TestCase
     assert_equal "Região Beta", Achievement.find("region:beta", world: @world).subject.name
     assert_equal "Andarilho", Achievement.find("title:andarilho", world: @world).subject.name
     assert_equal "phase", Achievement.find("phase:a2", world: @world).kind
+    assert_same @world.phase("a2").weeks.second, Achievement.subject_for("week", "a2:2", @world)
   end
 
   test "chave desconhecida vira nil" do
     assert_nil Achievement.find("phase:nao_existe", world: @world)
     assert_nil Achievement.find("bobagem", world: @world)
+    assert_nil Achievement.find("week:a2:9", world: @world)
+    assert_nil Achievement.find("week:a1:1", world: @world)
+    assert_nil Achievement.find("week", world: @world)
   end
 end

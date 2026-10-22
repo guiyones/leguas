@@ -74,7 +74,7 @@ class User::JourneyTest < ActiveSupport::TestCase
     journey = @user.journey(world: @world)
 
     assert_equal [ 30, 10, 40 ], [ journey.position_km, journey.banked_km, journey.total_km ]
-    assert_equal 400 + 25 + 100 + 25 + 0, journey.xp - 4 * Mission::XP   # km pelo total; a2 e região ainda não
+    assert_equal 400 + 25 + 100 + 25 + 0 + 2 * 30, journey.xp - 4 * Mission::XP   # km pelo total; a2 e região ainda não; longões das semanas 1 e 3
 
     walk_on @user, 1, 12
     journey = @user.journey(world: @world)
@@ -188,6 +188,100 @@ class User::JourneyTest < ActiveSupport::TestCase
     assert_not journey.finished?
   end
 
+  test "caminhadas com tempo contam pra semana em que o dia começou" do
+    walk_on @user, 5, 10                          # a1, sem semanas
+    walk_on @user, 4, 1, minutes: 40
+    walk_on @user, 3, 1, minutes: 39
+    walk_on @user, 3, 1                           # sem tempo
+    journey = @user.journey(world: @world)
+    week1 = @world.phase("a2").weeks.first
+    walks = week1.challenges.find { it.kind == :walks }
+
+    assert_equal 1, journey.week_progress(week1).done(walks)
+
+    walk_on @user, 2, 1, minutes: 40              # km 13 de manhã
+    journey = @user.journey(world: @world)
+
+    assert_equal 2, journey.week_progress(week1).done(walks)
+    assert_not journey.week_progress(week1).complete?
+    assert_empty journey.completed_weeks
+  end
+
+  test "caminhada de 3 km com 45 min conta pras caminhadas e pro longão" do
+    walk_on @user, 2, 10
+    walk_on @user, 1, 3, minutes: 45
+    progress = @user.journey(world: @world).week_progress(@world.phase("a2").weeks.first)
+
+    assert_equal [ 1, 1 ], progress.week.challenges.map { progress.done(it) }
+  end
+
+  test "fronteira: o dia conta pra semana da posição de manhã" do
+    walk_on @user, 3, 10
+    walk_on @user, 2, 4                           # km 14: a2, semana 1
+    walk_on @user, 1, 3, minutes: 40              # termina no km 17, semana 2
+    journey = @user.journey(world: @world)
+    week1, week2 = @world.phase("a2").weeks.first(2)
+
+    assert_equal 1, journey.week_progress(week1).done(week1.challenges.first)
+    assert_equal 0, journey.week_progress(week2).done(week2.challenges.first)
+  end
+
+  test "semana sem nenhum dia tem progresso vazio" do
+    week = @world.phase("a2").weeks.last
+    progress = @user.journey(world: @world).week_progress(week)
+
+    assert_equal [ 0, 0 ], week.challenges.map { progress.done(it) }
+    assert_equal 0, progress.xp
+  end
+
+  test "longão da semana 2 pede carga e escada conta sessão" do
+    walk_on @user, 4, 15                          # km 15: semana 2 de a2
+    walk_on @user, 3, 3
+    climb_on @user, 3, 2
+    journey = @user.journey(world: @world)
+    week2 = @world.phase("a2").weeks.second
+    long_walk, stairs = week2.challenges.values_at(1, 2)
+
+    assert_equal 0, journey.week_progress(week2).done(long_walk)
+    assert_equal 1, journey.week_progress(week2).done(stairs)
+
+    walk_on @user, 2, 3, load_kg: 5
+
+    assert_equal 1, @user.journey(world: @world).week_progress(week2).done(long_walk)
+  end
+
+  test "semana completa dá xp, conquista e entra nas completas" do
+    walk_on @user, 4, 10
+    walk_on @user, 3, 2, minutes: 40
+    walk_on @user, 2, 2, minutes: 40
+    walk_on @user, 1, 3                           # km 14 de manhã: longão da semana 1
+    journey = @user.journey(world: @world)
+    week1 = @world.phase("a2").weeks.first
+
+    assert_equal 2 * 15 + 30 + 50, journey.week_progress(week1).xp
+    assert_equal 2 * 15 + 30 + 50, journey.xp - base_xp(journey)
+    assert_equal [ week1 ], journey.completed_weeks
+    assert_equal "week:a2:1", journey.achievement_keys.last
+  end
+
+  test "chefe esperando: o dia não cai em semana nenhuma" do
+    walk_steady @user, 30, until_days_ago: 3      # a2 completa, chefe espera
+    before = @world.phase("a2").weeks.sum { @user.journey(world: @world).week_progress(it).xp }
+
+    walk_on @user, 2, 2, minutes: 40
+    walk_on @user, 1, 2, minutes: 40
+    journey = @user.journey(world: @world)
+
+    assert_equal :waiting, journey.boss_status(@world.phase("a2"))
+    assert_equal before, @world.phase("a2").weeks.sum { journey.week_progress(it).xp }
+  end
+
+  test "xp de caminhadas sem desafios não muda" do
+    walk_on @user, 1, 9                           # a1 não tem semanas
+
+    assert_equal 90 + 25 + missions_xp, @user.journey(world: @world).xp   # km + Marco A1
+  end
+
   test "léguas: 6 km cada pelo total, arredondando pra baixo" do
     walk_steady @user, 40, until_days_ago: 2
 
@@ -195,6 +289,12 @@ class User::JourneyTest < ActiveSupport::TestCase
   end
 
   private
+    def missions_xp = Mission::XP * @user.missions.accomplished.count
+
+    def base_xp(journey)
+      journey.total_km * 10 + journey.reached_milestones.sum(&:xp) + missions_xp + (journey.climbed_m / 5).floor
+    end
+
     # Cada fim de fase e o feito de cada chefe num dia próprio.
     def complete_world
       walk_steady @user, 30, until_days_ago: 20    # a2 aparece

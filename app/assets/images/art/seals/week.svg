@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="seal-week-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE0A0"/><stop offset="1" stop-color="#C98A3A"/></linearGradient>
+    <radialGradient id="seal-week-field" cx=".5" cy=".38" r=".65"><stop offset="0" stop-color="#29435E"/><stop offset="1" stop-color="#16263B"/></radialGradient>
+    <radialGradient id="seal-week-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".45"/><stop offset=".6" stop-color="#E98A3C" stop-opacity=".12"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="seal-week-boot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE6B0"/><stop offset="1" stop-color="#F2C46D"/></linearGradient>
+    <clipPath id="seal-week-clip"><circle cx="50" cy="50" r="40"/></clipPath>
+  </defs>
+  <path d="M50 1 L56 6 L63 3 L67 9 L75 8 L77 15 L85 16 L85 24 L92 27 L90 34 L96 39 L92 45 L97 50 L92 55 L96 61 L90 66 L92 73 L85 76 L85 84 L77 85 L75 92 L67 91 L63 97 L56 94 L50 99 L44 94 L37 97 L33 91 L25 92 L23 85 L15 84 L15 76 L8 73 L10 66 L4 61 L8 55 L3 50 L8 45 L4 39 L10 34 L8 27 L15 24 L15 16 L23 15 L25 8 L33 9 L37 3 L44 6 Z" fill="url(#seal-week-rim)"/>
+  <circle cx="50" cy="50" r="44" fill="none" stroke="#FFF3DC" stroke-opacity=".45" stroke-width=".8"/>
+  <circle cx="50" cy="50" r="41.5" fill="#C98A3A"/>
+  <g clip-path="url(#seal-week-clip)">
+    <rect width="100" height="100" fill="url(#seal-week-field)"/>
+    <circle cx="50" cy="42" r="26" fill="url(#seal-week-glow)"/>
+    <path d="M0 76 Q30 70 50 73 T100 72 V100 H0Z" fill="#0D1726" opacity=".7"/>
+    <path d="M28 60 Q50 54 72 60" stroke="#F2C46D" stroke-opacity=".5" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" stroke-linecap="round"/>
+    <path d="M42 63 h8 v7 q0 2 2 2.5 l8 2 q3 .8 3 3.5 v1.5 h-22 z" fill="url(#seal-week-boot)"/>
+    <path d="M41 79 h23" stroke="#E98A3C" stroke-width="2" stroke-linecap="round"/>
+    <path d="M43 66 h6 M43 69 h6" stroke="#C98A3A" stroke-width=".9"/>
+    <circle cx="26" cy="30" r=".9" fill="#FFE6B0"/><circle cx="74" cy="28" r=".9" fill="#FFE6B0"/><circle cx="78" cy="48" r=".7" fill="#FFE6B0"/><circle cx="22" cy="50" r=".7" fill="#FFE6B0"/>
+  </g>
+</svg>
