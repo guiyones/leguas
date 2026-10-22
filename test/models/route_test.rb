@@ -27,6 +27,18 @@ class RouteTest < ActiveSupport::TestCase
     assert_includes route.errors[:duration], "não parece um tempo, use 38:51"
   end
 
+  test "trace inválido salva como nil" do
+    route = @user.routes.create!(name: "Volta", km: 3, trace: [ [ "a", 1 ] ])
+
+    assert_nil route.reload.trace
+  end
+
+  test "trace válido é mantido" do
+    route = @user.routes.create!(name: "Volta", km: 3, trace: [ [ 0, 0 ], [ 1, 1 ] ])
+
+    assert_equal [ [ 0, 0 ], [ 1, 1 ] ], route.reload.trace
+  end
+
   test "por distância, depois por nome" do
     longa = @user.routes.create!(name: "Longa", km: 8)
     b = @user.routes.create!(name: "B", km: 3)

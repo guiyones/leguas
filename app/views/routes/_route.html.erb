@@ -1,6 +1,8 @@
-<li class="flex items-center gap-3 border-b border-gold/20 pb-3" data-route-card>
-  <div class="shrink-0 w-16 h-16 rounded border border-gold/30 bg-gold/10" aria-hidden="true"></div>
-  <div class="flex-1 min-w-0">
+<li class="flex flex-col gap-3 border-b border-gold/20 pb-3" data-route-card>
+  <div class="overflow-hidden rounded border border-gold/30 [&>svg]:block [&>svg]:w-full [&>img]:block [&>img]:w-full">
+    <%= route_map(route) %>
+  </div>
+  <div class="min-w-0">
     <h2 class="font-bold truncate"><%= route.name %></h2>
     <%= stat route.km, unit: "km" %>
     <p class="caption"><%= route.duration if route.duration_s %><%= " · #{pace(route.km, route.duration_s)}" if route.duration_s %><%= " · #{route.note}" if route.note.present? %></p>

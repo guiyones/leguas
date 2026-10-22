@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140">
+  <defs>
+    <linearGradient id="rt-ph-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1726"/><stop offset="0.6" stop-color="#16263B"/><stop offset="1" stop-color="#29435E"/></linearGradient>
+    <radialGradient id="rt-ph-glow" r=".5"><stop offset="0" stop-color="#FFE6B0" stop-opacity=".6"/><stop offset=".5" stop-color="#E98A3C" stop-opacity=".2"/><stop offset="1" stop-color="#E98A3C" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="200" height="140" fill="url(#rt-ph-sky)"/>
+  <circle cx="150" cy="96" r="60" fill="url(#rt-ph-glow)"/>
+  <path d="M0 112 L40 92 L72 106 L112 84 L160 104 L200 90 V140 H0Z" fill="#1C2E44"/>
+  <path d="M0 124 Q60 112 120 122 T200 118 V140 H0Z" fill="#132235"/>
+  <path d="M26 118 C52 104 24 90 58 82 S104 96 124 70 S150 50 168 40" fill="none" stroke="#9FB8C9" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 6"/>
+  <path d="M168 24 V42" stroke="#F2C46D" stroke-width="2" stroke-linecap="round"/>
+  <path d="M168 24 L182 29 L168 34Z" fill="#F2C46D"/>
+  <circle cx="26" cy="118" r="4" fill="#FFE6B0" stroke="#F2C46D" stroke-width="2"/>
+</svg>
