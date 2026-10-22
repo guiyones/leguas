@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_22_100001) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "auth_tokens", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "code", null: false
@@ -39,6 +67,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_100001) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "date"], name: "index_missions_on_user_id_and_date", unique: true
     t.index ["user_id"], name: "index_missions_on_user_id"
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.decimal "km", precision: 5, scale: 2, null: false
+    t.integer "duration_s"
+    t.string "note"
+    t.json "trace"
+    t.string "trace_source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -87,14 +128,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_100001) do
     t.integer "duration_s"
     t.integer "steps"
     t.integer "elevation_gain_m"
+    t.integer "route_id"
+    t.index ["route_id"], name: "index_walks_on_route_id"
     t.index ["user_id", "walked_on"], name: "index_walks_on_user_id_and_walked_on"
     t.index ["user_id"], name: "index_walks_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "auth_tokens", "users"
   add_foreign_key "celebrations", "users"
   add_foreign_key "missions", "users"
+  add_foreign_key "routes", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "stair_sessions", "users"
+  add_foreign_key "walks", "routes", on_delete: :nullify
   add_foreign_key "walks", "users"
 end

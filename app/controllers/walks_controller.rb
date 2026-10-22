@@ -44,6 +44,6 @@ class WalksController < ApplicationController
     end
 
     def walk_params
-      params.expect(walk: [ :km, :walked_on, :load_kg, :note, :duration, :steps, :elevation_gain_m ])
+      params.expect(walk: [ :km, :walked_on, :load_kg, :note, :duration, :steps, :elevation_gain_m, :route_id ])
     end
 end

@@ -1,0 +1,19 @@
+<% @page_title = "Rotas" %>
+
+<section class="panel flex flex-col gap-4">
+  <h1 class="text-gold">Rotas</h1>
+
+  <% if @routes.any? %>
+    <ul class="flex flex-col gap-3">
+      <% @routes.each do |route| %>
+        <%= render route %>
+      <% end %>
+    </ul>
+    <%= link_to "Nova rota", new_route_path, class: "btn-game" %>
+  <% else %>
+    <p>Nenhuma rota ainda. Faça um caminho e salve aqui.</p>
+    <%= link_to "Nova rota", new_route_path, class: "btn-game" %>
+  <% end %>
+
+  <%= link_to "Voltar ao menu", root_path, class: "caption underline" %>
+</section>

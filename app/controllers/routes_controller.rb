@@ -1,0 +1,46 @@
+class RoutesController < ApplicationController
+  before_action :set_route, only: %i[ edit update destroy ]
+
+  def index
+    @routes = Current.user.routes.by_distance.with_attached_photo
+  end
+
+  def new
+    @route = Current.user.routes.new
+  end
+
+  def create
+    @route = Current.user.routes.new(route_params)
+
+    if @route.save
+      redirect_to routes_path, notice: "Rota salva."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @route.update(route_params)
+      redirect_to routes_path, notice: "Rota atualizada."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @route.destroy
+    redirect_to routes_path, notice: "Rota removida. As caminhadas continuam no histórico."
+  end
+
+  private
+    def set_route
+      @route = Current.user.routes.find(params[:id])
+    end
+
+    def route_params
+      params.expect(route: [ :name, :km, :duration, :note, :photo ])
+    end
+end

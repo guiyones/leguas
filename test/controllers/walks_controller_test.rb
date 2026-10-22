@@ -110,4 +110,41 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_match "4.507 passos", response.body
     assert_match "32 m de subida", response.body
   end
+
+  test "formulário sem rotas não mostra o select, mas convida a salvar uma" do
+    get new_walk_url
+
+    assert_select "select[name='walk[route_id]']", count: 0
+    assert_select "a[href=?]", new_route_path, text: "Salvar um caminho novo como rota"
+  end
+
+  test "formulário com rotas mostra o select com km em cada opção" do
+    route = users(:viajante).routes.create!(name: "Volta do Guanabara", km: "3,55")
+    users(:novato).routes.create!(name: "Alheia", km: 2)
+
+    get new_walk_url
+
+    assert_select "label", text: "Rota"
+    assert_select "select[name='walk[route_id]'] option", count: 2
+    assert_select "select[name='walk[route_id]'] option[value=?][data-km=?]", route.id.to_s, "3.55", text: "Volta do Guanabara (3,55 km)"
+    assert_select "a[href=?]", new_route_path, text: "Salvar um caminho novo como rota"
+  end
+
+  test "registrar com rota grava a rota" do
+    route = users(:viajante).routes.create!(name: "Volta", km: 3.55)
+
+    post walks_url, params: { walk: { km: "3,55", walked_on: Date.current.iso8601, route_id: route.id } }
+
+    assert_equal route, users(:viajante).walks.order(:id).last.route
+  end
+
+  test "rota de outro usuário não vale" do
+    route = users(:novato).routes.create!(name: "Alheia", km: 2)
+
+    assert_no_difference -> { Walk.count } do
+      post walks_url, params: { walk: { km: 2, walked_on: Date.current.iso8601, route_id: route.id } }
+    end
+
+    assert_response :unprocessable_entity
+  end
 end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :auth_tokens, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :walks, dependent: :destroy
+  has_many :routes, dependent: :destroy
   has_many :missions, dependent: :destroy
   has_many :stair_sessions, dependent: :destroy
 

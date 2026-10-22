@@ -1,0 +1,14 @@
+<li class="flex items-center gap-3 border-b border-gold/20 pb-3" data-route-card>
+  <div class="shrink-0 w-16 h-16 rounded border border-gold/30 bg-gold/10" aria-hidden="true"></div>
+  <div class="flex-1 min-w-0">
+    <h2 class="font-bold truncate"><%= route.name %></h2>
+    <%= stat route.km, unit: "km" %>
+    <p class="caption"><%= route.duration if route.duration_s %><%= " · #{pace(route.km, route.duration_s)}" if route.duration_s %><%= " · #{route.note}" if route.note.present? %></p>
+  </div>
+  <div class="flex gap-2">
+    <%= link_to "Editar", edit_route_path(route), class: "btn-game btn-game--secondary text-sm min-h-0 py-2 px-3" %>
+    <%= button_to "Excluir", route_path(route), method: :delete,
+          class: "btn-game btn-game--secondary text-sm min-h-0 py-2 px-3",
+          form: { data: { turbo_confirm: "Excluir essa rota? As caminhadas feitas nela continuam no histórico." } } %>
+  </div>
+</li>

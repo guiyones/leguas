@@ -23,6 +23,7 @@
   <nav class="flex flex-col gap-3" aria-label="Menu do jogo">
     <%= link_to @journey.started? ? "Continuar jornada" : "Começar jornada", phase_path, class: "btn-game text-lg py-4" %>
     <div class="grid grid-cols-2 gap-2">
+      <%= link_to "Rotas", routes_path, class: "btn-game btn-game--secondary" %>
       <%= link_to "Diário", journal_path, class: "btn-game btn-game--secondary" %>
       <%= link_to "Troféus", trophies_path, class: "btn-game btn-game--secondary" %>
       <%= link_to "Histórico", walks_path, class: "btn-game btn-game--secondary" %>

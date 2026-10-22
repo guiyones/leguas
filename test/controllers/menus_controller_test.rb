@@ -8,6 +8,7 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "a[href=?]", phase_path, text: "Começar jornada"
+    assert_select "a[href=?]", routes_path, text: "Rotas"
     assert_select "a[href=?]", walks_path, text: "Histórico"
     assert_select "a[href=?]", edit_profile_path, text: "Perfil"
     assert_select "nav[aria-label=?]", "Navegação principal", count: 0

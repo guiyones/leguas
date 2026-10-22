@@ -1,0 +1,7 @@
+<% @page_title = "Editar rota" %>
+
+<section class="panel flex flex-col gap-4">
+  <h1 class="text-gold">Editar rota</h1>
+  <%= render "form", route: @route %>
+  <%= link_to "Voltar", routes_path, class: "caption underline" %>
+</section>

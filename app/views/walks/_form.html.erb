@@ -1,8 +1,18 @@
-<%= form_with model: walk, class: "flex flex-col gap-4" do |form| %>
+<% routes = Current.user.routes.by_distance %>
+<%= form_with model: walk, class: "flex flex-col gap-4", data: { controller: "route-select" } do |form| %>
+  <% if routes.any? %>
+    <div class="flex flex-col gap-2">
+      <%= form.label :route_id, "Rota" %>
+      <%= form.select :route_id,
+            routes.map { |route| [ "#{route.name} (#{number_with_precision(route.km, precision: 2, strip_insignificant_zeros: true).tr(".", ",")} km)", route.id, { data: { km: route.km.to_s("F") } } ] },
+            { include_blank: "Sem rota" }, class: "field", data: { action: "route-select#fill" } %>
+    </div>
+  <% end %>
+
   <div class="flex flex-col gap-2">
     <%= form.label :km, "Quantos km?" %>
     <%= form.text_field :km, value: walk.km&.to_s("F"), required: true, inputmode: "decimal",
-          autocomplete: "off", autofocus: walk.new_record?, class: "field text-center text-3xl" %>
+          autocomplete: "off", autofocus: walk.new_record?, class: "field text-center text-3xl", data: { route_select_target: "km" } %>
     <% if walk.new_record? %>
       <div class="grid grid-cols-3 gap-2">
         <% [ 2, 3, 5 ].each do |km| %>
@@ -60,6 +70,10 @@
     <%= form.label :note, "Observação (opcional)" %>
     <%= form.text_field :note, maxlength: 140, class: "field" %>
   </div>
+
+  <% if walk.new_record? %>
+    <%= link_to "Salvar um caminho novo como rota", new_route_path, class: "caption underline" %>
+  <% end %>
 
   <%= form.submit walk.new_record? ? "Registrar caminhada" : "Salvar", class: "btn-game" %>
 <% end %>
