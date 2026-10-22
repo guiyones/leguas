@@ -40,7 +40,7 @@ class World::Phase
       week_start = BigDecimal(0)
 
       weeks_data.map.with_index(1) do |data, number|
-        World::Week.new(data, number: number, start_km: week_start, light: number == weeks_data.size).tap { week_start = it.end_km }
+        World::Week.new(data, number: number, start_km: week_start, light: number == weeks_data.size, phase: self).tap { week_start = it.end_km }
       end
     end
 

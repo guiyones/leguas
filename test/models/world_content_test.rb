@@ -24,6 +24,23 @@ class WorldContentTest < ActiveSupport::TestCase
     end
   end
 
+  test "desafios estruturados do plano" do
+    first = @world.phases.first.weeks.first.challenges
+    assert_equal [ :walks, :long_walk ], first.map(&:kind)
+    assert_equal [ 3, 40, 8 ], [ first[0].count, first[0].min_minutes, first[1].km ]
+
+    camp = @world.phases.find { it.key == "dois_dias" }.weeks.first.challenges
+    assert_equal [ 13, 8 ], [ camp[1].km, camp[1].load_kg ]
+    assert_equal 2, camp.find { it.kind == :stairs }.count
+  end
+
+  test "toda semana tem caminhadas e longão" do
+    @world.phases.flat_map(&:weeks).each do |week|
+      assert_includes week.challenges.map(&:kind), :walks
+      assert_includes week.challenges.map(&:kind), :long_walk
+    end
+  end
+
   test "raridades" do
     assert_equal %w[ rare rare rare rare rare legendary ], @world.phases.map(&:rarity)
   end

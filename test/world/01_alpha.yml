@@ -28,10 +28,10 @@ phases:
     bonus: { name: Bônus A2, description: x }
     boss: { name: Chefe A2, description: x, kind: distance, km: 12 }
     weeks:
-      - { km: 5, short_walks: Curtas 1, long_walk: Longa 1, load: Sem carga, stairs: Sem escada }
-      - { km: 5, short_walks: Curtas 2, long_walk: Longa 2, load: Sem carga, stairs: Sem escada }
-      - { km: 5, short_walks: Curtas 3, long_walk: Longa 3, load: Sem carga, stairs: Sem escada }
-      - { km: 5, short_walks: Curtas 4, long_walk: Longa 4, load: Sem carga, stairs: Sem escada }
+      - { km: 5, short_walks: Curtas 1, long_walk: Longa 1, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 }, long_walk: { km: 3 } } }
+      - { km: 5, short_walks: Curtas 2, long_walk: Longa 2, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 }, long_walk: { km: 3, load_kg: 5 }, stairs: { count: 1 } } }
+      - { km: 5, short_walks: Curtas 3, long_walk: Longa 3, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 }, long_walk: { km: 3 } } }
+      - { km: 5, short_walks: Curtas 4, long_walk: Longa 4, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 }, long_walk: { km: 3 } } }
     landmarks:
       - key: a2_mark
         name: Marco A2

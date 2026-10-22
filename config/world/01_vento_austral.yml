@@ -22,21 +22,33 @@ phases:
         long_walk: 8 km
         load: sem mochila
         stairs: não
+        challenges:
+          walks: { count: 3, min_minutes: 40 }
+          long_walk: { km: 8 }
       - km: 24
         short_walks: 3× 40–50 min
         long_walk: 10 km
         load: sem mochila
         stairs: não
+        challenges:
+          walks: { count: 3, min_minutes: 40 }
+          long_walk: { km: 10 }
       - km: 26
         short_walks: 3× 40–50 min
         long_walk: 12 km
         load: sem mochila
         stairs: não
+        challenges:
+          walks: { count: 3, min_minutes: 40 }
+          long_walk: { km: 12 }
       - km: 18
         short_walks: 3× 40 min
         long_walk: 8 km
         load: sem mochila
         stairs: não
+        challenges:
+          walks: { count: 3, min_minutes: 40 }
+          long_walk: { km: 8 }
     boss:
       name: O Primeiro Horizonte
       description: Caminhar 12 km sem parar, em ritmo confortável.
@@ -83,21 +95,37 @@ phases:
         long_walk: 12 km
         load: 4 kg
         stairs: 1× 15 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 12, load_kg: 4 }
+          stairs: { count: 1 }
       - km: 30
         short_walks: 3× 50 min
         long_walk: 14 km
         load: 4–5 kg
         stairs: 1× 15–20 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 14, load_kg: 4 }
+          stairs: { count: 1 }
       - km: 33
         short_walks: 3× 50 min
         long_walk: 15 km
         load: 5 kg
         stairs: 1× 20 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 15, load_kg: 5 }
+          stairs: { count: 1 }
       - km: 24
         short_walks: 3× 50 min
         long_walk: 12 km
         load: 4–5 kg
         stairs: 1× 15 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 12, load_kg: 4 }
+          stairs: { count: 1 }
     boss:
       name: O Fardo do Caminhante
       description: 15 km com 5 kg nas costas, sem dor no ombro ou no pé.
@@ -145,21 +173,37 @@ phases:
         long_walk: 15 km
         load: 6 kg
         stairs: 1× 30 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 15, load_kg: 6 }
+          stairs: { count: 1 }
       - km: 33
         short_walks: 3× 50–60 min
         long_walk: 17 km
         load: 6–7 kg
         stairs: 2× 30 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 17, load_kg: 6 }
+          stairs: { count: 2 }
       - km: 36
         short_walks: 3× 60 min
         long_walk: 18 km
         load: 7 kg
         stairs: 2× 30 min
+        challenges:
+          walks: { count: 3, min_minutes: 60 }
+          long_walk: { km: 18, load_kg: 7 }
+          stairs: { count: 2 }
       - km: 26
         short_walks: 3× 50 min
         long_walk: 15 km
         load: 6 kg
         stairs: 1× 30 min
+        challenges:
+          walks: { count: 3, min_minutes: 50 }
+          long_walk: { km: 15, load_kg: 6 }
+          stairs: { count: 1 }
     boss:
       name: A Torre de Degraus
       description: Acumular 300 m de desnível na escada num dia (~10 subidas de prédio de 10 andares).
@@ -208,21 +252,37 @@ phases:
         long_walk: sábado 13 km + domingo 8 km
         load: 8 kg
         stairs: 2× 30 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 13, load_kg: 8 }
+          stairs: { count: 2 }
       - km: 40
         short_walks: 2× 60 min
         long_walk: sábado 14 km + domingo 9 km
         load: 8 kg
         stairs: 2× 30–40 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 14, load_kg: 8 }
+          stairs: { count: 2 }
       - km: 42
         short_walks: 2× 60 min
         long_walk: sábado 15 km + domingo 10 km
         load: 8 kg
         stairs: 2× 40 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 15, load_kg: 8 }
+          stairs: { count: 2 }
       - km: 32
         short_walks: 2× 60 min
         long_walk: sábado 12 km + domingo 8 km
         load: 8 kg
         stairs: 2× 30 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 12, load_kg: 8 }
+          stairs: { count: 2 }
     boss:
       name: Sol e Lua
       description: Dois dias seguidos com 8 kg nas costas, somando 25 km.
@@ -270,21 +330,37 @@ phases:
         long_walk: sábado 16 km + domingo 12 km
         load: 10 kg
         stairs: 2× 40 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 16, load_kg: 10 }
+          stairs: { count: 2 }
       - km: 47
         short_walks: 2× 60 min
         long_walk: sábado 17 km + domingo 14 km
         load: 10 kg
         stairs: 2× 45 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 17, load_kg: 10 }
+          stairs: { count: 2 }
       - km: 50
         short_walks: 2× 60 min
         long_walk: sábado 18 km + domingo 15 km
         load: 10 kg
         stairs: 2× 45 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 18, load_kg: 10 }
+          stairs: { count: 2 }
       - km: 39
         short_walks: 2× 60 min
         long_walk: sábado 15 km + domingo 10 km
         load: 10 kg
         stairs: 2× 40 min
+        challenges:
+          walks: { count: 2, min_minutes: 60 }
+          long_walk: { km: 15, load_kg: 10 }
+          stairs: { count: 2 }
     boss:
       name: O Cume
       description: 700 m de desnível na escada num dia, com 10 kg nas costas.
@@ -341,21 +417,36 @@ phases:
         long_walk: sábado 15 km + domingo 10 km
         load: 8–10 kg
         stairs: 1× 30 min
+        challenges:
+          walks: { count: 2, min_minutes: 45 }
+          long_walk: { km: 15, load_kg: 8 }
+          stairs: { count: 1 }
       - km: 55
         short_walks: 2× 45 min
         long_walk: 3 dias seguidos de 15–20 km
         load: 9–10 kg
         stairs: 1× 30 min
+        challenges:
+          walks: { count: 2, min_minutes: 45 }
+          long_walk: { km: 15, load_kg: 9 }
+          stairs: { count: 1 }
       - km: 30
         short_walks: 2–3× 45 min
         long_walk: 12 km
         load: 8 kg
         stairs: 1× 30 min
+        challenges:
+          walks: { count: 2, min_minutes: 45 }
+          long_walk: { km: 12, load_kg: 8 }
+          stairs: { count: 1 }
       - km: 27
         short_walks: 2–3× 45 min
         long_walk: 10 km
         load: 8 kg
         stairs: não
+        challenges:
+          walks: { count: 2, min_minutes: 45 }
+          long_walk: { km: 10, load_kg: 8 }
     boss:
       name: O Vento Austral
       description: 3 dias seguidos com 9 kg nas costas, somando 50 km, simulando o Circuito W.
