@@ -14,7 +14,7 @@
               <p class="caption"><%= l entry.climbed_on, format: :long %> · <%= entry.climbs %> subidas<%= " · mochila #{entry.load_kg.to_s("F")} kg" if entry.load_kg %><%= " · #{entry.note}" if entry.note.present? %></p>
             <% else %>
               <%= stat entry.km, unit: "km" %>
-              <p class="caption"><%= l entry.walked_on, format: :long %><%= " · mochila #{entry.load_kg.to_s("F")} kg" if entry.load_kg %><%= " · #{entry.note}" if entry.note.present? %></p>
+              <p class="caption"><%= l entry.walked_on, format: :long %><%= " · #{entry.duration}" if entry.duration_s %><%= " · #{pace(entry.km, entry.duration_s)}" if entry.duration_s %><%= " · #{number_with_delimiter(entry.steps, delimiter: ".")} passos" if entry.steps %><%= " · #{entry.elevation_gain_m} m de subida" if entry.elevation_gain_m %><%= " · mochila #{entry.load_kg.to_s("F")} kg" if entry.load_kg %><%= " · #{entry.note}" if entry.note.present? %></p>
             <% end %>
           </div>
           <div class="flex gap-2">

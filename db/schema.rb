@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_21_201637) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_22_100001) do
   create_table "auth_tokens", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "code", null: false
@@ -84,6 +84,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_21_201637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "load_kg", precision: 4, scale: 1
+    t.integer "duration_s"
+    t.integer "steps"
+    t.integer "elevation_gain_m"
     t.index ["user_id", "walked_on"], name: "index_walks_on_user_id_and_walked_on"
     t.index ["user_id"], name: "index_walks_on_user_id"
   end

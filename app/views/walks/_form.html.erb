@@ -25,6 +25,30 @@
   </div>
 
   <div class="flex flex-col gap-2">
+    <%= form.label :duration, "Tempo (opcional)" %>
+    <%= form.text_field :duration, placeholder: "38:51", inputmode: "numeric", autocomplete: "off", class: "field" %>
+    <% walk.errors.full_messages_for(:duration).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :steps, "Passos (opcional)" %>
+    <%= form.text_field :steps, inputmode: "numeric", autocomplete: "off", class: "field" %>
+    <% walk.errors.full_messages_for(:steps).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= form.label :elevation_gain_m, "Subida em metros (opcional)" %>
+    <%= form.text_field :elevation_gain_m, inputmode: "numeric", autocomplete: "off", class: "field" %>
+    <% walk.errors.full_messages_for(:elevation_gain_m).each do |message| %>
+      <p class="field-error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2">
     <%= form.label :load_kg, "Mochila (kg, opcional)" %>
     <%= form.text_field :load_kg, value: walk.load_kg&.to_s("F"), inputmode: "decimal", autocomplete: "off", class: "field" %>
     <% walk.errors.full_messages_for(:load_kg).each do |message| %>

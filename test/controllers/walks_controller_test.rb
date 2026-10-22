@@ -97,4 +97,17 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
   end
+
+  test "registrar guarda tempo, passos e subida e o histórico mostra" do
+    post walks_url, params: { walk: { km: "3,55", walked_on: Date.current.iso8601, duration: "38:51", steps: "4.507", elevation_gain_m: 32 } }
+
+    walk = users(:viajante).walks.order(:id).last
+    assert_equal [ 2331, 4507, 32 ], [ walk.duration_s, walk.steps, walk.elevation_gain_m ]
+
+    get walks_url
+    assert_match "38:51", response.body
+    assert_match "10&#39;57&quot;/km", response.body
+    assert_match "4.507 passos", response.body
+    assert_match "32 m de subida", response.body
+  end
 end

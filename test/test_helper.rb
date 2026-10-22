@@ -23,8 +23,8 @@ module ActiveSupport
       kms.each_with_index { |km, days_ago| user.walks.create!(km: km, walked_on: Date.current - days_ago) }
     end
 
-    def walk_on(user, days_ago, km, load_kg: nil)
-      user.walks.new(km: km, walked_on: Date.current - days_ago, load_kg: load_kg).tap { it.save!(validate: false) }
+    def walk_on(user, days_ago, km, load_kg: nil, minutes: nil)
+      user.walks.new(km: km, walked_on: Date.current - days_ago, load_kg: load_kg, duration_s: (minutes * 60 if minutes)).tap { it.save!(validate: false) }
     end
 
     def climb_on(user, days_ago, climbs, load_kg: nil)

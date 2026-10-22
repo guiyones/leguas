@@ -98,4 +98,35 @@ class WalkTest < ActiveSupport::TestCase
     assert_not @user.walks.new(km: 2, walked_on: Date.current, load_kg: 0).valid?
     assert_not @user.walks.new(km: 2, walked_on: Date.current, load_kg: 41).valid?
   end
+
+  test "tempo aceita m, m:ss e h:mm:ss" do
+    { "38:51" => 2331, "1:05:20" => 3920, "45" => 2700 }.each do |text, seconds|
+      assert_equal seconds, @user.walks.new(km: 1, walked_on: Date.current, duration: text).duration_s
+    end
+    assert_nil @user.walks.new(km: 1, walked_on: Date.current, duration: "").duration_s
+  end
+
+  test "tempo inválido não passa" do
+    [ "abc", "10:75" ].each do |text|
+      walk = @user.walks.new(km: 1, walked_on: Date.current, duration: text)
+
+      assert_not walk.valid?
+      assert_includes walk.errors[:duration], "não parece um tempo, use 38:51"
+    end
+  end
+
+  test "tempo é lido de volta como texto" do
+    assert_equal "38:51", @user.walks.new(duration_s: 2331).duration
+    assert_equal "1:05:20", @user.walks.new(duration_s: 3920).duration
+    assert_nil @user.walks.new.duration
+  end
+
+  test "passos aceitam ponto de milhar" do
+    assert_equal 4507, @user.walks.new(steps: "4.507").steps
+  end
+
+  test "subida não pode ser negativa" do
+    assert_not @user.walks.new(km: 1, walked_on: Date.current, elevation_gain_m: -1).valid?
+    assert @user.walks.new(km: 1, walked_on: Date.current, elevation_gain_m: 32).valid?
+  end
 end
