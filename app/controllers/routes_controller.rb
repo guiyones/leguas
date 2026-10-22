@@ -2,7 +2,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: %i[ edit update destroy ]
 
   def index
-    @routes = Current.user.routes.by_distance.with_attached_photo
+    @routes = Current.user.routes.by_distance
   end
 
   def new

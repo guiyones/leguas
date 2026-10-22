@@ -73,6 +73,43 @@ class RoutesTest < ApplicationSystemTestCase
     assert_nil @user.routes.last.trace
   end
 
+  test "trocar o print por um arquivo que não abre limpa o traçado" do
+    sign_in_as @user
+    route = @user.routes.create!(name: "Volta", km: 3, trace: [ [ 0, 0 ], [ 1, 1 ] ], trace_source: "photo")
+    visit edit_route_url(route)
+    attach_file "Print do mapa", file_fixture("rota_guanabara.png")
+    assert_selector "[data-trace-status='ok']"
+
+    attach_file "Print do mapa", file_fixture("quebrada.png")
+
+    assert_selector "[data-trace-status='empty']"
+    assert_equal "[]", trace_field.value
+    assert_no_selector "[data-route-trace-target='preview'] svg"
+
+    click_on "Salvar"
+
+    assert_selector "[data-route-card] img[src*='art/routes/placeholder']"
+    assert_nil route.reload.trace
+    assert_nil route.trace_source
+  end
+
+  test "tocar no fundo do mapa não trava e cai no vazio" do
+    sign_in_as @user
+    visit new_route_url
+    attach_file "Print do mapa", file_fixture("rota_guanabara.png")
+    assert_selector "[data-trace-status='ok']"
+
+    canvas = find("[data-route-trace-target='canvas']")
+    scale = canvas.evaluate_script("this.clientWidth") / 1080.0
+    page.execute_script("document.querySelector('[data-controller=\"route-trace\"]').removeAttribute('data-trace-status')")
+    started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    canvas.click(x: (560 * scale).round, y: (440 * scale).round, offset: :top_left)
+
+    assert_selector "[data-trace-status='empty']"
+    assert_operator Process.clock_gettime(Process::CLOCK_MONOTONIC) - started, :<, 2
+    assert_equal "[]", trace_field.value
+  end
+
   private
     def sign_in_as(user)
       visit root_url
@@ -82,6 +119,10 @@ class RoutesTest < ApplicationSystemTestCase
       fill_in "Código de 6 dígitos", with: user.auth_tokens.order(:created_at).last.code
       click_on "Entrar"
       assert_text "Começar jornada"
+    end
+
+    def trace_field
+      find("[data-route-trace-target='field']", visible: false)
     end
 
     def trace_bounds

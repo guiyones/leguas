@@ -10,6 +10,8 @@ const CELL_MIN_PIXELS = 3
 const MIN_COMPONENT_CELLS = 12
 const MAX_GAP_CELLS = 4
 const MAX_POINTS = 300
+// Mais que isso aceso não é uma linha: é foto toda laranja ou o fundo do mapa.
+const MAX_LIT_CELLS = 3500
 const TAP_DISTANCE = 70
 const TAP_RADIUS = 3
 
@@ -22,10 +24,15 @@ export default class extends Controller {
   static targets = [ "file", "canvas", "preview", "field", "retry" ]
 
   load() {
+    this.reset()
     const file = this.fileTarget.files[0]
     if (!file) return
 
     const image = new Image()
+    image.onerror = () => {
+      URL.revokeObjectURL(image.src)
+      this.show([], "empty")
+    }
     image.onload = () => {
       this.scale = SCALED_WIDTH / image.naturalWidth
       this.canvasTarget.width = SCALED_WIDTH
@@ -37,6 +44,17 @@ export default class extends Controller {
       this.extract()
     }
     image.src = URL.createObjectURL(file)
+  }
+
+  // Sem arquivo novo o campo fica em branco: a rota mantém o traçado que tinha.
+  reset() {
+    this.scale = null
+    this.fieldTarget.value = ""
+    this.previewTarget.replaceChildren()
+    this.canvasTarget.hidden = true
+    this.retryTarget.hidden = true
+    delete this.element.dataset.traceBounds
+    this.element.dataset.traceStatus = "pending"
   }
 
   pick(event) {
@@ -52,10 +70,11 @@ export default class extends Controller {
     const { width, height } = this.canvasTarget
     const image = this.canvasTarget.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, width, height)
     const cells = orderCells(litCells(image, color), Math.floor(height / CELL))
-    const points = simplify(cells).slice(0, MAX_POINTS)
+    const points = resample(simplify(cells), MAX_POINTS)
       .map(([ x, y ]) => [ (x * CELL + CELL / 2) / this.scale, (y * CELL + CELL / 2) / this.scale ])
 
     if (points.length < 2) {
+      delete this.element.dataset.traceBounds
       this.show([], "empty")
     } else {
       const xs = points.map(([ x ]) => x), ys = points.map(([ , y ]) => y)
@@ -65,10 +84,11 @@ export default class extends Controller {
     }
   }
 
+  // "[]" diz ao servidor que o print não tem trajeto: a rota fica sem traçado.
   show(points, status) {
-    this.fieldTarget.value = points.length ? JSON.stringify(points) : ""
+    this.fieldTarget.value = JSON.stringify(points)
     this.previewTarget.replaceChildren(...(points.length ? [ routeMap(points) ] : []))
-    this.retryTarget.hidden = false
+    this.retryTarget.hidden = this.canvasTarget.hidden
     this.retryTarget.textContent = status === "ok" ? "Saiu errado? Toque na linha do trajeto." : "Tocar na linha do trajeto"
     this.retryTarget.classList.toggle("caption", status === "ok")
     this.retryTarget.classList.toggle("text-gold", status === "empty")
@@ -128,6 +148,7 @@ function litCells({ data, width, height }, color) {
   }
 
   const lit = new Set([ ...counts ].filter(([ , count ]) => count >= CELL_MIN_PIXELS).map(([ key ]) => key))
+  if (lit.size > MAX_LIT_CELLS) return []
   return withoutSmallComponents(lit, cols).map(key => [ key % cols, Math.floor(key / cols) ])
 }
 
@@ -196,6 +217,12 @@ function simplify(points, epsilon = 1) {
 
   if (farthest <= epsilon) return [ first, last ]
   return [ ...simplify(points.slice(0, index + 1), epsilon).slice(0, -1), ...simplify(points.slice(index), epsilon) ]
+}
+
+// Pega pontos espaçados por igual ao longo do traçado, sem cortar o fim.
+function resample(points, max) {
+  if (points.length <= max) return points
+  return Array.from({ length: max }, (_, i) => points[Math.round(i * (points.length - 1) / (max - 1))])
 }
 
 function distanceToSegment(point, a, b) {

@@ -16,6 +16,12 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "Curta", "Longa" ], css_select("[data-route-card] h2").map { it.text.strip }
   end
 
+  test "tempo da rota abre o teclado com separador" do
+    get new_route_url
+
+    assert_select "input[name='route[duration]'][inputmode=decimal]"
+  end
+
   test "lista vazia convida a criar" do
     get routes_url
 
@@ -59,6 +65,16 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
     patch route_url(route), params: { route: { name: "Volta nova", trace: "" } }
 
     assert_equal [ [ 0, 0 ], [ 1, 1 ] ], route.reload.trace
+  end
+
+  test "editar com print sem trajeto apaga o traçado antigo" do
+    route = @user.routes.create!(name: "Volta", km: 3, trace: [ [ 0, 0 ], [ 1, 1 ] ], trace_source: "photo")
+
+    patch route_url(route), params: { route: { name: "Volta", trace: "[]" } }
+
+    route.reload
+    assert_nil route.trace
+    assert_nil route.trace_source
   end
 
   test "não cria sem nome" do
