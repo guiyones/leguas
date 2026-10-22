@@ -10,6 +10,10 @@ phases:
     rarity: rare
     symbol: teste
     boss: { name: Chefe B1, description: x, kind: climb, climb_m: 100 }
+    weeks:
+      - { km: 10, short_walks: Curtas 1, long_walk: Longa 1, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 } } }
+      - { km: 10, short_walks: Curtas 2, long_walk: Longa 2, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 } } }
+      - { km: 10, short_walks: Curtas 3, long_walk: Longa 3, load: Sem carga, stairs: Sem escada, challenges: { walks: { count: 2, min_minutes: 40 } } }
   - key: b2
     name: Fase B2
     inspired_by: Ponto 60 → Ponto 100

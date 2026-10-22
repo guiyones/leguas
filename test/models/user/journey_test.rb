@@ -266,14 +266,30 @@ class User::JourneyTest < ActiveSupport::TestCase
 
   test "chefe esperando: o dia não cai em semana nenhuma" do
     walk_steady @user, 30, until_days_ago: 3      # a2 completa, chefe espera
-    before = @world.phase("a2").weeks.sum { @user.journey(world: @world).week_progress(it).xp }
+    before = all_weeks_xp(@user.journey(world: @world))
 
-    walk_on @user, 2, 2, minutes: 40
+    walk_on @user, 2, 2, minutes: 40              # sem a trava, cairiam na semana 1 de b1
     walk_on @user, 1, 2, minutes: 40
     journey = @user.journey(world: @world)
+    b1_week1 = @world.phase("b1").weeks.first
 
     assert_equal :waiting, journey.boss_status(@world.phase("a2"))
-    assert_equal before, @world.phase("a2").weeks.sum { journey.week_progress(it).xp }
+    assert_equal 0, journey.week_progress(b1_week1).done(b1_week1.challenges.first)
+    assert_equal before, all_weeks_xp(journey)
+  end
+
+  test "manhã depois do chefe cair: km guardados levam o dia pra semana da posição nova" do
+    walk_steady @user, 40, until_days_ago: 4      # para em 30, 10 guardados
+    walk_on @user, 3, 12                          # derruba a2; o dia ainda é do chefe esperando
+    walk_on @user, 2, 1, minutes: 40              # manhã no km 52: semana 3 de b1 (20–30)
+    walk_on @user, 1, 1, minutes: 40
+    journey = @user.journey(world: @world)
+    b1_weeks = @world.phase("b1").weeks
+
+    assert_equal :defeated, journey.boss_status(@world.phase("a2"))
+    assert_equal [ 0, 0, 2 ], b1_weeks.map { journey.week_progress(it).done(it.challenges.first) }
+    assert_equal [ b1_weeks.third ], journey.completed_weeks
+    assert_includes journey.achievement_keys, "week:b1:3"
   end
 
   test "xp de caminhadas sem desafios não muda" do
@@ -289,6 +305,8 @@ class User::JourneyTest < ActiveSupport::TestCase
   end
 
   private
+    def all_weeks_xp(journey) = @world.phases.flat_map(&:weeks).sum { journey.week_progress(it).xp }
+
     def missions_xp = Mission::XP * @user.missions.accomplished.count
 
     def base_xp(journey)
