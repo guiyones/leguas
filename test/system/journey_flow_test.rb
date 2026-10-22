@@ -30,7 +30,7 @@ class JourneyFlowTest < ApplicationSystemTestCase
 
     assert_text "Primeiros Passos"
     assert_selector "[data-testid=phase]", text: %r{8\s*/ 90 km}
-    assert_text "Missão cumprida!"
+    assert_text "✓ bônus do dia +20 XP"
   end
 
   test "o chefe da fase 1 aparece e cai" do

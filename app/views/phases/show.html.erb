@@ -40,7 +40,7 @@
 </section>
 
 <% if @week %>
-  <%= render "phases/week", week: @week, phase: phase %>
+  <%= render "phases/challenges", week: @week, phase: phase, progress: @week_progress %>
 <% elsif @journey.boss_status(phase) == :waiting %>
   <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
 <% end %>
@@ -52,17 +52,11 @@
   </section>
 <% end %>
 
-<section class="panel flex flex-col gap-3" data-testid="mission">
-  <h2>Missão do dia</h2>
-  <% if @walked_today >= @mission_goal %>
-    <p class="text-lake font-bold">Missão cumprida! +<%= Mission::XP %> XP</p>
-  <% else %>
-    <p>Caminhar <%= number_with_precision @mission_goal, precision: 1, strip_insignificant_zeros: true %> km</p>
-  <% end %>
-  <%= progress_bar @walked_today / @mission_goal, color: :lake %>
-  <%= stat @walked_today, total: @mission_goal, unit: "km", color: :lake %>
-</section>
-
+<% if @walked_today >= @mission_goal %>
+  <p class="caption text-gold" data-testid="daily-bonus">✓ bônus do dia +<%= Mission::XP %> XP</p>
+<% else %>
+  <p class="caption" data-testid="daily-bonus">Hoje: <%= number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
+<% end %>
 <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
 <% if @stairs %>
   <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>

@@ -69,29 +69,82 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=phase] h2.text-legend", text: "Fase B2"
   end
 
-  test "missão do dia com a meta e o feito" do
-    users(:viajante).walks.create!(km: 1.5, walked_on: Date.current)
+  test "desafios da semana no mundo real, viajante novo" do
+    get phase_url
+
+    assert_select "[data-testid=challenges]" do
+      assert_select "h2", text: "Desafios da semana"
+      assert_select "*", text: /Semana 1 de 4/
+      assert_select "[data-done=false]", text: /3 caminhadas de 40 min.*0\/3/m
+      assert_select "[data-done=false]", text: /Longão de 8 km/
+      assert_select "*", text: Regexp.new(Regexp.escape(World.current.phases.first.note))
+      assert_select "*", text: /Caminhadas curtas:/, count: 0
+    end
+  end
+
+  test "progresso parcial não ganha o visto" do
+    walk_on users(:viajante), 1, 3, minutes: 40
 
     get phase_url
 
-    assert_select "[data-testid=mission]", text: %r{1,5 / 3 km}
+    assert_select "[data-testid=challenges] [data-done=false]", text: /3 caminhadas de 40 min.*1\/3/m do |rows|
+      assert_no_match "✓", rows.first.text
+    end
   end
 
-  test "missão do dia usa a meta congelada, não a meta atual do viajante" do
-    users(:viajante).walks.create!(km: 1, walked_on: Date.current)
-    users(:viajante).update!(daily_goal_km: 8)
+  test "desafio cumprido com visto e xp, não cumprido com caixa vazia" do
+    walk_on users(:viajante), 1, 9
 
     get phase_url
 
-    assert_select "[data-testid=mission]", text: %r{1 / 3 km}
+    assert_select "[data-testid=challenges] [data-done=true]", text: /Longão de 8 km/ do
+      assert_select "*", text: /✓/
+      assert_select "*", text: /\+30 XP/
+    end
+    assert_select "[data-testid=challenges] [data-done=false]", text: /3 caminhadas/ do
+      assert_select "*", text: /☐/
+      assert_select "*", text: /\+45 XP/
+      assert_select ".text-ember, .alert", 0
+    end
   end
 
-  test "missão cumprida" do
+  test "sem a missão do dia" do
+    get phase_url
+
+    assert_select "[data-testid=mission]", 0
+    assert_no_match(/Missão/, response.body)
+  end
+
+  test "bônus do dia sem caminhada" do
+    get phase_url
+
+    assert_select "[data-testid=daily-bonus].caption", text: "Hoje: 0 km · bônus do dia em 3 km"
+  end
+
+  test "bônus do dia com a meta congelada" do
+    users(:viajante).walks.create!(km: 3.55, walked_on: Date.current)
+    users(:viajante).missions.update_all(goal_km: 5)
+
+    get phase_url
+
+    assert_select "[data-testid=daily-bonus]", text: "Hoje: 3,55 km · bônus do dia em 5 km"
+  end
+
+  test "bônus do dia cumprido" do
     users(:viajante).walks.create!(km: 3, walked_on: Date.current)
 
     get phase_url
 
-    assert_select "[data-testid=mission]", text: /Missão cumprida/
+    assert_select "[data-testid=daily-bonus].text-gold", text: "✓ bônus do dia +20 XP"
+  end
+
+  test "com o chefe esperando não há desafios" do
+    walk_steady users(:viajante), 100
+
+    get phase_url
+
+    assert_select "[data-testid=challenges]", 0
+    assert_select "[data-testid=boss]"
   end
 
   test "botão grande de registrar" do
@@ -140,8 +193,8 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     get phase_url
 
-    assert_select "[data-testid=week]", text: /Semana 2 de 4/
-    assert_select "[data-testid=week]", text: /Desça prédios de elevador/
+    assert_select "[data-testid=challenges]", text: /Semana 2 de 4/
+    assert_select "[data-testid=challenges]", text: /Desça prédios de elevador/
     assert_select "[data-testid=boss]", 0
   end
 
@@ -150,7 +203,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     get phase_url
 
-    assert_select "[data-testid=week]", text: /semana leve/i
+    assert_select "[data-testid=challenges]", text: /semana leve/i
   end
 
   test "foco da fase perto do nome" do
@@ -170,7 +223,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=boss]", text: /Ele espera o tempo que for preciso/
     assert_select "[data-testid=boss]", text: /10 km guardados/
     assert_select "[data-testid=boss] img[alt=?][src*='art/bosses/primeiros_passos']", "O Primeiro Horizonte"
-    assert_select "[data-testid=week]", 0
+    assert_select "[data-testid=challenges]", 0
     assert_select "[data-testid=phase]", text: /Próximo marco/, count: 0
     assert_no_match(/atras|perdeu|falhou|prazo/i, response.body)
   end
@@ -189,7 +242,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     get phase_url
 
-    assert_select "[data-testid=week]", 0
+    assert_select "[data-testid=challenges]", 0
     assert_select "[data-testid=boss]", 0
   end
 

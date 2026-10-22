@@ -12,6 +12,31 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-stat=km] .stat__value", "8"
     assert_select "[data-stat=leagues] .stat__value", "1"
     assert_select "[data-stat=missions] .stat__value", "2"
+    assert_select "[data-stat=missions]", text: /bônus do dia/
+  end
+
+  test "sem semana completa não há seção de selos" do
+    get journal_url
+
+    assert_select "[data-testid=weeks]", 0
+    assert_select "*", text: /Semanas completas/, count: 0
+  end
+
+  test "semana completa vira selo com o nome da fase" do
+    walk_on users(:viajante), 4, 3, minutes: 40
+    walk_on users(:viajante), 3, 3, minutes: 40
+    walk_on users(:viajante), 2, 3, minutes: 40
+    walk_on users(:viajante), 1, 8
+
+    get journal_url
+
+    assert_select "[data-testid=weeks]" do
+      assert_select "h2", text: "Semanas completas"
+      assert_select "li", 1
+      assert_select "li", text: /Semana 1/
+      assert_select "li", text: /Primeiros Passos/
+      assert_select "img[src*='art/seals/week']"
+    end
   end
 
   test "carimbos alcançados com nome e história" do

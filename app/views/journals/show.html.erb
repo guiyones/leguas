@@ -9,8 +9,26 @@
   <div data-stat="km"><%= stat @journey.total_km, unit: "km" %></div>
   <div data-stat="leagues"><%= stat @journey.leagues, unit: "léguas" %></div>
   <div data-stat="climbed"><%= stat @journey.climbed_m, unit: "m subidos" %></div>
-  <div data-stat="missions"><%= stat @missions_done, unit: "missões" %></div>
+  <div data-stat="missions"><%= stat @missions_done, unit: "bônus do dia" %></div>
 </section>
+
+<% if @completed_weeks.any? %>
+  <section class="panel mt-3 flex flex-col gap-3" data-testid="weeks">
+    <h2>Semanas completas</h2>
+    <ul class="grid grid-cols-3 gap-3">
+      <% @completed_weeks.each do |week| %>
+        <li class="flex flex-col items-center gap-1">
+          <div class="relative">
+            <%= art_tag :seals, :week, label: "Selo da semana #{week.number}", size: 72 %>
+            <span class="absolute inset-x-0 top-[22%] text-center text-2xl text-glow" aria-hidden="true"><%= week.number %></span>
+          </div>
+          <span class="text-xs leading-tight text-center">Semana <%= week.number %></span>
+          <span class="caption text-xs text-center"><%= week.phase.name %></span>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
 
 <ul class="grid grid-cols-3 gap-3 mt-3">
   <% @journey.world.phases.each do |phase| %>
