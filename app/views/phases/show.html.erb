@@ -52,10 +52,11 @@
   </section>
 <% end %>
 
+<% walked_today = number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %>
 <% if @walked_today >= @mission_goal %>
-  <p class="caption text-gold" data-testid="daily-bonus">✓ bônus do dia +<%= Mission::XP %> XP</p>
+  <p class="caption text-gold" data-testid="daily-bonus">Hoje: <%= walked_today %> km · ✓ bônus do dia +<%= Mission::XP %> XP</p>
 <% else %>
-  <p class="caption" data-testid="daily-bonus">Hoje: <%= number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
+  <p class="caption" data-testid="daily-bonus">Hoje: <%= walked_today %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
 <% end %>
 <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
 <% if @stairs %>

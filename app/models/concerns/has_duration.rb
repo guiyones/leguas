@@ -43,7 +43,7 @@ module HasDuration
           return nil
         elsif text.match?(/\A\d+\z/)
           text.to_i * 60
-        elsif (match = text.match(/\A(?:(\d+):)?(\d{1,2}):(\d{2})\z/)) && match[2].to_i < 60 && match[3].to_i < 60
+        elsif (match = text.match(/\A(?:(\d+)[:.,])?(\d{1,2})[:.,](\d{2})\z/)) && match[2].to_i < 60 && match[3].to_i < 60
           match[1].to_i * 3600 + match[2].to_i * 60 + match[3].to_i
         end
 

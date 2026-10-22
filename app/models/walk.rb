@@ -34,7 +34,9 @@ class Walk < ApplicationRecord
 
   private
     def route_is_users_own
-      if route && route.user_id != user_id
+      if route_id && route.nil?
+        errors.add(:route, "não existe mais")
+      elsif route && route.user_id != user_id
         errors.add(:route, "não é sua")
       end
     end

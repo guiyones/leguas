@@ -6,6 +6,7 @@
       <% done = progress.done?(challenge) %>
       <li class="flex items-baseline gap-2 <%= "text-gold" if done %>" data-done="<%= done %>">
         <span aria-hidden="true"><%= done ? "✓" : "☐" %></span>
+        <span class="sr-only"><%= done ? "feito" : "a fazer" %></span>
         <span class="flex-1"><%= challenge.label %></span>
         <% unless challenge.kind == :long_walk %>
           <span class="caption"><%= progress.done(challenge) %>/<%= challenge.count %></span>

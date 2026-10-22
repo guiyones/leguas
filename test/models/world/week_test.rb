@@ -15,6 +15,13 @@ class World::WeekTest < ActiveSupport::TestCase
     assert_equal 30, challenge(:stairs, count: 2).max_xp
   end
 
+  test "xp máximo vem da mesma tabela do progresso da semana" do
+    assert_equal 3 * User::WeekProgress::WALK_XP, challenge(:walks, count: 3, min_minutes: 40).max_xp
+    assert_equal User::WeekProgress::LONG_WALK_XP, challenge(:long_walk, km: 8).max_xp
+    assert_equal 2 * User::WeekProgress::STAIRS_XP, challenge(:stairs, count: 2).max_xp
+    assert_not World::Challenge.const_defined?(:XP_PER_SESSION, false)
+  end
+
   test "semana do mundo de teste tem os desafios na ordem" do
     a2 = World.load(Rails.root.join("test/world")).phases.find { it.key == "a2" }
 

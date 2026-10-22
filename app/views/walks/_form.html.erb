@@ -36,7 +36,7 @@
 
   <div class="flex flex-col gap-2">
     <%= form.label :duration, "Tempo (opcional)" %>
-    <%= form.text_field :duration, placeholder: "38:51", inputmode: "numeric", autocomplete: "off", class: "field" %>
+    <%= form.text_field :duration, placeholder: "38:51", inputmode: "decimal", autocomplete: "off", class: "field" %>
     <% walk.errors.full_messages_for(:duration).each do |message| %>
       <p class="field-error"><%= message %></p>
     <% end %>

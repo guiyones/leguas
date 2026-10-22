@@ -106,8 +106,21 @@ class WalkTest < ActiveSupport::TestCase
     assert_nil @user.walks.new(km: 1, walked_on: Date.current, duration: "").duration_s
   end
 
+  test "tempo aceita ponto e vírgula no lugar dos dois pontos" do
+    { "38.51" => 2331, "38,51" => 2331, "1.05.20" => 3920, "1,05,20" => 3920 }.each do |text, seconds|
+      assert_equal seconds, @user.walks.new(km: 1, walked_on: Date.current, duration: text).duration_s, text
+    end
+  end
+
+  test "rota que não existe mais dá erro de validação" do
+    walk = @user.walks.new(km: 1, walked_on: Date.current, route_id: 999_999)
+
+    assert_not walk.valid?
+    assert_includes walk.errors[:route], "não existe mais"
+  end
+
   test "tempo inválido não passa" do
-    [ "abc", "10:75" ].each do |text|
+    [ "abc", "10:75", "10.75", "38:51.2" ].each do |text|
       walk = @user.walks.new(km: 1, walked_on: Date.current, duration: text)
 
       assert_not walk.valid?

@@ -5,6 +5,14 @@ class User::WeekProgress
   STAIRS_XP = 15
   COMPLETE_XP = 50
 
+  def self.xp_per(challenge)
+    case challenge.kind
+    when :walks then WALK_XP
+    when :long_walk then LONG_WALK_XP
+    when :stairs then STAIRS_XP
+    end
+  end
+
   attr_reader :week
 
   def initialize(week, walks:, stair_sessions:)
@@ -30,7 +38,7 @@ class User::WeekProgress
   end
 
   def xp
-    week.challenges.sum { done(it) * xp_per(it) } + (complete? ? COMPLETE_XP : 0)
+    week.challenges.sum { done(it) * self.class.xp_per(it) } + (complete? ? COMPLETE_XP : 0)
   end
 
   private
@@ -40,13 +48,5 @@ class User::WeekProgress
 
     def long_walk?(walk, challenge)
       walk.km >= challenge.km && (challenge.load_kg.nil? || walk.load_kg.to_d >= challenge.load_kg)
-    end
-
-    def xp_per(challenge)
-      case challenge.kind
-      when :walks then WALK_XP
-      when :long_walk then LONG_WALK_XP
-      when :stairs then STAIRS_XP
-      end
     end
 end

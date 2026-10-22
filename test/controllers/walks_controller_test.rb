@@ -9,6 +9,7 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "input[name='walk[walked_on]'][value=?]", Date.current.iso8601
     assert_select "input[name='walk[km]'][inputmode=decimal]"
+    assert_select "input[name='walk[duration]'][inputmode=decimal]"
   end
 
   test "registrar mostra o xp ganho" do

@@ -99,10 +99,12 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "[data-testid=challenges] [data-done=true]", text: /Longão de 8 km/ do
       assert_select "*", text: /✓/
+      assert_select ".sr-only", text: "feito"
       assert_select "*", text: /\+30 XP/
     end
     assert_select "[data-testid=challenges] [data-done=false]", text: /3 caminhadas/ do
       assert_select "*", text: /☐/
+      assert_select ".sr-only", text: "a fazer"
       assert_select "*", text: /\+45 XP/
       assert_select ".text-ember, .alert", 0
     end
@@ -135,7 +137,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     get phase_url
 
-    assert_select "[data-testid=daily-bonus].text-gold", text: "✓ bônus do dia +20 XP"
+    assert_select "[data-testid=daily-bonus].text-gold", text: "Hoje: 3 km · ✓ bônus do dia +20 XP"
   end
 
   test "com o chefe esperando não há desafios" do
