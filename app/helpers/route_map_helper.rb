@@ -4,8 +4,9 @@ module RouteMapHelper
   MAP_PADDING = 14
 
   def route_map(route)
+    return art_tag(:routes, :placeholder, label: "Rota #{route.name}") unless Route::Trace.valid?(route.trace)
+
     points = Route::Trace.normalize(route.trace)
-    return art_tag(:routes, :placeholder, label: "Rota #{route.name}") if points.empty?
 
     side = MAP_HEIGHT - 2 * MAP_PADDING
     left = (MAP_WIDTH - side) / 2.0
@@ -26,9 +27,9 @@ module RouteMapHelper
             safe_join [ tag.stop(offset: 0, style: "stop-color: var(--color-deep)"),
                         tag.stop(offset: 1, style: "stop-color: var(--color-panel)") ]
           end,
-          tag.filter(id: "#{id}-glow", x: "-20%", y: "-20%", width: "140%", height: "140%") do
+          tag.filter(id: "#{id}-glow", filterUnits: "userSpaceOnUse", x: 0, y: 0, width: MAP_WIDTH, height: MAP_HEIGHT) do
             safe_join [ tag.feGaussianBlur(stdDeviation: 3, result: "blur"),
-                        tag.feFlood("flood-color": "var(--color-glow)", "flood-opacity": 0.55, result: "tint"),
+                        tag.feFlood(style: "flood-color: var(--color-glow)", "flood-opacity": 0.55, result: "tint"),
                         tag.feComposite(in: "tint", in2: "blur", operator: "in", result: "halo"),
                         tag.feMerge { safe_join [ tag.feMergeNode(in: "halo"), tag.feMergeNode(in: "SourceGraphic") ] } ]
           end

@@ -30,4 +30,19 @@ class RouteMapHelperTest < ActionView::TestCase
     assert_equal ids.uniq, ids
     assert_not_empty ids
   end
+
+  test "trace em linha reta mantém o filtro em coordenadas absolutas" do
+    route = @user.routes.create!(name: "Reta", km: 3, trace: [ [ 0, 5 ], [ 10, 5 ] ])
+    svg = Nokogiri::HTML5.fragment(route_map(route)).at("svg")
+
+    assert_equal "userSpaceOnUse", svg.at("filter")["filterUnits"]
+    assert_match "var(--color-glow)", svg.at("feFlood")["style"]
+  end
+
+  test "trace inválido gravado por fora cai na arte de reserva" do
+    route = @user.routes.create!(name: "Volta", km: 3)
+    route.update_column(:trace, { "x" => 1 })
+
+    assert Nokogiri::HTML5.fragment(route_map(route)).at("img[src*='art/routes/placeholder']")
+  end
 end
