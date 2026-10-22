@@ -35,6 +35,32 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2331, route.duration_s
   end
 
+  test "cria com o traçado tirado do print" do
+    post routes_url, params: { route: { name: "Volta", km: 3, trace: "[[0,0],[0.5,1],[1,0.2]]" } }
+
+    route = @user.routes.last
+    assert_equal [ [ 0, 0 ], [ 0.5, 1 ], [ 1, 0.2 ] ], route.trace
+    assert_equal "photo", route.trace_source
+  end
+
+  test "traçado que não é json salva a rota sem traçado" do
+    assert_difference -> { @user.routes.count }, 1 do
+      post routes_url, params: { route: { name: "Volta", km: 3, trace: "não é json" } }
+    end
+
+    route = @user.routes.last
+    assert_nil route.trace
+    assert_nil route.trace_source
+  end
+
+  test "editar sem print novo mantém o traçado" do
+    route = @user.routes.create!(name: "Volta", km: 3, trace: [ [ 0, 0 ], [ 1, 1 ] ], trace_source: "photo")
+
+    patch route_url(route), params: { route: { name: "Volta nova", trace: "" } }
+
+    assert_equal [ [ 0, 0 ], [ 1, 1 ] ], route.reload.trace
+  end
+
   test "não cria sem nome" do
     assert_no_difference -> { Route.count } do
       post routes_url, params: { route: { name: "", km: 3 } }

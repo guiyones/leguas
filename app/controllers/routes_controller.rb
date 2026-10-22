@@ -41,6 +41,18 @@ class RoutesController < ApplicationController
     end
 
     def route_params
-      params.expect(route: [ :name, :km, :duration, :note, :photo ])
+      params.expect(route: [ :name, :km, :duration, :note, :photo, :trace ]).tap do |attributes|
+        json = attributes.delete(:trace)
+        next if json.blank?
+
+        trace = decoded_trace(json)
+        attributes.merge!(trace: trace, trace_source: ("photo" if Route::Trace.valid?(trace)))
+      end
+    end
+
+    def decoded_trace(json)
+      JSON.parse(json)
+    rescue JSON::ParserError
+      nil
     end
 end

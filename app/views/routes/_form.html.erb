@@ -23,9 +23,16 @@
     <% end %>
   </div>
 
-  <div class="flex flex-col gap-2">
-    <%= form.label :photo, "Foto do mapa (opcional)" %>
-    <%= form.file_field :photo, accept: "image/*", class: "field" %>
+  <div class="flex flex-col gap-2" data-controller="route-trace">
+    <%= form.label :photo, "Print do mapa (opcional)" %>
+    <%= form.file_field :photo, accept: "image/*", class: "field",
+          data: { route_trace_target: "file", action: "route-trace#load" } %>
+    <%= form.hidden_field :trace, value: "", data: { route_trace_target: "field" } %>
+    <div class="overflow-hidden rounded border border-gold/30 empty:hidden [&>svg]:block [&>svg]:w-full"
+         data-route-trace-target="preview"></div>
+    <p class="text-sm" data-route-trace-target="retry" hidden></p>
+    <canvas class="w-full rounded cursor-crosshair" hidden
+            data-route-trace-target="canvas" data-action="click->route-trace#pick"></canvas>
   </div>
 
   <div class="flex flex-col gap-2">

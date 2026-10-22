@@ -1,17 +1,11 @@
 require "application_system_test_case"
 
 class RoutesTest < ApplicationSystemTestCase
-  test "escolher a rota preenche os km e dá pra trocar antes de salvar" do
-    user = users(:viajante)
-    user.routes.create!(name: "Volta do Guanabara", km: "3,55")
+  setup { @user = users(:viajante) }
 
-    visit root_url
-    fill_in "Email", with: user.email_address
-    click_on "Receber código"
-    assert_text "CÓDIGO"
-    fill_in "Código de 6 dígitos", with: user.auth_tokens.order(:created_at).last.code
-    click_on "Entrar"
-    assert_text "Começar jornada"
+  test "escolher a rota preenche os km e dá pra trocar antes de salvar" do
+    @user.routes.create!(name: "Volta do Guanabara", km: "3,55")
+    sign_in_as @user
 
     visit new_walk_url
     select "Volta do Guanabara (3,55 km)", from: "Rota"
@@ -21,8 +15,76 @@ class RoutesTest < ApplicationSystemTestCase
     click_on "Registrar caminhada"
 
     assert_no_field "Quantos km?"
-    walk = user.walks.order(:id).last
+    walk = @user.walks.order(:id).last
     assert_equal 4, walk.km
     assert_equal "Volta do Guanabara", walk.route.name
   end
+
+  test "o print do Samsung Health vira o traçado da rota" do
+    sign_in_as @user
+    visit new_route_url
+    fill_in "Nome da rota", with: "Volta do Guanabara"
+    fill_in "Quantos km?", with: "3,55"
+    attach_file "Print do mapa", file_fixture("rota_guanabara.png")
+
+    assert_selector "[data-trace-status='ok']"
+    min_x, min_y, max_x, max_y = trace_bounds
+    assert_in_delta 215, min_x, 40
+    assert_in_delta 815, max_x, 40
+    assert_in_delta 230, min_y, 40
+    assert_in_delta 750, max_y, 40
+    assert_text "Saiu errado? Toque na linha do trajeto."
+
+    click_on "Salvar rota"
+
+    assert_selector "[data-route-card] svg polyline"
+    route = @user.routes.last
+    assert_equal "photo", route.trace_source
+    assert Route::Trace.valid?(route.trace)
+  end
+
+  test "tocar na linha refaz o traçado com a cor tocada" do
+    sign_in_as @user
+    visit new_route_url
+    attach_file "Print do mapa", file_fixture("rota_guanabara.png")
+    assert_selector "[data-trace-status='ok']"
+
+    canvas = find("[data-route-trace-target='canvas']")
+    scale = canvas.evaluate_script("this.clientWidth") / 1080.0
+    page.execute_script("document.querySelector('[data-controller=\"route-trace\"]').removeAttribute('data-trace-status')")
+    canvas.click(x: (800 * scale).round, y: (460 * scale).round, offset: :top_left)
+
+    assert_selector "[data-trace-status='ok']"
+  end
+
+  test "imagem sem trajeto salva a rota com a arte de reserva" do
+    sign_in_as @user
+    visit new_route_url
+    fill_in "Nome da rota", with: "Volta cinza"
+    fill_in "Quantos km?", with: "2"
+    attach_file "Print do mapa", file_fixture("cinza.png")
+
+    assert_selector "[data-trace-status='empty']"
+    assert_text "Tocar na linha do trajeto"
+
+    click_on "Salvar rota"
+
+    assert_selector "[data-route-card] img[src*='art/routes/placeholder']"
+    assert_nil @user.routes.last.trace
+  end
+
+  private
+    def sign_in_as(user)
+      visit root_url
+      fill_in "Email", with: user.email_address
+      click_on "Receber código"
+      assert_text "CÓDIGO"
+      fill_in "Código de 6 dígitos", with: user.auth_tokens.order(:created_at).last.code
+      click_on "Entrar"
+      assert_text "Começar jornada"
+    end
+
+    def trace_bounds
+      find("[data-trace-bounds]")["data-trace-bounds"].split(",").map(&:to_f)
+    end
 end
