@@ -359,10 +359,14 @@
   }
 
   @media (width >= 64rem) {
+    /* As duas colunas ficam juntas no meio: o mapa do tamanho da altura da
+       janela e as informações numa coluna estreita, com texto menor. */
     .split {
+      --split-info: 26rem;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 2rem;
+      grid-template-columns: auto var(--split-info);
+      justify-content: center;
+      gap: 1.5rem;
       align-items: start;
     }
 
@@ -373,14 +377,29 @@
 
     .split .phase-map,
     .split .world-map {
-      margin: 0 auto;
+      margin: 0;
       border-radius: 18px;
       overflow: hidden;
     }
 
-    /* Largura que faz a arte caber na altura da tela, na proporção do viewBox. */
-    .split .phase-map { width: min(100%, calc((100dvh - 8rem) * 280 / 420)); }
-    .split .world-map { width: min(100%, calc((100dvh - 8rem) * 280 / 600)); }
+    /* Largura que faz a arte caber na altura da tela, na proporção do viewBox,
+       sem passar do espaço que sobra ao lado das informações. */
+    /* No celular o cartão da fase sobe por cima do pé da cena, que é vazio;
+       aqui o cartão fica ao lado, então a cena perde esse pé. */
+    .split .phase-map {
+      aspect-ratio: 280 / 336;
+      width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
+    }
+    .split .phase-card { margin-top: 0; }
+    .split .world-map { width: min(calc((100dvh - 9.5rem) * 280 / 600), calc(100vw - var(--split-info) - 4rem)); }
+
+    .split__info {
+      gap: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .split__info .panel { padding: 0.85rem 1rem; }
+    .split__info .phase-card__name { font-size: 1.2rem; }
   }
 
   .phase-map {

@@ -63,7 +63,7 @@
     <% else %>
       <p class="caption" data-testid="daily-bonus">Hoje: <%= walked_today %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
     <% end %>
-    <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
+    <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4 lg:text-base lg:py-3" %>
     <% if @stairs %>
       <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>
     <% end %>
