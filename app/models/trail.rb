@@ -11,6 +11,12 @@ class Trail
     [ 220, 290 ], [ 140, 240 ], [ 60, 190 ], [ 100, 120 ], [ 140, 60 ]
   ].freeze
 
+  # O mesmo mundo deitado, pro computador: sobe da esquerda até a Patagônia.
+  WORLD_WIDE = [
+    [ 120, 330 ], [ 200, 300 ], [ 270, 320 ], [ 350, 270 ], [ 440, 240 ], [ 520, 265 ],
+    [ 600, 225 ], [ 680, 190 ], [ 740, 150 ], [ 800, 110 ], [ 830, 72 ]
+  ].freeze
+
   def initialize(points)
     @points = points
     @segments = points.each_cons(2).map { |a, b| [ a, b, Math.hypot(b[0] - a[0], b[1] - a[1]) ] }

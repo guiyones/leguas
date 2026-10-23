@@ -444,14 +444,23 @@
 
   .world-map { margin: 0 -1rem; }
 
-  /* No computador o mapa fica grande no meio, e a página rola por ele. */
+  /* No celular o mapa é em pé e a página rola por ele; no computador ele
+     deita, ocupa a largura e cabe inteiro na altura da tela. */
+  .world-map--wide { display: none; }
+
   @media (width >= 64rem) {
-    .world-map-page .world-map {
-      max-width: 36rem;
+    .world-map--tall { display: none; }
+
+    .world-map--wide {
+      display: block;
+      width: min(100%, calc((100dvh - 10rem) * 1000 / 380));
       margin: 0 auto;
       border-radius: 18px;
       overflow: hidden;
     }
+
+    .world-map--wide .world-map__name { font-size: 15px; }
+    .world-map--wide .world-map__caption { font-size: 11px; }
   }
 
   .phase-dialog {

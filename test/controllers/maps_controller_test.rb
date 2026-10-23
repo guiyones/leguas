@@ -106,7 +106,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
 
     get map_url
 
-    assert_select "[data-testid=world]" do
+    assert_select "[data-testid=world][data-layout=tall]" do
       assert_select "[data-world-phase]", 6
       assert_select "[data-world-phase=primeiros_passos][data-status=completed][href='#fase-primeiros_passos']" do
         assert_select "image[href*='art/insignias/primeiros_passos']"
@@ -117,12 +117,27 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#fase-a_subida [data-phase=a_subida]"
   end
 
+  test "no computador o mapa é deitado, da esquerda pra direita, com os mesmos nós" do
+    walk_steady users(:viajante), 90, until_days_ago: 2
+    walk_on users(:viajante), 1, 12
+
+    get map_url
+
+    assert_select "[data-testid=world][data-layout=wide]" do
+      assert_select "[data-world-phase]", 6
+      assert_select "[data-world-phase=primeiros_passos][data-status=completed][href='#fase-primeiros_passos']"
+      assert_select "[data-world-phase=carga_leve][data-status=current]", text: /você está aqui/
+      assert_select "[fill='url(#world-map-wide-sky)']"
+    end
+    assert_select "[data-layout=tall] [fill='url(#world-map-tall-sky)']"
+  end
+
   test "todo nó tem anel de foco" do
     walk_steady users(:viajante), 40
 
     get map_url
 
-    assert_select "[data-world-phase] .world-map__focus-ring", 6
+    assert_select "[data-world-phase] .world-map__focus-ring", 12
   end
 
   test "nó da fase atual diz você está aqui" do
@@ -131,7 +146,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     get map_url
 
     assert_select "[data-world-phase=primeiros_passos][data-status=current]", text: /você está aqui/
-    assert_select "[data-world-phase]", text: /você está aqui/, count: 1
+    assert_select "[data-layout=tall] [data-world-phase]", text: /você está aqui/, count: 1
   end
 
   test "chefe esperando faz o nó pulsar" do
@@ -165,7 +180,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
 
     get map_url
 
-    assert_select "[data-world-phase][data-status=completed]", 6
+    assert_select "[data-layout=tall] [data-world-phase][data-status=completed]", 6
     assert_select "[data-world-phase]", text: /você está aqui/, count: 0
   end
 

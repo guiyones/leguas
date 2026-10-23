@@ -1,91 +1,59 @@
-<% walked = world_walked_fraction(region, journey) %>
+<%# O mesmo mapa em dois desenhos: em pé no celular e deitado no computador. %>
+<% walked = world_walked_fraction(region, journey)
+   id = "world-map-#{layout}"
+   view_box = layout == :wide ? "0 0 1000 380" : "0 0 280 600" %>
 
-<div class="world-map">
-  <svg class="world-map__art" viewBox="0 0 280 600" role="group" data-testid="world"
+<div class="world-map world-map--<%= layout %>">
+  <svg class="world-map__art" viewBox="<%= view_box %>" role="group" data-testid="world" data-layout="<%= layout %>"
     aria-label="Mapa da região <%= region.name %>">
     <defs>
-      <linearGradient id="world-map-sky" x1="0" y1="0" x2="0" y2="1">
+      <linearGradient id="<%= id %>-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" style="stop-color: var(--color-deep)"/>
         <stop offset=".07" style="stop-color: var(--color-sky)"/>
         <stop offset=".16" style="stop-color: var(--color-horizon)"/>
         <stop offset=".26" style="stop-color: var(--color-ridge)"/>
         <stop offset="1" style="stop-color: var(--color-ridge-3)"/>
       </linearGradient>
-      <linearGradient id="world-map-granite" x1="0" y1="0" x2="1" y2="0">
+      <linearGradient id="<%= id %>-granite" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0" style="stop-color: var(--color-sky)"/>
         <stop offset=".55" style="stop-color: var(--color-ridge)"/>
         <stop offset="1" style="stop-color: var(--color-ridge-2)"/>
       </linearGradient>
-      <linearGradient id="world-map-lake" x1="0" y1="0" x2="0" y2="1">
+      <linearGradient id="<%= id %>-lake" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" style="stop-color: var(--color-horizon); stop-opacity: .55"/>
         <stop offset=".5" style="stop-color: var(--color-lake); stop-opacity: .6"/>
         <stop offset="1" style="stop-color: var(--color-ridge-2); stop-opacity: .9"/>
       </linearGradient>
-      <radialGradient id="world-map-glow" r=".5">
+      <radialGradient id="<%= id %>-glow" r=".5">
         <stop offset="0" style="stop-color: var(--color-glow); stop-opacity: .95"/>
         <stop offset=".5" style="stop-color: var(--color-ember); stop-opacity: .5"/>
         <stop offset="1" style="stop-color: var(--color-ember); stop-opacity: 0"/>
       </radialGradient>
-      <radialGradient id="world-map-horizon-glow" r=".5">
+      <radialGradient id="<%= id %>-horizon-glow" r=".5">
         <stop offset="0" style="stop-color: var(--color-horizon); stop-opacity: .7"/>
         <stop offset="1" style="stop-color: var(--color-horizon); stop-opacity: 0"/>
       </radialGradient>
-      <radialGradient id="world-map-legend-glow" r=".5">
+      <radialGradient id="<%= id %>-legend-glow" r=".5">
         <stop offset="0" style="stop-color: var(--color-legend); stop-opacity: .55"/>
         <stop offset="1" style="stop-color: var(--color-legend); stop-opacity: 0"/>
       </radialGradient>
     </defs>
 
     <g aria-hidden="true">
-      <rect width="280" height="600" fill="url(#world-map-sky)"/>
-
-      <g class="world-map__stars">
-        <circle cx="18" cy="22" r="1"/>
-        <circle cx="52" cy="48" r=".8" opacity=".7"/>
-        <circle cx="96" cy="16" r=".9" opacity=".8"/>
-        <circle cx="206" cy="20" r="1.1"/>
-        <circle cx="244" cy="44" r=".8" opacity=".6"/>
-        <circle cx="266" cy="14" r=".7" opacity=".5"/>
-      </g>
-
-      <circle cx="140" cy="110" r="130" fill="url(#world-map-horizon-glow)"/>
-
-      <path class="world-map__far" d="M0 150 L36 132 L70 140 L96 120 L120 134 L160 126 L196 112 L232 128 L280 118 L280 220 L0 220Z"/>
-
-      <path d="M54 168 L82 146 L98 120 L104 82 L110 50 L118 40 L124 48 L128 84 L132 100 L134 64 L138 30 L144 22 L150 30 L154 66 L156 98 L160 80 L164 46 L170 36 L176 44 L180 78 L186 116 L206 142 L236 170Z" fill="url(#world-map-granite)"/>
-      <path class="world-map__rim" d="M104 82 L110 50 L118 40 L124 48 L128 84 M134 64 L138 30 L144 22 L150 30 L154 66 M160 80 L164 46 L170 36 L176 44 L180 78"/>
-      <g class="world-map__snow">
-        <path d="M110 50 L118 40 L124 48 L125 60 L120 55 L116 62 L112 56 L108 60Z"/>
-        <path d="M138 30 L144 22 L150 30 L151 44 L146 38 L142 46 L138 40 L135 44Z"/>
-        <path d="M164 46 L170 36 L176 44 L177 58 L172 52 L168 58 L164 52 L161 56Z"/>
-      </g>
-
-      <path d="M150 214 Q200 200 266 208 Q252 226 200 228 Q160 226 150 214Z" fill="url(#world-map-lake)"/>
-      <path class="world-map__shine" d="M176 213 h50 M190 220 h26"/>
-
-      <path class="world-map__hill world-map__hill--1" d="M0 232 Q70 196 150 230 T280 214 L280 600 L0 600Z"/>
-      <path class="world-map__hill world-map__hill--2" d="M0 340 Q100 304 180 334 T280 322 L280 600 L0 600Z"/>
-      <path class="world-map__hill world-map__hill--3" d="M0 450 Q120 418 280 444 L280 600 L0 600Z"/>
-
-      <g class="world-map__trees">
-        <path d="M228 404 l7 -20 l7 20Z M242 410 l6 -16 l6 16Z"/>
-        <path d="M20 304 l6 -17 l6 17Z M32 308 l5 -13 l5 13Z"/>
-        <path d="M212 520 l8 -22 l8 22Z M228 526 l6 -16 l6 16Z"/>
-        <path d="M24 556 l7 -19 l7 19Z"/>
-      </g>
+      <%= render "maps/world_scenery_#{layout}", id: id %>
 
       <% if walked > 0 %>
-        <path class="world-map__walked" d="<%= world_trail.path_d(from: 0, to: walked) %>"/>
+        <path class="world-map__walked" d="<%= world_trail(layout).path_d(from: 0, to: walked) %>"/>
       <% end %>
       <% if walked < 1 %>
-        <path class="world-map__ahead" d="<%= world_trail.path_d(from: walked, to: 1) %>"/>
+        <path class="world-map__ahead" d="<%= world_trail(layout).path_d(from: walked, to: 1) %>"/>
       <% end %>
     </g>
 
-    <% world_nodes(region).each do |phase, (x, y)| %>
+    <% world_nodes(region, layout).each do |phase, (x, y)| %>
       <% status = journey.phase_status(phase)
-         label_x, anchor = world_label_position(x)
-         caption = world_node_caption(phase, status) %>
+         caption = world_node_caption(phase, status)
+         label_x, label_y, anchor = world_label(layout, x, y, caption) %>
       <a href="#fase-<%= phase.key %>" data-world-phase="<%= phase.key %>" data-status="<%= status %>"
         data-action="world-map#open"
         class="world-map__node world-map__node--<%= status %> <%= "world-map__node--legend" if phase.legendary? %>">
@@ -94,18 +62,18 @@
           <circle cx="<%= x %>" cy="<%= y %>" r="14" class="world-map__dot world-map__dot--won"/>
           <image href="<%= asset_path "art/insignias/#{phase.key}.svg" %>" x="<%= x - 11 %>" y="<%= y - 11 %>" width="22" height="22"/>
         <% when :current, :boss %>
-          <circle cx="<%= x %>" cy="<%= y %>" r="40" fill="url(#world-map-glow)"
+          <circle cx="<%= x %>" cy="<%= y %>" r="40" fill="url(#<%= id %>-glow)"
             class="<%= status == :boss ? "world-map__ember" : "world-map__glow" %>"/>
           <circle cx="<%= x %>" cy="<%= y %>" r="15" class="world-map__dot world-map__dot--<%= status %>"/>
           <image href="<%= asset_path "art/avatar/traveler.svg" %>" x="<%= x - 15 %>" y="<%= y - 46 %>" width="30" height="38"/>
         <% else %>
           <% if phase.legendary? %>
-            <circle cx="<%= x %>" cy="<%= y %>" r="26" fill="url(#world-map-legend-glow)"/>
+            <circle cx="<%= x %>" cy="<%= y %>" r="26" fill="url(#<%= id %>-legend-glow)"/>
           <% end %>
           <circle cx="<%= x %>" cy="<%= y %>" r="11" class="world-map__dot"/>
         <% end %>
         <circle cx="<%= x %>" cy="<%= y %>" r="<%= status == :upcoming ? 16 : 20 %>" class="world-map__focus-ring"/>
-        <text class="world-map__label" x="<%= label_x %>" y="<%= y + (caption ? 0 : 4) %>" text-anchor="<%= anchor %>">
+        <text class="world-map__label" x="<%= label_x %>" y="<%= label_y %>" text-anchor="<%= anchor %>">
           <tspan class="world-map__name"><%= phase.name %></tspan>
           <% if caption %>
             <tspan class="world-map__caption" x="<%= label_x %>" dy="12"><%= caption %></tspan>

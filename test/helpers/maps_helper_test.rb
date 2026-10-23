@@ -11,6 +11,20 @@ class MapsHelperTest < ActionView::TestCase
     assert_equal [ 140, 60 ], nodes.last.last
   end
 
+  test "no mapa deitado os nós vão da esquerda pra direita" do
+    nodes = world_nodes(@region, :wide).map(&:last)
+
+    assert_equal [ 120, 330 ], nodes.first
+    assert_equal [ 830, 72 ], nodes.last
+    assert_equal nodes.map(&:first).sort, nodes.map(&:first)
+  end
+
+  test "rótulo do mapa em pé fica do lado livre, no deitado fica embaixo do nó" do
+    assert_equal [ 78, 104, "start" ], world_label(:tall, 60, 100, nil)
+    assert_equal [ 162, 100, "end" ], world_label(:tall, 180, 100, "vencida")
+    assert_equal [ 400, 130, "middle" ], world_label(:wide, 400, 100, nil)
+  end
+
   test "trilha dourada vai até o nó da fase atual" do
     user = users(:viajante)
     walk_steady user, 90, until_days_ago: 2

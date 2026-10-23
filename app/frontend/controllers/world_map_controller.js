@@ -1,10 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  // O mapa é mais alto que a tela: abre já mostrando onde o viajante está.
+  // O mapa em pé do celular é mais alto que a tela: se o viajante ficou fora
+  // dela, abre já mostrando onde ele está. O deitado do computador cabe inteiro.
   connect() {
-    this.element.querySelector(".world-map__node--current, .world-map__node--boss")
-      ?.scrollIntoView({ block: "center" })
+    const here = [ ...this.element.querySelectorAll(".world-map__node--current, .world-map__node--boss") ]
+      .find(node => node.getClientRects().length > 0)
+    if (!here) return
+
+    const { top, bottom } = here.getBoundingClientRect()
+    if (top < 0 || bottom > window.innerHeight - 80) here.scrollIntoView({ block: "center" })
   }
 
   // A bolinha abre a janela da fase; sem suporte a <dialog> o link só pula pra ela.

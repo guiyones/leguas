@@ -1,5 +1,5 @@
 <% @page_title = "Mapa" %>
-<% @wide = true %>
+<% @wide = :full %>
 <% region = @journey.current_region %>
 <% status = @journey.region_status(region) %>
 
@@ -10,7 +10,8 @@
 </header>
 
 <div class="world-map-page" data-controller="world-map">
-  <%= render "maps/world", region: region, journey: @journey %>
+  <%= render "maps/world", region: region, journey: @journey, layout: :tall %>
+  <%= render "maps/world", region: region, journey: @journey, layout: :wide %>
 
   <% region.phases.each do |phase| %>
     <dialog id="fase-<%= phase.key %>" class="phase-dialog" aria-labelledby="fase-<%= phase.key %>-nome"

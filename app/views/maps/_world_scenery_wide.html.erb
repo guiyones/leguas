@@ -1,0 +1,42 @@
+<rect width="1000" height="380" fill="url(#<%= id %>-sky)"/>
+
+<g class="world-map__stars">
+  <circle cx="40" cy="24" r="1.2"/>
+  <circle cx="130" cy="52" r=".9" opacity=".7"/>
+  <circle cx="230" cy="18" r="1"/>
+  <circle cx="340" cy="44" r=".8" opacity=".6"/>
+  <circle cx="460" cy="22" r="1.1"/>
+  <circle cx="560" cy="56" r=".8" opacity=".7"/>
+  <circle cx="650" cy="16" r="1"/>
+  <circle cx="960" cy="30" r=".9" opacity=".6"/>
+</g>
+
+<circle cx="830" cy="110" r="260" fill="url(#<%= id %>-horizon-glow)"/>
+
+<path class="world-map__far" d="M0 128 L70 110 L140 120 L210 98 L280 114 L360 104 L440 118 L520 96 L600 112 L680 100 L760 116 L840 102 L920 114 L1000 104 L1000 240 L0 240Z"/>
+
+<%# Os picos da Patagônia, os mesmos do mapa em pé, na ponta direita. %>
+<g transform="translate(690 8)">
+  <path d="M54 168 L82 146 L98 120 L104 82 L110 50 L118 40 L124 48 L128 84 L132 100 L134 64 L138 30 L144 22 L150 30 L154 66 L156 98 L160 80 L164 46 L170 36 L176 44 L180 78 L186 116 L206 142 L236 170Z" fill="url(#<%= id %>-granite)"/>
+  <path class="world-map__rim" d="M104 82 L110 50 L118 40 L124 48 L128 84 M134 64 L138 30 L144 22 L150 30 L154 66 M160 80 L164 46 L170 36 L176 44 L180 78"/>
+  <g class="world-map__snow">
+    <path d="M110 50 L118 40 L124 48 L125 60 L120 55 L116 62 L112 56 L108 60Z"/>
+    <path d="M138 30 L144 22 L150 30 L151 44 L146 38 L142 46 L138 40 L135 44Z"/>
+    <path d="M164 46 L170 36 L176 44 L177 58 L172 52 L168 58 L164 52 L161 56Z"/>
+  </g>
+</g>
+
+<path d="M230 186 Q300 172 390 178 Q376 196 316 198 Q256 196 230 186Z" fill="url(#<%= id %>-lake)"/>
+<path class="world-map__shine" d="M262 184 h70 M280 191 h36"/>
+
+<path class="world-map__hill world-map__hill--1" d="M0 212 Q250 184 500 206 T1000 196 L1000 380 L0 380Z"/>
+<path class="world-map__hill world-map__hill--2" d="M0 282 Q300 252 560 276 T1000 266 L1000 380 L0 380Z"/>
+<path class="world-map__hill world-map__hill--3" d="M0 338 Q420 316 1000 332 L1000 380 L0 380Z"/>
+
+<g class="world-map__trees">
+  <path d="M120 262 l7 -20 l7 20Z M134 266 l6 -16 l6 16Z"/>
+  <path d="M410 300 l6 -17 l6 17Z M422 304 l5 -13 l5 13Z"/>
+  <path d="M640 268 l8 -22 l8 22Z M656 272 l6 -16 l6 16Z"/>
+  <path d="M900 330 l7 -19 l7 19Z M914 334 l6 -15 l6 15Z"/>
+  <path d="M20 360 l7 -19 l7 19Z"/>
+</g>
