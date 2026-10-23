@@ -43,6 +43,19 @@ class RoutesTest < ApplicationSystemTestCase
     assert Route::Trace.valid?(route.trace)
   end
 
+  test "print no modo escuro com linha azul e cruzamentos sai inteiro" do
+    sign_in_as @user
+    visit new_route_url
+    attach_file "Print do mapa", file_fixture("rota_escura.jpg")
+
+    assert_selector "[data-trace-status='ok']"
+    min_x, min_y, max_x, max_y = trace_bounds
+    assert_in_delta 45, min_x, 40
+    assert_in_delta 960, max_x, 40
+    assert_in_delta 35, min_y, 40
+    assert_in_delta 640, max_y, 40
+  end
+
   test "tocar na linha refaz o traçado com a cor tocada" do
     sign_in_as @user
     visit new_route_url

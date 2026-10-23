@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Tira o traçado da rota do print do Samsung Health: acha a linha laranja e
-// vermelha, ordena, simplifica e normaliza igual a Route::Trace.normalize.
+// Tira o traçado da rota do print do Samsung Health: acha a linha colorida
+// (laranja no mapa claro, azul no escuro), ordena, simplifica e normaliza igual
+// a Route::Trace.normalize.
 const SCALED_WIDTH = 360
-const TOP_SKIP = 0.09
-const BOTTOM_SKIP = 0.12
+// A linha é a cor forte que mais aparece; aceita tons até essa distância dela.
+const HUE_WINDOW = 30
 const CELL = 4
 const CELL_MIN_PIXELS = 3
 const MIN_COMPONENT_CELLS = 12
@@ -121,23 +122,50 @@ function hsv(r, g, b) {
   return { hue, saturation: max === 0 ? 0 : delta / max, value: max / 255 }
 }
 
-function isRouteColor(r, g, b) {
+function strongHue(r, g, b) {
   const { hue, saturation, value } = hsv(r, g, b)
-  return saturation >= 0.55 && value >= 0.45 && (hue <= 45 || hue >= 340)
+  return saturation >= 0.55 && value >= 0.45 ? hue : null
 }
 
-function maskFor(color) {
-  if (!color) return isRouteColor
-  return (r, g, b) => Math.hypot(r - color[0], g - color[1], b - color[2]) < TAP_DISTANCE
+function hueDistance(a, b) {
+  const d = Math.abs(a - b) % 360
+  return Math.min(d, 360 - d)
+}
+
+// Conta os tons fortes grau a grau e fica com o pico da janela mais cheia.
+function routeHue({ data }) {
+  const counts = new Array(360).fill(0)
+  for (let i = 0; i < data.length; i += 4) {
+    const hue = strongHue(data[i], data[i + 1], data[i + 2])
+    if (hue !== null) counts[Math.floor(hue) % 360]++
+  }
+
+  let best = null, bestCount = 0
+  for (let center = 0; center < 360; center++) {
+    let count = 0
+    for (let d = -HUE_WINDOW; d <= HUE_WINDOW; d++) count += counts[(center + d + 360) % 360]
+    if (count > bestCount) { best = center; bestCount = count }
+  }
+  return best
+}
+
+function maskFor(image, color) {
+  if (color) return (r, g, b) => Math.hypot(r - color[0], g - color[1], b - color[2]) < TAP_DISTANCE
+
+  const center = routeHue(image)
+  if (center === null) return () => false
+  return (r, g, b) => {
+    const hue = strongHue(r, g, b)
+    return hue !== null && hueDistance(hue, center) <= HUE_WINDOW
+  }
 }
 
 function litCells({ data, width, height }, color) {
-  const matches = maskFor(color)
+  const matches = maskFor({ data }, color)
   const cols = Math.floor(width / CELL)
-  const top = Math.ceil(height * TOP_SKIP), bottom = Math.floor(height * (1 - BOTTOM_SKIP))
   const counts = new Map()
 
-  for (let y = top; y < bottom; y++) {
+  for (let y = 0; y < height; y++) {
     for (let x = 0; x < cols * CELL; x++) {
       const i = (y * width + x) * 4
       if (matches(data[i], data[i + 1], data[i + 2])) {
@@ -177,18 +205,50 @@ function withoutSmallComponents(lit, cols) {
   return kept
 }
 
-// Começa no canto inferior esquerdo e vai sempre pra vizinha mais perto.
+// Começa no canto inferior esquerdo e percorre a linha toda em profundidade,
+// indo sempre pra vizinha mais perto. Num beco volta pelo mesmo caminho até o
+// último cruzamento, então trajetos com cruzamentos e trechos repetidos saem
+// inteiros; a volta passa por cima da linha e não aparece no desenho.
 function orderCells(cells, rows) {
-  const left = [ ...cells ], path = []
-  let current = nearest(left, [ 0, rows ])
+  if (!cells.length) return []
 
-  while (current) {
-    path.push(current)
-    left.splice(left.indexOf(current), 1)
-    const next = nearest(left, current)
-    current = next && distance(next, current) <= MAX_GAP_CELLS ? next : null
+  const unvisited = new Set(cells.map(cellKey))
+  const start = nearest(cells, [ 0, rows ])
+  const stack = [ start ], path = [ start ]
+  let lastNew = 0
+  unvisited.delete(cellKey(start))
+
+  while (stack.length) {
+    const next = nearestUnvisited(stack[stack.length - 1], unvisited)
+    if (next) {
+      unvisited.delete(cellKey(next))
+      stack.push(next)
+      path.push(next)
+      lastNew = path.length - 1
+    } else {
+      stack.pop()
+      if (stack.length) path.push(stack[stack.length - 1])
+    }
   }
-  return path
+  return path.slice(0, lastNew + 1)
+}
+
+function nearestUnvisited([ x, y ], unvisited) {
+  let best = null, bestDistance = Infinity
+  for (let dy = -MAX_GAP_CELLS; dy <= MAX_GAP_CELLS; dy++) {
+    for (let dx = -MAX_GAP_CELLS; dx <= MAX_GAP_CELLS; dx++) {
+      const d = Math.hypot(dx, dy)
+      if (d > 0 && d <= MAX_GAP_CELLS && d < bestDistance && unvisited.has(cellKey([ x + dx, y + dy ]))) {
+        best = [ x + dx, y + dy ]
+        bestDistance = d
+      }
+    }
+  }
+  return best
+}
+
+function cellKey([ x, y ]) {
+  return `${x},${y}`
 }
 
 function nearest(cells, point) {
@@ -205,7 +265,7 @@ function distance([ ax, ay ], [ bx, by ]) {
 }
 
 // Ramer–Douglas–Peucker, epsilon em células.
-function simplify(points, epsilon = 1) {
+function simplify(points, epsilon = 1.5) {
   if (points.length < 3) return points
 
   const first = points[0], last = points[points.length - 1]
