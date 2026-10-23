@@ -398,7 +398,16 @@
       width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
     }
     .split .phase-card { margin-top: 0; }
-    .split .world-map { width: min(calc((100dvh - 6.5rem) * 280 / 600), calc(100vw - var(--split-info) - 4rem)); }
+    /* O mundo é alto demais pra caber largo: fica com a largura da cena da
+       fase numa moldura da altura da tela, que rola por dentro. */
+    .split .world-map {
+      width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
+      height: calc(100dvh - 6.5rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-ridge) transparent;
+    }
 
     .split__info {
       gap: 0.9rem;
