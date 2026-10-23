@@ -1,17 +1,23 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  // Quando o mapa rola dentro da moldura (no computador), abre na fase atual.
+  // O mapa é mais alto que a tela: abre já mostrando onde o viajante está.
   connect() {
-    const here = this.element.querySelector(".world-map__node--current, .world-map__node--boss")
-    if (!here || this.element.scrollHeight <= this.element.clientHeight) return
-
-    const frame = this.element.getBoundingClientRect(), node = here.getBoundingClientRect()
-    this.element.scrollTop += node.top - frame.top - (frame.height - node.height) / 2
+    this.element.querySelector(".world-map__node--current, .world-map__node--boss")
+      ?.scrollIntoView({ block: "center" })
   }
 
-  open({ currentTarget }) {
-    const panel = document.getElementById(currentTarget.getAttribute("href").slice(1))
-    panel?.querySelector("details")?.setAttribute("open", "")
+  // A bolinha abre a janela da fase; sem suporte a <dialog> o link só pula pra ela.
+  open(event) {
+    const dialog = document.getElementById(event.currentTarget.getAttribute("href").slice(1))
+    if (!dialog?.showModal) return
+
+    event.preventDefault()
+    dialog.showModal()
+  }
+
+  // Clique fora do conteúdo cai no próprio <dialog>, que é o fundo escuro.
+  closeOnBackdrop({ target }) {
+    if (target.tagName === "DIALOG") target.close()
   }
 }

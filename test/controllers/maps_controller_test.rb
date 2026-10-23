@@ -169,6 +169,24 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-world-phase]", text: /você está aqui/, count: 0
   end
 
+  test "cada fase tem uma janela com os detalhes, aberta pelo nó do mapa" do
+    get map_url
+
+    assert_select "dialog[id^=fase-]", 6
+    assert_select "dialog#fase-primeiros_passos" do
+      assert_select "[data-phase=primeiros_passos]"
+      assert_select "form[method=dialog] button[title=Fechar]", /Fechar/
+    end
+    assert_select "[data-world-phase=primeiros_passos][href='#fase-primeiros_passos'][data-action~='world-map#open']"
+  end
+
+  test "só o mapa, sem a lista de fases embaixo" do
+    get map_url
+
+    assert_select "details", 0
+    assert_select ".trail", 0
+  end
+
   test "aba Mapa na navegação" do
     get phase_url
 

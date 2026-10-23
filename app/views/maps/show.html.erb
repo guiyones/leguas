@@ -1,16 +1,21 @@
 <% @page_title = "Mapa" %>
 <% @wide = true %>
+<% region = @journey.current_region %>
+<% status = @journey.region_status(region) %>
 
-<h1 class="text-gold text-center">Mapa da trilha</h1>
+<header class="flex flex-col items-center gap-1 text-center" data-region="<%= region.key %>" data-status="<%= status %>">
+  <h1 class="text-gold">Mapa da trilha</h1>
+  <p class="eyebrow">Região <%= region.number %> · <%= region.name %> · <%= region.km.to_i %> km ·
+    <%= { completed: "Concluída", current: "Em andamento", locked: "Bloqueada" }.fetch(status) %></p>
+</header>
 
-<div class="split">
-  <div class="split__map">
-    <%= render "maps/world", region: @journey.current_region, journey: @journey %>
-  </div>
+<div class="world-map-page" data-controller="world-map">
+  <%= render "maps/world", region: region, journey: @journey %>
 
-  <div class="split__info">
-    <% @journey.world.regions.each do |region| %>
-      <%= render "maps/region", region: region, journey: @journey %>
-    <% end %>
-  </div>
+  <% region.phases.each do |phase| %>
+    <dialog id="fase-<%= phase.key %>" class="phase-dialog" aria-labelledby="fase-<%= phase.key %>-nome"
+      data-action="click->world-map#closeOnBackdrop">
+      <%= render "maps/phase", phase: phase, journey: @journey %>
+    </dialog>
+  <% end %>
 </div>

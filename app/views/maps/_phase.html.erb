@@ -1,86 +1,85 @@
 <% status = journey.phase_status(phase) %>
 <% here = status.in?(%i[ current boss ]) %>
-<div id="fase-<%= phase.key %>" class="scroll-mt-4">
-  <%= tag.details id: ("atual" if here), open: here,
-        class: [ "trail-node", "trail-node--#{status == :boss ? :waiting : status}" ],
-        data: { phase: phase.key, status: status } do %>
-    <summary>
-      <%= art_tag :insignias, phase.key, label: "Insígnia #{phase.name}", size: phase.legendary? ? 60 : 52,
-            class: [ "shrink-0", ("art-locked" if status == :upcoming) ] %>
-      <span class="flex-1 flex flex-col gap-1">
-        <span class="block caption">Fase <%= phase.number %></span>
-        <span class="block font-display <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></span>
-      </span>
-      <% if here %>
-        <%= art_tag :avatar, :traveler, label: journey.user.name, width: 40, height: 52 %>
-      <% end %>
-    </summary>
+<%= tag.article id: ("atual" if here), class: "flex flex-col gap-3", data: { phase: phase.key, status: status } do %>
+  <header class="flex items-center gap-3">
+    <%= art_tag :insignias, phase.key, label: "Insígnia #{phase.name}", size: phase.legendary? ? 60 : 52,
+          class: [ "shrink-0", ("art-locked" if status == :upcoming) ] %>
+    <span class="flex-1 flex flex-col gap-1">
+      <span class="block caption">Fase <%= phase.number %></span>
+      <h2 id="fase-<%= phase.key %>-nome" class="font-display <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></h2>
+    </span>
+    <% if here %>
+      <%= art_tag :avatar, :traveler, label: journey.user.name, width: 40, height: 52 %>
+    <% end %>
+    <form method="dialog" class="self-start">
+      <button class="phase-dialog__close" title="Fechar"><span aria-hidden="true">✕</span><span class="sr-only">Fechar</span></button>
+    </form>
+  </header>
 
-    <div class="flex flex-col gap-2 mt-3">
-      <% if here %>
-        <%= progress_bar journey.phase_progress %>
-        <%= stat journey.km_in_phase, total: phase.km, unit: "km" %>
-      <% else %>
-        <%= stat phase.km, unit: "km" %>
-      <% end %>
-      <% if phase.focus.present? %>
-        <p class="caption">Foco: <%= phase.focus %></p>
-      <% end %>
+  <div class="flex flex-col gap-2">
+    <% if here %>
+      <%= progress_bar journey.phase_progress %>
+      <%= stat journey.km_in_phase, total: phase.km, unit: "km" %>
+    <% else %>
+      <%= stat phase.km, unit: "km" %>
+    <% end %>
+    <% if phase.focus.present? %>
+      <p class="caption">Foco: <%= phase.focus %></p>
+    <% end %>
 
-      <% if phase.weeks.any? %>
-        <ol class="flex flex-col">
-          <% phase.weeks.each do |week| %>
-            <li class="py-2 border-t border-ridge text-sm" data-week="<%= week.number %>">
-              <p class="flex justify-between gap-2 mb-1">
-                <span class="font-bold">Trecho <%= week.number %><%= tag.span " · leve", class: "caption" if week.light? %></span>
-                <span class="text-gold font-bold"><%= number_with_precision week.km, precision: 1, strip_insignificant_zeros: true %> km</span>
-              </p>
-              <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
-                <dt class="caption">Curtas</dt><dd><%= week.short_walks %></dd>
-                <dt class="caption">Longão</dt><dd><%= week.long_walk %></dd>
-                <dt class="caption">Carga</dt><dd><%= week.load %></dd>
-                <% if week.stairs? %>
-                  <dt class="caption">Escada</dt><dd><%= week.stairs %></dd>
-                <% end %>
-              </dl>
-            </li>
-          <% end %>
-        </ol>
-      <% end %>
-
-      <% if phase.boss? %>
-        <div data-boss="<%= journey.boss_status(phase) %>">
-          <% if status == :upcoming %>
-            <p class="caption">Chefe: ???</p>
-          <% else %>
-            <p class="caption">Chefe: <span class="text-ember"><%= phase.boss.name %></span></p>
-            <p class="caption"><%= phase.boss.description %></p>
-          <% end %>
-        </div>
-      <% end %>
-
-      <% if phase.bonus %>
-        <p class="caption">Bônus: <%= phase.bonus["name"] %>. <%= phase.bonus["description"] %></p>
-      <% end %>
-
-      <% if phase.landmarks.any? %>
-        <ul class="flex flex-col gap-2">
-          <% phase.landmarks.each do |landmark| %>
-            <li class="flex items-center gap-2">
-              <% if journey.landmark_reached?(landmark) %>
-                <%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 40, class: "shrink-0" %>
-                <span><%= landmark.name %></span>
-              <% else %>
-                <span class="stamp-unknown" aria-hidden="true">?</span>
-                <span class="caption">
-                  <span class="sr-only">Marco ainda não alcançado,</span>
-                  <span aria-hidden="true">???</span> · km <%= number_with_precision landmark.at_km, precision: 1, strip_insignificant_zeros: true %>
-                </span>
+    <% if phase.weeks.any? %>
+      <ol class="flex flex-col">
+        <% phase.weeks.each do |week| %>
+          <li class="py-2 border-t border-ridge text-sm" data-week="<%= week.number %>">
+            <p class="flex justify-between gap-2 mb-1">
+              <span class="font-bold">Trecho <%= week.number %><%= tag.span " · leve", class: "caption" if week.light? %></span>
+              <span class="text-gold font-bold"><%= number_with_precision week.km, precision: 1, strip_insignificant_zeros: true %> km</span>
+            </p>
+            <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
+              <dt class="caption">Curtas</dt><dd><%= week.short_walks %></dd>
+              <dt class="caption">Longão</dt><dd><%= week.long_walk %></dd>
+              <dt class="caption">Carga</dt><dd><%= week.load %></dd>
+              <% if week.stairs? %>
+                <dt class="caption">Escada</dt><dd><%= week.stairs %></dd>
               <% end %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+            </dl>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+
+    <% if phase.boss? %>
+      <div data-boss="<%= journey.boss_status(phase) %>">
+        <% if status == :upcoming %>
+          <p class="caption">Chefe: ???</p>
+        <% else %>
+          <p class="caption">Chefe: <span class="text-ember"><%= phase.boss.name %></span></p>
+          <p class="caption"><%= phase.boss.description %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if phase.bonus %>
+      <p class="caption">Bônus: <%= phase.bonus["name"] %>. <%= phase.bonus["description"] %></p>
+    <% end %>
+
+    <% if phase.landmarks.any? %>
+      <ul class="flex flex-col gap-2">
+        <% phase.landmarks.each do |landmark| %>
+          <li class="flex items-center gap-2">
+            <% if journey.landmark_reached?(landmark) %>
+              <%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 40, class: "shrink-0" %>
+              <span><%= landmark.name %></span>
+            <% else %>
+              <span class="stamp-unknown" aria-hidden="true">?</span>
+              <span class="caption">
+                <span class="sr-only">Marco ainda não alcançado,</span>
+                <span aria-hidden="true">???</span> · km <%= number_with_precision landmark.at_km, precision: 1, strip_insignificant_zeros: true %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

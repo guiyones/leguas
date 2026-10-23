@@ -229,95 +229,6 @@
     text-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 70%, transparent), 0 2px 0 var(--color-ink-warm);
   }
 
-  .trail {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-left: 1.25rem;
-    border-left: 2px dashed color-mix(in srgb, var(--color-muted) 40%, transparent);
-  }
-
-  .trail--done {
-    border-left-style: solid;
-    border-left-color: var(--color-gold);
-  }
-
-  .trail-node {
-    position: relative;
-    background: color-mix(in srgb, var(--color-ridge-2) 85%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-gold) 30%, transparent);
-    border-radius: 14px;
-    padding: 0.75rem;
-  }
-
-  .trail-node::before {
-    content: "";
-    position: absolute;
-    left: calc(-1.25rem - 9px);
-    top: 1.25rem;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--color-ridge);
-    border: 2px solid color-mix(in srgb, var(--color-muted) 50%, transparent);
-  }
-
-  .trail-node--completed::before { background: var(--color-gold); border-color: var(--color-gold); }
-
-  .trail-node--current {
-    border-color: color-mix(in srgb, var(--color-gold) 70%, transparent);
-    box-shadow: 0 0 18px color-mix(in srgb, var(--color-ember) 30%, transparent);
-  }
-
-  .trail-node--current::before {
-    background: var(--color-glow);
-    border-color: var(--color-gold);
-    box-shadow: 0 0 10px var(--color-ember);
-  }
-
-  .trail-node--waiting {
-    border-color: var(--color-ember);
-    animation: boss-pulse 2.4s ease-in-out infinite;
-  }
-
-  .trail-node--waiting::before {
-    background: var(--color-ember);
-    border-color: var(--color-glow);
-    width: 18px;
-    height: 18px;
-    left: calc(-1.25rem - 11px);
-    box-shadow: 0 0 12px var(--color-ember);
-  }
-
-  @keyframes boss-pulse {
-    50% { box-shadow: 0 0 22px color-mix(in srgb, var(--color-ember) 55%, transparent); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .trail-node--waiting { animation: none; }
-  }
-
-  .trail-node > summary {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .trail-node > summary::-webkit-details-marker { display: none; }
-
-  .trail-node > summary::after {
-    content: "▸";
-    margin-left: auto;
-    padding-left: 0.5rem;
-    color: var(--color-gold);
-    font-size: 0.9rem;
-    flex-shrink: 0;
-  }
-
-  .trail-node[open] > summary::after { content: "▾"; }
-
   .silhouette {
     display: block;
     background: var(--color-ridge);
@@ -375,8 +286,7 @@
       top: 1rem;
     }
 
-    .split .phase-map,
-    .split .world-map {
+    .split .phase-map {
       margin: 0;
       border-radius: 18px;
       overflow: hidden;
@@ -391,17 +301,6 @@
       width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
     }
     .split .phase-card { margin-top: 0; }
-    /* O mundo é alto demais pra caber largo: fica com a largura da cena da
-       fase numa moldura da altura da tela menos o título, que rola por dentro. */
-    .split .world-map {
-      width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
-      height: calc(100dvh - 10rem);
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      scrollbar-width: thin;
-      scrollbar-color: var(--color-ridge) transparent;
-    }
-
     .split__info {
       gap: 0.9rem;
       font-size: 0.8125rem;
@@ -544,6 +443,47 @@
   }
 
   .world-map { margin: 0 -1rem; }
+
+  /* No computador o mapa fica grande no meio, e a página rola por ele. */
+  @media (width >= 64rem) {
+    .world-map-page .world-map {
+      max-width: 36rem;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+  }
+
+  .phase-dialog {
+    width: min(100% - 2rem, 28rem);
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 0;
+    color: inherit;
+    background: linear-gradient(var(--color-panel), var(--color-deep));
+    border: 1px solid color-mix(in srgb, var(--color-gold) 50%, transparent);
+    border-radius: 16px;
+    box-shadow: 0 0 28px color-mix(in srgb, var(--color-ember) 30%, transparent);
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ridge) transparent;
+  }
+
+  .phase-dialog::backdrop {
+    background: color-mix(in srgb, var(--color-deep) 75%, transparent);
+    backdrop-filter: blur(2px);
+  }
+
+  .phase-dialog > article { padding: 1rem; }
+
+  .phase-dialog__close {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    color: var(--color-gold);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 40%, transparent);
+    cursor: pointer;
+  }
 
   .world-map__art {
     display: block;
