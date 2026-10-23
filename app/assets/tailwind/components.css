@@ -394,7 +394,7 @@
     .split .world-map { width: min(calc((100dvh - 9.5rem) * 280 / 600), calc(100vw - var(--split-info) - 4rem)); }
 
     .split__info {
-      gap: 0.6rem;
+      gap: 0.9rem;
       font-size: 0.8125rem;
     }
 
