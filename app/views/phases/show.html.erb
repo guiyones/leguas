@@ -50,13 +50,6 @@
       <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
     <% end %>
 
-    <% if tip = tip_of_the_day(phase.region) %>
-      <section class="panel">
-        <p class="eyebrow">Dica do plano</p>
-        <p data-testid="tip"><%= tip %></p>
-      </section>
-    <% end %>
-
     <% walked_today = number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %>
     <% if @walked_today >= @mission_goal %>
       <p class="caption text-gold" data-testid="daily-bonus">Hoje: <%= walked_today %> km · ✓ bônus do dia +<%= Mission::XP %> XP</p>

@@ -257,13 +257,11 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=phase]", text: /m subidos/
   end
 
-  test "dica do plano" do
+  test "sem dica do plano, pra o botão de registrar caber sem rolar" do
     get phase_url
 
-    tips = World.current.regions.first.tips
-    assert_select "[data-testid=tip]" do |nodes|
-      assert_includes tips, nodes.first.text.strip
-    end
+    assert_select "[data-testid=tip]", 0
+    assert_no_match "Dica do plano", response.body
   end
 
   test "barra com Fase, Mapa, Diário e Menu" do
