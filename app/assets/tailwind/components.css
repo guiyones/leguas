@@ -365,19 +365,12 @@
       --split-info: 26rem;
       display: grid;
       grid-template-columns: auto var(--split-info);
-      grid-template-areas: "map title" "map info";
-      grid-template-rows: auto 1fr;
       justify-content: center;
-      column-gap: 1.5rem;
+      gap: 1.5rem;
       align-items: start;
     }
 
-    /* O título vai pro topo da coluna da direita e o mapa ganha a altura toda. */
-    .split__title { grid-area: title; margin-bottom: 0.75rem; }
-    .split__info { grid-area: info; }
-
     .split__map {
-      grid-area: map;
       position: sticky;
       top: 1rem;
     }
@@ -399,10 +392,10 @@
     }
     .split .phase-card { margin-top: 0; }
     /* O mundo é alto demais pra caber largo: fica com a largura da cena da
-       fase numa moldura da altura da tela, que rola por dentro. */
+       fase numa moldura da altura da tela menos o título, que rola por dentro. */
     .split .world-map {
       width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
-      height: calc(100dvh - 6.5rem);
+      height: calc(100dvh - 10rem);
       overflow-y: auto;
       overscroll-behavior: contain;
       scrollbar-width: thin;

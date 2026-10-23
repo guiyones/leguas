@@ -1,9 +1,9 @@
 <% @page_title = "Mapa" %>
 <% @wide = true %>
 
-<div class="split">
-  <h1 class="split__title text-gold text-center lg:text-left">Mapa da trilha</h1>
+<h1 class="text-gold text-center">Mapa da trilha</h1>
 
+<div class="split">
   <div class="split__map">
     <%= render "maps/world", region: @journey.current_region, journey: @journey %>
   </div>
