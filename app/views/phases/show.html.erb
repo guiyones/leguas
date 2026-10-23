@@ -24,7 +24,7 @@
   </div>
 
   <div class="split__info">
-    <section class="panel phase-card flex flex-col gap-3" data-testid="phase">
+    <section class="panel phase-card flex flex-col gap-3 lg:gap-2" data-testid="phase">
       <p class="eyebrow">Fase <%= phase.number %> de <%= phase.region.phases.size %><%= " · #{phase.focus}" if phase.focus %></p>
       <h2 class="phase-card__name <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></h2>
       <%= progress_bar @journey.phase_progress %>
@@ -42,6 +42,12 @@
       <% end %>
 
       <p class="caption">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas<% if @journey.climbed_m > 0 %> · <%= number_with_delimiter @journey.climbed_m.round %> m subidos<% end %></p>
+      <% walked_today = number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %>
+      <% if @walked_today >= @mission_goal %>
+        <p class="caption text-gold" data-testid="daily-bonus">Hoje: <%= walked_today %> km · ✓ bônus do dia +<%= Mission::XP %> XP</p>
+      <% else %>
+        <p class="caption" data-testid="daily-bonus">Hoje: <%= walked_today %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
+      <% end %>
     </section>
 
     <% if @week %>
@@ -50,15 +56,9 @@
       <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
     <% end %>
 
-    <% walked_today = number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %>
-    <% if @walked_today >= @mission_goal %>
-      <p class="caption text-gold" data-testid="daily-bonus">Hoje: <%= walked_today %> km · ✓ bônus do dia +<%= Mission::XP %> XP</p>
-    <% else %>
-      <p class="caption" data-testid="daily-bonus">Hoje: <%= walked_today %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
-    <% end %>
-    <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4 lg:text-base lg:py-3" %>
+    <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4 lg:text-sm lg:py-2" %>
     <% if @stairs %>
-      <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>
+      <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary lg:text-sm lg:py-2" %>
     <% end %>
   </div>
 </div>
