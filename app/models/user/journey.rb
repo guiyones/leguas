@@ -109,12 +109,18 @@ class User::Journey
     @week_progress[week] ||= begin
       dates = @week_dates.fetch(week, [])
       User::WeekProgress.new(week, walks: dates.flat_map { @log.walks_on(it) },
-        stair_sessions: dates.flat_map { @log.stair_sessions_on(it) })
+        stair_sessions: dates.flat_map { @log.stair_sessions_on(it) },
+        finished: week.phase.start_km + week.end_km <= position_km)
     end
   end
 
   def completed_weeks
-    world.phases.flat_map(&:weeks).select { week_progress(it).complete? }
+    world.phases.flat_map(&:weeks).select { week_progress(it).conquered? }
+  end
+
+  # Carimbo dourado: o marco que fecha um trecho conquistado.
+  def landmark_conquered?(landmark)
+    completed_weeks.any? { it.landmark == landmark }
   end
 
   def level

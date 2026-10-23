@@ -32,7 +32,7 @@
         <% phase.weeks.each do |week| %>
           <li class="py-2 border-t border-ridge text-sm" data-week="<%= week.number %>">
             <p class="flex justify-between gap-2 mb-1">
-              <span class="font-bold">Trecho <%= week.number %><%= tag.span " · leve", class: "caption" if week.light? %></span>
+              <span class="font-bold">Trecho <%= week.number %><%= tag.span " · leve", class: "caption" if week.light? %><%= tag.span " · #{week_destination(week, journey)}", class: "caption" if week.landmark %><%= tag.span " ✓", class: "text-gold", title: "conquistado" if journey.week_progress(week).conquered? %></span>
               <span class="text-gold font-bold"><%= number_with_precision week.km, precision: 1, strip_insignificant_zeros: true %> km</span>
             </p>
             <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
@@ -68,7 +68,9 @@
         <% phase.landmarks.each do |landmark| %>
           <li class="flex items-center gap-2">
             <% if journey.landmark_reached?(landmark) %>
-              <%= art_tag :stamps, landmark.key, label: "Carimbo #{landmark.name}", size: 40, class: "shrink-0" %>
+              <% gold = journey.landmark_conquered?(landmark) %>
+              <%= art_tag :stamps, landmark.key, label: "Carimbo #{"dourado " if gold}#{landmark.name}", size: 40,
+                    class: [ "shrink-0", ("stamp--gold" if gold) ] %>
               <span><%= landmark.name %></span>
             <% else %>
               <span class="stamp-unknown" aria-hidden="true">?</span>

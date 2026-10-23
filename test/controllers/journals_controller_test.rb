@@ -22,25 +22,35 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /Trechos completos/, count: 0
   end
 
-  test "semana completa vira selo com o nome da fase" do
+  test "trecho conquistado deixa o carimbo do marco dourado" do
     walk_on users(:viajante), 4, 3, minutes: 40
     walk_on users(:viajante), 3, 3, minutes: 40
     walk_on users(:viajante), 2, 3, minutes: 40
     walk_on users(:viajante), 1, 8
+    walk_on users(:viajante), 0, 5                # chega em Ponta das Areias, km 22
 
     get journal_url
 
-    assert_select "[data-testid=weeks]" do
-      assert_select "h2", text: "Trechos completos"
-      assert_select "li", 1
-      assert_select "li", text: /Trecho 1/
-      assert_select "li", text: /Primeiros Passos/
-      assert_select "img[src*='art/seals/week']"
+    assert_select "[data-testid=weeks]", 0
+    assert_select ".stamp-slot--conquered", 1
+    assert_select ".stamp-slot--conquered", text: /Ponta das Areias/ do
+      assert_select ".stamp--gold[src*='art/stamps/ponta_das_areias']"
+      assert_select "*", text: /Trecho 1 conquistado/
     end
   end
 
+  test "marco alcançado sem os desafios do trecho fica com o carimbo comum" do
+    log_walks users(:viajante), 25
+
+    get journal_url
+
+    assert_select "summary", text: /Ponta das Areias/
+    assert_select ".stamp-slot--conquered", 0
+    assert_select ".stamp--gold", 0
+  end
+
   test "carimbos alcançados com nome e história" do
-    log_walks users(:viajante), 10
+    log_walks users(:viajante), 25
 
     get journal_url
 

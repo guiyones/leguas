@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class JourneyFlowTest < ApplicationSystemTestCase
-  test "novo viajante entra, caminha 8 km e ganha o primeiro carimbo" do
+  test "novo viajante entra, caminha 22 km e ganha o primeiro carimbo" do
     visit root_url
     fill_in "Email", with: "estreante@leguas.test"
     click_on "Receber código"
@@ -21,7 +21,7 @@ class JourneyFlowTest < ApplicationSystemTestCase
     assert_text "Primeiros Passos"
 
     click_on "Registrar caminhada", match: :first
-    fill_in "Quantos km?", with: "8"
+    fill_in "Quantos km?", with: "22"
     click_on "Registrar caminhada"
 
     assert_text "Carimbo conquistado!"
@@ -29,8 +29,8 @@ class JourneyFlowTest < ApplicationSystemTestCase
     click_on "Continuar"
 
     assert_text "Primeiros Passos"
-    assert_selector "[data-testid=phase]", text: %r{8\s*/ 90 km}
-    assert_selector "[data-testid=daily-bonus].text-gold", text: "Hoje: 8 km · ✓ bônus do dia +20 XP"
+    assert_selector "[data-testid=phase]", text: %r{22\s*/ 90 km}
+    assert_selector "[data-testid=daily-bonus].text-gold", text: "Hoje: 22 km · ✓ bônus do dia +20 XP"
   end
 
   test "o chefe da fase 1 aparece e cai" do
@@ -50,6 +50,10 @@ class JourneyFlowTest < ApplicationSystemTestCase
     visit new_walk_url
     fill_in "Quantos km?", with: "12"
     click_on "Registrar caminhada"
+
+    assert_text "Carimbo conquistado!"          # Ilha dos Pinguins: onde o chefe espera
+    assert_text "Ilha dos Pinguins"
+    click_on "Continuar"
 
     assert_text "Um chefe apareceu!"
     click_on "Aceitar o desafio"

@@ -1,4 +1,5 @@
 # What a week's challenges got from the walks and stair sessions of the days spent in it.
+# The week is conquered when its challenges are done and the traveler reached its end.
 class User::WeekProgress
   WALK_XP = 15
   LONG_WALK_XP = 30
@@ -15,10 +16,11 @@ class User::WeekProgress
 
   attr_reader :week
 
-  def initialize(week, walks:, stair_sessions:)
+  def initialize(week, walks:, stair_sessions:, finished:)
     @week = week
     @walks = walks
     @stair_sessions = stair_sessions
+    @finished = finished
   end
 
   def done(challenge)
@@ -37,8 +39,12 @@ class User::WeekProgress
     week.challenges.any? && week.challenges.all? { done?(it) }
   end
 
+  def conquered?
+    complete? && @finished
+  end
+
   def xp
-    week.challenges.sum { done(it) * self.class.xp_per(it) } + (complete? ? COMPLETE_XP : 0)
+    week.challenges.sum { done(it) * self.class.xp_per(it) } + (conquered? ? COMPLETE_XP : 0)
   end
 
   private

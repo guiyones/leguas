@@ -49,11 +49,18 @@ class WorldContentTest < ActiveSupport::TestCase
     @world.phases.each do |phase|
       assert_includes 3..5, phase.landmarks.size, "#{phase.key} com #{phase.landmarks.size} marcos"
     end
-    assert_operator @world.phases.first.landmarks.first.at_km, :<=, 10
-
     stops = ([ 0 ] + @world.landmarks.map(&:world_km) + @world.phases.map(&:end_km)).sort
     gaps = stops.each_cons(2).map { |a, b| b - a }
-    assert_operator gaps.max, :<=, 35
+    assert_operator gaps.max, :<=, 55
+  end
+
+  test "todo trecho termina num marco, e o último é onde o chefe espera" do
+    @world.phases.each do |phase|
+      phase.weeks.each do |week|
+        assert week.landmark, "#{phase.key}, trecho #{week.number}: sem marco no km #{week.end_km.to_s("F")}"
+      end
+      assert_equal phase.km, phase.weeks.last.landmark.at_km
+    end
   end
 
   test "o mundo inteiro pode ser vencido, chefe por chefe" do

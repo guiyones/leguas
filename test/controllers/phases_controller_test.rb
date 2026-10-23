@@ -29,7 +29,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: /Primeiros Passos/
       assert_select "*", text: %r{5 / 90 km}
       assert_select "*", text: /Ponta das Areias/
-      assert_select "*", text: /faltam 3 km/
+      assert_select "*", text: /faltam 17 km/
     end
   end
 
@@ -39,8 +39,8 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     get phase_url
 
     assert_select "[data-testid=phase]" do
-      assert_select "*", text: /O chefe da fase aparece em 10 km/
-      assert_select "*", text: /Próximo marco: Primeiros Passos/, count: 0
+      assert_select "*", text: /O chefe da fase aparece em 10 km, na Ilha dos Pinguins/
+      assert_select "*", text: /Próximo marco/, count: 0
     end
   end
 
@@ -74,7 +74,7 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "[data-testid=challenges]" do
       assert_select "h2", text: "Desafios do trecho"
-      assert_select "*", text: /Trecho 1 de 4/
+      assert_select "*", text: /Trecho 1 de 4 · até Ponta das Areias/
       assert_select "[data-done=false]", text: /3 caminhadas de 40 min.*0\/3/m
       assert_select "[data-done=false]", text: /Longão de 8 km/
       assert_select "*", text: Regexp.new(Regexp.escape(World.current.phases.first.note))
@@ -290,14 +290,15 @@ class PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=scene] [data-traveler][data-fraction=?]", "0.0"
   end
 
-  test "marcos alcançados com nome, futuros sem nome" do
-    log_walks users(:viajante), 10
+  test "marcos alcançados com nome, futuros sem nome; o do fim é o chefe" do
+    log_walks users(:viajante), 25
 
     get phase_url
 
     assert_select "[data-testid=scene]" do
       assert_select "[data-landmark=ponta_das_areias][data-reached=true]", text: /Ponta das Areias/
-      assert_select "[data-reached=false]", 3
+      assert_select "[data-reached=false]", 2
+      assert_select "[data-landmark=ilha_dos_pinguins]", 0
       assert_select "[data-landmark=estreito_do_navegante]", text: /\?\?\?/
       assert_select "*", text: /Estreito do Navegante/, count: 0
     end

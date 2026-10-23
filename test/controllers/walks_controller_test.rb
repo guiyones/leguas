@@ -28,7 +28,8 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "vencer um marco leva pra celebração" do
-    post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }
+    walk_on users(:viajante), 1, 14
+    post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }   # km 22: Ponta das Areias
 
     assert_redirected_to celebration_url
     assert_match(/\A\+\d+ XP/, flash[:notice])

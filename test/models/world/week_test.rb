@@ -22,6 +22,13 @@ class World::WeekTest < ActiveSupport::TestCase
     assert_not World::Challenge.const_defined?(:XP_PER_SESSION, false)
   end
 
+  test "trecho termina no marco que fica no km do fim dele" do
+    a2 = World.load(Rails.root.join("test/world")).phase("a2")
+
+    assert_equal "a2_mark", a2.weeks.first.landmark.key
+    assert_nil a2.weeks.second.landmark
+  end
+
   test "semana do mundo de teste tem os desafios na ordem" do
     a2 = World.load(Rails.root.join("test/world")).phases.find { it.key == "a2" }
 

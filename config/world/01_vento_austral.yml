@@ -57,25 +57,25 @@ phases:
     landmarks:
       - key: ponta_das_areias
         name: Ponta das Areias
-        at_km: 8
+        at_km: 22
         story: >
           Uma cidade de vento na beira do estreito, com a estátua de um navegador no meio
           da praça. Dizem que quem esfrega o pé de um dos indígenas na base dela um dia volta pra lá.
       - key: estreito_do_navegante
         name: Estreito do Navegante
-        at_km: 30
+        at_km: 46
         story: >
           Um canal de água fria entre o continente e a Terra do Fogo, ligando o Atlântico ao
           Pacífico. A primeira expedição europeia a atravessar foi a de Fernão de Magalhães, em 1520.
       - key: forte_do_estreito
         name: Forte do Estreito
-        at_km: 55
+        at_km: 72
         story: >
           Um forte de madeira erguido em 1843 numa ponta do estreito, pra marcar quem cuidava
           daquelas águas. O que se visita hoje é uma reconstrução.
       - key: ilha_dos_pinguins
         name: Ilha dos Pinguins
-        at_km: 75
+        at_km: 90
         story: >
           Uma ilha no meio do estreito onde milhares de pinguins-de-magalhães fazem ninho em
           tocas cavadas no chão. Eles chegam na primavera e vão embora no outono.
@@ -135,25 +135,25 @@ phases:
     landmarks:
       - key: estrada_da_estepe
         name: Estrada da Estepe
-        at_km: 20
+        at_km: 28
         story: >
           Entre a cidade do estreito e o porto do norte são quase 250 km de estepe, com mais
           ovelha que gente. As fazendas de ovelhas fizeram a riqueza da região há mais de cem anos.
       - key: porto_da_ultima_esperanca
         name: Porto da Última Esperança
-        at_km: 50
+        at_km: 58
         story: >
           Uma cidade pequena na beira de um fiorde chamado Última Esperança. O nome veio de um
           navegante espanhol do século XVI que procurava o caminho até o estreito por ali.
       - key: orla_dos_cisnes
         name: Orla dos Cisnes
-        at_km: 80
+        at_km: 91
         story: >
           Na orla do fiorde nadam cisnes de corpo branco e pescoço preto. Essa espécie só
           existe no sul da América do Sul.
       - key: morro_da_vigia
         name: Morro da Vigia
-        at_km: 105
+        at_km: 115
         story: >
           Um morro perto do porto, com um mirante lá no alto. De cima dá pra ver a cidade
           inteira e o fiorde entrando no continente.
@@ -215,25 +215,25 @@ phases:
     landmarks:
       - key: frigorifico_velho
         name: Frigorífico Velho
-        at_km: 25
+        at_km: 30
         story: >
           Um frigorífico de tijolo à beira do fiorde onde se congelava a carne das ovelhas da
           região. Hoje é monumento nacional e virou hotel.
       - key: caverna_do_gigante
         name: Caverna do Gigante
-        at_km: 55
+        at_km: 63
         story: >
           Numa caverna enorme acharam, no fim do século XIX, pele e ossos de milodonte, uma
           preguiça gigante extinta. Na entrada tem uma estátua dele em tamanho real.
       - key: lagoa_do_sal_amargo
         name: Lagoa do Sal Amargo
-        at_km: 85
+        at_km: 99
         story: >
           Uma lagoa salgada perto da entrada do parque, onde muitos viajantes descem do ônibus.
           Em volta pastam guanacos, parentes selvagens da lhama.
       - key: pedras_vivas
         name: Pedras Vivas
-        at_km: 110
+        at_km: 125
         story: >
           Na margem de um lago azul crescem pedras claras feitas por micróbios, os trombólitos.
           Formações assim existem na Terra há bilhões de anos.
@@ -293,25 +293,25 @@ phases:
     landmarks:
       - key: mirante_do_azul
         name: Mirante do Azul
-        at_km: 25
+        at_km: 36
         story: >
           Daqui o maciço aparece inteiro pela primeira vez. O parque que guarda essas montanhas
           é Reserva da Biosfera da UNESCO desde 1978.
       - key: salto_furioso
         name: Salto Furioso
-        at_km: 60
+        at_km: 76
         story: >
           Uma cachoeira curta e barulhenta por onde a água de um lago despenca pro outro. O
           vento ali costuma ser tão forte que dá pra se apoiar nele.
       - key: lago_turquesa
         name: Lago Turquesa
-        at_km: 95
+        at_km: 118
         story: >
           Um lago de cor turquesa, quase de mentira. A cor vem de um pó de rocha bem fino que
           os glaciares moem e os rios trazem.
       - key: travessia_do_lago
         name: Travessia do Lago
-        at_km: 130
+        at_km: 150
         story: >
           Pra seguir viagem, um catamarã cruza o lago turquesa. Do outro lado fica o pé da
           montanha mais alta do maciço.
@@ -373,31 +373,31 @@ phases:
     landmarks:
       - key: lago_dos_icebergs
         name: Lago dos Icebergs
-        at_km: 30
+        at_km: 44
         story: >
           Num lago cinzento boiam pedaços de gelo azul que se soltaram do glaciar. O gelo é tão
           compacto que absorve o vermelho da luz, e o que sobra pro olho é azul.
       - key: geleira_cinzenta
         name: Geleira Cinzenta
-        at_km: 60
+        at_km: 91
         story: >
           Uma parede de gelo que desce do Campo de Gelo Patagônico Sul até o lago. Esse campo é
           uma das maiores massas de gelo do mundo fora da Antártida e da Groenlândia.
       - key: vale_do_frances
         name: Vale do Francês
-        at_km: 90
+        at_km: 115
         story: >
           Um vale entre montanhas onde o gelo troveja. São pedaços do glaciar lá em cima que
           desabam em avalanches, mesmo no verão.
       - key: os_chifres
         name: Os Chifres
-        at_km: 120
+        at_km: 141
         story: >
           Picos de granito claro com o topo escuro, de uma rocha mais antiga que ficou por
           cima. Vistos do lago, parecem chifres.
       - key: lago_do_explorador
         name: Lago do Explorador
-        at_km: 150
+        at_km: 180
         story: >
           Um lago comprido de água verde-azulada aos pés dos chifres. Leva o nome de um geólogo
           sueco que explorou a Patagônia no fim do século XIX.
@@ -457,25 +457,25 @@ phases:
     landmarks:
       - key: passo_dos_ventos
         name: Passo dos Ventos
-        at_km: 25
+        at_km: 38
         story: >
           A trilha entra num vale estreito, subindo pela beira de um rio que desce das torres.
           Num trecho chamado Passo dos Ventos, o vento sopra encanado entre as montanhas.
       - key: refugio_do_vale
         name: Refúgio do Vale
-        at_km: 60
+        at_km: 93
         story: >
           Um refúgio de madeira no fundo do vale, à beira do rio. Muita gente dorme aqui pra
           subir de madrugada e ver o sol nascer nas torres.
       - key: morena_das_torres
         name: Morena das Torres
-        at_km: 95
+        at_km: 123
         story: >
           O último trecho é uma subida íngreme por uma morena, um monte de pedras soltas que o
           glaciar empurrou e deixou pra trás.
       - key: base_das_torres
         name: Base das Três Torres
-        at_km: 130
+        at_km: 150
         story: >
           Três torres de granito sobem acima de uma lagoa verde de degelo. O granito delas se
           formou debaixo da terra há uns 12 milhões de anos.

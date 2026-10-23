@@ -12,33 +12,20 @@
   <div data-stat="missions"><%= stat @missions_done, unit: "bônus do dia" %></div>
 </section>
 
-<% if @completed_weeks.any? %>
-  <section class="panel mt-3 flex flex-col gap-3" data-testid="weeks">
-    <h2>Trechos completos</h2>
-    <ul class="grid grid-cols-3 gap-3">
-      <% @completed_weeks.each do |week| %>
-        <li class="flex flex-col items-center gap-1">
-          <div class="relative">
-            <%= art_tag :seals, :week, label: "Selo do trecho #{week.number}", size: 72 %>
-            <span class="absolute inset-x-0 top-[22%] text-center text-2xl text-glow" aria-hidden="true"><%= week.number %></span>
-          </div>
-          <span class="text-xs leading-tight text-center">Trecho <%= week.number %></span>
-          <span class="caption text-xs text-center"><%= week.phase.name %></span>
-        </li>
-      <% end %>
-    </ul>
-  </section>
-<% end %>
-
 <ul class="grid grid-cols-3 gap-3 mt-3">
   <% @journey.world.phases.each do |phase| %>
     <% phase.landmarks.each do |landmark| %>
       <% if @journey.landmark_reached?(landmark) %>
-        <li class="stamp-slot">
+        <% week = phase.weeks.find { it.landmark == landmark }
+           gold = @journey.landmark_conquered?(landmark) %>
+        <li class="stamp-slot <%= "stamp-slot--conquered" if gold %>">
           <details>
             <summary class="flex flex-col items-center gap-1 cursor-pointer">
-              <%= art_tag :stamps, landmark.key, label: "", size: 72 %>
+              <%= art_tag :stamps, landmark.key, label: "", size: 72, class: ("stamp--gold" if gold) %>
               <span class="text-xs leading-tight text-center"><%= landmark.name %></span>
+              <% if gold %>
+                <span class="caption text-xs text-gold text-center">Trecho <%= week.number %> conquistado</span>
+              <% end %>
             </summary>
             <p class="caption mt-1">Fase <%= phase.number %> · <%= phase.name %></p>
             <p class="caption mt-1"><%= landmark.story %></p>

@@ -77,12 +77,14 @@
     <path class="phase-scene__ahead" d="<%= scene_trail.path_d(from: progress, to: 1) %>"/>
   <% end %>
 
-  <% phase.landmarks.each do |landmark|
+  <%# O marco do fim da fase é onde o chefe espera: quem aparece nele é o chefe. %>
+  <% phase.landmarks.reject { it.at_km == phase.km && phase.boss? }.each do |landmark|
        x, y = scene_trail.point_at(landmark.at_km.to_f / phase.km)
        reached = journey.landmark_reached?(landmark) %>
     <g data-landmark="<%= landmark.key %>" data-reached="<%= reached %>">
       <% if reached %>
-        <circle class="phase-scene__mark phase-scene__mark--reached" cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5.5"/>
+        <circle class="phase-scene__mark phase-scene__mark--reached <%= "phase-scene__mark--gold" if journey.landmark_conquered?(landmark) %>"
+          cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5.5"/>
       <% else %>
         <circle class="phase-scene__mark" cx="<%= x.round(1) %>" cy="<%= y.round(1) %>" r="5"/>
       <% end %>

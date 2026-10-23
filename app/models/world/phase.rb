@@ -49,8 +49,8 @@ class World::Phase
         raise World::Invalid, "fase #{key}: raridade desconhecida #{rarity}"
       end
 
-      if landmarks.any? { !(it.at_km > 0 && it.at_km < km) }
-        raise World::Invalid, "fase #{key}: marco precisa ficar entre 0 e #{km.to_s("F")} km (exclusivo)"
+      if landmarks.any? { !(it.at_km > 0 && it.at_km <= km) }
+        raise World::Invalid, "fase #{key}: marco precisa ficar depois do km 0 e até o km #{km.to_s("F")}"
       end
 
       if weeks.any? && weeks.sum(&:km) != km

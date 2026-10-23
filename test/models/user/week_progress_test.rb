@@ -49,6 +49,17 @@ class User::WeekProgressTest < ActiveSupport::TestCase
     assert_equal 2 * 15 + 30 + 50, complete.xp
   end
 
+  test "trecho só é conquistado quando chega no marco do fim com os desafios feitos" do
+    walks = [ walk(2, minutes: 40), walk(3, minutes: 45) ]
+    on_the_way = progress(@week1, walks: walks, finished: false)
+
+    assert on_the_way.complete?
+    assert_not on_the_way.conquered?
+    assert_equal 2 * 15 + 30, on_the_way.xp
+    assert progress(@week1, walks: walks).conquered?
+    assert_not progress(@week1, walks: walks.first(1)).conquered?
+  end
+
   test "semana sem desafios nunca fica completa" do
     week = World::Week.new({ "km" => 5 }, number: 1, start_km: 0, light: false, phase: @phase)
 
@@ -57,8 +68,8 @@ class User::WeekProgressTest < ActiveSupport::TestCase
   end
 
   private
-    def progress(week, walks: [], stair_sessions: [])
-      User::WeekProgress.new(week, walks: walks, stair_sessions: stair_sessions)
+    def progress(week, walks: [], stair_sessions: [], finished: true)
+      User::WeekProgress.new(week, walks: walks, stair_sessions: stair_sessions, finished: finished)
     end
 
     def walk(km, minutes: nil, load_kg: nil)

@@ -288,8 +288,33 @@ class User::JourneyTest < ActiveSupport::TestCase
 
     assert_equal :defeated, journey.boss_status(@world.phase("a2"))
     assert_equal [ 0, 0, 2 ], b1_weeks.map { journey.week_progress(it).done(it.challenges.first) }
+    assert_empty journey.completed_weeks              # km 54: o fim do trecho 3 é no 60
+
+    walk_on @user, 0, 6
+    journey = @user.journey(world: @world)
+
     assert_equal [ b1_weeks.third ], journey.completed_weeks
     assert_includes journey.achievement_keys, "week:b1:3"
+  end
+
+  test "desafios feitos antes do marco: o trecho só é conquistado ao chegar nele" do
+    walk_on @user, 4, 10
+    walk_on @user, 3, 1, minutes: 40
+    walk_on @user, 2, 3, minutes: 45              # km 14: desafios feitos, marco no 15
+    journey = @user.journey(world: @world)
+    week1 = @world.phase("a2").weeks.first
+
+    assert journey.week_progress(week1).complete?
+    assert_empty journey.completed_weeks
+    assert_not_includes journey.achievement_keys, "week:a2:1"
+    assert_not journey.landmark_conquered?(week1.landmark)
+
+    walk_on @user, 1, 1
+    journey = @user.journey(world: @world)
+
+    assert_equal [ week1 ], journey.completed_weeks
+    assert journey.landmark_conquered?(week1.landmark)
+    assert_equal %w[ landmark:a2_mark week:a2:1 ], journey.achievement_keys.last(2)
   end
 
   test "xp de caminhadas sem desafios não muda" do

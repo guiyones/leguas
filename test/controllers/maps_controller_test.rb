@@ -27,7 +27,7 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#atual[data-phase=carga_leve][data-status=current]" do
       assert_select "*", text: %r{12 / 115 km}
       assert_select "img[alt=?][src*='art/avatar/traveler']", "Tião"
-      assert_select "*", text: /km 20/                # Estrada da Estepe ainda não alcançada
+      assert_select "*", text: /km 28/                # Estrada da Estepe ainda não alcançada
       assert_select ".stamp-unknown", text: "?"
       assert_select "img[src*='art/stamps/estrada_da_estepe']", count: 0
     end
@@ -79,6 +79,20 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
         assert_select "dd", text: "2× 30 min"
       end
     end
+  end
+
+  test "trecho leva o nome do marco do fim quando ele já é conhecido" do
+    log_walks users(:viajante), 25                 # passou Ponta das Areias, rumo ao Estreito
+
+    get map_url
+
+    assert_select "[data-phase=primeiros_passos]" do
+      assert_select "[data-week='1']", text: /Trecho 1 · até Ponta das Areias/
+      assert_select "[data-week='2']", text: /Trecho 2 · até Estreito do Navegante/
+      assert_select "[data-week='3']", text: /Trecho 3 · até \?\?\?/
+      assert_select "[data-week='4']", text: /Trecho 4 · leve · até o chefe/
+    end
+    assert_select "[data-phase=carga_leve] [data-week='1']", text: /Trecho 1 · até \?\?\?/
   end
 
   test "semana sem escada não lista escada" do

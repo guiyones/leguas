@@ -13,6 +13,11 @@ class World::Week
 
   def end_km = start_km + km
   def light? = @light
+
+  # O trecho termina no marco que fica no km do fim dele; o último é onde o chefe espera.
+  def landmark
+    phase.landmarks.find { it.at_km == end_km }
+  end
   def stairs? = stairs.present? && stairs != "não"
 
   private

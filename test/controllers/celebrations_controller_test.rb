@@ -10,7 +10,10 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "sequência: carimbo e depois início" do
-    post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }
+    user = users(:viajante)
+    walk_on user, 1, 14
+    user.pending_celebration_keys.each { user.celebrate(it) }
+    post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }   # km 22
 
     get celebration_url
     assert_select "h1", text: /Carimbo conquistado/
@@ -95,23 +98,26 @@ class CelebrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "*", text: /completou o mundo inteiro/, count: 0
   end
 
-  test "semana completa mostra o selo" do
+  test "trecho conquistado mostra o carimbo dourado do marco" do
     user = users(:viajante)
-    3.downto(1) { walk_on user, it, 3, minutes: 40 }
-    walk_on user, 0, 8                            # longão da semana 1
+    4.downto(2) { walk_on user, it, 3, minutes: 40 }
+    walk_on user, 1, 8                            # longão do trecho 1
+    walk_on user, 0, 5                            # chega em Ponta das Areias, km 22
     user.pending_celebration_keys.excluding("week:primeiros_passos:1").each { user.celebrate(it) }
 
     get celebration_url
 
-    assert_select "h1", text: /Trecho completo!/
+    assert_select "h1", text: /Trecho conquistado!/
     assert_select "*", text: /Primeiros Passos/
     assert_select "*", text: /Trecho 1/
-    assert_select "img[src*='art/seals/week']"
+    assert_select "h2", text: "Ponta das Areias"
+    assert_select "img.stamp--gold[alt=?][src*='art/stamps/ponta_das_areias']", "Carimbo dourado Ponta das Areias"
     assert_select ".stat", text: /\+50\s+XP/
     assert_select "button", text: "Continuar"
   end
 
   test "clique duplo ou chave estranha não quebra" do
+    walk_on users(:viajante), 1, 14
     post walks_url, params: { walk: { km: "8", walked_on: Date.current.iso8601 } }
 
     post celebration_url, params: { key: "landmark:ponta_das_areias" }

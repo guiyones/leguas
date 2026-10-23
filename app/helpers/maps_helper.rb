@@ -40,6 +40,20 @@ module MapsHelper
     end
   end
 
+  # Pra onde o trecho leva: o marco do fim, pelo nome só se o viajante já chegou
+  # nele ou é o trecho onde está. O último marco é onde o chefe espera.
+  def week_destination(week, journey)
+    if landmark = week.landmark
+      if journey.landmark_reached?(landmark) || week == journey.current_week && week.phase == journey.current_phase
+        "até #{landmark.name}"
+      elsif week == week.phase.weeks.last && week.phase.boss?
+        "até o chefe"
+      else
+        "até ???"
+      end
+    end
+  end
+
   def world_node_caption(phase, status)
     case status
     when :completed then "vencida"

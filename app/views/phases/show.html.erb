@@ -36,6 +36,8 @@
         <% km_to_next = number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %>
         <% if milestone.kind == :boss %>
           <p>O chefe da fase aparece em <strong><%= km_to_next %> km</strong></p>
+        <% elsif milestone.at_km == phase.end_km && phase.boss? %>
+          <p>O chefe da fase aparece em <strong><%= km_to_next %> km</strong>, na <strong><%= milestone.subject.name %></strong></p>
         <% else %>
           <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= km_to_next %> km</p>
         <% end %>
@@ -51,7 +53,7 @@
     </section>
 
     <% if @week %>
-      <%= render "phases/challenges", week: @week, phase: phase, progress: @week_progress %>
+      <%= render "phases/challenges", week: @week, phase: phase, progress: @week_progress, journey: @journey %>
     <% elsif @journey.boss_status(phase) == :waiting %>
       <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
     <% end %>

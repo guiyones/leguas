@@ -402,6 +402,15 @@
   }
 
   .phase-scene__mark--reached { fill: var(--color-gold); stroke: var(--color-glow); }
+  .phase-scene__mark--gold { stroke: var(--color-ember); stroke-width: 2.5; }
+
+  /* Carimbo dourado: o marco que fecha um trecho conquistado. */
+  .stamp--gold {
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 3px var(--color-gold),
+      0 0 16px color-mix(in srgb, var(--color-ember) 70%, transparent);
+  }
 
   .phase-scene__boss--waiting { fill: var(--color-ridge); stroke: var(--color-ember); stroke-width: 2.5; }
   .phase-scene__boss--defeated { fill: var(--color-gold); stroke: var(--color-glow); stroke-width: 2; }

@@ -52,10 +52,26 @@ class WorldTest < ActiveSupport::TestCase
         trophy_name: X
         phases:
           - { key: x1, name: X1, inspired_by: x, km: 10, symbol: x,
-              landmarks: [ { key: m, name: M, at_km: 10, story: s } ] }
+              landmarks: [ { key: m, name: M, at_km: 10.5, story: s } ] }
       YAML
 
       assert_raises(World::Invalid) { World.load(dir) }
+    end
+  end
+
+  test "marco no fim da fase é válido: é onde o chefe espera" do
+    Dir.mktmpdir do |dir|
+      File.write(File.join(dir, "01.yml"), <<~YAML)
+        key: x
+        name: X
+        inspired_by: x
+        trophy_name: X
+        phases:
+          - { key: x1, name: X1, inspired_by: x, km: 10, symbol: x,
+              landmarks: [ { key: m, name: M, at_km: 10, story: s } ] }
+      YAML
+
+      assert_equal 10, World.load(dir).landmark("m").at_km
     end
   end
 
