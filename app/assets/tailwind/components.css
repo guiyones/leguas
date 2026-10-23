@@ -297,13 +297,13 @@
     /* No celular o cartão da fase sobe por cima do pé da cena, que é vazio;
        aqui o cartão fica ao lado, então a cena perde esse pé. */
     .split .phase-map {
-      aspect-ratio: 280 / 336;
-      width: min(calc((100dvh - 6.5rem) * 280 / 336), calc(100vw - var(--split-info) - 4rem));
+      aspect-ratio: 280 / 316;
+      width: min(calc((100dvh - 6rem) * 280 / 316), calc(100vw - var(--split-info) - 4rem));
     }
     .split .phase-card { margin-top: 0; }
     .split__info {
       gap: 0.9rem;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       font-size: 0.8125rem;
     }
 
