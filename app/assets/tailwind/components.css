@@ -349,6 +349,40 @@
 
   .art-locked { filter: grayscale(1) brightness(0.45); opacity: 0.7; }
 
+  /* Fase e Mapa: no celular tudo empilhado; no computador o mapa fica parado
+     à esquerda, do tamanho da tela, e as informações rolam à direita. */
+  .split,
+  .split__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (width >= 64rem) {
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .split__map {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .split .phase-map,
+    .split .world-map {
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    /* Largura que faz a arte caber na altura da tela, na proporção do viewBox. */
+    .split .phase-map { width: min(100%, calc((100dvh - 8rem) * 280 / 420)); }
+    .split .world-map { width: min(100%, calc((100dvh - 8rem) * 280 / 600)); }
+  }
+
   .phase-map {
     position: relative;
     margin: -1rem -1rem 0;

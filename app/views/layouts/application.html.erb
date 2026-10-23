@@ -15,7 +15,7 @@
 
   <body class="min-h-dvh">
     <% show_nav = authenticated? && !@hide_nav %>
-    <main class="mx-auto max-w-md px-4 pt-4 <%= show_nav ? "pb-28" : "pb-6" %> flex flex-col gap-4">
+    <main class="mx-auto <%= @wide ? "max-w-md lg:max-w-6xl" : "max-w-md" %> px-4 pt-4 <%= show_nav ? "pb-28" : "pb-6" %> flex flex-col gap-4">
       <% flash.each do |type, message| %>
         <% next if type == "otp_code" %>
         <p class="panel flash flash--<%= type %>" role="status"><%= message %></p>

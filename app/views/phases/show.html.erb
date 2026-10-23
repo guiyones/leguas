@@ -1,64 +1,71 @@
 <% @page_title = "Fase" %>
+<% @wide = true %>
 
 <% phase = @journey.current_phase %>
 
-<div class="phase-map">
-  <%= render "phases/scene", phase: phase, journey: @journey %>
+<div class="split">
+  <div class="split__map">
+    <div class="phase-map">
+      <%= render "phases/scene", phase: phase, journey: @journey %>
 
-  <section class="phase-map__hud panel" data-testid="hud">
-    <%= link_to edit_profile_path, class: "shrink-0", aria: { label: "Perfil" } do %>
-      <%= art_tag :avatar, :portrait, label: Current.user.name, size: 34 %>
-    <% end %>
-    <div class="flex-1 min-w-0 flex flex-col gap-1">
-      <p class="flex justify-between gap-2 text-xs leading-tight">
-        <span class="truncate"><b><%= Current.user.name %></b> · <span class="text-gold">Nível <%= @level.number %></span> · <%= @level.title.name %></span>
-        <span class="text-gold font-bold shrink-0" title="faltam <%= @level.xp_to_next %> XP pro próximo nível"><%= @level.xp %> XP</span>
-      </p>
-      <%= progress_bar @level.progress %>
+      <section class="phase-map__hud panel" data-testid="hud">
+        <%= link_to edit_profile_path, class: "shrink-0", aria: { label: "Perfil" } do %>
+          <%= art_tag :avatar, :portrait, label: Current.user.name, size: 34 %>
+        <% end %>
+        <div class="flex-1 min-w-0 flex flex-col gap-1">
+          <p class="flex justify-between gap-2 text-xs leading-tight">
+            <span class="truncate"><b><%= Current.user.name %></b> · <span class="text-gold">Nível <%= @level.number %></span> · <%= @level.title.name %></span>
+            <span class="text-gold font-bold shrink-0" title="faltam <%= @level.xp_to_next %> XP pro próximo nível"><%= @level.xp %> XP</span>
+          </p>
+          <%= progress_bar @level.progress %>
+        </div>
+      </section>
     </div>
-  </section>
-</div>
+  </div>
 
-<section class="panel phase-card flex flex-col gap-3" data-testid="phase">
-  <p class="eyebrow">Fase <%= phase.number %> de <%= phase.region.phases.size %><%= " · #{phase.focus}" if phase.focus %></p>
-  <h2 class="phase-card__name <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></h2>
-  <%= progress_bar @journey.phase_progress %>
-  <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
+  <div class="split__info">
+    <section class="panel phase-card flex flex-col gap-3" data-testid="phase">
+      <p class="eyebrow">Fase <%= phase.number %> de <%= phase.region.phases.size %><%= " · #{phase.focus}" if phase.focus %></p>
+      <h2 class="phase-card__name <%= phase.legendary? ? "text-legend" : "text-gold" %>"><%= phase.name %></h2>
+      <%= progress_bar @journey.phase_progress %>
+      <%= stat @journey.km_in_phase, total: phase.km, unit: "km" %>
 
-  <% if @journey.finished? %>
-    <p class="text-gold">Você chegou ao fim do mundo conhecido, viajante! Novas regiões estão a caminho.</p>
-  <% elsif (milestone = @journey.next_milestone) && milestone.at_km <= phase.end_km %>
-    <% km_to_next = number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %>
-    <% if milestone.kind == :boss %>
-      <p>O chefe da fase aparece em <strong><%= km_to_next %> km</strong></p>
-    <% else %>
-      <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= km_to_next %> km</p>
+      <% if @journey.finished? %>
+        <p class="text-gold">Você chegou ao fim do mundo conhecido, viajante! Novas regiões estão a caminho.</p>
+      <% elsif (milestone = @journey.next_milestone) && milestone.at_km <= phase.end_km %>
+        <% km_to_next = number_with_precision @journey.km_to_next, precision: 1, strip_insignificant_zeros: true %>
+        <% if milestone.kind == :boss %>
+          <p>O chefe da fase aparece em <strong><%= km_to_next %> km</strong></p>
+        <% else %>
+          <p>Próximo marco: <strong><%= milestone.subject.name %></strong>, faltam <%= km_to_next %> km</p>
+        <% end %>
+      <% end %>
+
+      <p class="caption">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas<% if @journey.climbed_m > 0 %> · <%= number_with_delimiter @journey.climbed_m.round %> m subidos<% end %></p>
+    </section>
+
+    <% if @week %>
+      <%= render "phases/challenges", week: @week, phase: phase, progress: @week_progress %>
+    <% elsif @journey.boss_status(phase) == :waiting %>
+      <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
     <% end %>
-  <% end %>
 
-  <p class="caption">Total: <%= number_with_precision @journey.total_km, precision: 1, strip_insignificant_zeros: true %> km · <%= @journey.leagues %> léguas<% if @journey.climbed_m > 0 %> · <%= number_with_delimiter @journey.climbed_m.round %> m subidos<% end %></p>
-</section>
+    <% if tip = tip_of_the_day(phase.region) %>
+      <section class="panel">
+        <p class="eyebrow">Dica do plano</p>
+        <p data-testid="tip"><%= tip %></p>
+      </section>
+    <% end %>
 
-<% if @week %>
-  <%= render "phases/challenges", week: @week, phase: phase, progress: @week_progress %>
-<% elsif @journey.boss_status(phase) == :waiting %>
-  <%= render "phases/boss", phase: phase, banked_km: @journey.banked_km %>
-<% end %>
-
-<% if tip = tip_of_the_day(phase.region) %>
-  <section class="panel">
-    <p class="eyebrow">Dica do plano</p>
-    <p data-testid="tip"><%= tip %></p>
-  </section>
-<% end %>
-
-<% walked_today = number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %>
-<% if @walked_today >= @mission_goal %>
-  <p class="caption text-gold" data-testid="daily-bonus">Hoje: <%= walked_today %> km · ✓ bônus do dia +<%= Mission::XP %> XP</p>
-<% else %>
-  <p class="caption" data-testid="daily-bonus">Hoje: <%= walked_today %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
-<% end %>
-<%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
-<% if @stairs %>
-  <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>
-<% end %>
+    <% walked_today = number_with_precision @walked_today, precision: 2, strip_insignificant_zeros: true %>
+    <% if @walked_today >= @mission_goal %>
+      <p class="caption text-gold" data-testid="daily-bonus">Hoje: <%= walked_today %> km · ✓ bônus do dia +<%= Mission::XP %> XP</p>
+    <% else %>
+      <p class="caption" data-testid="daily-bonus">Hoje: <%= walked_today %> km · bônus do dia em <%= number_with_precision @mission_goal, precision: 2, strip_insignificant_zeros: true %> km</p>
+    <% end %>
+    <%= link_to "Registrar caminhada", new_walk_path, class: "btn-game text-lg py-4" %>
+    <% if @stairs %>
+      <%= link_to "Registrar escada", new_stair_session_path, class: "btn-game btn-game--secondary" %>
+    <% end %>
+  </div>
+</div>
