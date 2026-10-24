@@ -2,6 +2,7 @@ module HasDuration
   extend ActiveSupport::Concern
 
   MAX_DURATION_S = 24.hours.to_i
+  DURATION_PARTS = %i[ hours minutes seconds ]
 
   included do
     validate :duration_readable
@@ -36,7 +37,38 @@ module HasDuration
     end
   end
 
+  # O formulário manda horas, minutos e segundos em caixas separadas, pra 1:31 não virar dúvida.
+  DURATION_PARTS.each do |part|
+    define_method(:"duration_#{part}") do
+      @duration_parts ? @duration_parts[part] : duration_split[part]
+    end
+
+    define_method(:"duration_#{part}=") do |value|
+      @duration_text = nil
+      @duration_parts = DURATION_PARTS.to_h { [ it, public_send(:"duration_#{it}").to_s ] }.merge(part => value.to_s.strip)
+      self.duration_s = parse_duration_parts(@duration_parts)
+      @duration_parts = nil if duration_s || @duration_parts.values.all?(&:blank?)
+    end
+  end
+
   private
+    # Minutos sempre aparecem; horas e segundos só quando não são zero.
+    def duration_split
+      return {} unless duration_s
+
+      hours, rest = duration_s.divmod(3600)
+      minutes, seconds = rest.divmod(60)
+      { hours: hours.nonzero?, minutes: minutes, seconds: seconds.nonzero? }
+    end
+
+    def parse_duration_parts(parts)
+      return if parts.values.all?(&:blank?) || parts.values.any? { it.present? && !it.match?(/\A\d+\z/) }
+
+      hours, minutes, seconds = parts.values_at(*DURATION_PARTS).map(&:to_i)
+      total = hours * 3600 + minutes * 60 + seconds
+      total if minutes < 60 && seconds < 60 && total.between?(1, MAX_DURATION_S)
+    end
+
     def parse_duration(text)
       seconds =
         if text.blank?
@@ -52,5 +84,6 @@ module HasDuration
 
     def duration_readable
       errors.add(:duration, "não parece um tempo, use 38:51") if @duration_text
+      errors.add(:duration, "confira o tempo: minutos e segundos vão até 59") if @duration_parts
     end
 end

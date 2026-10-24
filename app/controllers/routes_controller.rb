@@ -41,7 +41,7 @@ class RoutesController < ApplicationController
     end
 
     def route_params
-      params.expect(route: [ :name, :km, :duration, :note, :photo, :trace ]).tap do |attributes|
+      params.expect(route: [ :name, :km, :duration_hours, :duration_minutes, :duration_seconds, :note, :photo, :trace ]).tap do |attributes|
         json = attributes.delete(:trace)
         next if json.blank?
 

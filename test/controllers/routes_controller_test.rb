@@ -16,10 +16,12 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "Curta", "Longa" ], css_select("[data-route-card] h2").map { it.text.strip }
   end
 
-  test "tempo da rota abre o teclado com separador" do
+  test "tempo da rota em horas, minutos e segundos" do
     get new_route_url
 
-    assert_select "input[name='route[duration]'][inputmode=decimal]"
+    assert_select "input[name='route[duration_hours]'][inputmode=numeric]"
+    assert_select "input[name='route[duration_minutes]'][inputmode=numeric]"
+    assert_select "input[name='route[duration_seconds]'][inputmode=numeric]"
   end
 
   test "lista vazia convida a criar" do
@@ -31,7 +33,7 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
 
   test "cria com foto" do
     assert_difference -> { @user.routes.count }, 1 do
-      post routes_url, params: { route: { name: "Volta do Guanabara", km: "3,55", duration: "38:51",
+      post routes_url, params: { route: { name: "Volta do Guanabara", km: "3,55", duration_minutes: "38", duration_seconds: "51",
         photo: fixture_file_upload("rota_guanabara.png", "image/png") } }
     end
 

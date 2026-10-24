@@ -9,7 +9,11 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "input[name='walk[walked_on]'][value=?]", Date.current.iso8601
     assert_select "input[name='walk[km]'][inputmode=decimal]"
-    assert_select "input[name='walk[duration]'][inputmode=decimal]"
+    assert_select "input[name='walk[duration]']", 0
+    assert_select "input[name='walk[duration_hours]'][inputmode=numeric]"
+    assert_select "input[name='walk[duration_minutes]'][inputmode=numeric]"
+    assert_select "input[name='walk[duration_seconds]'][inputmode=numeric]"
+    assert_select ".duration-field__unit", %w[h min s].size
   end
 
   test "registrar mostra o xp ganho" do
@@ -101,7 +105,7 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "registrar guarda tempo, passos e subida e o histórico mostra" do
-    post walks_url, params: { walk: { km: "3,55", walked_on: Date.current.iso8601, duration: "38:51", steps: "4.507", elevation_gain_m: 32 } }
+    post walks_url, params: { walk: { km: "3,55", walked_on: Date.current.iso8601, duration_hours: "", duration_minutes: "38", duration_seconds: "51", steps: "4.507", elevation_gain_m: 32 } }
 
     walk = users(:viajante).walks.order(:id).last
     assert_equal [ 2331, 4507, 32 ], [ walk.duration_s, walk.steps, walk.elevation_gain_m ]
@@ -130,6 +134,16 @@ class WalksControllerTest < ActionDispatch::IntegrationTest
     assert_select "select[name='walk[route_id]'] option", count: 2
     assert_select "select[name='walk[route_id]'] option[value=?][data-km=?]", route.id.to_s, "3.55", text: "Volta do Guanabara (3,55 km)"
     assert_select "a[href=?]", new_route_path, text: "Salvar um caminho novo como rota"
+  end
+
+  test "rota com tempo leva o tempo na opção, sem tempo não" do
+    timed = users(:viajante).routes.create!(name: "Volta longa", km: 8, duration: "1:31:20")
+    untimed = users(:viajante).routes.create!(name: "Volta curta", km: 2)
+
+    get new_walk_url
+
+    assert_select "option[value=?][data-duration-s=?]", timed.id.to_s, "5480"
+    assert_select "option[value=?][data-duration-s]", untimed.id.to_s, 0
   end
 
   test "registrar com rota grava a rota" do

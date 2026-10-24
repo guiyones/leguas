@@ -134,6 +134,34 @@ class WalkTest < ActiveSupport::TestCase
     assert_nil @user.walks.new.duration
   end
 
+  test "tempo em horas, minutos e segundos separados" do
+    walk = @user.walks.new(km: 1, walked_on: Date.current, duration_hours: "1", duration_minutes: "31", duration_seconds: "")
+
+    assert_equal 5460, walk.duration_s
+    assert @user.walks.new(km: 1, walked_on: Date.current, duration_hours: "", duration_minutes: "", duration_seconds: "").valid?
+    assert_nil @user.walks.new(duration_hours: "", duration_minutes: "", duration_seconds: "").duration_s
+    assert_equal 2331, @user.walks.new(duration_minutes: "38", duration_seconds: "51").duration_s
+  end
+
+  test "tempo separado é lido de volta em partes" do
+    walk = @user.walks.new(duration_s: 5480)
+
+    assert_equal [ 1, 31, 20 ], [ walk.duration_hours, walk.duration_minutes, walk.duration_seconds ]
+    assert_equal [ nil, 38, 51 ], @user.walks.new(duration_s: 2331).then { [ it.duration_hours, it.duration_minutes, it.duration_seconds ] }
+    assert_equal [ nil, nil, nil ], @user.walks.new.then { [ it.duration_hours, it.duration_minutes, it.duration_seconds ] }
+  end
+
+  test "tempo separado inválido não passa e guarda o que foi digitado" do
+    [ { duration_minutes: "75" }, { duration_seconds: "60" }, { duration_minutes: "abc" }, { duration_hours: "25" }, { duration_minutes: "0" } ].each do |parts|
+      walk = @user.walks.new(km: 1, walked_on: Date.current, **parts)
+
+      assert_not walk.valid?, parts.inspect
+      assert_nil walk.duration_s
+      assert_includes walk.errors[:duration], "confira o tempo: minutos e segundos vão até 59"
+    end
+    assert_equal "75", @user.walks.new(duration_minutes: "75").duration_minutes
+  end
+
   test "passos aceitam ponto de milhar" do
     assert_equal 4507, @user.walks.new(steps: "4.507").steps
   end

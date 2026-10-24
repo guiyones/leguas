@@ -185,6 +185,29 @@
     font-weight: 700;
   }
 
+  .duration-field {
+    position: relative;
+    display: block;
+  }
+
+  .duration-field .field {
+    padding-right: 2.6rem;
+  }
+
+  .duration-field__unit {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    padding: 0.1rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    background: color-mix(in srgb, var(--color-gold) 16%, transparent);
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
   @keyframes glow-pulse {
     50% { opacity: 0.6; transform: scale(0.92); }
   }

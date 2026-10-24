@@ -20,6 +20,28 @@ class RoutesTest < ApplicationSystemTestCase
     assert_equal "Volta do Guanabara", walk.route.name
   end
 
+  test "escolher a rota com tempo preenche horas e minutos, sem tempo limpa" do
+    @user.routes.create!(name: "Volta longa", km: 8, duration: "1:31:00")
+    @user.routes.create!(name: "Volta curta", km: 2)
+    sign_in_as @user
+
+    visit new_walk_url
+    select "Volta longa (8 km)", from: "Rota"
+    assert_field "Horas", with: "1"
+    assert_field "Minutos", with: "31"
+    assert_field "Segundos", with: ""
+
+    select "Volta curta (2 km)", from: "Rota"
+    assert_field "Horas", with: ""
+    assert_field "Minutos", with: ""
+
+    select "Volta longa (8 km)", from: "Rota"
+    click_on "Registrar caminhada"
+
+    assert_no_field "Quantos km?"
+    assert_equal 5460, @user.walks.order(:id).last.duration_s
+  end
+
   test "o print do Samsung Health vira o traçado da rota" do
     sign_in_as @user
     visit new_route_url

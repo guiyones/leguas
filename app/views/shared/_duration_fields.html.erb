@@ -1,0 +1,16 @@
+<fieldset class="flex flex-col gap-2">
+  <legend class="mb-2">Tempo (opcional)</legend>
+  <div class="grid grid-cols-3 gap-2">
+    <% { hours: [ "Horas", "h" ], minutes: [ "Minutos", "min" ], seconds: [ "Segundos", "s" ] }.each do |part, (label, unit)| %>
+      <label class="duration-field">
+        <span class="sr-only"><%= label %></span>
+        <%= form.text_field :"duration_#{part}", inputmode: "numeric", autocomplete: "off", maxlength: 2,
+              placeholder: "0", class: "field text-center", data: { route_select_target: part } %>
+        <span class="duration-field__unit" aria-hidden="true"><%= unit %></span>
+      </label>
+    <% end %>
+  </div>
+  <% form.object.errors.full_messages_for(:duration).each do |message| %>
+    <p class="field-error"><%= message %></p>
+  <% end %>
+</fieldset>
